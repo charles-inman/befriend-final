@@ -16,15 +16,19 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		document.getElementById("facebookLogin").style.display = "block";
-		document.getElementById("facebookLogin").onclick = function() {
-			facebookConnectPlugin.login("", loginSuccess, loginFail);
-		}
-    },
-	loginSuccess: function() {
+		document.getElementById("fblog").style.display = "block";
+		document.getElementById("fblog").addEventListener("click", function() {
+			console.warn("you clicked the facebook button");
+			var fbLoginSuccess = function (userData) {
+				console.log("UserInfo: " + JSON.stringify(userData));
+			}
 
-	},
-	loginFail: function() {
+			facebookConnectPlugin.login(["public_profile"],
+				fbLoginSuccess,
+				function (error) { console.warn("" + error) }
+			);
 
-	}
+		});
+		
+    }
 };
