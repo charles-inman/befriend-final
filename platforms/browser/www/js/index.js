@@ -20,7 +20,7 @@ var app = {
 		document.getElementById("fblog").addEventListener("click", function() {
 			console.log("you clicked the facebook button");
 			var fbLoginSuccess = function (userData) {
-				fullJSON = JSON.parse(userData);
+				fullJSON = userData;
 				fbId = fullJSON.authResponse.userID;
 				console.log(fullJSON);
 				newPage("register.html");
