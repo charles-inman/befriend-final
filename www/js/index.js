@@ -38,8 +38,25 @@ var app = {
 
 var fullJSON;
 
+var profileJSON;
+
 var fbId;
 
+function registerGetInfo() {
+	facebookConnectPlugin.api("/" + fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+    function (result) {
+        profileJSON = result;
+       idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
+		var datesset = result.birthday.split('/');
+       idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[0],datesset[1],datesset[2],0,0,0)) + " Years old";
+		idc("description").value = result.bio;
+    },
+    function (error) {
+        console.log("Failed: " + error);
+    });
+}
+
+// COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
 	while (myNode.firstChild) {
@@ -61,13 +78,11 @@ function newPage(pagename) {
 	xmlhttp.open("GET", "screens/" + pagename, true);
 	xmlhttp.send();
 }
-function registerGetInfo() {
-	facebookConnectPlugin.api("/" + fbId, ["user_birthday"],
-    function (result) {
-        console.log(result);
-       
-    },
-    function (error) {
-        console.log("Failed: " + error);
-    });
+function idc(chosenid) {
+	return document.getElementById("chosenid");
+}
+function calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
