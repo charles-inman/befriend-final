@@ -71,7 +71,7 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	facebookConnectPlugin.api("/" + fbId + "/picture", ["public_profile"],
+	facebookConnectPlugin.api("/" + fbId + "/picture", ["user_photos"],
 		function (result) {
 			
 		   console.log(result);
@@ -86,14 +86,7 @@ function registerGetInfo() {
 	}
 }
 function getPhotos() {
-	facebookConnectPlugin.api("/" + fbId + "/photos", ["public_profile"],
-		function (result) {
-		   console.log(result);
-		},
-		function (error) {
-			console.log("Failed: " + error);
-		}
-	 );
+	
 }
 
 // COMMON FUCTIONS 
