@@ -17,19 +17,18 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
+		document.getElementById("fblog").addEventListener("click", function() {
+				fblogin();
+		});
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
 			fblogin();
 			var uid = response.authResponse.userID;
 			var accessToken = response.authResponse.accessToken;
 		  } else if (response.status === 'not_authorized') {
-			document.getElementById("fblog").addEventListener("click", function() {
-				fblogin();
-			});
+			
 		  } else {
-			document.getElementById("fblog").addEventListener("click", function() {
-				fblogin();
-			});
+			
 		  }
 		 });
     },
