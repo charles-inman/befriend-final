@@ -62,12 +62,12 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function registerGetInfo() {
-	facebookConnectPlugin.api(userId + "/?fields=id,email", ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+	facebookConnectPlugin.api("<user-id>/?fields=id,email", ["public_profile", "user_birthday","user_likes","user_about_me"],
     function (result) {
         console.log("Result: " + JSON.stringify(result));
        
     },
     function (error) {
-        alert("Failed: " + error);
+        console.log("Failed: " + error);
     });
 }
