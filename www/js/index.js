@@ -64,7 +64,7 @@ function newPage(pagename) {
 function registerGetInfo() {
 	facebookConnectPlugin.api("/" + fbId, ["user_birthday"],
     function (result) {
-        console.log("Result: " + result);
+        console.log(result);
        
     },
     function (error) {
