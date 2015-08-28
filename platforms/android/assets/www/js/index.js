@@ -17,42 +17,39 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
-		document.getElementById("fblog").addEventListener("click", function() {
-				var fbLoginSuccess = function (userData) {
-			fullJSON = userData;
-			fbId = fullJSON.authResponse.userID;
-			console.log(fullJSON);
-			newPage("register.html");
-			registerGetInfo();
-		}
-
-		facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
-			fbLoginSuccess,
-			function (error) { console.warn("" + error) }
-		);
-		});
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
-			var fbLoginSuccess = function (userData) {
-			fullJSON = userData;
-			fbId = fullJSON.authResponse.userID;
-			console.log(fullJSON);
-			newPage("register.html");
-			registerGetInfo();
-		}
-
-		facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
-			fbLoginSuccess,
-			function (error) { console.warn("" + error) }
-		);
+			// the user is logged in and has authenticated your
+			// app, and response.authResponse supplies
+			// the user's ID, a valid access token, a signed
+			// request, and the time the access token 
+			// and signed request each expire
 			var uid = response.authResponse.userID;
 			var accessToken = response.authResponse.accessToken;
 		  } else if (response.status === 'not_authorized') {
-			
+			// the user is logged in to Facebook, 
+			// but has not authenticated your app
 		  } else {
-			
+			// the user isn't logged in to Facebook.
 		  }
 		 });
+		
+		document.getElementById("fblog").addEventListener("click", function() {
+			console.log("you clicked the facebook button");
+			var fbLoginSuccess = function (userData) {
+				fullJSON = userData;
+				fbId = fullJSON.authResponse.userID;
+				console.log(fullJSON);
+				newPage("register.html");
+				registerGetInfo();
+			}
+
+			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+				fbLoginSuccess,
+				function (error) { console.warn("" + error) }
+			);
+
+		});
     }
 };
 
@@ -61,7 +58,7 @@ var fullJSON;
 var profileJSON;
 
 var fbId;
-// Facebook Functions
+
 function registerGetInfo() {
 	facebookConnectPlugin.api("/" + fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
     function (result) {
@@ -76,7 +73,7 @@ function registerGetInfo() {
     });
 	facebookConnectPlugin.api("/" + fbId + "/picture", ["public_profile"],
 		function (result) {
-			console.log("profile picture");
+			
 		   console.log(result);
 		},
 		function (error) {
@@ -89,7 +86,6 @@ function registerGetInfo() {
 	}
 }
 function getPhotos() {
-			console.log("all pictures");
 	facebookConnectPlugin.api("/" + fbId + "/photos", ["public_profile"],
 		function (result) {
 		   console.log(result);
@@ -99,6 +95,7 @@ function getPhotos() {
 		}
 	 );
 }
+
 // COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
