@@ -18,22 +18,7 @@ var app = {
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
 		document.getElementById("fblog").addEventListener("click", function() {
-				app.fblogin();
-		});
-		facebookConnectPlugin.getLoginStatus(function(response) {
-		  if (response.status === 'connected') {
-			app.fblogin();
-			var uid = response.authResponse.userID;
-			var accessToken = response.authResponse.accessToken;
-		  } else if (response.status === 'not_authorized') {
-			
-		  } else {
-			
-		  }
-		 });
-    },
-	fblogin:function() {
-		var fbLoginSuccess = function (userData) {
+				var fbLoginSuccess = function (userData) {
 			fullJSON = userData;
 			fbId = fullJSON.authResponse.userID;
 			console.log(fullJSON);
@@ -45,7 +30,30 @@ var app = {
 			fbLoginSuccess,
 			function (error) { console.warn("" + error) }
 		);
-	}
+		});
+		facebookConnectPlugin.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+			var fbLoginSuccess = function (userData) {
+			fullJSON = userData;
+			fbId = fullJSON.authResponse.userID;
+			console.log(fullJSON);
+			newPage("register.html");
+			registerGetInfo();
+		}
+
+		facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			fbLoginSuccess,
+			function (error) { console.warn("" + error) }
+		);
+			var uid = response.authResponse.userID;
+			var accessToken = response.authResponse.accessToken;
+		  } else if (response.status === 'not_authorized') {
+			
+		  } else {
+			
+		  }
+		 });
+    }
 };
 
 var fullJSON;
