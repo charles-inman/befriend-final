@@ -24,8 +24,7 @@ var app = {
 				fbId = fullJSON.authResponse.userID;
 				console.log(fullJSON);
 				newPage("register.html");
-				console.log("user ID" + fbId);
-				//registerGetInfo();
+				registerGetInfo();
 			}
 
 			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -63,9 +62,9 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function registerGetInfo() {
-	facebookConnectPlugin.api("/" + userId, ["user_birthday"],
+	facebookConnectPlugin.api("/" + fbId, ["user_birthday"],
     function (result) {
-        console.log("Result: " + userId);
+        console.log("Result: " + result);
        
     },
     function (error) {
