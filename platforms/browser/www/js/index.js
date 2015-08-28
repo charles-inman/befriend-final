@@ -79,7 +79,7 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function idc(chosenid) {
-	return document.getElementById("chosenid");
+	return document.getElementById(chosenid);
 }
 function calculateAge(birthday) { // birthday is a date
     var ageDifMs = Date.now() - birthday.getTime();
