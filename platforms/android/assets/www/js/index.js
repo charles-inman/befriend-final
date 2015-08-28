@@ -20,11 +20,12 @@ var app = {
 		document.getElementById("fblog").addEventListener("click", function() {
 			console.warn("you clicked the facebook button");
 			var fbLoginSuccess = function (userData) {
-				console.log("UserInfo: " + JSON.stringify(userData));
 				fullJSON = JSON.stringify(userData);
 				
-				
-				
+				console.log(fullJSON);
+				for(i = 0; i < fullJSON.length; i++) {
+					console.log(fullJSON[i]);
+				}
 				newPage("register.html");
 				registerGetInfo();
 			}
