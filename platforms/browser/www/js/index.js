@@ -70,7 +70,7 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	facebookConnectPlugin.api("/" + fbId + "/picture", ["user_photos"],
+	facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
 		function (result) {
 			
 		   console.log("photo");
@@ -80,13 +80,26 @@ function registerGetInfo() {
 			console.log("Failed: " + error);
 		}
 	 );
-	
-	idc("plus-icon-blue").addEventListener("click", function() {
-		getPhotos();
-	});
+	if(document.getElementById("plus-icon-blue")) {
+		document.getElementById("plus-icon-blue").addEventListener("click", function() {
+			getPhotos();
+		});
+	}
+	else {
+		console.warn("No profile image button attached");
+	}
 }
 function getPhotos() {
-	
+	facebookConnectPlugin.api(fbId + "/photos?type=uploaded", ["user_photos"],
+		function (result) {
+			
+		   console.log("photos");
+		   console.log(result);
+		},
+		function (error) {
+			console.log("Failed: " + error);
+		}
+	 );
 }
 
 // COMMON FUCTIONS 
