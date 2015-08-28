@@ -19,7 +19,7 @@ var app = {
 		document.getElementById("fblog").style.display = "block";
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
-			  this.fblogin();
+			  app.fblogin();
 			var uid = response.authResponse.userID;
 			var accessToken = response.authResponse.accessToken;
 		  } else if (response.status === 'not_authorized') {
@@ -32,7 +32,7 @@ var app = {
 		
 		document.getElementById("fblog").addEventListener("click", function() {
 			console.log("you clicked the facebook button");
-			this.fblogin();
+			app.fblogin();
 
 		});
     },
