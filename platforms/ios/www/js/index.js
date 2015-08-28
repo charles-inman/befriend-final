@@ -19,11 +19,7 @@ var app = {
 		document.getElementById("fblog").style.display = "block";
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
-			// the user is logged in and has authenticated your
-			// app, and response.authResponse supplies
-			// the user's ID, a valid access token, a signed
-			// request, and the time the access token 
-			// and signed request each expire
+			  fblogin();
 			var uid = response.authResponse.userID;
 			var accessToken = response.authResponse.accessToken;
 		  } else if (response.status === 'not_authorized') {
@@ -36,11 +32,15 @@ var app = {
 		
 		document.getElementById("fblog").addEventListener("click", function() {
 			console.log("you clicked the facebook button");
-			var fbLoginSuccess = function (userData) {
+			fblogin();
+
+		});
+    },
+	fblogin: function() {
+		var fbLoginSuccess = function (userData) {
 				fullJSON = userData;
 				fbId = fullJSON.authResponse.userID;
 				console.log(fullJSON);
-				newPage("register.html");
 				registerGetInfo();
 			}
 
@@ -48,9 +48,7 @@ var app = {
 				fbLoginSuccess,
 				function (error) { console.warn("" + error) }
 			);
-
-		});
-    }
+	}
 };
 
 var fullJSON;
@@ -60,6 +58,7 @@ var profileJSON;
 var fbId;
 
 function registerGetInfo() {
+	newPage("register.html");
 	facebookConnectPlugin.api("/" + fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
     function (result) {
         profileJSON = result;
@@ -74,6 +73,7 @@ function registerGetInfo() {
 	facebookConnectPlugin.api("/" + fbId + "/picture", ["user_photos"],
 		function (result) {
 			
+		   console.log("photo");
 		   console.log(result);
 		},
 		function (error) {
