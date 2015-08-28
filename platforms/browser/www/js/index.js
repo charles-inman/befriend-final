@@ -21,10 +21,10 @@ var app = {
 			console.warn("you clicked the facebook button");
 			var fbLoginSuccess = function (userData) {
 				fullJSON = JSON.stringify(userData);
-				userId = fullJSON["authResponse"]["userID"];
+				fbId = fullJSON.userID;
 				console.log(fullJSON);
 				newPage("register.html");
-				console.log("user ID" + userId);
+				console.log("user ID" + fbId);
 				registerGetInfo();
 			}
 
@@ -39,7 +39,7 @@ var app = {
 
 var fullJSON;
 
-var userId;
+var fbId;
 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
