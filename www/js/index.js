@@ -21,11 +21,8 @@ var app = {
 			console.warn("you clicked the facebook button");
 			var fbLoginSuccess = function (userData) {
 				fullJSON = JSON.stringify(userData);
-				
+				userId = fullJSON["userID"];
 				console.log(fullJSON);
-				for(i = 0; i < fullJSON.length; i++) {
-					console.log(fullJSON[i]);
-				}
 				newPage("register.html");
 				registerGetInfo();
 			}
@@ -65,5 +62,12 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function registerGetInfo() {
-	
+	facebookConnectPlugin.api(userId + "/?fields=id,email", ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+    function (result) {
+        console.log("Result: " + JSON.stringify(result));
+       
+    },
+    function (error) {
+        alert("Failed: " + error);
+    });
 }
