@@ -17,23 +17,36 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
-		document.getElementById("fblog").addEventListener("click", function() {
-			console.log("you clicked the facebook button");
-			var fbLoginSuccess = function (userData) {
-				fullJSON = userData;
-				fbId = fullJSON.authResponse.userID;
-				console.log(fullJSON);
-				newPage("register.html");
-				registerGetInfo();
-			}
+		facebookConnectPlugin.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+			fblogin();
+			var uid = response.authResponse.userID;
+			var accessToken = response.authResponse.accessToken;
+		  } else if (response.status === 'not_authorized') {
+			document.getElementById("fblog").addEventListener("click", function() {
+				fblogin();
+			});
+		  } else {
+			document.getElementById("fblog").addEventListener("click", function() {
+				fblogin();
+			});
+		  }
+		 });
+    },
+	fblogin:function() {
+		var fbLoginSuccess = function (userData) {
+			fullJSON = userData;
+			fbId = fullJSON.authResponse.userID;
+			console.log(fullJSON);
+			newPage("register.html");
+			registerGetInfo();
+		}
 
-			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
-				fbLoginSuccess,
-				function (error) { console.warn("" + error) }
-			);
-
-		});
-    }
+		facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			fbLoginSuccess,
+			function (error) { console.warn("" + error) }
+		);
+	}
 };
 
 var fullJSON;
@@ -41,22 +54,44 @@ var fullJSON;
 var profileJSON;
 
 var fbId;
-
+// Facebook Functions
 function registerGetInfo() {
 	facebookConnectPlugin.api("/" + fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
     function (result) {
         profileJSON = result;
        idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
 		var datesset = result.birthday.split('/');
-		alert(result.birthday);
-       idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[1],datesset[0],0,0,0)) + " Years old";
+       idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[1],datesset[1],datesset[0],0,0,0)) + " Years old";
 		idc("description").value = result.bio;
     },
     function (error) {
         console.log("Failed: " + error);
     });
+	facebookConnectPlugin.api("/" + fbId + "/picture", ["public_profile"],
+		function (result) {
+			console.log("profile picture");
+		   console.log(result);
+		},
+		function (error) {
+			console.log("Failed: " + error);
+		}
+	 );
+	
+	idc("plus-icon-blue").addEventListener("click", function() {
+		getPhotos();
+	}
 }
-
+function getPhotos() {
+			console.log("all pictures");
+	facebookConnectPlugin.api("/" + fbId + "/photos", ["public_profile"],
+		function (result) {
+		   console.log(result);
+		},
+		function (error) {
+			console.log("Failed: " + error);
+		}
+	 );
+}
 // COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");

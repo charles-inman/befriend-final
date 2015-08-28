@@ -188,7 +188,7 @@ hr {
 	position:relative;
 	overflow: hidden;
 }
-#plus-icon:after {
+#plus-icon-blue:after {
 	content:'';
 	width:50%;
 	height:7%;
@@ -200,7 +200,7 @@ hr {
 	bottom:0;
 	margin:auto;
 }
-#plus-icon:before {
+#plus-icon-blue:before {
 	content:'';
 	width:7%;
 	height:50%;
