@@ -63,7 +63,7 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function registerGetInfo() {
-	facebookConnectPlugin.api("me", ["user_birthday"],
+	facebookConnectPlugin.api("/me", ["user_birthday"],
     function (result) {
         console.log("Result: " + JSON.stringify(result));
        
