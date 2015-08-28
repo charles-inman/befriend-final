@@ -83,7 +83,7 @@ function registerGetInfo() {
 	
 	idc("plus-icon-blue").addEventListener("click", function() {
 		getPhotos();
-	}
+	});
 }
 function getPhotos() {
 	
