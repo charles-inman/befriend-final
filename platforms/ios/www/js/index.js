@@ -18,11 +18,11 @@ var app = {
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
 		document.getElementById("fblog").addEventListener("click", function() {
-				fblogin();
+				app.fblogin();
 		});
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
-			fblogin();
+			app.fblogin();
 			var uid = response.authResponse.userID;
 			var accessToken = response.authResponse.accessToken;
 		  } else if (response.status === 'not_authorized') {
