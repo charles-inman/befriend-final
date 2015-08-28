@@ -29,7 +29,7 @@ var app = {
 				registerGetInfo();
 			}
 
-			facebookConnectPlugin.login(["id","public_profile", "user_birthday","about","bio","email","first_name","last_name","gender"],
+			facebookConnectPlugin.login(["public_profile", "user_birthday","about","bio","email","first_name","last_name","gender"],
 				fbLoginSuccess,
 				function (error) { console.warn("" + error) }
 			);
