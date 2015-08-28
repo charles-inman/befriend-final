@@ -21,7 +21,7 @@ var app = {
 			console.warn("you clicked the facebook button");
 			var fbLoginSuccess = function (userData) {
 				fullJSON = JSON.stringify(userData);
-				userId = fullJSON["userID"];
+				userId = fullJSON["authResponse"]["userID"];
 				console.log(fullJSON);
 				newPage("register.html");
 				console.log("user ID" + userId);
