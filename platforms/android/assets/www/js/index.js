@@ -24,7 +24,7 @@ var app = {
 				userId = fullJSON["userID"];
 				console.log(fullJSON);
 				newPage("register.html");
-				console.log(userId);
+				console.log("user ID" + userId);
 				registerGetInfo();
 			}
 
@@ -63,9 +63,9 @@ function newPage(pagename) {
 	xmlhttp.send();
 }
 function registerGetInfo() {
-	facebookConnectPlugin.api("/me", ["user_birthday"],
+	facebookConnectPlugin.api("/" + userId, ["user_birthday"],
     function (result) {
-        console.log("Result: " + JSON.stringify(result));
+        console.log("Result: " + userId);
        
     },
     function (error) {
