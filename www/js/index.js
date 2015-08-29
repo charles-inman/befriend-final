@@ -61,7 +61,7 @@ function registerGetInfo() {
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var pp = document.createElement("style");
-			pp.innerHTML = "<style> #profileIcon { background-image:url(" +image.data.url + "); }";
+			pp.styleSheet.cssText = "#profileIcon { background-image:url(" +image.data.url + "); }";
 			document.getElementById("profileIcon").appendChild(pp);
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -137,7 +137,7 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
             var pp = document.createElement("style");
-            pp.innerHTML = "<style> #profileIcon { background-image:url(" +this.src + "); }";
+            pp.styleSheet.cssText = "#profileIcon { background-image:url(" +this.src + "); }";
             photoChosen.innerHTML = "";
 
             photoChosen.appendChild(pp);
