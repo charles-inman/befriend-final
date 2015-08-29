@@ -66,11 +66,12 @@ function registerGetInfo() {
 			document.getElementById("profileIcon").appendChild(pp);
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
-			function (result) {
-				profileJSON = result;
+			function (dda) {
+				profileJSON = dda;
 			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = profileJSON.first_name;
 				var datesset = result.birthday.split('/');
 				idc("description").value = profileJSON.bio;
+                idc("description").setAttribute("textdet", profileJSON.bio);
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
 				
 			},
@@ -90,12 +91,12 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
+    idc("description").value = idc("description").getAttribute("textdet");
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
-		function (result) {
-			editProfImg = result;
+		function (def) {
+			editProfImg = def;
 			addPage("findphotos.html" , 0);
 			
-		   console.log(result);
 		},
 		function (error) {
 			console.log("Failed: " + error);

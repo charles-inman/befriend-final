@@ -213,12 +213,20 @@ hr {
 	margin:auto;
 }
 #profileIcon img {
-	position: absolute;
-	width: 100%;
-	z-index: 10;
-	-webkit-box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
--moz-box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
-box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
+	bottom: 0px;
+box-shadow: rgba(224, 224, 224, 0.701961) 0px 0px 0px 5px inset;
+left: 0px;
+margin-bottom: auto;
+margin-left: auto;
+margin-right: auto;
+margin-top: auto;
+max-height: 100%;
+max-width: 100%;
+position: absolute;
+right: 0px;
+top: 0px;
+width: 100%;
+z-index: 10;
 }
 #mainDetails {
 	color:#fff;
