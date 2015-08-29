@@ -83,14 +83,8 @@ function registerGetInfo() {
 	
 }
 function setupProfileicon() {
-	document.getElementById("profileIcon").addEventListener("click", function() {
 		photoChosen = document.getElementById("basicprofileimg");
 		getPhotos(fbId);
-	});
-	document.getElementById("profileIcon").children[0].addEventListener("click", function() {
-		photoChosen = document.getElementById("basicprofileimg");
-		getPhotos(fbId);
-	});
 }
 var photoChosen;
 function getPhotos(facebookid) {
