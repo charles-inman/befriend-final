@@ -138,12 +138,12 @@ function editprofileImage() {
 			imgage.style.opacity = 1;
 		}
 		imgage.addEventListener("click", function() {
-            var pp = document.createElement("style");
+			var pp = document.createElement("style");
             pp.type = 'text/css';
-            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + this.src + "'); }"));
-            photoChosen.innerHTML = "";
-            photoChosen.className = "noplus";
-            photoChosen.appendChild(pp);
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
+			document.getElementById("profileIcon").removeChild(document.getElementById("profileIcon").children[0]);
+			document.getElementById("profileIcon").appendChild(pp);
+            document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 		});
 		imgage.src = editProfImg.data[i].source;
