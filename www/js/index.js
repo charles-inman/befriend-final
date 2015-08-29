@@ -70,7 +70,7 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
+	facebookConnectPlugin.api(fbId + "/picture",
 		function (image) {
 			
 		   console.log("photo");
