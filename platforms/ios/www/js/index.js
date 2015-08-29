@@ -59,7 +59,7 @@ var fbId;
 
 function registerGetInfo() {
 	newPage("register.html");
-	facebookConnectPlugin.api("/" + fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+	facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
     function (result) {
         profileJSON = result;
        idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
@@ -71,10 +71,10 @@ function registerGetInfo() {
         console.log("Failed: " + error);
     });
 	facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
-		function (result) {
+		function (image) {
 			
 		   console.log("photo");
-		   console.log(result);
+		   console.log(image);
 		},
 		function (error) {
 			console.log("Failed: " + error);
