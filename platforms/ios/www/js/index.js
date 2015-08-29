@@ -94,7 +94,8 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (result) {
-			addPage("findphotos.html", editprofileImage(result));
+			editProfImg = result;
+			addPage("findphotos.html" , 0);
 			
 		   console.log(result);
 		},
@@ -105,7 +106,7 @@ function getPhotos(facebookid) {
 }
 
 // COMMON FUCTIONS 
-function newPage(pagename) {
+function newPage(pagename, type) {
 	var myNode = document.getElementById("pagewrap");
 	while (myNode.firstChild) {
 		myNode.removeChild(myNode.firstChild);
@@ -121,31 +122,34 @@ function newPage(pagename) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML = xmlhttp.responseText;
+			if(type == 0) {
+				editprofileImage();
+			}
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
 	xmlhttp.send();
 }
-function editprofileImage(result) {
+var editProfImg;
+function editprofileImage() {
 	var maingallery = document.getElementById("imageGallery");
-			var maingallery = document.getElementById("imageGallery");
-			for(i = 0; i < result.data.length; i++) (function(i){ 
-				var imgage = document.createElement("img");
-				imgage.style.opacity = 0;
-				imgage.onload = function() {
-					imgage.style.opacity = 1;
-				}
-				imgage.addEventListener("click", function() {
-					if(photoChosen) {
-						photoChosen.src = imgage[i];
-						document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-					}
-				});
-				imgage.src = result.data[i].picture;
-				maingallery.appendChild(imgage);
-			})(i);
+	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
+		var imgage = document.createElement("img");
+		imgage.style.opacity = 0;
+		imgage.onload = function() {
+			imgage.style.opacity = 1;
+		}
+		imgage.addEventListener("click", function() {
+			if(photoChosen) {
+				photoChosen.src = imgage[i];
+				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+			}
+		});
+		imgage.src = editProfImg.data[i].picture;
+		maingallery.appendChild(imgage);
+	})(i);
 }
-function addPage(pagename, functstate) {
+function addPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
 	var xmlhttp;
 	if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -157,7 +161,6 @@ function addPage(pagename, functstate) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML += xmlhttp.responseText;
-			functstate();
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
