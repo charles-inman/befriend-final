@@ -70,15 +70,7 @@ function registerGetInfo() {
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
 				idc("description").value = result.bio;
 				
-				if(document.getElementById("profileIcon")) {
-					document.getElementById("profileIcon").addEventListener("click", function() {
-						photoChosen = document.getElementById("basicprofileimg");
-						getPhotos(fbId);
-					});
-				}
-				else {
-					console.warn("No profile image button attached");
-				}
+				setupProfileicon();
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -89,6 +81,12 @@ function registerGetInfo() {
 		}
 	 );
 	
+}
+function setupProfileicon() {
+	document.getElementById("profileIcon").addEventListener("click", function() {
+		photoChosen = document.getElementById("basicprofileimg");
+		getPhotos(fbId);
+	});
 }
 var photoChosen;
 function getPhotos(facebookid) {
