@@ -62,7 +62,7 @@ function registerGetInfo() {
 		function (image) {
 			var pp = document.createElement("style");
             pp.type = 'text/css';
-            pp.style.appendChild(document.createTextNode("#profileIcon { background-image:url(" +this.src + "); }"));
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url(" +this.src + "); }"));
 			document.getElementById("profileIcon").appendChild(pp);
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -139,7 +139,7 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
             var pp = document.createElement("style");
             pp.type = 'text/css';
-            pp.style.appendChild(document.createTextNode("#profileIcon { background-image:url(" +this.src + "); }"));
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url(" +this.src + "); }"));
             photoChosen.innerHTML = "";
 
             photoChosen.appendChild(pp);
