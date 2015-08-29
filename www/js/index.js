@@ -144,7 +144,7 @@ function editprofileImage() {
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
 		});
-		imgage.src = editProfImg.data[i].picture;
+		imgage.src = editProfImg.data[i].source;
 		maingallery.appendChild(imgage);
 	})(i);
 }

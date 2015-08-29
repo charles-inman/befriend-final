@@ -315,4 +315,5 @@ box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
 	opacity:0;
 	-webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
+	z-index: 99999;
 }
