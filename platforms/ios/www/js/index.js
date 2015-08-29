@@ -58,23 +58,23 @@ var fbId;
 
 function registerGetInfo() {
 	newPage("register.html");
-	facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
-    function (result) {
-        profileJSON = result;
-       idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
-		var datesset = result.birthday.split('/');
-		console.log(result.birthday);
-       idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
-		idc("description").value = result.bio;
-    },
-    function (error) {
-        console.log("Failed: " + error);
-    });
-	console.log("Got age etc");
-	facebookConnectPlugin.api("me/picture?redirect=false&type=large", ["user_photos"],
+	
+	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ["user_photos"],
 		function (image) {
 			var fbdata = image.data;
 			alert(fbdata.length);
+			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			function (result) {
+				profileJSON = result;
+			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
+				var datesset = result.birthday.split('/');
+				console.log(result.birthday);
+			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
+				idc("description").value = result.bio;
+			},
+			function (error) {
+				console.log("Failed: " + error);
+			});
 		},
 		function (error) {
 			console.log("Failed: " + error);
