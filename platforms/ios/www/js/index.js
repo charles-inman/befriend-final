@@ -131,6 +131,7 @@ function newPage(pagename) {
 var editProfImg;
 function editprofileImage() {
 	var maingallery = document.getElementById("imageGallery");
+	maingallery.style.opacity = 1;
 	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
 		var imgage = document.createElement("img");
 		imgage.style.opacity = 0;
