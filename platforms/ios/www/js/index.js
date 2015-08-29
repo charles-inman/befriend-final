@@ -141,7 +141,7 @@ function editprofileImage() {
 			var pp = document.createElement("style");
             pp.type = 'text/css';
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
-			document.getElementById("profileIcon").removeChild(document.getElementById("profileIcon").children[0]);
+			document.getElementById("profileIcon").innerHTML = "";
 			document.getElementById("profileIcon").appendChild(pp);
             document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
