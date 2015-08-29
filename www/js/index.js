@@ -91,7 +91,6 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-    idc("description").value = idc("description").getAttribute("textdet");
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (def) {
 			editProfImg = def;
@@ -168,6 +167,7 @@ function addPage(pagename,type) {
 			if(type == 0) {
 				editprofileImage();
 			}
+            idc("description").value = idc("description").getAttribute("textdet");
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
