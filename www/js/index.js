@@ -59,7 +59,7 @@ var fbId;
 function registerGetInfo() {
 	newPage("register.html");
 	
-	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ["user_photos"],
+	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var fbdata = image.data;
 			alert(fbdata.length);
