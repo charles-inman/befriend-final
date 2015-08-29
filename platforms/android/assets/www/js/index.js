@@ -70,7 +70,7 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	/*facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
+	facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
 		function (image) {
 			
 		   console.log("photo");
@@ -80,7 +80,7 @@ function registerGetInfo() {
 			console.log("Failed: " + error);
 		}
 	 );
-	if(document.getElementById("profileIcon")) {
+	/*if(document.getElementById("profileIcon")) {
 		document.getElementById("profileIcon").addEventListener("click", function() {
 			getPhotos();
 		});
