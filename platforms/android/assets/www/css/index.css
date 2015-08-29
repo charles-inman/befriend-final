@@ -306,6 +306,7 @@ z-index: 10;
 #imageGallery {
 	width:100%;
 	clear:both;
+    overflow:scroll;
 }
 #imageGallery img{
 	width:25%;
@@ -324,4 +325,5 @@ z-index: 10;
 	-webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
 	z-index: 99999;
+    height:100%;
 }
