@@ -67,8 +67,8 @@ function registerGetInfo() {
 				profileJSON = result;
 			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
 				var datesset = result.birthday.split('/');
-			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
 				idc("description").value = result.bio;
+			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
 				
 				setupProfileicon();
 			},
