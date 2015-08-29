@@ -70,10 +70,11 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	facebookConnectPlugin.api("/" + fbId + "/picture", ["user_photos"],
+	console.log("Got age etc");
+	facebookConnectPlugin.api("me/picture?redirect=false&type=large", ["user_photos"],
 		function (image) {
-			
-		   console.log("photo");
+			var fbdata = image.data;
+			alert(fbdata.length);
 		},
 		function (error) {
 			console.log("Failed: " + error);
