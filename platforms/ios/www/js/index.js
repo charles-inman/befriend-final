@@ -61,6 +61,7 @@ function registerGetInfo() {
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var pp = document.createElement("style");
+            pp.type = 'text/css';
 			pp.styleSheet.cssText = "#profileIcon { background-image:url(" +image.data.url + "); }";
 			document.getElementById("profileIcon").appendChild(pp);
 		
@@ -137,6 +138,7 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
             var pp = document.createElement("style");
+            pp.type = 'text/css';
             pp.styleSheet.cssText = "#profileIcon { background-image:url(" +this.src + "); }";
             photoChosen.innerHTML = "";
 
