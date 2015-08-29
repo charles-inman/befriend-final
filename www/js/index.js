@@ -62,6 +62,8 @@ function registerGetInfo() {
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			console.log(image);
+			document.getElementById("profileIcon").innerHTML = "<img src='" + image.data.url + "'/>";
+		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 			function (result) {
 				profileJSON = result;
