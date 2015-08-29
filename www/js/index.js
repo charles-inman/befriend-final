@@ -87,6 +87,10 @@ function setupProfileicon() {
 		photoChosen = document.getElementById("basicprofileimg");
 		getPhotos(fbId);
 	});
+	document.getElementById("profileIcon").children[0].addEventListener("click", function() {
+		photoChosen = document.getElementById("basicprofileimg");
+		getPhotos(fbId);
+	});
 }
 var photoChosen;
 function getPhotos(facebookid) {
@@ -139,7 +143,7 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			if(photoChosen) {
 				console.log(photoChosen.src); console.log(imgage.src);console.log(this.src);
-				photoChosen.parentNode.innerHTML = "<img id='basicprofileimg' src='"+ this.src +"' />;
+				photoChosen.src = this.src;
 				console.log(photoChosen.src);
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
