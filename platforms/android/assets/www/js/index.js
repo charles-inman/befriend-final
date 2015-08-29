@@ -138,7 +138,9 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
 			if(photoChosen) {
+				console.log(photoChosen);
 				photoChosen.src = editProfImg.data[i].source;
+				console.log(photoChosen);
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
 		});
