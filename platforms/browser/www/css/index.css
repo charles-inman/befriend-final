@@ -216,6 +216,9 @@ hr {
 	position: absolute;
 	width: 100%;
 	z-index: 10;
+	-webkit-box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
+-moz-box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
+box-shadow: inset 0px 0px 0px 5px rgba(224,224,224,0.7);
 }
 #mainDetails {
 	color:#fff;
@@ -286,4 +289,30 @@ hr {
 	top:0;
 	right:0;
 	bottom:0;
+}
+
+.black {
+	color:#000;
+}
+
+#imageGallery {
+	width:100%;
+	clear:both;
+}
+#imageGallery img{
+	width:25%;
+	margin: 10px 4%;
+	float:left;
+	-webkit-transition: all 0.5s; /* Safari */
+    transition: all 0.5s;
+}
+
+#gallery {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	opacity:0;
+	-webkit-transition: all 0.5s; /* Safari */
+    transition: all 0.5s;
 }

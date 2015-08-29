@@ -60,7 +60,7 @@ function registerGetInfo() {
 	
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
-			document.getElementById("profileIcon").innerHTML = "<img src='" + image.data.url + "'/>";
+			document.getElementById("profileIcon").innerHTML = "<img id='basicprofileimg' src='" + image.data.url + "'/>";
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 			function (result) {
@@ -72,7 +72,8 @@ function registerGetInfo() {
 				
 				if(document.getElementById("profileIcon")) {
 					document.getElementById("profileIcon").addEventListener("click", function() {
-						getPhotos();
+						photoChosen = document.getElementById("basicprofileimg");
+						getPhotos(fbId);
 					});
 				}
 				else {
@@ -89,11 +90,27 @@ function registerGetInfo() {
 	 );
 	
 }
-function getPhotos() {
-	facebookConnectPlugin.api(fbId + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
+var photoChosen;
+function getPhotos(facebookid) {
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (result) {
-			
-		   console.log("photos");
+			addPage("findphotos.html");
+			var maingallery = document.getElementById("imageGallery");
+			for(i = 0; i < result.data.length; i++) (function(i){ 
+				var imgage = document.createElement("img");
+				imgage.style.opacity = 0;
+				imgage.onload = function() {
+					imgage.style.opacity = 1;
+				}
+				imgage.addEventListener("click", function() {
+					if(photoChosen) {
+						photoChosen.src = imgage[i];
+						document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+					}
+				});
+				imgage.src = result.data[i].picture;
+				maingallery.appendChild(imgage);
+			})(i);
 		   console.log(result);
 		},
 		function (error) {
@@ -119,6 +136,23 @@ function newPage(pagename) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML = xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET", "screens/" + pagename, true);
+	xmlhttp.send();
+}
+function addPage(pagename) {
+	var myNode = document.getElementById("pagewrap");
+	var xmlhttp;
+	if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}
+	else { // code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			document.getElementById("pagewrap").innerHTML += xmlhttp.responseText;
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
