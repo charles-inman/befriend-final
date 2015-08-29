@@ -60,9 +60,8 @@ function registerGetInfo() {
 	
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
-			var pp = document.createElement("img");
-			pp.src = image.data.url;
-		pp.id = "basicprofileimg";
+			var pp = document.createElement("style");
+			pp.innerHTML = "<style> #profileIcon { background-image:url(" +image.data.url + "); }";
 			document.getElementById("profileIcon").appendChild(pp);
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -86,7 +85,7 @@ function registerGetInfo() {
 	
 }
 function setupProfileicon() {
-		photoChosen = document.getElementById("basicprofileimg");
+		photoChosen = document.getElementById("profileIcon");
 		getPhotos(fbId);
 }
 var photoChosen;
@@ -137,16 +136,12 @@ function editprofileImage() {
 			imgage.style.opacity = 1;
 		}
 		imgage.addEventListener("click", function() {
-			if(photoChosen) {
-			     var pp = document.createElement("img");
-                pp.src = this.src;
-                pp.id ="basicprofileimg";
-                document.getElementById("profileIcon").innerHTML = "";
-                
-                document.getElementById("profileIcon").appendChild(pp);
-				console.log(photoChosen.src);
-				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-			}
+            var pp = document.createElement("style");
+            pp.innerHTML = "<style> #profileIcon { background-image:url(" +this.src + "); }";
+            photoChosen.innerHTML = "";
+
+            photoChosen.appendChild(pp);
+            document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 		});
 		imgage.src = editProfImg.data[i].source;
 		maingallery.appendChild(imgage);
