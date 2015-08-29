@@ -17,6 +17,11 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 		document.getElementById("fblog").style.display = "block";
+		document.getElementById("fblog").addEventListener("click", function() {
+			console.log("you clicked the facebook button");
+			app.fblogin();
+
+		});
 		facebookConnectPlugin.getLoginStatus(function(response) {
 		  if (response.status === 'connected') {
 			  app.fblogin();
@@ -29,12 +34,6 @@ var app = {
 			// the user isn't logged in to Facebook.
 		  }
 		 });
-		
-		document.getElementById("fblog").addEventListener("click", function() {
-			console.log("you clicked the facebook button");
-			app.fblogin();
-
-		});
     },
 	fblogin: function() {
 		var fbLoginSuccess = function (userData) {
