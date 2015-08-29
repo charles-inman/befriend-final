@@ -177,7 +177,7 @@ hr {
 	float:left;
 }
 
-#plus-icon-blue {
+#profileIcon {
 	width:35vw;
 	height:35vw;
 	background-color:#1aafdb;
@@ -188,7 +188,7 @@ hr {
 	position:relative;
 	overflow: hidden;
 }
-#plus-icon-blue:after {
+#profileIcon:after {
 	content:'';
 	width:50%;
 	height:7%;
@@ -200,7 +200,7 @@ hr {
 	bottom:0;
 	margin:auto;
 }
-#plus-icon-blue:before {
+#profileIcon:before {
 	content:'';
 	width:7%;
 	height:50%;

@@ -22,10 +22,21 @@ var app = {
 			app.fblogin();
 
 		});
-		
+		facebookConnectPlugin.getLoginStatus(function(response) {
+		  if (response.status === 'connected') {
+			  app.fblogin();
+			var uid = response.authResponse.userID;
+			var accessToken = response.authResponse.accessToken;
+		  } else if (response.status === 'not_authorized') {
+			// the user is logged in to Facebook, 
+			// but has not authenticated your app
+		  } else {
+			// the user isn't logged in to Facebook.
+		  }
+		 });
     },
 	fblogin: function() {
-			var fbLoginSuccess = function (userData) {
+		var fbLoginSuccess = function (userData) {
 				fullJSON = userData;
 				fbId = fullJSON.authResponse.userID;
 				console.log(fullJSON);
@@ -58,7 +69,7 @@ function registerGetInfo() {
     function (error) {
         console.log("Failed: " + error);
     });
-	facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
+	/*facebookConnectPlugin.api(fbId + "/picture?type=large", ["user_photos"],
 		function (image) {
 			
 		   console.log("photo");
@@ -75,10 +86,10 @@ function registerGetInfo() {
 	}
 	else {
 		console.warn("No profile image button attached");
-	}
+	}*/
 }
 function getPhotos() {
-	facebookConnectPlugin.api(fbId + "/photos?type=uploaded", ["user_photos"],
+	/*facebookConnectPlugin.api(fbId + "/photos?type=uploaded", ["user_photos"],
 		function (result) {
 			
 		   console.log("photos");
@@ -87,7 +98,7 @@ function getPhotos() {
 		function (error) {
 			console.log("Failed: " + error);
 		}
-	 );
+	 );*/
 }
 
 // COMMON FUCTIONS 
