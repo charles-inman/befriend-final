@@ -94,7 +94,7 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (result) {
-			addPage("findphotos.html", editprofileImage);
+			addPage("findphotos.html", editprofileImage(result));
 			
 		   console.log(result);
 		},
@@ -126,7 +126,7 @@ function newPage(pagename) {
 	xmlhttp.open("GET", "screens/" + pagename, true);
 	xmlhttp.send();
 }
-function editprofileImage() {
+function editprofileImage(result) {
 	var maingallery = document.getElementById("imageGallery");
 			var maingallery = document.getElementById("imageGallery");
 			for(i = 0; i < result.data.length; i++) (function(i){ 
