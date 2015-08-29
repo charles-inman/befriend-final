@@ -64,6 +64,7 @@ function registerGetInfo() {
             pp.type = 'text/css';
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
 			document.getElementById("profileIcon").appendChild(pp);
+			document.getElementById("profileIcon").setAttribute("assignedimage", image.data.url);
             document.getElementById("profileIcon").className = "noplus";
 		
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -140,8 +141,9 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
+            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + this.url + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
+			document.getElementById("profileIcon").setAttribute("assignedimage", this.url);
 			document.getElementById("profileIcon").appendChild(aa);
             document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
