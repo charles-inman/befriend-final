@@ -106,7 +106,7 @@ function getPhotos(facebookid) {
 }
 
 // COMMON FUCTIONS 
-function newPage(pagename, type) {
+function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
 	while (myNode.firstChild) {
 		myNode.removeChild(myNode.firstChild);
@@ -122,9 +122,7 @@ function newPage(pagename, type) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML = xmlhttp.responseText;
-			if(type == 0) {
-				editprofileImage();
-			}
+			
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
@@ -149,7 +147,7 @@ function editprofileImage() {
 		maingallery.appendChild(imgage);
 	})(i);
 }
-function addPage(pagename) {
+function addPage(pagename,type) {
 	var myNode = document.getElementById("pagewrap");
 	var xmlhttp;
 	if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -161,6 +159,9 @@ function addPage(pagename) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML += xmlhttp.responseText;
+			if(type == 0) {
+				editprofileImage();
+			}
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
