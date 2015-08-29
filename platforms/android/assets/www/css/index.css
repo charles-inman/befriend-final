@@ -187,7 +187,7 @@ hr {
 	box-shadow: inset 0px 0px 0px 10px #5cd1f4;
 	position:relative;
 	overflow: hidden;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
 }
 #profileIcon:after {
@@ -213,6 +213,9 @@ hr {
 	top:0;
 	bottom:0;
 	margin:auto;
+}
+#profileIcon.noplus:after,#profileIcon.noplus:before {
+    opacity:0;
 }
 #profileIcon img {
 	bottom: 0px;
