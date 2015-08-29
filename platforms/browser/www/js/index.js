@@ -138,8 +138,10 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
 			if(photoChosen) {
-				console.log(photoChosen.src); console.log(imgage.src);console.log(this.src);
-				photoChosen.src = this.src;
+			     var pp = document.createElement("img");
+                pp.src = this.src;
+                pp.id ="basicprofileimg";
+                document.getElementById("profileIcon").innerHTML = pp;
 				console.log(photoChosen.src);
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
