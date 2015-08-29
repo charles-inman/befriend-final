@@ -68,9 +68,9 @@ function registerGetInfo() {
 			facebookConnectPlugin.api(fbId, ["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 			function (result) {
 				profileJSON = result;
-			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = result.first_name;
+			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = profileJSON.first_name;
 				var datesset = result.birthday.split('/');
-				idc("description").value = result.bio;
+				idc("description").value = profileJSON.bio;
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
 				
 			},
@@ -141,7 +141,9 @@ function editprofileImage() {
 			     var pp = document.createElement("img");
                 pp.src = this.src;
                 pp.id ="basicprofileimg";
-                document.getElementById("profileIcon").innerHTML = pp;
+                document.getElementById("profileIcon").innerHTML = "";
+                
+                document.getElementById("profileIcon").appendChild(pp);
 				console.log(photoChosen.src);
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
