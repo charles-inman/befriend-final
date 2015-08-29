@@ -212,7 +212,11 @@ hr {
 	bottom:0;
 	margin:auto;
 }
-
+#profileIcon img {
+	position: absolute;
+	width: 100%;
+	z-index: 10;
+}
 #mainDetails {
 	color:#fff;
 	font-size:5vw;
