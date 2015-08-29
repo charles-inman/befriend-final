@@ -131,7 +131,7 @@ function newPage(pagename) {
 var editProfImg;
 function editprofileImage() {
 	var maingallery = document.getElementById("imageGallery");
-	maingallery.style.opacity = 1;
+	document.getElementById("gallery").style.opacity = 1;
 	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
 		var imgage = document.createElement("img");
 		imgage.style.opacity = 0;
@@ -140,7 +140,7 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
 			if(photoChosen) {
-				photoChosen.src = imgage[i];
+				photoChosen.src = imgage[i].src;
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
 		});
