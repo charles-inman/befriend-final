@@ -140,7 +140,7 @@ function editprofileImage() {
 		}
 		imgage.addEventListener("click", function() {
 			if(photoChosen) {
-				photoChosen.src = imgage[i].src;
+				photoChosen.src = editProfImg.data[i].source;
 				document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 			}
 		});
