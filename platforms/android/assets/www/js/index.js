@@ -74,7 +74,6 @@ function registerGetInfo() {
 		function (image) {
 			
 		   console.log("photo");
-		   console.log(image);
 		},
 		function (error) {
 			console.log("Failed: " + error);
