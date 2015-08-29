@@ -94,23 +94,8 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (result) {
-			addPage("findphotos.html");
-			var maingallery = document.getElementById("imageGallery");
-			for(i = 0; i < result.data.length; i++) (function(i){ 
-				var imgage = document.createElement("img");
-				imgage.style.opacity = 0;
-				imgage.onload = function() {
-					imgage.style.opacity = 1;
-				}
-				imgage.addEventListener("click", function() {
-					if(photoChosen) {
-						photoChosen.src = imgage[i];
-						document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-					}
-				});
-				imgage.src = result.data[i].picture;
-				maingallery.appendChild(imgage);
-			})(i);
+			addPage("findphotos.html", editprofileImage);
+			
 		   console.log(result);
 		},
 		function (error) {
@@ -141,7 +126,26 @@ function newPage(pagename) {
 	xmlhttp.open("GET", "screens/" + pagename, true);
 	xmlhttp.send();
 }
-function addPage(pagename) {
+function editprofileImage() {
+	var maingallery = document.getElementById("imageGallery");
+			var maingallery = document.getElementById("imageGallery");
+			for(i = 0; i < result.data.length; i++) (function(i){ 
+				var imgage = document.createElement("img");
+				imgage.style.opacity = 0;
+				imgage.onload = function() {
+					imgage.style.opacity = 1;
+				}
+				imgage.addEventListener("click", function() {
+					if(photoChosen) {
+						photoChosen.src = imgage[i];
+						document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+					}
+				});
+				imgage.src = result.data[i].picture;
+				maingallery.appendChild(imgage);
+			})(i);
+}
+function addPage(pagename, functstate) {
 	var myNode = document.getElementById("pagewrap");
 	var xmlhttp;
 	if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -153,6 +157,7 @@ function addPage(pagename) {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			document.getElementById("pagewrap").innerHTML += xmlhttp.responseText;
+			functstate();
 		}
 	}
 	xmlhttp.open("GET", "screens/" + pagename, true);
