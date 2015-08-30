@@ -214,12 +214,12 @@ function mainInterestCheck(type) {
     else {
         mainTypeInterest = type;
         idc("subcats").style.left = "16%";
-        for(i = 0;i <interestJSON[0][mainTypeInterest].length;i++) {
+        for(i = 0;i <interestJSON[mainTypeInterest].length;i++) {
             var container = document.createElement("div");
             var active = document.createElement("button");
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
-            details.innerHTML = interestJSON[0][mainTypeInterest][i];
+            details.innerHTML = interestJSON[mainTypeInterest][i];
             idc("subcats").appendChild(container);
         }
     }
