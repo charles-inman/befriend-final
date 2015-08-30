@@ -56,6 +56,8 @@ var app = {
 
 var fullJSON;
 
+var interestJSON;
+var mainTypeInterest ;
 var profileJSON;
 
 var fbId;
@@ -192,6 +194,7 @@ function calculateAge(birthday) { // birthday is a date
 }
 function openeditInterests() {
     addPage("interests.html",1);
+    idc("pagewrap").lastChild.style.left = "0%";
 }
 function backScreen(item) {
     item.style.left = "-100%";
@@ -200,8 +203,6 @@ function backScreen(item) {
     }, 600);
 }
 
-var interestJSON;
-var mainTypeInterest ;
 function mainInterestCheck(type) {
     if(mainTypeInterest == type) {
         idc("subcats").style.left = "100%";
