@@ -214,6 +214,8 @@ function mainInterestCheck(type) {
     else {
         mainTypeInterest = type;
         idc("subcats").style.left = "16%";
+        console.log(interestJSON[0][mainTypeInterest]);
+        console.log(interestJSON[mainTypeInterest]);
         for(i = 0;i <interestJSON[mainTypeInterest].length;i++) {
             var container = document.createElement("div");
             var active = document.createElement("button");
