@@ -206,6 +206,7 @@ function backScreen(item) {
 }
 
 function mainInterestCheck(type) {
+    console.log(interestJSON);
     if(mainTypeInterest == type) {
         idc("subcats").style.left = "100%";
     }
