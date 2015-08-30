@@ -209,6 +209,7 @@ function mainInterestCheck(type) {
     console.log(interestJSON);
     if(mainTypeInterest == type) {
         idc("subcats").style.left = "100%";
+        mainTypeInterest = -1;
     }
     else {
         mainTypeInterest = type;
