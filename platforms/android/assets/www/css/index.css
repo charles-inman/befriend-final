@@ -389,7 +389,7 @@ z-index: 10;
 
 #interestspage {
     position:absolute;
-    left:100%;
+    left:0%;
 	-webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
     top:0;

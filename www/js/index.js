@@ -204,9 +204,8 @@ function backScreen(item) {
         document.getElementById("pagewrap").removeChild(item);
     }, 600);
 }
-
+var intereststypes = ["music","movies","travel","games","crafts","dancing","dining","exercising","artsandculture","sports","technology"];
 function mainInterestCheck(type) {
-    console.log(interestJSON);
     if(mainTypeInterest == type) {
         idc("subcats").style.left = "100%";
         mainTypeInterest = -1;
@@ -214,14 +213,12 @@ function mainInterestCheck(type) {
     else {
         mainTypeInterest = type;
         idc("subcats").style.left = "16%";
-        console.log(interestJSON[0][mainTypeInterest]);
-        console.log(interestJSON[mainTypeInterest]);
-        for(i = 0;i <interestJSON[mainTypeInterest].length;i++) {
+        for(i = 0;i <interestJSON[intereststypes[mainTypeInterest]].length;i++) {
             var container = document.createElement("div");
             var active = document.createElement("button");
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
-            details.innerHTML = interestJSON[mainTypeInterest][i][0];
+            details.innerHTML = interestJSON[intereststypes[mainTypeInterest]][i]["name"];
             idc("subcats").appendChild(container);
         }
     }
