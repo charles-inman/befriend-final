@@ -44,8 +44,6 @@ var app = {
                     'js/interests-1.json', 
                     function (response) {
                         interestJSON = JSON.parse(response);
-                            console.log(interestJSON[0]);
-                        console.log(interestJSON[0][1]);
                 });
 			}
 
