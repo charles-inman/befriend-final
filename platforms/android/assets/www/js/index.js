@@ -219,7 +219,7 @@ function mainInterestCheck(type) {
             var active = document.createElement("button");
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
-            details.innerHTML = interestJSON[mainTypeInterest][i];
+            details.innerHTML = interestJSON[mainTypeInterest][i][0];
             idc("subcats").appendChild(container);
         }
     }
