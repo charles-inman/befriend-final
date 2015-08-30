@@ -181,6 +181,9 @@ function addPage(pagename,type) {
 			if(type == 0) {
 				editprofileImage();
 			}
+            else if(type == 1) {
+                idc("pagewrap").lastChild.style.left = "0%";
+            }
             idc("description").value = idc("description").getAttribute("textdet");
     });
 }
@@ -194,7 +197,6 @@ function calculateAge(birthday) { // birthday is a date
 }
 function openeditInterests() {
     addPage("interests.html",1);
-    idc("pagewrap").lastChild.style.left = "0%";
 }
 function backScreen(item) {
     item.style.left = "-100%";
