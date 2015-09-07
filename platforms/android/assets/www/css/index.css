@@ -411,8 +411,14 @@ z-index: 10;
     transition: all 0.5s;
     top:0;
     overflow: hidden;
+    background: #63bd6c;
 }
 
-#subcats {
-    
+#subcats button{
+    background-color: #fff;
+    border-radius:1vw;
+    float: left;
+    height: 6vw;
+    margin: 3vw;
+    width: 6vw;
 }
