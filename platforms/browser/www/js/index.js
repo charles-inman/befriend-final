@@ -83,7 +83,7 @@ function registerGetInfo() {
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
-				personalJSON = JSON.parse('{ personalDate: { }');
+				personalJSON = JSON.parse('{ personalDate: { }}');
 			},
 			function (error) {
 				console.log("Failed: " + error);
