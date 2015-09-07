@@ -59,6 +59,7 @@ var fullJSON;
 var interestJSON;
 var mainTypeInterest ;
 var profileJSON;
+var personalJSON;
 
 var fbId;
 
@@ -82,7 +83,7 @@ function registerGetInfo() {
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
-				
+				personalJSON = JSON.parse('{ personalDate: { firstname:"' + profileJSON.first_name +'",age:"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'", description:"' + profileJSON.bio +'",profileImage:"" }, interests: {},version:0 }');
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -213,9 +214,21 @@ function mainInterestCheck(type) {
     else {
         mainTypeInterest = type;
         idc("subcats").style.left = "16%";
+        
+        var myNode = idc("subcats");
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
         for(i = 0;i <interestJSON[intereststypes[mainTypeInterest]].length;i++) {
             var container = document.createElement("div");
             var active = document.createElement("button");
+            
+            active.setAttribute("counter",i);
+            active.onclick = function() {
+                console.log(personalJSON);
+                personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")] = 1;
+                console.log(personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")]);
+            }
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
             details.innerHTML = interestJSON[intereststypes[mainTypeInterest]][i]["name"];

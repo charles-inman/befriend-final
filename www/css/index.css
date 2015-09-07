@@ -388,13 +388,13 @@ z-index: 10;
 }
 .interesting div{ 
     clear:both;
-    font-size:5vw;
     float:left;
     clear:both;
     width:90%;
 }
 .interesting div p{ 
     float:left;
+    font-size:5vw;
 }
 .interesting div button{ 
     clear:both;
