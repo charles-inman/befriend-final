@@ -59,6 +59,7 @@ button {
 .screen {
 	width:100%;
 	height:100%;
+overflow-y: scroll;
 }
 #homescreen {
 	text-align:center;
@@ -484,5 +485,7 @@ z-index: 10;
 
 .thumbsup {
     margin: 20px auto;
-    max-width:90px;
+    display: block;
+    max-width: 100%;
+    width: 15vw;
 }

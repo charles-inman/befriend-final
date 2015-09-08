@@ -186,6 +186,7 @@ function addPage(pagename,type) {
                 idc("pagewrap").lastChild.style.left = "0%";
             }
             idc("description").value = idc("description").getAttribute("textdet");
+            idc("answer").value = idc("answer").getAttribute("textdet");
     });
 }
 function idc(chosenid) {
