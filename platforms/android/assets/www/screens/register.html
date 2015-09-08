@@ -1,0 +1,25 @@
+<section id="register" class="screen">
+	<div class="greyback">
+		<div class="spacingcenter">
+			<h1 class="screen-header">BeYou</h1>
+			<hr>
+			<div id="profile-image" class="column-two">
+				<div id="profileIcon" onclick="setupProfileicon()"></div>
+			</div>
+			<div id="mainDetails" class="column-two">
+				<h2>Name</h2>
+				<h3>Age</h3>
+			</div>
+			<textarea oninput="this.setAttribute('textdet', this.value);" value="0" rows="3" id="description" placeholder="Let everyone know a bit about yourself and what you’re looking for."></textarea>
+		</div>
+	</div>
+	<div class="whiteback">
+		<div class="spacingcenter">
+			<h2 class="header">Interests</h2>
+			<p>Add your interests to find people who have common interests</p>
+			<div id="interests">
+				<button class="plus-icon-green" onclick="openeditInterests()"></button>
+			</div>
+		</div>
+	</div>
+</section>
