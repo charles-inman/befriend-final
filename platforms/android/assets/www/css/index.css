@@ -469,10 +469,9 @@ z-index: 10;
 	margin: 20px 0;
 }
 #question select {
-    font-size:3vw;
+    font-size:3vw;appearance:none;
 }
 #question select, #question textarea {
-    font-size:vw;
     width:94%;
     background-color:#fff;
     border: 5px solid #63bd6c;
