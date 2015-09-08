@@ -206,7 +206,7 @@ function backScreen(item) {
         document.getElementById("pagewrap").removeChild(itemchose);
     }, 600);
 }
-var intereststypes = ["music","movies","travel","games","crafts","dancing","dining","exercising","artsandculture","sports","technology"];
+var intereststypes = ["music","movies","travel","games","books","crafts","dancing","dining","exercising","artsandculture","sports","technology"];
 function mainInterestCheck(type) {
     if(mainTypeInterest == type) {
         idc("subcats").style.left = "100%";
