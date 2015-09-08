@@ -83,7 +83,7 @@ function registerGetInfo() {
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
-            personalJSON = JSON.parse('{ "personalDate": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'", "description":"' + profileJSON.bio +'","profileImage":"-1" }, "interests": {},"version":0  }');
+            personalJSON = JSON.parse('{ "personalDate": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'", "description":"' + profileJSON.bio +'","profileImage":"-1" }, "interests": {"music":[],"movies":[],"travel":[],"games":[],"crafts":[],"dancing":[],"dining:[]","exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -225,11 +225,7 @@ function mainInterestCheck(type) {
             
             active.setAttribute("counter",i);
             active.onclick = function() {
-                console.log(personalJSON);
-                console.log(this.getAttribute("counter"));
-                console.log(personalJSON.interests);
-                personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")] = 1;
-                console.log(personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")]);
+                personalJSON.interests[intereststypes[mainTypeInterest]].push({"count": this.getAttribute("counter") });
             }
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
