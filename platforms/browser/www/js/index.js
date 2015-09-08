@@ -226,6 +226,8 @@ function mainInterestCheck(type) {
             active.setAttribute("counter",i);
             active.onclick = function() {
                 console.log(personalJSON);
+                console.log(this.getAttribute("counter"));
+                console.log(personalJSON.interests);
                 personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")] = 1;
                 console.log(personalJSON.interests[intereststypes[mainTypeInterest]][this.getAttribute("counter")]);
             }
