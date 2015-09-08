@@ -443,13 +443,19 @@ z-index: 10;
 }
 #interests .imageint {
     float:left;
-    width:4vw;
-    height:4vw;
+    width:14vw;
+    height:14vw;
     border:5px solid #63bd6c;
     border-radius:10vw;
-    padding:1vw;
+    position:relative;
 }
 .imageint img {
-    -webkit-filter: hue-rotate(90deg);
-    filter: hue-rotate(90deg);
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top:0;
+    margin:auto;
+    max-width:80%;
+    max-height:80%;
 }
