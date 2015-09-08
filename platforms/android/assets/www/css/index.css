@@ -435,7 +435,7 @@ z-index: 10;
     background-repeat: no-repeat;
 }
 #subcats button.active{
-    background-size:0%;
+    background-size:80%;
 }
 
 

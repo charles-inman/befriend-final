@@ -200,9 +200,10 @@ function openeditInterests() {
     addPage("interests.html",1);
 }
 function backScreen(item) {
-    item.style.left = "-100%";
+    var itemchose = document.getElementById(item);
+    itemchose.style.left = "-100%";
     setTimeout(function(){ 
-        document.getElementById("pagewrap").removeChild(item);
+        document.getElementById("pagewrap").removeChild(itemchose);
     }, 600);
 }
 var intereststypes = ["music","movies","travel","games","crafts","dancing","dining","exercising","artsandculture","sports","technology"];
