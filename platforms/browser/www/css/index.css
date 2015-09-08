@@ -427,6 +427,7 @@ z-index: 10;
     margin: 3vw;
     width: 6vw;
     position:relative;
+    background-image: url(../img/tick.png);
 }
 .interesting div button:after {
     content:'';
