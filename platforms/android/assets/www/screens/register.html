@@ -20,6 +20,21 @@
 			<div id="interests">
 				<button class="plus-icon-green" onclick="openeditInterests()"></button>
 			</div>
+			<h2 class="header">Random Question</h2>
+			<p>Select a random question to answer to help people get to know you.</p>
+			<div id="question">
+				<select>
+                  <option value="0">What’s your favorite color?</option>
+                  <option value="1">If you could learn one random skill, what would you learn?</option>
+                  <option value="2">What’s your favorite dessert?</option>
+                  <option value="3">What are some things that scare you?</option>
+                  <option value="4">Do you like to plan things out in detail or be spontaneous?</option>
+                  <option value="5">What’s the biggest lie you’ve ever told?</option>
+                  <option value="6">What’s something most people don’t know about you?</option>
+                  <option value="7">Would you rather be hated or forgotten?</option>
+                </select>
+                <textarea oninput="this.setAttribute('textdet', this.value);" value="0" rows="3" id="answer" placeholder="Whats your answer"></textarea>
+			</div>
 		</div>
 	</div>
 </section>
