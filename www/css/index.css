@@ -274,6 +274,7 @@ z-index: 10;
 	width:100%;
 	clear:both;
 	margin: 20px 0;
+    overflow:scroll;
 }
 
 .plus-icon-green {

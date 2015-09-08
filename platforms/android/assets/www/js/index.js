@@ -224,6 +224,12 @@ function mainInterestCheck(type) {
             var container = document.createElement("div");
             var active = document.createElement("button");
             
+            for(b = 0; b < personalJSON.interests[intereststypes[mainTypeInterest]].length; b++) {
+                if(i == personalJSON.interests[intereststypes[mainTypeInterest]][b].count) {
+                    active.className = "active";
+                }
+            }
+            
             active.setAttribute("counter",i);
             active.onclick = function() {
                 if(this.className == "active") {
@@ -233,7 +239,6 @@ function mainInterestCheck(type) {
                 else {
                     this.className = "active";
                     personalJSON.interests[intereststypes[mainTypeInterest]].push({"count": this.getAttribute("counter") });
-                    console.log(personalJSON.interests);
                 }
             }
             var details = document.createElement("p");
