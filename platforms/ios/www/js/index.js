@@ -225,7 +225,15 @@ function mainInterestCheck(type) {
             
             active.setAttribute("counter",i);
             active.onclick = function() {
-                personalJSON.interests[intereststypes[mainTypeInterest]].push({"count": this.getAttribute("counter") });
+                if(this.className == "active") {
+                    personalJSON.interests[intereststypes[mainTypeInterest]].splice(parseInt(this.getAttribute("counter")),1);
+                    this.className = "";
+                }
+                else {
+                    this.className = "active";
+                    personalJSON.interests[intereststypes[mainTypeInterest]].push({"count": this.getAttribute("counter") });
+                    console.log(personalJSON.interests);
+                }
             }
             var details = document.createElement("p");
             container.appendChild(active);container.appendChild(details);
