@@ -478,3 +478,6 @@ z-index: 10;
     border: 5px solid #63bd6c;
     padding:2vw 3%;
 }
+#question select {
+    width:100%;
+}
