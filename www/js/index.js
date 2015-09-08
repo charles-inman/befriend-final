@@ -246,7 +246,7 @@ function mainInterestCheck(type) {
 function assignInterests() {
     var maininterests = document.getElementById("interests");
     
-    while (maininterests.children.length != 1 || maininterests.children.length != 0) {
+    while (maininterests.children.length != 1 && maininterests.children.length != 0) {
         maininterests.removeChild(maininterests.firstChild);
     }
     for(i = 0; i < intereststypes.length;i++) {
