@@ -437,9 +437,19 @@ z-index: 10;
 #subcats button.active{
     background-size:80%;
 }
-
-
 #subcats {
     color:#fff;
     overflow:scroll;
+}
+#interests .imageint {
+    float:left;
+    width:4vw;
+    height:4vw;
+    border:5px solid #63bd6c;
+    border-radius:10vw;
+    padding:1vw;
+}
+.imageint img {
+    -webkit-filter: hue-rotate(90deg);
+    filter: hue-rotate(90deg);
 }

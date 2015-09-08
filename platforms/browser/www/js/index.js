@@ -243,3 +243,15 @@ function mainInterestCheck(type) {
         }
     }
 }
+function assignInterests() {
+    var maininterests = document.getElementById("interests");
+    
+    while (maininterests.children.length != 1 || maininterests.children.length != 0) {
+        maininterests.removeChild(maininterests.firstChild);
+    }
+    for(i = 0; i < intereststypes.length;i++) {
+        if(personalJSON.interests[intereststypes[i]].length != 0) {
+            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
+        }
+    }
+}
