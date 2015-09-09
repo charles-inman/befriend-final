@@ -23,12 +23,9 @@ var app = {
             searchScreen();
         }
         else {
-            
             document.getElementById("fblog").style.display = "block";
             document.getElementById("fblog").addEventListener("click", function() {
-                console.log("you clicked the facebook button");
                 app.fblogin();
-
             });
             facebookConnectPlugin.getLoginStatus(function(response) {
               if (response.status === 'connected') {
@@ -36,8 +33,6 @@ var app = {
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
               } else if (response.status === 'not_authorized') {
-                // the user is logged in to Facebook, 
-                // but has not authenticated your app
               } else {
                 // the user isn't logged in to Facebook.
               }
@@ -46,18 +41,18 @@ var app = {
 		
     },
 	fblogin: function() {
-        
-        
 		var fbLoginSuccess = function (userData) {
 				fullJSON = userData;
 				fbId = fullJSON.authResponse.userID;
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
                     function (response) {
+                        console.log("type of login " + response);
                     if(response == "yes") {
                         searchScreen();
                     }
                     else if(response == "no") {
+                        
                         registerGetInfo();
                     }
                     else {
@@ -129,7 +124,6 @@ function getPhotos(facebookid) {
 		function (def) {
 			editProfImg = def;
 			addPage("findphotos.html" , 0);
-			
 		},
 		function (error) {
 			console.log("Failed: " + error);
@@ -330,5 +324,5 @@ function register() {
    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
 function searchScreen() {
-    newPage("searchscreen.html",-1);
+    newPage("searchscreen.html");
 }
