@@ -293,9 +293,10 @@ function register() {
         "http://www.divinitycomputing.com/apps/beoples/register.php", 
         function (response) {
 			if(response == "success") {
-                
+                alert("success");
             }
             else {
+                alert(response);
             
             }
     },
