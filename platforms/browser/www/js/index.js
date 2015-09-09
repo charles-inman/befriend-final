@@ -329,5 +329,5 @@ function register() {
    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
 function searchScreen() {
-    
+    addPage("searchscreen.html",-1);
 }
