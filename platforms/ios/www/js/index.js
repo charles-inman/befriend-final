@@ -83,7 +83,7 @@ function registerGetInfo() {
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
-            personalJSON = JSON.parse('{ "personalDate": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'", "description":"' + profileJSON.bio +'","profileImage":"-1" }, "interests": {"music":[],"movies":[],"travel":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
+            personalJSON = JSON.parse('{ "personalData": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'","relationship":"' + profileJSON.relationship_status + '", "description":"' + profileJSON.bio +'","gender":"'+ profileJSON.gender +'","profileImage":"-1","question":"0","answer":"0"  }, "interests": {"music":[],"movies":[],"travel":[],"books":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -132,6 +132,28 @@ var ajaxGet = function (url, callback) {
       }
     }
     xhr.send(null);
+    return xhr;
+}
+var ajaxPost = function (url, callback,data) {
+    var callback = (typeof callback == 'function' ? callback : false), xhr = null;
+    try {
+      xhr = new XMLHttpRequest();
+    } catch (e) {
+      try {
+        ajxhrax = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    }
+    if (!xhr)
+           return null;
+    xhr.open("POST", url,true);
+    xhr.onreadystatechange=function() {
+      if (xhr.readyState==4 && callback) {
+        callback(xhr.responseText)
+      }
+    }
+    xhr.send(data);
     return xhr;
 }
 // COMMON FUCTIONS 
@@ -260,4 +282,22 @@ function assignInterests() {
             maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
         }
     }
+}
+function register() {
+    personalJSON.personalData.description = idc("description").value;
+    personalJSON.personalData.profileImage = idc("profileIcon").getAttribute("assignedimage");
+    personalJSON.personalData.question = idc("question").children[0].value;
+    personalJSON.personalData.answer = idc("answer").value;
+    
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/register.php", 
+        function (response) {
+			if(response == "success") {
+                
+            }
+            else {
+            
+            }
+    },
+   'fbid=' + fbId + '&data=' JSON.stringify(personalJSON));
 }
