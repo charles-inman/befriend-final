@@ -17,6 +17,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         var regs = window.localStorage.getItem("registered");
+        console.log(regs);
         if(regs == "active") {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             searchScreen();
@@ -328,6 +329,6 @@ function register() {
     },
    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
-function newPage() {
-    addPage("searchscreen.html",-1);
+function searchScreen() {
+    newPage("searchscreen.html",-1);
 }
