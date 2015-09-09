@@ -128,13 +128,14 @@ var ajaxGet = function (url, callback) {
     xhr.open("GET", url,true);
     xhr.onreadystatechange=function() {
       if (xhr.readyState==4 && callback) {
-        callback(xhr.responseText)
+        callback(xhr.responseText);
       }
     }
     xhr.send(null);
     return xhr;
 }
 var ajaxPost = function (url, callback,data) {
+    console.log(data);
     var callback = (typeof callback == 'function' ? callback : false), xhr = null;
     try {
       xhr = new XMLHttpRequest();
@@ -150,9 +151,10 @@ var ajaxPost = function (url, callback,data) {
     xhr.open("POST", url,true);
     xhr.onreadystatechange=function() {
       if (xhr.readyState==4 && callback) {
-        callback(xhr.responseText)
+        callback(xhr.responseText);
       }
     }
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xhr.send(data);
     return xhr;
 }
