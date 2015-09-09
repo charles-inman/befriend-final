@@ -16,30 +16,54 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-		document.getElementById("fblog").style.display = "block";
-		document.getElementById("fblog").addEventListener("click", function() {
-			console.log("you clicked the facebook button");
-			app.fblogin();
+        var regs = window.localStorage.getItem("registered");
+        if(regs == "active") {
+            personalJSON = JSON.parse(window.localStorage.getItem("data"));
+            searchScreen();
+        }
+        else {
+            
+            document.getElementById("fblog").style.display = "block";
+            document.getElementById("fblog").addEventListener("click", function() {
+                console.log("you clicked the facebook button");
+                app.fblogin();
 
-		});
-		facebookConnectPlugin.getLoginStatus(function(response) {
-		  if (response.status === 'connected') {
-			  app.fblogin();
-			var uid = response.authResponse.userID;
-			var accessToken = response.authResponse.accessToken;
-		  } else if (response.status === 'not_authorized') {
-			// the user is logged in to Facebook, 
-			// but has not authenticated your app
-		  } else {
-			// the user isn't logged in to Facebook.
-		  }
+            });
+            facebookConnectPlugin.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                  app.fblogin();
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+              } else if (response.status === 'not_authorized') {
+                // the user is logged in to Facebook, 
+                // but has not authenticated your app
+              } else {
+                // the user isn't logged in to Facebook.
+              }
 		 });
+        }
+		
     },
 	fblogin: function() {
+        
+        
 		var fbLoginSuccess = function (userData) {
 				fullJSON = userData;
 				fbId = fullJSON.authResponse.userID;
-				registerGetInfo();
+                ajaxPost(
+                    "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
+                    function (response) {
+                    if(response == "yes") {
+                        searchScreen();
+                    }
+                    else if(response == "no") {
+                        registerGetInfo();
+                    }
+                    else {
+                        alert(response);
+                    }
+                },
+               'fbid=' + fbId);
               ajaxGet(
                     'js/interests-1.json', 
                     function (response) {
@@ -53,7 +77,6 @@ var app = {
 			);
 	}
 };
-
 var fullJSON;
 
 var interestJSON;
@@ -169,7 +192,6 @@ function newPage(pagename) {
         function (response) {
         document.getElementById("pagewrap").innerHTML = response;
     });
-    
 }
 var editProfImg;
 function editprofileImage() {
@@ -294,13 +316,18 @@ function register() {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/register.php", 
         function (response) {
-			if(response == "success") {
-                alert("success");
-            }
-            else {
-                alert(response);
-            
-            }
+        if(response == "success") {
+            window.localStorage.setItem("registered", "active");
+            window.localStorage.setItem("data", JSON.stringify(personalJSON));
+            searchScreen();
+        }
+        else {
+            alert(response);
+
+        }
     },
    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
+}
+function searchScreen() {
+    
 }
