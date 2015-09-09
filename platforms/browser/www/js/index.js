@@ -328,6 +328,6 @@ function register() {
     },
    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
-function searchScreen() {
+function newPage() {
     addPage("searchscreen.html",-1);
 }
