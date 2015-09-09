@@ -299,5 +299,5 @@ function register() {
             
             }
     },
-   'fbid=' + fbId + '&data=' JSON.stringify(personalJSON));
+   'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
