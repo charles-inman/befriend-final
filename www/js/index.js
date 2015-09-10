@@ -177,6 +177,29 @@ var ajaxPost = function (url, callback,data) {
     xhr.send(data);
     return xhr;
 }
+var ajaxPostImage = function (url, callback, data) {
+    var callback = (typeof callback == 'function' ? callback : false), xhr = null;
+    try {
+      xhr = new XMLHttpRequest();
+    } catch (e) {
+      try {
+        ajxhrax = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    }
+    if (!xhr)
+           return null;
+    xhr.open("POST", url,true);
+    xhr.onreadystatechange=function() {
+      if (xhr.readyState==4 && callback) {
+        callback(xhr.responseText);
+      }
+    }
+    xhr.setRequestHeader("multipart/form-data");
+    xhr.send(data);
+    return xhr;
+}
 // COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
@@ -307,18 +330,19 @@ function register() {
     var img = new Image();
 
     img.onload = function () {
-        
-        var options = new FileUploadOptions();
-        options.fileKey = "file";
-        options.fileName = fbId + ".jpg";
-        options.mimeType = "image/jpeg";
-        options.chunkedMode = false;
-        var params = new Object();
-        params.name = fbId + ".jpg";
+        var canvas = document.createElement("canvas");
+        canvas.width =this.width;
+        canvas.height =this.height;
 
-        options.params = params;
-        var ft = new FileTransfer();
-        ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+        console.log(dataURL);
+        ajaxPostImage(
+            "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", 
+            function (response) {
+            if(response.indexOf("success") != -1) {
                     var responsePicture = JSON.parse(response);
                     personalJSON.personalData.profileImage = responsePicture.image.url;
                     personalJSON.personalData.description = idc("description").value;
@@ -339,10 +363,13 @@ function register() {
                         }
                     },
                     'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
-        }, function(response) {
-            alert("image upload failed" + response);
-        }, options, true);
-       
+            }
+            else {
+                alert(response);
+
+            }
+        },
+       'fbid=' + fbId + '&urlselect=' + dataURL);
     };
 
     img.src = idc("profileIcon").getAttribute("assignedimage");
