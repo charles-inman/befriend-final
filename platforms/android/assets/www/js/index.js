@@ -307,21 +307,22 @@ function register() {
     var img = idc("profileIcon").getAttribute("assignedimage");
 
     var options = new FileUploadOptions();
-            options.fileKey="file";
-            options.fileName=img.substr(img.lastIndexOf('/')+1);
-            options.mimeType="image/jpeg";
- 
-            var params = new Object();
- 
-            options.params = params;
-            options.chunkedMode = false;
- 
-            var ft = new FileTransfer();
-            ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
-                
-            }, function() {
-            
-            }, options);
+    options.fileKey="file";
+    options.fileName=img.substr(img.lastIndexOf('/')+1);
+    options.mimeType="image/jpeg";
+
+    var params = new Object();
+    params.id = fbId;
+
+    options.params = params;
+    options.chunkedMode = false;
+
+    var ft = new FileTransfer();
+    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
+
+    }, function(response) {
+        alert(response);
+    }, options);
 }
 function searchScreen() {
     newPage("searchscreen.html");
