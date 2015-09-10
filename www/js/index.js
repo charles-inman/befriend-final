@@ -327,22 +327,6 @@ function assignInterests() {
     }
 }
 function register() {
-    var img = idc("profileIcon").getAttribute("assignedimage");
-
-    var options = new FileUploadOptions();
-            options.fileKey="file";
-            options.fileName=img.substr(img.lastIndexOf('/')+1);
-            options.mimeType="image/jpeg";
- 
-            var params = new Object();
-            params.value1 = "test";
-            params.value2 = "param";
- 
-            options.params = params;
-            options.chunkedMode = false;
- 
-            var ft = new FileTransfer();
-            ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", win, fail, options);
 }
 function win(r) {
     console.log("Code = " + r.responseCode);
