@@ -328,52 +328,36 @@ function assignInterests() {
 }
 function register() {
     var img = new Image();
-
-    img.onload = function () {
-        var canvas = document.createElement("canvas");
-        canvas.width =this.width;
-        canvas.height =this.height;
-
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(this, 0, 0);
-
-        var dataURL = canvas.toDataURL("image/png");
-        console.log(dataURL);
-        ajaxPostImage(
-            "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", 
-            function (response) {
-            if(response.indexOf("success") != -1) {
-                    var responsePicture = JSON.parse(response);
-                    personalJSON.personalData.profileImage = responsePicture.image.url;
-                    personalJSON.personalData.description = idc("description").value;
-                    personalJSON.personalData.question = idc("question").children[0].value;
-                    personalJSON.personalData.answer = idc("answer").value;
-
-                    ajaxPost(
-                        "http://www.divinitycomputing.com/apps/beoples/register.php", 
-                        function (response) {
-                        if(response == "success") {
-                            window.localStorage.setItem("registered", "active");
-                            window.localStorage.setItem("data", JSON.stringify(personalJSON));
-                            searchScreen();
-                        }
-                        else {
-                            alert(response);
-
-                        }
-                    },
-                    'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
-            }
-            else {
-                alert(response);
-
-            }
-        },
-       'fbid=' + fbId + '&urlselect=' + dataURL);
-    };
-
     img.src = idc("profileIcon").getAttribute("assignedimage");
+
+    var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=img.src.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+ 
+            var params = new Object();
+            params.value1 = "test";
+            params.value2 = "param";
+ 
+            options.params = params;
+            options.chunkedMode = false;
+ 
+            var ft = new FileTransfer();
+            ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", win, fail, options);
+       
+
 }
+function win(r) {
+    console.log("Code = " + r.responseCode);
+    console.log("Response = " + r.response);
+    console.log("Sent = " + r.bytesSent);
+    alert(r.response);
+}
+
+function fail(error) {
+    alert("An error has occurred: Code = " = error.code);
+}
+
 function searchScreen() {
     newPage("searchscreen.html");
 }
