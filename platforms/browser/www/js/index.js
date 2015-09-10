@@ -338,6 +338,7 @@ function register() {
         ctx.drawImage(this, 0, 0);
 
         var dataURL = canvas.toDataURL("image/png");
+        console.log(dataURL);
         ajaxPostImage(
             "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", 
             function (response) {
