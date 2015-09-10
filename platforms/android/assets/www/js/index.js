@@ -319,7 +319,32 @@ function register() {
 
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
+        if(response.indexOf("success") != -1) {
+            var responsePicture = JSON.parse(response);
+            personalJSON.personalData.profileImage = responsePicture.image.url;
+            personalJSON.personalData.description = idc("description").value;
+            personalJSON.personalData.question = idc("question").children[0].value;
+            personalJSON.personalData.answer = idc("answer").value;
 
+            ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/register.php", 
+                function (response) {
+                if(response == "success") {
+                    window.localStorage.setItem("registered", "active");
+                    window.localStorage.setItem("data", JSON.stringify(personalJSON));
+                    searchScreen();
+                }
+                else {
+                    alert(response);
+
+                }
+            },
+            'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
+        }
+        else {
+            alert(response);
+
+        }
     }, function(response) {
         alert(response);
     }, options);
