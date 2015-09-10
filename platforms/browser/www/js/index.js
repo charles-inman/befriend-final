@@ -327,12 +327,11 @@ function assignInterests() {
     }
 }
 function register() {
-    var img = new Image();
-    img.src = idc("profileIcon").getAttribute("assignedimage");
+    var img = idc("profileIcon").getAttribute("assignedimage");
 
     var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName=img.src.substr(img.src.lastIndexOf('/')+1);
+            options.fileName=img.substr(img.lastIndexOf('/')+1);
             options.mimeType="image/jpeg";
  
             var params = new Object();
@@ -343,7 +342,7 @@ function register() {
             options.chunkedMode = false;
  
             var ft = new FileTransfer();
-            ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", win, fail, options);
+            ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", win, fail, options);
 }
 function win(r) {
     console.log("Code = " + r.responseCode);
