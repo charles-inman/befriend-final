@@ -205,7 +205,7 @@ function editprofileImage() {
             aa.type = 'text/css';
             aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].source + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
-			document.getElementById("profileIcon").setAttribute("assignedimage", this.url);
+			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].source);
 			document.getElementById("profileIcon").appendChild(aa);
             document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
