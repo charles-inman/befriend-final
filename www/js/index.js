@@ -177,6 +177,29 @@ var ajaxPost = function (url, callback,data) {
     xhr.send(data);
     return xhr;
 }
+var ajaxPostImage = function (url, callback, data) {
+    var callback = (typeof callback == 'function' ? callback : false), xhr = null;
+    try {
+      xhr = new XMLHttpRequest();
+    } catch (e) {
+      try {
+        ajxhrax = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+    }
+    if (!xhr)
+           return null;
+    xhr.open("POST", url,true);
+    xhr.onreadystatechange=function() {
+      if (xhr.readyState==4 && callback) {
+        callback(xhr.responseText);
+      }
+    }
+    xhr.setRequestHeader("multipart/form-data");
+    xhr.send(data);
+    return xhr;
+}
 // COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
@@ -304,7 +327,18 @@ function assignInterests() {
     }
 }
 function register() {
-        ajaxPost(
+    var img = new Image();
+
+    img.onload = function () {
+        var canvas = document.createElement("canvas");
+        canvas.width =this.width;
+        canvas.height =this.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+        ajaxPostImage(
             "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", 
             function (response) {
             if(response.indexOf("success") != -1) {
@@ -334,7 +368,10 @@ function register() {
 
             }
         },
-       'fbid=' + fbId + '&urlselect=' + idc("profileIcon").getAttribute("assignedimage"));
+       'fbid=' + fbId + '&urlselect=' + dataURL);
+    };
+
+    img.src = idc("profileIcon").getAttribute("assignedimage");
 }
 function searchScreen() {
     newPage("searchscreen.html");
