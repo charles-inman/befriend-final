@@ -122,7 +122,7 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded&redirect=false", ['email', 'public_profile', 'user_friends'],
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (def) {
 			editProfImg = def;
 			addPage("findphotos.html" , 0);
