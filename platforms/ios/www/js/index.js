@@ -155,7 +155,6 @@ var ajaxGet = function (url, callback) {
     return xhr;
 }
 var ajaxPost = function (url, callback,data) {
-    console.log(data);
     var callback = (typeof callback == 'function' ? callback : false), xhr = null;
     try {
       xhr = new XMLHttpRequest();
@@ -203,7 +202,6 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			var aa = document.createElement("style");
             aa.type = 'text/css';
-            console.log( editProfImg.data[i]);
             aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].source + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
 			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].source);
@@ -306,25 +304,37 @@ function assignInterests() {
     }
 }
 function register() {
-    personalJSON.personalData.description = idc("description").value;
-    personalJSON.personalData.profileImage = idc("profileIcon").getAttribute("assignedimage");
-    personalJSON.personalData.question = idc("question").children[0].value;
-    personalJSON.personalData.answer = idc("answer").value;
-    
-    ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/register.php", 
-        function (response) {
-        if(response == "success") {
-            window.localStorage.setItem("registered", "active");
-            window.localStorage.setItem("data", JSON.stringify(personalJSON));
-            searchScreen();
-        }
-        else {
-            alert(response);
+        ajaxPost(
+            "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", 
+            function (response) {
+            if(response.indexOf("success") != -1) {
+                    var responsePicture = JSON.parse(response);
+                    personalJSON.personalData.profileImage = responsePicture.image.url;
+                    personalJSON.personalData.description = idc("description").value;
+                    personalJSON.personalData.question = idc("question").children[0].value;
+                    personalJSON.personalData.answer = idc("answer").value;
 
-        }
-    },
-   'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
+                    ajaxPost(
+                        "http://www.divinitycomputing.com/apps/beoples/register.php", 
+                        function (response) {
+                        if(response == "success") {
+                            window.localStorage.setItem("registered", "active");
+                            window.localStorage.setItem("data", JSON.stringify(personalJSON));
+                            searchScreen();
+                        }
+                        else {
+                            alert(response);
+
+                        }
+                    },
+                    'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
+            }
+            else {
+                alert(response);
+
+            }
+        },
+       'fbid=' + fbId + '&urlselect=' + idc("profileIcon").getAttribute("assignedimage"));
 }
 function searchScreen() {
     newPage("searchscreen.html");
