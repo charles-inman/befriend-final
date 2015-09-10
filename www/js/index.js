@@ -332,7 +332,7 @@ function register() {
 
     var options = new FileUploadOptions();
             options.fileKey="file";
-            options.fileName=img.src.substr(imageURI.lastIndexOf('/')+1);
+            options.fileName=img.src.substr(img.src.lastIndexOf('/')+1);
             options.mimeType="image/jpeg";
  
             var params = new Object();
@@ -344,8 +344,6 @@ function register() {
  
             var ft = new FileTransfer();
             ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", win, fail, options);
-       
-
 }
 function win(r) {
     console.log("Code = " + r.responseCode);
