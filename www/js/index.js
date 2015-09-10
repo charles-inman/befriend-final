@@ -312,10 +312,13 @@ function register() {
         options.fileKey = "file";
         options.fileName = fbId + ".jpg";
         options.mimeType = "image/jpeg";
+        options.chunkedMode = false;
+        var params = new Object();
+        params.name = fbId + ".jpg";
 
+        options.params = params;
         var ft = new FileTransfer();
         ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
-            
                     var responsePicture = JSON.parse(response);
                     personalJSON.personalData.profileImage = responsePicture.image.url;
                     personalJSON.personalData.description = idc("description").value;
