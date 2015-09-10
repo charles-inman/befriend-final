@@ -16,6 +16,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         console.log(regs);
         if(regs == "active") {
@@ -52,15 +53,14 @@ var app = {
                         searchScreen();
                     }
                     else if(response == "no") {
-                        
                         registerGetInfo();
                     }
                     else {
                         alert(response);
                     }
                 },
-               'fbid=' + fbId);
-              ajaxGet(
+               'fbid=' + fullJSON.authResponse.userID);
+                ajaxGet(
                     'js/interests-1.json', 
                     function (response) {
                         interestJSON = JSON.parse(response);
@@ -80,11 +80,13 @@ var mainTypeInterest ;
 var profileJSON;
 var personalJSON;
 
-var fbId;
+var fbId;        
+
 
 function registerGetInfo() {
 	newPage("register.html");
 	
+    usersProcessed.transaction(populateDB, errorCB, successCB);
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var pp = document.createElement("style");
@@ -120,7 +122,7 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded&redirect=false", ['email', 'public_profile', 'user_friends'],
 		function (def) {
 			editProfImg = def;
 			addPage("findphotos.html" , 0);
@@ -325,4 +327,18 @@ function register() {
 }
 function searchScreen() {
     newPage("searchscreen.html");
+}
+/* Users Details */
+var usersProcessed;
+
+function populateDB(tx) {
+     tx.executeSql('CREATE TABLE IF NOT EXISTS users (userid,type)');
+     tx.executeSql('CREATE TABLE IF NOT EXISTS messages (userid,message,time,sentfrom)');
+}
+function errorCB(err) {
+    alert("Error processing SQL: "+err.code);
+}
+
+function successCB() {
+    alert("success!");
 }
