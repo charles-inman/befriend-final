@@ -177,29 +177,6 @@ var ajaxPost = function (url, callback,data) {
     xhr.send(data);
     return xhr;
 }
-var ajaxPostImage = function (url, callback, data) {
-    var callback = (typeof callback == 'function' ? callback : false), xhr = null;
-    try {
-      xhr = new XMLHttpRequest();
-    } catch (e) {
-      try {
-        ajxhrax = new ActiveXObject("Msxml2.XMLHTTP");
-      } catch (e) {
-        xhr = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-    }
-    if (!xhr)
-           return null;
-    xhr.open("POST", url,true);
-    xhr.onreadystatechange=function() {
-      if (xhr.readyState==4 && callback) {
-        callback(xhr.responseText);
-      }
-    }
-    xhr.setRequestHeader("multipart/form-data");
-    xhr.send(data);
-    return xhr;
-}
 // COMMON FUCTIONS 
 function newPage(pagename) {
 	var myNode = document.getElementById("pagewrap");
@@ -327,18 +304,25 @@ function assignInterests() {
     }
 }
 function register() {
-}
-function win(r) {
-    console.log("Code = " + r.responseCode);
-    console.log("Response = " + r.response);
-    console.log("Sent = " + r.bytesSent);
-    alert(r.response);
-}
+    var img = idc("profileIcon").getAttribute("assignedimage");
 
-function fail(error) {
-    alert("An error has occurred: Code = " = error.code);
+    var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=img.substr(img.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+ 
+            var params = new Object();
+ 
+            options.params = params;
+            options.chunkedMode = false;
+ 
+            var ft = new FileTransfer();
+            ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
+                
+            }, function() {
+            
+            }, options);
 }
-
 function searchScreen() {
     newPage("searchscreen.html");
 }
