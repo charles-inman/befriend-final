@@ -314,7 +314,7 @@ function register() {
         options.mimeType = "image/jpeg";
 
         var ft = new FileTransfer();
-        ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function() {
+        ft.upload(img.src, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
             
                     var responsePicture = JSON.parse(response);
                     personalJSON.personalData.profileImage = responsePicture.image.url;
@@ -336,8 +336,8 @@ function register() {
                         }
                     },
                     'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
-        }, function() {
-            alert("image upload failed");
+        }, function(response) {
+            alert("image upload failed" + response);
         }, options, true);
        
     };
