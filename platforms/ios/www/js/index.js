@@ -203,6 +203,7 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			var aa = document.createElement("style");
             aa.type = 'text/css';
+            console.log( editProfImg.data[i]);
             aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].source + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
 			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].source);
