@@ -320,8 +320,7 @@ function register() {
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
         if(response.indexOf("success") != -1) {
-            var responsePicture = JSON.parse(response);
-            personalJSON.personalData.profileImage = responsePicture.image.url;
+            console.log(response);
             personalJSON.personalData.description = idc("description").value;
             personalJSON.personalData.question = idc("question").children[0].value;
             personalJSON.personalData.answer = idc("answer").value;
