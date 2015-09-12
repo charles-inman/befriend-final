@@ -380,14 +380,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     var distance = window.localStorage.getItem("distance");
-    alert(distance);
-    ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
-        function (response) {
-        var usersfound = JSON.parse(response);
-        console.log(usersfound);
-    },
-    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude);
+    alert("distance" + distance);
 }
 /* Users Details */
 var usersProcessed;
