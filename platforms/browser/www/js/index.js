@@ -319,8 +319,8 @@ function register() {
 
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
-            var responsePicture = JSON.parse(response);
-        if(responsePicture.success) {
+        var responsePicture = JSON.parse(response);
+        if(responsePicture.success == "success) {
             personalJSON.personalData.profileImage = responsePicture.image.url;
             personalJSON.personalData.description = idc("description").value;
             personalJSON.personalData.question = idc("question").children[0].value;
