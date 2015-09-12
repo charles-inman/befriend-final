@@ -21,9 +21,7 @@ var app = {
         var regs = window.localStorage.getItem("registered");
         console.log(regs);
         if(regs == "active") {
-            if(!window.localStorage.getItem("distance")) {
-                window.localStorage.setItem("distance", "50");
-            }
+            
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             searchScreen();
         }
@@ -378,7 +376,11 @@ function searchScreen() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
+    if(!window.localStorage.getItem("distance")) {
+        window.localStorage.setItem("distance", "50");
+    }
     var distance = window.localStorage.getItem("distance");
+    alert(distance);
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
