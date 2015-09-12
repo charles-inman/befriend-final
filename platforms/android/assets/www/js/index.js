@@ -350,6 +350,7 @@ function register() {
 }
 function searchScreen() {
     newPage("searchscreen.html");
+    console.log("searchpage");
     navigator.geolocation.getCurrentPosition(onSuccessLoc, onErrorLoc);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
@@ -362,7 +363,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
     'fbid=' + fbId + '&distance=' + window.localStorage.getItem("distance") + '&longitude=' + longitude + '&latitude=' + latitude);
 }
 
-var onSuccessLoc = function(position) {
+function onSuccessLoc (position) {
     getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
 };
 
