@@ -339,7 +339,7 @@ function register() {
 
                 }
             },
-            'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
+            'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
         }
         else {
             alert(responsedata.response);
