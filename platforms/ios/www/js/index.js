@@ -318,8 +318,8 @@ function register() {
     options.chunkedMode = false;
 
     var ft = new FileTransfer();
-    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(response) {
-        var responsePicture = JSON.parse(response);
+    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
+        var responsePicture = JSON.parse(responsedata);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
             personalJSON.personalData.description = idc("description").value;
@@ -342,8 +342,7 @@ function register() {
             'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
         }
         else {
-            alert(response);
-
+            alert(responsedata);
         }
     }, function(response) {
         alert(response);
