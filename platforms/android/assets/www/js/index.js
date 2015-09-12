@@ -19,9 +19,9 @@ var app = {
         
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
+        fbId = window.localStorage.getItem("fbid");
         console.log(regs);
-        if(regs == "active") {
-            
+        if(regs == "active" && fbId.length != 0) {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             searchScreen();
         }
@@ -335,6 +335,7 @@ function register() {
                     window.localStorage.setItem("registered", "active");
                     window.localStorage.setItem("distance", "50");
                     window.localStorage.setItem("data", JSON.stringify(personalJSON));
+                    window.localStorage.setItem("fbid", fbId);
                     searchScreen();
                 }
                 else {
@@ -355,14 +356,6 @@ function searchScreen() {
     newPage("searchscreen.html");
     
     var onSuccess = function(position) {
-        alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
@@ -380,16 +373,14 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     var distance = window.localStorage.getItem("distance");
-    alert("distance" + distance);
     
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
-        if(response == "success") {
+        if(response == "no results") {
         }
         else {
-            alert(response);
-
+            var data = JSON.parse(response);
         }
     },
     'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude);
