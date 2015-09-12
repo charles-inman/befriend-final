@@ -16,10 +16,14 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         console.log(regs);
         if(regs == "active") {
+            if(!window.localStorage.getItem("distance")) {
+                window.localStorage.setItem("distance", "50");
+            }
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             searchScreen();
         }
@@ -331,6 +335,7 @@ function register() {
                 function (response) {
                 if(response == "success") {
                     window.localStorage.setItem("registered", "active");
+                    window.localStorage.setItem("distance", "50");
                     window.localStorage.setItem("data", JSON.stringify(personalJSON));
                     searchScreen();
                 }
@@ -373,6 +378,14 @@ function searchScreen() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
+    var distance = window.localStorage.getItem("distance");
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
+        function (response) {
+        var usersfound = JSON.parse(response);
+        console.log(usersfound);
+    },
+    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude);
 }
 /* Users Details */
 var usersProcessed;
