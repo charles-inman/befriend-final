@@ -352,14 +352,7 @@ function searchScreen() {
     newPage("searchscreen.html");
     
     var onSuccess = function(position) {
-        alert('Latitude: '          + position.coords.latitude          + '\n' +
-              'Longitude: '         + position.coords.longitude         + '\n' +
-              'Altitude: '          + position.coords.altitude          + '\n' +
-              'Accuracy: '          + position.coords.accuracy          + '\n' +
-              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-              'Heading: '           + position.coords.heading           + '\n' +
-              'Speed: '             + position.coords.speed             + '\n' +
-              'Timestamp: '         + position.timestamp                + '\n');
+        getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
     // onError Callback receives a PositionError object
@@ -371,7 +364,15 @@ function searchScreen() {
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
-
+function getUsersBaseOnLocation(longitude,latitude) {
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
+        function (response) {
+        var usersfound = JSON.parse(response);
+        console.log(usersfound);
+    },
+    'fbid=' + fbId + '&distance=' + window.localStorage.getItem("distance") + '&longitude=' + longitude + '&latitude=' + latitude);
+}
 /* Users Details */
 var usersProcessed;
 
@@ -382,7 +383,7 @@ function populateDB(tx) {
 function errorCB(err) {
     alert("Error processing SQL: "+err.code);
 }
-
+var activeLocalDB = false;
 function successCB() {
-    alert("success!");
+    activeLocalDB = true;
 }
