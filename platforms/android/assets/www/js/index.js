@@ -319,7 +319,7 @@ function register() {
 
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
-        var responsePicture = JSON.parse(responsedata);
+        var responsePicture = JSON.parse(responsedata.response);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
             personalJSON.personalData.description = idc("description").value;
@@ -342,7 +342,7 @@ function register() {
             'fbid=' + fbId + '&urlselect=' + JSON.stringify(personalJSON));
         }
         else {
-            alert(responsedata);
+            alert(responsedata.response);
         }
     }, function(response) {
         alert(response);
