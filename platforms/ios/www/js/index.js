@@ -350,7 +350,7 @@ function register() {
 }
 function searchScreen() {
     newPage("searchscreen.html");
-    console.log("searchpage");
+    alert("searchpage");
     navigator.geolocation.getCurrentPosition(onSuccessLoc, onErrorLoc);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
@@ -358,7 +358,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         var usersfound = JSON.parse(response);
-        console.log(usersfound);
+        alert(usersfound);
     },
     'fbid=' + fbId + '&distance=' + window.localStorage.getItem("distance") + '&longitude=' + longitude + '&latitude=' + latitude);
 }
