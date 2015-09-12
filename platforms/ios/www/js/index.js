@@ -380,6 +380,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         if(response == "no results") {
         }
         else {
+            alert(response);
             var data = JSON.parse(response);
         }
     },
