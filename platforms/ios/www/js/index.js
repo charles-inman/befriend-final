@@ -350,19 +350,7 @@ function register() {
 }
 function searchScreen() {
     newPage("searchscreen.html");
-    
-    var onSuccess = function(position) {
-        getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
-    };
-
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    navigator.geolocation.getCurrentPosition(onSuccessLoc, onErrorLoc);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
     ajaxPost(
@@ -372,6 +360,17 @@ function getUsersBaseOnLocation(longitude,latitude) {
         console.log(usersfound);
     },
     'fbid=' + fbId + '&distance=' + window.localStorage.getItem("distance") + '&longitude=' + longitude + '&latitude=' + latitude);
+}
+
+var onSuccessLoc = function(position) {
+    getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
+};
+
+// onError Callback receives a PositionError object
+//
+function onErrorLoc(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
 }
 /* Users Details */
 var usersProcessed;
