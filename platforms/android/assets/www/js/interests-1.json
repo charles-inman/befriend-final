@@ -301,6 +301,16 @@
       {"name":"Internet of Things"},
       {"name":"Lumia"},
       {"name":"Smartwatch"}
+ ], 
+    "question":[
+        {"name":"What’s your favorite color?"},
+        {"name":"If you could learn one random skill, what would you learn?"},
+        {"name":"What’s your favorite dessert?"},
+        {"name":"What are some things that scare you?"},
+        {"name":"Do you like to plan things out in detail or be spontaneous?"},
+        {"name":"What’s the biggest lie you’ve ever told?"},
+        {"name":"What’s something most people don’t know about you?"},
+        {"name":"Would you rather be hated or forgotten?"}
  ],   
 	"version":"0"
 }

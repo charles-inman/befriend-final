@@ -23,7 +23,7 @@ var app = {
         console.log(regs);
         if(regs == "active" && fbId.length != 0) {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
-            searchScreen();
+            mainScreen();
         }
         else {
             document.getElementById("fblog").style.display = "block";
@@ -52,7 +52,7 @@ var app = {
                     function (response) {
                         console.log("type of login " + response);
                     if(response == "yes") {
-                        searchScreen();
+                        mainScreen();
                     }
                     else if(response == "no") {
                         registerGetInfo();
@@ -324,6 +324,9 @@ function register() {
         var responsePicture = JSON.parse(responsedata.response);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
+            if(idc("description").value == "undefined") {
+                idc("description").value = "";
+            }
             personalJSON.personalData.description = idc("description").value;
             personalJSON.personalData.question = idc("question").children[0].value;
             personalJSON.personalData.answer = idc("answer").value;
@@ -333,10 +336,19 @@ function register() {
                 function (response) {
                 if(response == "success") {
                     window.localStorage.setItem("registered", "active");
+                    window.localStorage.setItem("genderlook", "2");
                     window.localStorage.setItem("distance", "50");
+                    var minage = 30;
+                    if(parseInt(personalJSON.personalData.age) - 5 < 16) {
+                       minage = 16;
+                    }else {
+                        minage = personalJSON.personalData.age;
+                    }
+                    window.localStorage.setItem("minage", minage);
+                    window.localStorage.setItem("maxage", parseInt(personalJSON.personalData.age) + 5);
                     window.localStorage.setItem("data", JSON.stringify(personalJSON));
                     window.localStorage.setItem("fbid", fbId);
-                    searchScreen();
+                    mainScreen();
                 }
                 else {
                     alert(response);
@@ -352,9 +364,11 @@ function register() {
         alert(response);
     }, options);
 }
-function searchScreen() {
-    newPage("searchscreen.html");
-    
+function mainScreen() {
+    newPage("mainscreen.html");
+    searchProfile();
+}
+function searchProfile() {
     var onSuccess = function(position) {
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
@@ -399,4 +413,41 @@ function errorCB(err) {
 var activeLocalDB = false;
 function successCB() {
     activeLocalDB = true;
+},ease: Circ.easeOut
+var genderLookUp = 2;
+function genderChange(type) {
+    var genderobjs = document.getElementsByClassName("gender");
+    
+    if(genderobjs[type].className == "gender active") {
+        genderobjs[type].className = "gender";
+    }
+    else {
+        genderobjs[type].className = "gender active";
+    }
+    if(genderobjs[0].className == "gender active" && genderobjs[1].className == "gender active") {
+        window.localStorage.setItem("genderlook", "2");
+    }
+    else if(genderobjs[0].className == "gender active") {
+        window.localStorage.setItem("genderlook", "1");
+    }
+    else {
+        window.localStorage.setItem("genderlook", "0");
+    }
+}
+function openMenu(ele) {
+    var tl = new TimelineMax();
+    if(idc("menu").style.display == "none") {
+        tl.set(idc("menu"), {display:"block"})
+        .fromTo(ele.children[0], 1, {rotation:"0deg"}, {rotation:"45deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[2], 1, {rotation:"0deg"}, {rotation:"-45deg",ease: Circ.easeOut},0.5)
+        .fromTo(idc("menu"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+    }
+    else {
+        tl.fromTo(idc("menu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+        .fromTo(ele.children[0], 1, {rotation:"45deg"}, {rotation:"0deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[2], 1, {rotation:"-45degdeg"}, {rotation:"0deg",ease: Circ.easeOut},0.5)
+            .set(idc("menu"), {display:"none"})
+    }
 }
