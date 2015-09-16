@@ -8,7 +8,7 @@
             <div></div>
         </div>
     </div>
-    <div id="menu">
+    <div id="menu" style="display:none">
         <h2>SQUAD</h2>
         <button onclick="">
             <h3>BeYou</h3>
@@ -91,7 +91,7 @@
                 document.getElementById("smallslider").children[0].ontouchmove = function(e) {
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.changedTouches[0].pageX;
+                    var posX = e.changedTouches[0].clientX;
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
@@ -105,7 +105,7 @@
                     this.style.left = trueleft + "px";
                     if(trueleft < document.getElementById("smallslider").children[1].getAttribute("x")) {
                         document.getElementById("barbetween").style.left = (trueleft) + "px";
-                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) - (elewidth / 2)) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) - (elewidth / 2)) + "px";
                         this.className = "bluehandle ";
                         document.getElementById("smallslider").children[1].className = "bluehandle big";
 
@@ -137,7 +137,7 @@
                 document.getElementById("smallslider").children[1].ontouchmove = function(e) {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.changedTouches[0].pageX;
+                    var posX = e.changedTouches[0].clientX;
 
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
