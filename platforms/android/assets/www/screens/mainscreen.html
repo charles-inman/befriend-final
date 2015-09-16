@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div id="picky" class="subscreen fill">
+    <div id="picky" style="display:none;" class="subscreen fill">
         <div class="spacingcenter topspacing">
             <div class="sixty">
                 <h2>I'm looking for</h2>
@@ -88,7 +88,7 @@
             <script>
                 var upperagelimit;
                 var loweragelimit;
-                document.getElementById("smallslider").children[0].onmousemove = function(e) {
+                document.getElementById("smallslider").children[0].ontouchmove = function(e) {
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var posX = e.clientX;
@@ -134,7 +134,7 @@
                     window.localStorage.setItem("minage", loweragelimit);
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
-                document.getElementById("smallslider").children[1].onmousemove = function(e) {
+                document.getElementById("smallslider").children[1].ontouchmove = function(e) {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var posX = e.clientX;

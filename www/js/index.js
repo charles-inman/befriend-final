@@ -457,7 +457,7 @@ function openMenu(ele) {
         tl.fromTo(idc("menu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
         .fromTo(ele.children[0], 1, {marginTop:"1rem",rotation:"45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[2], 1, {marginTop:"1.3rem",rotation:"-45degdeg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[2], 1, {marginTop:"1.3rem",rotation:"-45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
             .set(idc("menu"), {display:"none"})
     }
 }
@@ -465,7 +465,7 @@ function openSubMenu(idof) {
     openMenu(idc("mainmenuclick"));
     var picky = idc(idof)
     var tl = new TimelineMax();
-    if(idc("menu").style.display == "none") {
+    if(picky.style.display == "none") {
         tl.set(picky, {display:"block"})
         .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
     }
