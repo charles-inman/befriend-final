@@ -80,6 +80,8 @@ overflow-y: scroll;
     margin-bottom: 5%;
 }
 #h-one img{
+    -webkit-transform: rotate(-38deg);
+    -ms-transform: rotate(-38deg);
     transform: rotate(-38deg);
     margin-bottom: -3%;
 }
@@ -197,7 +199,6 @@ hr {
 
 #profileIcon {
 	background-color:#1aafdb;
-	-webkit-border-radius:30rem;
 	border-radius:30rem;
 	position:relative;
 	overflow: hidden;
@@ -224,7 +225,7 @@ hr {
   padding: 0;
     border-color:#47d656;
     right: 0;
-    -webkit-transform: rotate(180deg); transform: rotate(180deg);
+    -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg);
 }
 #profileIcon div:nth-child(3){
   position: absolute;
@@ -232,7 +233,7 @@ hr {
   margin: 0;
   padding: 0;
     border-color:#47d656;
-    -webkit-transform: rotate(180deg); transform: rotate(180deg);
+    -webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); transform: rotate(180deg);
     opacity: 0;
 }
 #profileIcon div {
@@ -522,7 +523,7 @@ z-index: 10;
 	margin: 20px 0;
 }
 #question select {
-    font-size:3rem;appearance:none;
+    font-size:3rem;-webkit-appearance:none;-moz-appearance:none;appearance:none;
 }
 #question select, #question textarea {
     width:94%;
