@@ -91,7 +91,7 @@
                 document.getElementById("smallslider").children[0].ontouchmove = function(e) {
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.clientX;
+                    var posX = e.changedTouches[0].pageX;
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
@@ -137,7 +137,7 @@
                 document.getElementById("smallslider").children[1].ontouchmove = function(e) {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.clientX;
+                    var posX = e.changedTouches[0].pageX;
 
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
