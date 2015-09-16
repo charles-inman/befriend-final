@@ -642,6 +642,7 @@ z-index: 10;
 #picky {
     display: none;
     background-color: #fff;
+    z-index:99999999999;
 }
 
 .sixty {
