@@ -16,7 +16,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
+        resize();
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
@@ -75,6 +75,23 @@ var app = {
 			);
 	}
 };
+            
+            function resize() {
+                var w = document.documentElement.clientWidth;
+                var h = document.documentElement.clientHeight;
+                var styleSheet = document.styleSheets[0];
+                // ar = aspect ratio h/w; Replace this with your apps aspect ratio
+                var ar = 1.17;
+                // x = scaling factor
+                var x = 0.1; 
+                var rem;
+                if (h / w > ar) { // higher than aspect ratio
+                    rem = x * w;
+                } else { // wider than aspect ratio
+                    rem = x * h;
+                }
+                document.documentElement.style.fontSize = rem + 'px';
+            }
 var fullJSON;
 
 var interestJSON;
