@@ -185,9 +185,7 @@ hr {
     margin: auto;
     position: absolute;
     left: 17%;
-    top: 0;
-    bottom: 0;
-    right: 0;
+    top: 7.5rem;
     height: 10rem;
     font-size: 8rem;
 }
@@ -420,6 +418,7 @@ z-index: 10;
 .mainCat div img {
     filter: brightness(-10) invert(100%);
     -webkit-filter: brightness(-10) invert(100%);
+	filter: url(greyscale.svg#greyscale);
     width: 10%;
     max-height: 130px;
     margin:5% 3%;
@@ -808,4 +807,7 @@ img.gender.active {
 .rocket {
     max-width:15rem;
     max-height:15rem;
+    filter: brightness(-10) invert(100%);
+    -webkit-filter: brightness(-10) invert(100%);
+	filter: url(greyscale.svg#greyscale);
 }
