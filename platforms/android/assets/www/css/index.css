@@ -5,7 +5,6 @@
 \*------------------------------------*/
 
 html,body,#pagewrap {
-	font-size:6px;
 	margin:0;
 	padding:0;
 	width:100%;
@@ -124,7 +123,7 @@ overflow-y: scroll;
 	background-color:#3b5998;
 	color:#fff;
 	width:80%;
-	height:6rem;
+	height:19rem;
     padding-left: 50px;
     font-size: 5.5rem;
 }
@@ -133,8 +132,8 @@ overflow-y: scroll;
 	content:'';
 	    background-image: url(../img/f-icon.png);
     background-size: contain;
-    width: 6rem;
-    height: 6rem;
+    width: 12rem;
+    height: 12rem;
     position: absolute;
     background-repeat: no-repeat;
     left: 5rem;
@@ -148,7 +147,7 @@ overflow-y: scroll;
 	background-color:#9b3434;
 	color:#fff;
 	width:80%;
-	height:6rem;
+	height:19rem;
     font-size:5.5rem;
 }
 .app {
@@ -806,6 +805,6 @@ img.gender.active {
 }
 
 .rocket {
-    max-width:6rem;
-    max-height:6rem;
+    max-width:15rem;
+    max-height:15rem;
 }

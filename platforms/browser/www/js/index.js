@@ -20,7 +20,6 @@ var app = {
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
-        console.log(regs);
         if(regs == "active" && fbId.length != 0) {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             mainScreen();
@@ -80,16 +79,11 @@ var app = {
                 var w = document.documentElement.clientWidth;
                 var h = document.documentElement.clientHeight;
                 var styleSheet = document.styleSheets[0];
-                // ar = aspect ratio h/w; Replace this with your apps aspect ratio
-                var ar = 1.77;
                 // x = scaling factor
-                var x = 0.005; 
+                var x = 0.01; 
                 var rem;
-                if (h / w > ar) { // higher than aspect ratio
                     rem = x * w;
-                } else { // wider than aspect ratio
-                    rem = x * h;
-                }
+                console.log(rem);
                 document.documentElement.style.fontSize = rem + 'px';
             }
 var fullJSON;
