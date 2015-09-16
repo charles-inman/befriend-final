@@ -83,7 +83,7 @@ var app = {
                 // ar = aspect ratio h/w; Replace this with your apps aspect ratio
                 var ar = 1.17;
                 // x = scaling factor
-                var x = 0.1; 
+                var x = 0.01; 
                 var rem;
                 if (h / w > ar) { // higher than aspect ratio
                     rem = x * w;
