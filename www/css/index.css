@@ -129,7 +129,7 @@ overflow-y: scroll;
     font-size: 5.5vw;
 }
 
-#h-two button:before {
+#h-two button::before {
 	content:'';
 	    background-image: url(../img/f-icon.png);
     background-size: contain;
@@ -246,7 +246,7 @@ hr {
   padding: 0;
 }
 
-#profileIcon:after {
+#profileIcon::after {
 	content:'';
 	width:50%;
 	height:7%;
@@ -258,7 +258,7 @@ hr {
 	bottom:0;
 	margin:auto;
 }
-#profileIcon:before {
+#profileIcon::before {
 	content:'';
 	width:7%;
 	height:50%;
@@ -270,7 +270,7 @@ hr {
 	bottom:0;
 	margin:auto;
 }
-#profileIcon.noplus:after,#profileIcon.noplus:before {
+#profileIcon.noplus::after,#profileIcon.noplus::before {
     opacity:0;
 }
 #profileIcon img {
@@ -344,7 +344,7 @@ z-index: 10;
 	border-radius:15vw;
 	position:relative;
 }
-.plus-icon-green:before {
+.plus-icon-green::before {
 	content:'';
 	width:50%;
 	height:7%;
@@ -356,7 +356,7 @@ z-index: 10;
 	right:0;
 	bottom:0;
 }
-.plus-icon-green:after {
+.plus-icon-green::after {
 	content:'';
 	width:7%;
 	height:50%;
@@ -692,7 +692,7 @@ img.gender.active {
     position:absolute;
 }
 
-.handleCircle:before {
+.handleCircle::before {
     content:'';
     width:200%;
     height:200%;
@@ -702,7 +702,7 @@ img.gender.active {
     left:-3vw;
     top:-3vw;
 }
-.handleCircle:after {
+.handleCircle::after {
     content:'';
     width:350%;
     height:350%;
@@ -803,4 +803,9 @@ img.gender.active {
 }
 #menu button {
     color:#fff;
+}
+
+.rocket {
+    max-width:15vw;
+    max-height:15vw;
 }

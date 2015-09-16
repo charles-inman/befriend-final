@@ -413,7 +413,7 @@ function errorCB(err) {
 var activeLocalDB = false;
 function successCB() {
     activeLocalDB = true;
-},ease: Circ.easeOut
+}
 var genderLookUp = 2;
 function genderChange(type) {
     var genderobjs = document.getElementsByClassName("gender");
