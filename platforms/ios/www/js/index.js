@@ -461,3 +461,16 @@ function openMenu(ele) {
             .set(idc("menu"), {display:"none"})
     }
 }
+function openSubMenu(idof) {
+    openMenu(idc("mainmenuclick"));
+    var picky = idc(idof)
+    var tl = new TimelineMax();
+    if(idc("menu").style.display == "none") {
+        tl.set(picky, {display:"block"})
+        .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+    }
+    else {
+        tl.fromTo(picky, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+            .set(picky, {display:"none"});
+    }
+}

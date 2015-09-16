@@ -1,187 +1,184 @@
-
-        <section id="mainScreen" class="screen">
-            <div class="greyback fixedheader">
-                <img class="backButton" src="img/backbutton.png"/>
-                <h1 class="screen-header">Discover</h1>
-                <div onclick="openMenu(this)" class="burgermenu">
-                    <div></div>
-                    <div></div>
-                    <div></div>
+<section id="mainScreen" class="screen">
+    <div class="greyback fixedheader">
+        <img class="backButton" src="img/backbutton.png"/>
+        <h1 class="screen-header">Discover</h1>
+        <div id="mainmenuclick" onclick="openMenu(this)" class="burgermenu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="menu">
+        <h2>SQUAD</h2>
+        <button onclick="">
+            <h3>BeYou</h3>
+            <p>Edit your information, pictures and interests.</p>
+        </button>
+        <button onclick="openSubMenu('picky')">
+            <h3>BePicky</h3>
+            <p>Customize the people you want to see.</p>
+        </button>
+        <button>
+            <h3>BeAppy</h3>
+            <p>Change how the app behaves.</p>
+        </button>
+    </div>
+    <div class="loader subscreen fill">
+        <img class="center flame" src="img/logo.png"/>
+    </div>
+    <div id="viewprofile" class="subscreen fill">
+        <div class="profileviewer">
+            <div class="greyback profilemain">
+                <div class="spacingcenter">
+                    <div id="profile-image" class="column-two">
+                        <div id="profileIcon" class="noplus"><div></div><div><div></div></div><div></div></div>
+                    </div>
+                    <div id="mainDetails" class="column-two">
+                        <h2>Name</h2>
+                        <h3>Age</h3>
+                        <h4>Distance</h4>
+                    </div>
+                    <p></p>
                 </div>
             </div>
-            <div id="menu">
-                <h2>SQUAD</h2>
-                <button>
-                    <h3>BeYou</h3>
-                    <p>Edit your information, pictures and interests.</p>
-                </button>
-                <button>
-                    <h3>BePicky</h3>
-                    <p>Customize the people you want to see.</p>
-                </button>
-                <button>
-                    <h3>BeAppy</h3>
-                    <p>Change how the app behaves.</p>
-                </button>
-            </div>
-            <div class="loader subscreen fill">
-                <img class="center flame" src="img/logo.png"/>
-            </div>
-            <div id="viewprofile" class="subscreen fill">
-                <div class="profileviewer">
-                    <div class="greyback profilemain">
-                        <div class="spacingcenter">
-                            <div id="profile-image" class="column-two">
-                                <div id="profileIcon" class="noplus"><div></div><div><div></div></div><div></div></div>
-                            </div>
-                            <div id="mainDetails" class="column-two">
-                                <h2>Name</h2>
-                                <h3>Age</h3>
-                                <h4>Distance</h4>
-                            </div>
-                            <p></p>
-                        </div>
+            <div class="whiteback">
+                <div class="spacingcenter">
+                    <h2 class="header">Interests</h2>
+                    <div id="interests">
                     </div>
-                    <div class="whiteback">
-                        <div class="spacingcenter">
-                            <h2 class="header">Interests</h2>
-                            <div id="interests">
-                            </div>
-                            <h2></h2>
-                            <h3></h3>
-                            <div class="thumbs">
-                                <img class="tb" src="img/thumbs-down.png"/>
-                                <img class="tb" src="img/thumbs-up.png"/>
-                            </div>
-                        </div>
+                    <h2></h2>
+                    <h3></h3>
+                    <div class="thumbs">
+                        <img class="tb" src="img/thumbs-down.png"/>
+                        <img class="tb" src="img/thumbs-up.png"/>
                     </div>
                 </div>
             </div>
-            <div id="picky" class="subscreen fill">
-                <div class="spacingcenter topspacing">
-                    <div class="sixty">
-                        <h2>I'm looking for</h2>
-                        <p>Tap to change</p>
-                    </div>
-                    <img class="gender active" onclick="genderChange(0)" src="img/male.png" />
-                    <img class="gender active" onclick="genderChange(1)" src="img/female.png" />
-                    <h2 id="kilometres" class="topspacingtwo left">Within 30 kilometres</h2>
-                    <div id="distanceslider" class="dragdealer">
-                        <div class="handle handleCircle"></div>
-                    </div>
-                    <script>
-                        new Dragdealer('distanceslider', {
-                              animationCallback: function(x, y) {
-                                  document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
-                                  window.localStorage.setItem("distance", Math.round(x * 100));
-                              },
-                            x:0.3
-                        });
-                    </script>
-                    <h2 id="ages" class="topspacingtwo left">Between 20 and 28</h2>
-                    <div class="range">
-                        <div id="smallslider" class="dragdealer">
-                            <div x="0" class="bluehandle"></div>
-                            <div x="20" class="bluehandle big"></div>
-                            <div id="barbetween"></div>
-                        </div>
-                    </div>
-                    <script>
-                        var upperagelimit;
-                        var loweragelimit;
-                        document.getElementById("smallslider").children[0].onmousemove = function(e) {
-                            var width = document.documentElement["clientWidth"];
-                            var elewidth = this.offsetWidth;
-                            var posX = e.clientX;
-                            var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
-                            
-                            if(trueleft < 0 - (elewidth / 2)) {
-                               trueleft = 0- (elewidth / 2);
-                            }
-                            else if(trueleft > width *0.9) {
-                                trueleft = width *0.9;
-                            }
-                            
-                            this.setAttribute("x", trueleft);
-                            this.style.left = trueleft + "px";
-                            if(trueleft < document.getElementById("smallslider").children[1].getAttribute("x")) {
-                                document.getElementById("barbetween").style.left = (trueleft) + "px";
-                            document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) - (elewidth / 2)) + "px";
-                                this.className = "bluehandle ";
-                                document.getElementById("smallslider").children[1].className = "bluehandle big";
-                                
-                                upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
-                                loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
-                                if(loweragelimit < 16) 
-                                    loweragelimit = 16;
-                                if(upperagelimit < 16) 
-                                    upperagelimit = 16;
-                                document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
-                            }
-                            else {
-                                document.getElementById("barbetween").style.left = (document.getElementById("smallslider").children[1].getAttribute("x")) + "px";
-                                document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) + (elewidth / 2)) + "px";
-                                this.className = "bluehandle big";
-                                document.getElementById("smallslider").children[1].className = "bluehandle ";
-                                
-                                loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
-                                upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
-                                if(loweragelimit < 16) 
-                                    loweragelimit = 16;
-                                if(upperagelimit < 16) 
-                                    upperagelimit = 16;
-                                document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
-                            }
-                            window.localStorage.setItem("minage", loweragelimit);
-                            window.localStorage.setItem("maxage", upperagelimit);
-                        };
-                        document.getElementById("smallslider").children[1].onmousemove = function(e) {
-                            var  width = document.documentElement["clientWidth"];
-                            var elewidth = this.offsetWidth;
-                            var posX = e.clientX;
-
-                            var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
-                            if(trueleft < 0 - (elewidth / 2)) {
-                               trueleft =0- (elewidth / 2);
-                            }
-                            else if(trueleft > (width *0.9) - (elewidth / 2)) {
-                                trueleft = (width *0.9) - (elewidth / 2);
-                            }
-                            this.setAttribute("x", trueleft);
-                            
-                            this.style.left = trueleft + "px";
-                            if(trueleft < document.getElementById("smallslider").children[0].getAttribute("x")) {
-                                document.getElementById("barbetween").style.left = (trueleft) + "px";
-                            document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) - (elewidth / 2)) + "px";
-                                this.className = "bluehandle ";
-                                document.getElementById("smallslider").children[0].className = "bluehandle big";
-                                upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
-                                loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
-                                if(loweragelimit < 16) 
-                                    loweragelimit = 16;
-                                if(upperagelimit < 16) 
-                                    upperagelimit = 16;
-                                document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
-                            }
-                            else {
-                                document.getElementById("barbetween").style.left = ( document.getElementById("smallslider").children[0].getAttribute("x")) + "px";
-                            document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) + (elewidth / 2)) + "px";
-                                this.className = "bluehandle big";
-                                document.getElementById("smallslider").children[0].className = "bluehandle ";
-                                loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
-                                upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
-                                if(loweragelimit < 16) 
-                                    loweragelimit = 16;
-                                if(upperagelimit < 16) 
-                                    upperagelimit = 16;
-                                document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
-                            }
-                            window.localStorage.setItem("minage", loweragelimit);
-                            window.localStorage.setItem("maxage", upperagelimit);
-                        };
-                    </script>
+        </div>
+    </div>
+    <div id="picky" class="subscreen fill">
+        <div class="spacingcenter topspacing">
+            <div class="sixty">
+                <h2>I'm looking for</h2>
+                <p>Tap to change</p>
+            </div>
+            <div class="gender1 active" onclick="genderChange(0)" ></div>
+            <div class="gender2 active" onclick="genderChange(1)" ></div>
+            <h2 id="kilometres" class="topspacingtwo left">Within 30 kilometres</h2>
+            <div id="distanceslider" class="dragdealer">
+                <div class="handle handleCircle"></div>
+            </div>
+            <script>
+                new Dragdealer('distanceslider', {
+                      animationCallback: function(x, y) {
+                          document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
+                          window.localStorage.setItem("distance", Math.round(x * 100));
+                      },
+                    x:0.3
+                });
+            </script>
+            <h2 id="ages" class="topspacingtwo left">Between 20 and 28</h2>
+            <div class="range">
+                <div id="smallslider" class="dragdealer">
+                    <div x="0" class="bluehandle"></div>
+                    <div x="20" class="bluehandle big"></div>
+                    <div id="barbetween"></div>
                 </div>
             </div>
-        </section>
+            <script>
+                var upperagelimit;
+                var loweragelimit;
+                document.getElementById("smallslider").children[0].onmousemove = function(e) {
+                    var width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth;
+                    var posX = e.clientX;
+                    var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
-       
+                    if(trueleft < 0 - (elewidth / 2)) {
+                       trueleft = 0 - (elewidth / 2);
+                    }
+                    else if(trueleft > width *0.9) {
+                        trueleft = width *0.9;
+                    }
+
+                    this.setAttribute("x", trueleft);
+                    this.style.left = trueleft + "px";
+                    if(trueleft < document.getElementById("smallslider").children[1].getAttribute("x")) {
+                        document.getElementById("barbetween").style.left = (trueleft) + "px";
+                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) - (elewidth / 2)) + "px";
+                        this.className = "bluehandle ";
+                        document.getElementById("smallslider").children[1].className = "bluehandle big";
+
+                        upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
+                        loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    else {
+                        document.getElementById("barbetween").style.left = (document.getElementById("smallslider").children[1].getAttribute("x")) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) + (elewidth / 2)) + "px";
+                        this.className = "bluehandle big";
+                        document.getElementById("smallslider").children[1].className = "bluehandle ";
+
+                        loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
+                        upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    window.localStorage.setItem("minage", loweragelimit);
+                    window.localStorage.setItem("maxage", upperagelimit);
+                };
+                document.getElementById("smallslider").children[1].onmousemove = function(e) {
+                    var  width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth;
+                    var posX = e.clientX;
+
+                    var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
+                    if(trueleft < 0 - (elewidth / 2)) {
+                       trueleft =0- (elewidth / 2);
+                    }
+                    else if(trueleft > (width *0.9) - (elewidth / 2)) {
+                        trueleft = (width *0.9) - (elewidth / 2);
+                    }
+                    this.setAttribute("x", trueleft);
+
+                    this.style.left = trueleft + "px";
+                    if(trueleft < document.getElementById("smallslider").children[0].getAttribute("x")) {
+                        document.getElementById("barbetween").style.left = (trueleft) + "px";
+                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) - (elewidth / 2)) + "px";
+                        this.className = "bluehandle ";
+                        document.getElementById("smallslider").children[0].className = "bluehandle big";
+                        upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
+                        loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    else {
+                        document.getElementById("barbetween").style.left = ( document.getElementById("smallslider").children[0].getAttribute("x")) + "px";
+                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) + (elewidth / 2)) + "px";
+                        this.className = "bluehandle big";
+                        document.getElementById("smallslider").children[0].className = "bluehandle ";
+                        loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
+                        upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    window.localStorage.setItem("minage", loweragelimit);
+                    window.localStorage.setItem("maxage", upperagelimit);
+                };
+            </script>
+        </div>
+    </div>
+</section>

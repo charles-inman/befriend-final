@@ -416,9 +416,6 @@ z-index: 10;
     width:100%;
 }
 .mainCat div img {
-    filter: brightness(-10) invert(100%);
-    -webkit-filter: brightness(-10) invert(100%);
-	filter: url(greyscale.svg#greyscale);
     width: 10%;
     max-height: 130px;
     margin:5% 3%;
@@ -657,16 +654,40 @@ z-index: 10;
     margin-top:5%;
 }
 
-.gender {
+.gender1,.gender2 {
     float:left;
     max-width:14rem;
     max-height:14rem;
     margin-top:2%;
     margin-right:7rem;
+    position: relative;
+    background-size: contain;
+}
+.gender1 {
+    background-image: url(../img/male.png);
+}
+.gender2 {
+    background-image: url(../img/female.png);
+}
+.gender1::after,.gender2::after {
+    content:'';
+    width:100%;
+    height:auto;
+    top:0;
+    position: absolute;
+    left:0;
 	-webkit-transition: all 0.5s; /* Safari */
     transition: all 0.5s;
-    -webkit-filter:grayscale(100%);
-    filter:grayscale(100%);
+    oapcity:0;
+    background-size: contain;
+}
+.gender1.active::after {
+    background-image: url(../img/male-black.png);
+    oapcity:1;
+}
+.gender2.active::after {
+    background-image: url(../img/female-black.png);
+    oapcity:1;
 }
 img.gender.active {
     -webkit-filter:grayscale(0%);
@@ -807,7 +828,4 @@ img.gender.active {
 .rocket {
     max-width:15rem;
     max-height:15rem;
-    filter: brightness(-10) invert(100%);
-    -webkit-filter: brightness(-10) invert(100%);
-	filter: url(greyscale.svg#greyscale);
 }
