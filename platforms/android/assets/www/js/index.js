@@ -81,9 +81,9 @@ var app = {
                 var h = document.documentElement.clientHeight;
                 var styleSheet = document.styleSheets[0];
                 // ar = aspect ratio h/w; Replace this with your apps aspect ratio
-                var ar = 1.17;
+                var ar = 1.77;
                 // x = scaling factor
-                var x = 0.01; 
+                var x = 0.005; 
                 var rem;
                 if (h / w > ar) { // higher than aspect ratio
                     rem = x * w;
