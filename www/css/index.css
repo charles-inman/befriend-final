@@ -124,7 +124,7 @@ overflow-y: scroll;
 	background-color:#3b5998;
 	color:#fff;
 	width:80%;
-	height:19rem;
+	height:6rem;
     padding-left: 50px;
     font-size: 5.5rem;
 }
@@ -133,8 +133,8 @@ overflow-y: scroll;
 	content:'';
 	    background-image: url(../img/f-icon.png);
     background-size: contain;
-    width: 12rem;
-    height: 12rem;
+    width: 6rem;
+    height: 6rem;
     position: absolute;
     background-repeat: no-repeat;
     left: 5rem;
@@ -148,7 +148,7 @@ overflow-y: scroll;
 	background-color:#9b3434;
 	color:#fff;
 	width:80%;
-	height:19rem;
+	height:6rem;
     font-size:5.5rem;
 }
 .app {
@@ -806,6 +806,6 @@ img.gender.active {
 }
 
 .rocket {
-    max-width:15rem;
-    max-height:15rem;
+    max-width:6rem;
+    max-height:6rem;
 }
