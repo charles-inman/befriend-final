@@ -655,11 +655,12 @@ z-index: 10;
 }
 
 .gender {
-    float:left;
-    width:12rem;
-    height:12rem;
-    margin-top:2%;
-    margin-right:6rem;
+float: left;
+height: 6rem;
+margin-right: 2rem;
+margin-top: 2%;
+position: relative;
+width: 6rem;
     position: relative;
     background-size: contain;
     background-repeat: no-repeat;
@@ -720,20 +721,20 @@ z-index: 10;
 
 .handleCircle::before {
     content:'';
-    width:200%;
-    height:200%;
+    width:150%;
+    height:150%;
     position: absolute;
-    border: 1rem solid #5cd1f4;
+    border: 0.5rem solid #5cd1f4;
     border-radius: 12rem;
-    left: -2.5rem;
-    top: -2.5rem;
+    left: -1.25rem;
+    top: -1.25rem;
 }
 .handleCircle::after {
     content:'';
-    width:350%;
-    height:350%;
+    width:250%;
+    height:250%;
     position: absolute;
-    border: 1rem solid #1aafdb;
+    border: 0.5rem solid #1aafdb;
     border-radius: 12rem;
     left: -4.75rem;
     top: -4.75rem;
