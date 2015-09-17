@@ -490,7 +490,7 @@ function openSubMenu(idof) {
     e.preventDefault();
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var touch = e.touches[0];
                     var posX = touch.pageX;
                     console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
@@ -539,7 +539,7 @@ function openSubMenu(idof) {
     e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var touch = e.changedTouches[0];
+                    var touch = e.touches[0];
                     console.log(touch);
                     var posX = touch.pageX;
                     console.log(posX);
