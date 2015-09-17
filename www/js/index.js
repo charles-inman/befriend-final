@@ -463,8 +463,8 @@ function openMenu(ele) {
             .set(idc("menu"), {display:"none"})
     }
 }
-                var upperagelimit;
-                var loweragelimit;
+var upperagelimit;
+var loweragelimit;
 function openSubMenu(idof) {
     openMenu(idc("mainmenuclick"));
     var picky = idc(idof)
@@ -486,7 +486,7 @@ function openSubMenu(idof) {
     });
     startXPositions();
     
-                document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
+    document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
                     console.log("touched");
     e.preventDefault();
                     var width = document.documentElement["clientWidth"];
@@ -583,23 +583,21 @@ function openSubMenu(idof) {
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
 }
+function startXPositions() {
+    var width = document.documentElement["clientWidth"];
+    var elewidth = this.offsetWidth * 0.9; 
+    loweragelimit = window.localStorage.getItem("minage");
+    upperagelimit = window.localStorage.getItem("maxage");
+    var onewidth = (elewidth / 84) * loweragelimit;
+    var twowidth = (elewidth / 84) * upperagelimit;
+    document.getElementById("smallslider").children[0].setAttribute("x",onewidth);
+    document.getElementById("smallslider").children[1].setAttribute("x",twowidth);
 
+    document.getElementById("smallslider").children[0].left = onewidth + "px";
+    document.getElementById("smallslider").children[1].left = twowidth + "px";
 
-                var startXPositions() {
-                    var width = document.documentElement["clientWidth"];
-                    var elewidth = this.offsetWidth * 0.9; 
-                    loweragelimit = window.localStorage.getItem("minage");
-                    upperagelimit = window.localStorage.getItem("maxage");
-                    var onewidth = (elewidth / 84) * loweragelimit;
-                    var twowidth = (elewidth / 84) * upperagelimit;
-                    document.getElementById("smallslider").children[0].setAttribute("x",onewidth);
-                    document.getElementById("smallslider").children[1].setAttribute("x",twowidth);
-                    
-                    document.getElementById("smallslider").children[0].left = onewidth + "px";
-                    document.getElementById("smallslider").children[1].left = twowidth + "px";
-                    
-                    document.getElementById("barbetween").style.left = onewidth + "px";
-                    document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";
-                    
-                    document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
-                }
+    document.getElementById("barbetween").style.left = onewidth + "px";
+    document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";
+
+    document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+}
