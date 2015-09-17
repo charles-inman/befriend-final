@@ -585,7 +585,7 @@ function openSubMenu(idof) {
 }
 function startXPositions() {
     var width = document.documentElement["clientWidth"];
-                    var elewidth = document.getElementById("smallslider").children[1].offsetWidth;
+                    var aas = document.getElementById("smallslider").children[1].offsetWidth;
     var elewidth = width * 0.9; 
     loweragelimit = window.localStorage.getItem("minage");
     upperagelimit = window.localStorage.getItem("maxage");
@@ -598,7 +598,7 @@ function startXPositions() {
     document.getElementById("smallslider").children[1].style.left = twowidth + "px";
 
     document.getElementById("barbetween").style.left = onewidth + "px";
-    document.getElementById("barbetween").style.width = ((twowidth - onewidth) + (elewidth / 2)) + "px";
+    document.getElementById("barbetween").style.width = ((twowidth - onewidth) + (aas / 2)) + "px";
 
     document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
 }
