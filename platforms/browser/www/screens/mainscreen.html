@@ -1,3 +1,4 @@
+
 <section id="mainScreen" class="screen">
     <div class="greyback fixedheader">
         <img class="backButton" src="img/backbutton.png"/>
@@ -24,7 +25,7 @@
         </button>
     </div>
     <div class="loader subscreen fill">
-        <img class="center flame" src="img/logo.png"/>
+        <img class="center flame" src="../img/logo.png"/>
     </div>
     <div id="viewprofile" class="subscreen fill">
         <div class="profileviewer">
@@ -62,21 +63,12 @@
                 <h2>I'm looking for</h2>
                 <p>Tap to change</p>
             </div>
-            <div class="gender1 active" onclick="genderChange(0)" ></div>
-            <div class="gender2 active" onclick="genderChange(1)" ></div>
+            <div id="gender1" class="gender active" onclick="genderChange(0)" ></div>
+            <div id="gender2" class="gender active" onclick="genderChange(1)" ></div>
             <h2 id="kilometres" class="topspacingtwo left">Within 30 kilometres</h2>
             <div id="distanceslider" class="dragdealer">
                 <div class="handle handleCircle"></div>
             </div>
-            <script>
-                new Dragdealer('distanceslider', {
-                      animationCallback: function(x, y) {
-                          document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
-                          window.localStorage.setItem("distance", Math.round(x * 100));
-                      },
-                    x:0.3
-                });
-            </script>
             <h2 id="ages" class="topspacingtwo left">Between 20 and 28</h2>
             <div class="range">
                 <div id="smallslider" class="dragdealer">
@@ -88,10 +80,11 @@
             <script>
                 var upperagelimit;
                 var loweragelimit;
-                document.getElementById("smallslider").children[0].ontouchmove = function(e) {
+                document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.changedTouches[0].clientX;
+                    console.log(e.touches[0]);
+                    var posX = e.touches[0].pageX;
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
@@ -134,11 +127,12 @@
                     window.localStorage.setItem("minage", loweragelimit);
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
-                document.getElementById("smallslider").children[1].ontouchmove = function(e) {
+                document.getElementById("smallslider").children[1].ontouchmove  = function(e) {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var posX = e.changedTouches[0].clientX;
-
+                    console.log(e.touches[0]);
+                    var posX = e.touches[0].pageX;
+                    console.log(e);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
                        trueleft =0- (elewidth / 2);
@@ -179,6 +173,7 @@
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
             </script>
+        <script type="text/javascript" src="../js/index.js"></script>
         </div>
     </div>
 </section>
