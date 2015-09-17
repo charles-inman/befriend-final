@@ -99,11 +99,12 @@
                 var upperagelimit;
                 var loweragelimit;
                 document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
+                    console.log("touched");
     e.preventDefault();
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    console.log(e.touches[0]);
-                    var posX = e.touches[0].pageX;
+                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var posX = touch.pageX;
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
