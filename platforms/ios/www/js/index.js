@@ -539,7 +539,6 @@ function openSubMenu(idof) {
     e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    console.log("touched");
                     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                     var posX = touch.pageX;
                     console.log(posX);
