@@ -93,9 +93,28 @@
                 </div>
             </div>
             <script>
+                var startXPositions() {
+                    var width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth * 0.9; 
+                    loweragelimit = window.localStorage.getItem("minage");
+                    upperagelimit = window.localStorage.getItem("maxage");
+                    var onewidth = (elewidth / 84) * loweragelimit;
+                    var twowidth = (elewidth / 84) * upperagelimit;
+                    document.getElementById("smallslider").children[0].setAttribute("x",onewidth);
+                    document.getElementById("smallslider").children[1].setAttribute("x",twowidth);
+                    
+                    document.getElementById("smallslider").children[0].left = onewidth + "px";
+                    document.getElementById("smallslider").children[1].left = twowidth + "px";
+                    
+                    document.getElementById("barbetween").style.left = onewidth + "px";
+                    document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";
+                    
+                    document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                }
                 var upperagelimit;
                 var loweragelimit;
                 document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
+    e.preventDefault();
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     console.log(e.touches[0]);
@@ -143,6 +162,7 @@
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
                 document.getElementById("smallslider").children[1].ontouchmove  = function(e) {
+    e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     console.log(e.touches[0]);

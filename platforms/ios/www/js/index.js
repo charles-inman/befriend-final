@@ -450,16 +450,16 @@ function openMenu(ele) {
     var tl = new TimelineMax();
     if(idc("menu").style.display == "none") {
         tl.set(idc("menu"), {display:"block"})
-        .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"2.2rem",rotation:"45deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"2rem",rotation:"45deg",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-2.2rem",rotation:"-45deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-2rem",rotation:"-45deg",ease: Circ.easeOut},0.5)
         .fromTo(idc("menu"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
     }
     else {
         tl.fromTo(idc("menu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
-        .fromTo(ele.children[0], 1, {marginTop:"2.2rem",rotation:"45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[0], 1, {marginTop:"2rem",rotation:"45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[2], 1, {marginTop:"-2.2rem",rotation:"-45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[2], 1, {marginTop:"-2rem",rotation:"-45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
             .set(idc("menu"), {display:"none"})
     }
 }
@@ -480,6 +480,7 @@ function openSubMenu(idof) {
               document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
               window.localStorage.setItem("distance", Math.round(x * 100));
           },
-        x: (parseInt(window.localStorage.getItem("fbid")) * 0.01)
+        x: (parseInt(window.localStorage.getItem("distance")) * 0.01)
     });
+    startXPositions();
 }
