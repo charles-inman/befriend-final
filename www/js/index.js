@@ -487,12 +487,12 @@ function openSubMenu(idof) {
     startXPositions();
     
     document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
-                    console.log("touched");
     e.preventDefault();
                     var width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                     var posX = touch.pageX;
+                    console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
@@ -542,7 +542,7 @@ function openSubMenu(idof) {
                     console.log("touched");
                     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                     var posX = touch.pageX;
-                    console.log(e);
+                    console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
                        trueleft =0- (elewidth / 2);
@@ -585,7 +585,7 @@ function openSubMenu(idof) {
 }
 function startXPositions() {
     var width = document.documentElement["clientWidth"];
-    var elewidth = this.offsetWidth * 0.9; 
+    var elewidth = width * 0.9; 
     loweragelimit = window.localStorage.getItem("minage");
     upperagelimit = window.localStorage.getItem("maxage");
     var onewidth = (elewidth / 84) * loweragelimit;
