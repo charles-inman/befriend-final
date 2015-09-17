@@ -540,6 +540,7 @@ function openSubMenu(idof) {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    console.log(touch);
                     var posX = touch.pageX;
                     console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
@@ -587,13 +588,13 @@ function startXPositions() {
     var elewidth = width * 0.9; 
     loweragelimit = window.localStorage.getItem("minage");
     upperagelimit = window.localStorage.getItem("maxage");
-    var onewidth = (elewidth / 84) * loweragelimit;
-    var twowidth = (elewidth / 84) * upperagelimit;
+    var onewidth = (elewidth / 100) * (loweragelimit - 16);
+    var twowidth = (elewidth / 100) * (upperagelimit - 16);
     document.getElementById("smallslider").children[0].setAttribute("x",onewidth);
     document.getElementById("smallslider").children[1].setAttribute("x",twowidth);
 
-    document.getElementById("smallslider").children[0].left = onewidth + "px";
-    document.getElementById("smallslider").children[1].left = twowidth + "px";
+    document.getElementById("smallslider").children[0].style.left = onewidth + "px";
+    document.getElementById("smallslider").children[1].style.left = twowidth + "px";
 
     document.getElementById("barbetween").style.left = onewidth + "px";
     document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";

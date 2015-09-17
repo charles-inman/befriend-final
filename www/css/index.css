@@ -193,6 +193,7 @@ hr {
     margin: auto;
     top: 3.5rem;
     font-size: 8rem;
+    margin-top:2rem;
 }
 
 .column-two {
@@ -334,7 +335,7 @@ z-index: 10;
 	clear:both;
 	margin: 20px 0;
     overflow:scroll;
-    height:15rem;
+    height:9rem;
     white-space: nowrap;
 }
 
@@ -459,7 +460,7 @@ z-index: 10;
 .interesting div p{ 
     float:left;
     font-size:5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 .interesting div button{ 
     clear:both;
@@ -501,12 +502,12 @@ z-index: 10;
 }
 #interests .imageint {
     float:left;
-    width:8rem;
-    height:8rem;
     border:5px solid #63bd6c;
     border-radius:10rem;
     position:relative;
-    margin-right:2rem;
+height: 7rem;
+margin-right: 1rem;
+width: 7rem;
 }
 .imageint img {
     position:absolute;
