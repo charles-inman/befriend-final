@@ -151,8 +151,9 @@
     e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    console.log(e.touches[0]);
-                    var posX = e.touches[0].pageX;
+                    console.log("touched");
+                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var posX = touch.pageX;
                     console.log(e);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
