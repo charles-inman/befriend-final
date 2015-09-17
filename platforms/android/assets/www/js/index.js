@@ -539,7 +539,7 @@ function openSubMenu(idof) {
     e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
-                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var touch = e.changedTouches[0];
                     console.log(touch);
                     var posX = touch.pageX;
                     console.log(posX);
@@ -585,6 +585,7 @@ function openSubMenu(idof) {
 }
 function startXPositions() {
     var width = document.documentElement["clientWidth"];
+                    var elewidth = document.getElementById("smallslider").children[1].offsetWidth;
     var elewidth = width * 0.9; 
     loweragelimit = window.localStorage.getItem("minage");
     upperagelimit = window.localStorage.getItem("maxage");
@@ -597,7 +598,7 @@ function startXPositions() {
     document.getElementById("smallslider").children[1].style.left = twowidth + "px";
 
     document.getElementById("barbetween").style.left = onewidth + "px";
-    document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";
+    document.getElementById("barbetween").style.width = ((twowidth - onewidth) + (elewidth / 2)) + "px";
 
     document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
 }
