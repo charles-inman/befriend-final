@@ -407,7 +407,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
             var data = JSON.parse(response);
         }
     },
-    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude);
+    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
 }
 /* Users Details */
 var usersProcessed;
@@ -437,10 +437,10 @@ function genderChange(type) {
         window.localStorage.setItem("genderlook", "2");
     }
     else if(genderobjs[0].className == "gender active") {
-        window.localStorage.setItem("genderlook", "1");
+        window.localStorage.setItem("genderlook", "0");
     }
     else if(genderobjs[1].className == "gender active") {
-        window.localStorage.setItem("genderlook", "0");
+        window.localStorage.setItem("genderlook", "1");
     }
     else {
         window.localStorage.setItem("genderlook", "-1");
@@ -477,15 +477,19 @@ function openSubMenu(idof) {
         tl.fromTo(picky, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
             .set(picky, {display:"none"});
     }
-    new Dragdealer('distanceslider', {
+    if(idof == "picky") {
+        startXPositions();
+    }
+   
+}
+function startXPositions() {
+     new Dragdealer('distanceslider', {
           animationCallback: function(x, y) {
               document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
               window.localStorage.setItem("distance", Math.round(x * 100));
           },
         x: (parseInt(window.localStorage.getItem("distance")) * 0.01)
     });
-    startXPositions();
-    
     document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
     e.preventDefault();
                     var width = document.documentElement["clientWidth"];
@@ -582,8 +586,7 @@ function openSubMenu(idof) {
                     window.localStorage.setItem("minage", loweragelimit);
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
-}
-function startXPositions() {
+    
     var width = document.documentElement["clientWidth"];
                     var aas = document.getElementById("smallslider").children[1].offsetWidth;
     var elewidth = width * 0.9; 
