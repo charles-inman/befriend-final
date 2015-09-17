@@ -463,6 +463,8 @@ function openMenu(ele) {
             .set(idc("menu"), {display:"none"})
     }
 }
+                var upperagelimit;
+                var loweragelimit;
 function openSubMenu(idof) {
     openMenu(idc("mainmenuclick"));
     var picky = idc(idof)
@@ -483,4 +485,121 @@ function openSubMenu(idof) {
         x: (parseInt(window.localStorage.getItem("distance")) * 0.01)
     });
     startXPositions();
+    
+                document.getElementById("smallslider").children[0].ontouchmove  = function(e) {
+                    console.log("touched");
+    e.preventDefault();
+                    var width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth;
+                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var posX = touch.pageX;
+                    var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
+
+                    if(trueleft < 0 - (elewidth / 2)) {
+                       trueleft = 0 - (elewidth / 2);
+                    }
+                    else if(trueleft > width *0.9) {
+                        trueleft = width *0.9;
+                    }
+
+                    this.setAttribute("x", trueleft);
+                    this.style.left = trueleft + "px";
+                    if(trueleft < document.getElementById("smallslider").children[1].getAttribute("x")) {
+                        document.getElementById("barbetween").style.left = (trueleft) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) - (elewidth / 2)) + "px";
+                        this.className = "bluehandle ";
+                        document.getElementById("smallslider").children[1].className = "bluehandle big";
+
+                        upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
+                        loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    else {
+                        document.getElementById("barbetween").style.left = (document.getElementById("smallslider").children[1].getAttribute("x")) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[1].getAttribute("x")) + (elewidth / 2)) + "px";
+                        this.className = "bluehandle big";
+                        document.getElementById("smallslider").children[1].className = "bluehandle ";
+
+                        loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[1].getAttribute("x") / (width *0.9) * 86))));
+                        upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    window.localStorage.setItem("minage", loweragelimit);
+                    window.localStorage.setItem("maxage", upperagelimit);
+                };
+                document.getElementById("smallslider").children[1].ontouchmove  = function(e) {
+    e.preventDefault();
+                    var  width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth;
+                    console.log("touched");
+                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    var posX = touch.pageX;
+                    console.log(e);
+                    var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
+                    if(trueleft < 0 - (elewidth / 2)) {
+                       trueleft =0- (elewidth / 2);
+                    }
+                    else if(trueleft > (width *0.9) - (elewidth / 2)) {
+                        trueleft = (width *0.9) - (elewidth / 2);
+                    }
+                    this.setAttribute("x", trueleft);
+
+                    this.style.left = trueleft + "px";
+                    if(trueleft < document.getElementById("smallslider").children[0].getAttribute("x")) {
+                        document.getElementById("barbetween").style.left = (trueleft) + "px";
+                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) - (elewidth / 2)) + "px";
+                        this.className = "bluehandle ";
+                        document.getElementById("smallslider").children[0].className = "bluehandle big";
+                        upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
+                        loweragelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    else {
+                        document.getElementById("barbetween").style.left = ( document.getElementById("smallslider").children[0].getAttribute("x")) + "px";
+                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) + (elewidth / 2)) + "px";
+                        this.className = "bluehandle big";
+                        document.getElementById("smallslider").children[0].className = "bluehandle ";
+                        loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
+                        upperagelimit = Math.floor((16 + ((trueleft / (width *0.9)) * 86)));
+                        if(loweragelimit < 16) 
+                            loweragelimit = 16;
+                        if(upperagelimit < 16) 
+                            upperagelimit = 16;
+                        document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                    }
+                    window.localStorage.setItem("minage", loweragelimit);
+                    window.localStorage.setItem("maxage", upperagelimit);
+                };
 }
+
+
+                var startXPositions() {
+                    var width = document.documentElement["clientWidth"];
+                    var elewidth = this.offsetWidth * 0.9; 
+                    loweragelimit = window.localStorage.getItem("minage");
+                    upperagelimit = window.localStorage.getItem("maxage");
+                    var onewidth = (elewidth / 84) * loweragelimit;
+                    var twowidth = (elewidth / 84) * upperagelimit;
+                    document.getElementById("smallslider").children[0].setAttribute("x",onewidth);
+                    document.getElementById("smallslider").children[1].setAttribute("x",twowidth);
+                    
+                    document.getElementById("smallslider").children[0].left = onewidth + "px";
+                    document.getElementById("smallslider").children[1].left = twowidth + "px";
+                    
+                    document.getElementById("barbetween").style.left = onewidth + "px";
+                    document.getElementById("barbetween").style.width = (twowidth - onewidth) + "px";
+                    
+                    document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
+                }
