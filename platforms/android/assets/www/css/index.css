@@ -201,7 +201,7 @@ hr {
 	float:left;
 }
 
-#profileIcon {
+#profileIcon,.profileIcon {
 	background-color:#1aafdb;
 	border-radius:30rem;
 	position:relative;

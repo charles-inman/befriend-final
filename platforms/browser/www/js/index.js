@@ -115,6 +115,10 @@ function registerGetInfo() {
 				var datesset = result.birthday.split('/');
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
+            if(idc("description").value == "undefined") {
+                idc("description").value = "";
+                idc("description").setAttribute("textdet", "");
+            }
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
             personalJSON = JSON.parse('{ "personalData": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'","relationship":"' + profileJSON.relationship_status + '", "description":"' + profileJSON.bio +'","gender":"'+ profileJSON.gender +'","profileImage":"-1","question":"0","answer":"0"  }, "interests": {"music":[],"movies":[],"travel":[],"books":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
 			},
@@ -333,9 +337,6 @@ function register() {
         var responsePicture = JSON.parse(responsedata.response);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
-            if(idc("description").value == "undefined") {
-                idc("description").value = "";
-            }
             personalJSON.personalData.description = idc("description").value;
             personalJSON.personalData.question = idc("question").children[0].value;
             personalJSON.personalData.answer = idc("answer").value;
@@ -403,14 +404,46 @@ function getUsersBaseOnLocation(longitude,latitude) {
         if(response == "no results") {
         }
         else {
-            alert(response);
-            var data = JSON.parse(response);
+            dataFromLocation = JSON.parse(response);
+            transformUserData();
         }
     },
     'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
 }
+var dataFromLocation;
 /* Users Details */
 var usersProcessed;
+
+function transformUserData() {
+    if(dataFromLocation.length != 0) {
+        ajaxGet(
+            'screens/viewprofile.html', 
+            function (response) {
+            document.getElementById("viewprofile").innerHTML += response;
+                ajaxPost(
+                    "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                    function (response) {
+                    if(response == "no id") {
+                    }
+                    else {
+                        var responseData = JSON.parse(response);
+                        var viewprofile = document.getElementById("viewprofile").lastChild;
+                        viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
+                        var aa = document.createElement("style");
+                        aa.type = 'text/css';
+                        aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" + responseData.personalData.profileImage + "'); }"));
+                        viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
+                        
+                        viewprofile.getElementsByClassName("mainDetails").children[0].innerHTML = responseData.personalData.firstname;
+                        viewprofile.getElementsByClassName("mainDetails").children[1].innerHTML = responseData.personalData.age;
+                        viewprofile.getElementsByClassName("mainDetails").children[2].innerHTML = dataFromLocation.userprofiles[0].distance_unit;
+                        viewprofile.getElementsByClassName("profilemain").getElementsByTagName("p")[0].innerHTML = responseData.personalData.description;
+                    }
+                },
+                'factualid=' + dataFromLocation.userprofiles[0].id );
+        });
+    }
+}
 
 function populateDB(tx) {
      tx.executeSql('CREATE TABLE IF NOT EXISTS users (userid,type)');
