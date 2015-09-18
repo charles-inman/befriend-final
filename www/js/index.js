@@ -406,7 +406,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
         else {
             dataFromLocation = JSON.parse(response);
             transformUserData();
-            document.getElementById("viewprofile").style.display = "block";
         }
     },
     'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
@@ -429,36 +428,110 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
-                        var responseData = JSON.parse(response);
-                        var viewprofile = document.getElementById("viewprofile").lastChild;
-                        viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
-                        var aa = document.createElement("style");
-                        aa.type = 'text/css';
-                        aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" + responseData.personalData.profileImage + "'); }"));
-                        viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
+                        setdataViewprofile(JSON.parse(response));
                         
-                        viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = responseData.personalData.firstname;
-                        viewprofile.getElementsByClassName("mainDetails")[0].children[1].innerHTML = responseData.personalData.age + " yr old";
-                        if( dataFromLocation.userprofiles[0].distance_in_km < 1) {
-                            viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML =  "Less than km";
-                        }
-                        else {
-                            viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = Math.ceil(dataFromLocation.userprofiles[0].distance_in_km) + " km";
-                        }
-                        
-                        viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = responseData.personalData.description;
-                        
-                        
-    var tl = new TimelineMax();
-        tl.set(document.getElementById("viewprofile"), {display:"block"})
-        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-        .fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+
+        var tl = new TimelineMax();
+            tl.set(document.getElementById("viewprofile").parentNode, {display:"block"})
+            .fromTo(document.getElementById("viewprofile").parentNode, 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
                         
                     }
                 },
                 'factualid=' + dataFromLocation.userprofiles[0].id );
         });
+        if(dataFromLocation.length > 1) {
+                ajaxGet(
+                'screens/viewprofile.html', 
+                function (response) {
+                document.getElementById("viewprofile").innerHTML += response;
+                    ajaxPost(
+                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                        function (response) {
+                            console.log("response");
+                            console.log(response);
+                        if(response == "no id") {
+                        }
+                        else {
+                        setdataViewprofile(JSON.parse(response));
+
+        var tl = new TimelineMax();
+                        }
+                    },
+                    'factualid=' + dataFromLocation.userprofiles[0].id );
+            });
+        }
     }
+}
+
+function setdataViewprofile(data) {
+
+    var viewprofile = document.getElementById("viewprofile").lastChild;
+    document.getElementById("viewprofile").lastChild.setAttribute("idset", dataFromLocation.userprofiles[0].id);
+    viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
+    var aa = document.createElement("style");
+    aa.type = 'text/css';
+    aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" + data.personalData.profileImage + "'); }"));
+    viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
+
+    viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
+    viewprofile.getElementsByClassName("mainDetails")[0].children[1].innerHTML = data.personalData.age + " yr old";
+    if( dataFromLocation.userprofiles[0].distance_in_km < 1) {
+        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML =  "Less than a km";
+    }
+    else {
+        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = Math.ceil(dataFromLocation.userprofiles[0].distance_in_km) + " km";
+    }
+
+    viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
+    dataFromLocation.splice(0, 1);
+    
+  TweenLite.set(viewprofile, {x:"100%"});
+}
+function appliedUser(type, element) {
+     ajaxGet(
+                'screens/viewprofile.html', 
+                function (response) {
+                document.getElementById("viewprofile").innerHTML += response;
+                    ajaxPost(
+                        "http://www.divinitycomputing.com/apps/beoples/acceptedusers.php", 
+                        function (response) {
+                        if(response == "success") {
+                            
+                            var tl = new TimelineMax();
+                                tl
+                                .fromTo(element, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut,onComplete:function() {
+                                    element.removeChild(element);
+                                    if(document.getElementById("viewprofile").children.length != 0) {
+                                        var tl2 = new TimelineMax();
+                                            tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                                        
+                                    if(dataFromLocation.length != 0) {
+                                        ajaxGet(
+                                                'screens/viewprofile.html', 
+                                                function (response) {
+                                                document.getElementById("viewprofile").innerHTML += response;
+                                                    ajaxPost(
+                                                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                                                        function (response) {
+                                                        if(response == "no id") {
+                                                        }
+                                                        else {
+                                                            setdataViewprofile(JSON.parse(response));
+                                                        }
+                                                    },
+                                                    'factualid=' + dataFromLocation.userprofiles[0].id );
+                                            });
+                                        }
+                                    }
+                                    else {
+                                        searchProfile();
+                                    }
+                                }},0.5);
+                        }
+                    },
+                    'acceptedstate=' + type + '&fbid=' + fbId + '&touserid=' + element.getAttribute("idset") );
+            });
 }
 
 function populateDB(tx) {
