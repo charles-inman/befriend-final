@@ -479,10 +479,6 @@ function setdataViewprofile(data) {
     dataFromLocation.userprofiles.splice(0, 1);
 }
 function appliedUser(type, element) {
-     ajaxGet(
-                'screens/viewprofile.html', 
-                function (response) {
-                document.getElementById("viewprofile").innerHTML += response;
                     ajaxPost(
                         "http://www.divinitycomputing.com/apps/beoples/acceptedusers.php", 
                         function (response) {
@@ -518,9 +514,11 @@ function appliedUser(type, element) {
                                     }
                                 }},0.5);
                         }
+                            else {
+                                alert(response);
+                            }
                     },
                     'acceptedstate=' + type + '&fbid=' + fbId + '&touserid=' + element.getAttribute("idset") );
-            });
 }
 
 function populateDB(tx) {
