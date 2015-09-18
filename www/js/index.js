@@ -406,6 +406,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         else {
             dataFromLocation = JSON.parse(response);
             transformUserData();
+            document.getElementById("viewprofile").style.display = "block";
         }
     },
     'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
@@ -423,6 +424,8 @@ function transformUserData() {
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                     function (response) {
+                        console.log("response");
+                        console.log(response);
                     if(response == "no id") {
                     }
                     else {
@@ -434,10 +437,17 @@ function transformUserData() {
                         aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" + responseData.personalData.profileImage + "'); }"));
                         viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
                         
-                        viewprofile.getElementsByClassName("mainDetails").children[0].innerHTML = responseData.personalData.firstname;
-                        viewprofile.getElementsByClassName("mainDetails").children[1].innerHTML = responseData.personalData.age;
-                        viewprofile.getElementsByClassName("mainDetails").children[2].innerHTML = dataFromLocation.userprofiles[0].distance_unit;
-                        viewprofile.getElementsByClassName("profilemain").getElementsByTagName("p")[0].innerHTML = responseData.personalData.description;
+                        viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = responseData.personalData.firstname;
+                        viewprofile.getElementsByClassName("mainDetails")[0].children[1].innerHTML = responseData.personalData.age + " yr old";
+                        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = dataFromLocation.userprofiles[0].distance_unit + " km";
+                        viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = responseData.personalData.description;
+                        
+                        
+    var tl = new TimelineMax();
+        tl.set(document.getElementById("viewprofile"), {display:"block"})
+        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+        .fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+                        
                     }
                 },
                 'factualid=' + dataFromLocation.userprofiles[0].id );

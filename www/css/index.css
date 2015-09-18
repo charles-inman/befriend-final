@@ -166,6 +166,7 @@ overflow-y: scroll;
 	clear:both;
 	float:left;
 	width:100%;
+    color:#fff;
 }
 
 hr {
@@ -844,4 +845,16 @@ width: 6rem;
 .rocket {
     max-width:15rem;
     max-height:15rem;
+}
+
+.mainDetails {
+    color:#fff;
+}
+.mainDetails h3 {
+margin-top:2rem;
+font-size: 6rem;
+}
+.mainDetails h4 {
+margin-top:2rem;
+font-size: 6rem;
 }
