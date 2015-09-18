@@ -428,6 +428,7 @@ function transformUserData() {
                     else {
                         setdataViewprofile(JSON.parse(response));console.log("mainsearch");
                         var tl = new TimelineMax();
+                        document.getElementById("viewprofile").style.display = "block";
                             tl.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
@@ -449,9 +450,9 @@ function transformUserData() {
                         if(response == "no id") {
                         }
                         else {
-                        setdataViewprofile(JSON.parse(response));
+                            setdataViewprofile(JSON.parse(response));
 
-        var tl = new TimelineMax();
+                            var tl = new TimelineMax();
                         }
                     },
                     'factualid=' + dataFromLocation.userprofiles[0].id );
@@ -480,7 +481,7 @@ function setdataViewprofile(data) {
     }
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
-    dataFromLocation.splice(0, 1);
+    dataFromLocation.userprofiles.splice(0, 1);
     
   TweenLite.set(viewprofile, {x:"100%"});
 }
