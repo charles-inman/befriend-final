@@ -432,8 +432,8 @@ function transformUserData() {
                         
 
         var tl = new TimelineMax();
-            tl.set(document.getElementById("viewprofile").parentNode, {display:"block"})
-            .fromTo(document.getElementById("viewprofile").parentNode, 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+            tl.set(document.getElementById("viewprofile"), {display:"block"})
+            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
                         
                     }
