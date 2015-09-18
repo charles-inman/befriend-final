@@ -432,6 +432,23 @@ function transformUserData() {
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
+                        if(dataFromLocation.userprofiles.length > 1) {
+                                ajaxGet(
+                                'screens/viewprofile.html', 
+                                function (response) {
+                                document.getElementById("viewprofile").innerHTML += response;
+                                    ajaxPost(
+                                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                                        function (response) {
+                                        if(response == "no id") {
+                                        }
+                                        else {
+                                            setdataViewprofile(JSON.parse(response));
+                                        }
+                                    },
+                                    'factualid=' + dataFromLocation.userprofiles[0].id );
+                            });
+                        }
                         
                     }
                 },
@@ -441,10 +458,7 @@ function transformUserData() {
 }
 
 function setdataViewprofile(data) {
-    console.log(data);
-    console.log(dataFromLocation.userprofiles);
     var viewprofile = document.getElementById("viewprofile").lastChild;
-    console.log(viewprofile);
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
@@ -462,6 +476,7 @@ function setdataViewprofile(data) {
     }
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
+    dataFromLocation.userprofiles.splice(0, 1);
 }
 function appliedUser(type, element) {
      ajaxGet(
@@ -474,9 +489,8 @@ function appliedUser(type, element) {
                         if(response == "success") {
                             
                             var tl = new TimelineMax();
-                                tl
-                                .fromTo(element, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut,onComplete:function() {
-                                    element.removeChild(element);
+                                tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
+                                    element.parentNode.removeChild(element);
                                     if(document.getElementById("viewprofile").children.length != 0) {
                                         var tl2 = new TimelineMax();
                                             tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
