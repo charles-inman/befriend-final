@@ -426,12 +426,32 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
-                        setdataViewprofile(JSON.parse(response));console.log("mainsearch");
-                        var tl = new TimelineMax();
+                        setdataViewprofile(JSON.parse(response));
+                        var tlaa = new TimelineMax();
                         document.getElementById("viewprofile").style.display = "block";
-                            tl.set(document.getElementById("viewprofile"), {display:"block"})
+                            tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                        
+                        if(dataFromLocation.length > 1) {
+                                ajaxGet(
+                                'screens/viewprofile.html', 
+                                function (response) {
+                                document.getElementById("viewprofile").innerHTML += response;
+                                    ajaxPost(
+                                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                                        function (response) {
+                                            console.log("response");
+                                            console.log(response);
+                                        if(response == "no id") {
+                                        }
+                                        else {
+                                            setdataViewprofile(JSON.parse(response));
+                                        }
+                                    },
+                                    'factualid=' + dataFromLocation.userprofiles[0].id );
+                            });
+                        }
                         
                     }
                 },
@@ -441,7 +461,7 @@ function transformUserData() {
 }
 
 function setdataViewprofile(data) {
-
+    console.log(data);
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.lastChild.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
