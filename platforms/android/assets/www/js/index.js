@@ -433,7 +433,7 @@ function transformUserData() {
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
-                        if(dataFromLocation.length > 1) {
+                        if(dataFromLocation.userprofiles.length > 1) {
                                 ajaxGet(
                                 'screens/viewprofile.html', 
                                 function (response) {
@@ -441,8 +441,6 @@ function transformUserData() {
                                     ajaxPost(
                                         "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                                         function (response) {
-                                            console.log("response");
-                                            console.log(response);
                                         if(response == "no id") {
                                         }
                                         else {
@@ -462,6 +460,7 @@ function transformUserData() {
 
 function setdataViewprofile(data) {
     console.log(data);
+    console.log(dataFromLocation.userprofiles);
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.lastChild.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
@@ -481,8 +480,6 @@ function setdataViewprofile(data) {
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
     dataFromLocation.userprofiles.splice(0, 1);
-    
-  TweenLite.set(viewprofile, {x:"100%"});
 }
 function appliedUser(type, element) {
      ajaxGet(
