@@ -439,7 +439,7 @@ function transformUserData() {
                         
                         viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = responseData.personalData.firstname;
                         viewprofile.getElementsByClassName("mainDetails")[0].children[1].innerHTML = responseData.personalData.age + " yr old";
-                        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = dataFromLocation.userprofiles[0].distance_unit + " km";
+                        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = dataFromLocation.userprofiles[0].distance_in_km + " km";
                         viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = responseData.personalData.description;
                         
                         
