@@ -559,6 +559,8 @@ function openMenu(ele) {
     var tl = new TimelineMax();
     if(idc("menu").style.display == "none") {
         tl.set(idc("menu"), {display:"block"})
+        .set(idc("backButton"), {display:"block"})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},0.5)
         .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"0.5rem",rotation:"45deg",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-1.5rem",rotation:"-45deg",ease: Circ.easeOut},0.5)
@@ -591,7 +593,11 @@ function openSubMenu(idof) {
     }
    
 }
-function closeSubMenu(idof) {
+function closeSubMenu() {
+    var tl = new TimelineMax();
+        tl.fromTo(document.getElementsByClassName("submenu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut},0.5)
+        .fromTo(idc("backButton"), 1, {opacity:1}, {opacity:0,ease: Circ.easeOut},0.5)
+        .set(idc("backButton"), {display:"none"});
 }
 function startXPositions() {
      new Dragdealer('distanceslider', {
