@@ -432,7 +432,7 @@ function transformUserData() {
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {position:"absolute",x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
-                        if(dataFromLocation.userprofiles.length > 1 || dataFromLocation.userprofiles.length == 1) {
+                        if(dataFromLocation.userprofiles.length != 0) {
                                 ajaxGet(
                                 'screens/viewprofile.html', 
                                 function (response) {
