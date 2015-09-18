@@ -423,18 +423,14 @@ function transformUserData() {
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                     function (response) {
-                        console.log("response");
-                        console.log(response);
                     if(response == "no id") {
                     }
                     else {
-                        setdataViewprofile(JSON.parse(response));
-                        
-
-        var tl = new TimelineMax();
-            tl.set(document.getElementById("viewprofile"), {display:"block"})
-            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+                        setdataViewprofile(JSON.parse(response));console.log("mainsearch");
+                        var tl = new TimelineMax();
+                            tl.set(document.getElementById("viewprofile"), {display:"block"})
+                            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
                     }
                 },
@@ -467,7 +463,7 @@ function transformUserData() {
 function setdataViewprofile(data) {
 
     var viewprofile = document.getElementById("viewprofile").lastChild;
-    document.getElementById("viewprofile").lastChild.setAttribute("idset", dataFromLocation.userprofiles[0].id);
+    viewprofile.lastChild.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
     aa.type = 'text/css';
