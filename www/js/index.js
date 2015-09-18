@@ -591,6 +591,8 @@ function openSubMenu(idof) {
     }
    
 }
+function closeSubMenu(idof) {
+}
 function startXPositions() {
      new Dragdealer('distanceslider', {
           animationCallback: function(x, y) {
