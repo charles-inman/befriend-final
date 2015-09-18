@@ -430,9 +430,9 @@ function transformUserData() {
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {position:"absolute",x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
-                        if(dataFromLocation.userprofiles.length > 1) {
+                        if(dataFromLocation.userprofiles.length > 1 || dataFromLocation.userprofiles.length == 1) {
                                 ajaxGet(
                                 'screens/viewprofile.html', 
                                 function (response) {
@@ -491,7 +491,7 @@ function appliedUser(type, element) {
                                         var tl2 = new TimelineMax();
                                             tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                                         
-                                    if(dataFromLocation.length != 0) {
+                                    if(dataFromLocation.userprofiles.length != 0) {
                                         ajaxGet(
                                                 'screens/viewprofile.html', 
                                                 function (response) {
