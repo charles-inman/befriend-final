@@ -428,28 +428,10 @@ function transformUserData() {
                     else {
                         setdataViewprofile(JSON.parse(response));
                         var tlaa = new TimelineMax();
-                        document.getElementById("viewprofile").style.display = "block";
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
-                        if(dataFromLocation.userprofiles.length > 1) {
-                                ajaxGet(
-                                'screens/viewprofile.html', 
-                                function (response) {
-                                document.getElementById("viewprofile").innerHTML += response;
-                                    ajaxPost(
-                                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                                        function (response) {
-                                        if(response == "no id") {
-                                        }
-                                        else {
-                                            setdataViewprofile(JSON.parse(response));
-                                        }
-                                    },
-                                    'factualid=' + dataFromLocation.userprofiles[0].id );
-                            });
-                        }
                         
                     }
                 },
@@ -479,7 +461,6 @@ function setdataViewprofile(data) {
     }
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
-    dataFromLocation.userprofiles.splice(0, 1);
 }
 function appliedUser(type, element) {
      ajaxGet(
