@@ -437,27 +437,6 @@ function transformUserData() {
                 },
                 'factualid=' + dataFromLocation.userprofiles[0].id );
         });
-        if(dataFromLocation.length > 1) {
-                ajaxGet(
-                'screens/viewprofile.html', 
-                function (response) {
-                document.getElementById("viewprofile").innerHTML += response;
-                    ajaxPost(
-                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                        function (response) {
-                            console.log("response");
-                            console.log(response);
-                        if(response == "no id") {
-                        }
-                        else {
-                            setdataViewprofile(JSON.parse(response));
-
-                            var tl = new TimelineMax();
-                        }
-                    },
-                    'factualid=' + dataFromLocation.userprofiles[0].id );
-            });
-        }
     }
 }
 
