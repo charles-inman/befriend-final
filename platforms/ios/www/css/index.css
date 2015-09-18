@@ -168,6 +168,12 @@ overflow-y: scroll;
 	width:100%;
     color:#fff;
 }
+.greyback p {
+float: left;
+font-size: 3.5rem;
+margin-top: 3rem;
+width: 100%;
+}
 
 hr {
 	background-color:#474746;
