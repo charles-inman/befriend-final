@@ -613,7 +613,7 @@ function openSubMenu(idof) {
 }
 function closeSubMenu() {
     var tl = new TimelineMax();
-        tl.to(document.getElementsByClassName("submenu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut},0.5)
+        tl.to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut})
         .fromTo(idc("backButton"), 1, {opacity:1}, {opacity:0,ease: Circ.easeOut},0.5)
         .set(idc("backButton"), {display:"none"});
 }
