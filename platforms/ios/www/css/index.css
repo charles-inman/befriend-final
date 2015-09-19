@@ -864,3 +864,9 @@ font-size: 6rem;
 margin-top:2rem;
 font-size: 6rem;
 }
+
+.profileviewer {
+    position:absolute;
+    top:0;
+    left:0;
+}
