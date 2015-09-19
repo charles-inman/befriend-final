@@ -881,3 +881,7 @@ font-size: 6rem;
     top:0;
     left:0;
 }
+
+#mainScreen {
+    overflow-x:hidden;
+}
