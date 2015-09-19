@@ -403,7 +403,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
-            document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button onclick='searchProfile()'>Try Again</button>";
+            document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button>";
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                 .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
@@ -468,7 +468,7 @@ function setdataViewprofile(data) {
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
     aa.type = 'text/css';
-    aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" + data.personalData.profileImage + "'); }"));
+    aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +    data.personalData.profileImage + "'); }"));
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
 
     viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
@@ -530,7 +530,7 @@ function appliedUser(type, element) {
                                     else {
                                         searchProfile();
                                     }
-                                }},0.5);
+                                }},2);
                         }
                             else {
                                 alert(response);
@@ -577,16 +577,16 @@ function openMenu(ele) {
     var tl = new TimelineMax();
     if(idc("menu").style.display == "none") {
         tl.set(idc("menu"), {display:"block"})
-        .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"0.5rem",rotation:"45deg",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-1.5rem",rotation:"-45deg",ease: Circ.easeOut},0.5)
-        .fromTo(idc("menu"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+        .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"0.5rem",rotation:"45deg",ease: Circ.easeOut},0)
+        .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0)
+        .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-1.5rem",rotation:"-45deg",ease: Circ.easeOut},0)
+        .fromTo(idc("menu"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0);
     }
     else {
         tl.fromTo(idc("menu"), 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
-        .fromTo(ele.children[0], 1, {marginTop:"0.5rem",rotation:"45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-        .fromTo(ele.children[2], 1, {marginTop:"-1.5rem",rotation:"-45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0.5)
+        .fromTo(ele.children[0], 1, {marginTop:"0.5rem",rotation:"45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0)
+        .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0)
+        .fromTo(ele.children[2], 1, {marginTop:"-1.5rem",rotation:"-45deg"}, {marginTop:"0rem",rotation:"0deg",ease: Circ.easeOut},0)
             .set(idc("menu"), {display:"none"})
     }
 }

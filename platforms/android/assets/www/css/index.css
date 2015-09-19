@@ -822,7 +822,7 @@ width: 6rem;
 #menu {
     width:80%;
     height:100%;
-    z-index:9999999999999;
+    z-index:9999999;
     right: 0;
     position: absolute;
     top: 0;
