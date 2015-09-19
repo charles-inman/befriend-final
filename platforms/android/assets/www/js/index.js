@@ -599,8 +599,9 @@ function openSubMenu(idof) {
     if(picky.style.display == "none") {
         tl.set(picky, {display:"block"})
         .set(idc("backButton"), {display:"block"})
-        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},0.5)
-        .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
+        .to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1)
+        .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},1);
     }
     else {
         tl.fromTo(picky, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})

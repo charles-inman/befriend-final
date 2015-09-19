@@ -555,6 +555,7 @@ button.none {
     font-size: 5rem;
     margin: auto;
     padding: 2rem;
+    background:transparent;
 }
 .thumbsup {
     margin: 20px auto;
