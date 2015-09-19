@@ -92,8 +92,7 @@ var mainTypeInterest ;
 var profileJSON;
 var personalJSON;
 
-var fbId;        
-
+var fbId;    
 
 function registerGetInfo() {
 	newPage("register.html");
@@ -476,6 +475,19 @@ function setdataViewprofile(data) {
     }
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
+    
+    var maininterests = viewprofile.getElementsByClassName("interests")[0];
+    for(i = 0; i < intereststypes.length;i++) {
+        if(personalJSON.interests[intereststypes[i]].length != 0) {
+            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
+        }
+    }
+    if(maininterests.children == 0) {
+        maininterests.innerHTML = "<h3>No interests</h3>";
+    }
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h2")[1] =  fullJSON.question[data.personalData.question].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0] =  data.personalData.answer;
+    
     dataFromLocation.userprofiles.splice(0, 1);
 }
 function appliedUser(type, element) {
@@ -559,8 +571,6 @@ function openMenu(ele) {
     var tl = new TimelineMax();
     if(idc("menu").style.display == "none") {
         tl.set(idc("menu"), {display:"block"})
-        .set(idc("backButton"), {display:"block"})
-        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},0.5)
         .fromTo(ele.children[0], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"0.5rem",rotation:"45deg",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[1], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
         .fromTo(ele.children[2], 1, {rotation:"0deg",marginTop:"0rem"}, {marginTop:"-1.5rem",rotation:"-45deg",ease: Circ.easeOut},0.5)
@@ -582,6 +592,8 @@ function openSubMenu(idof) {
     var tl = new TimelineMax();
     if(picky.style.display == "none") {
         tl.set(picky, {display:"block"})
+        .set(idc("backButton"), {display:"block"})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},0.5)
         .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5);
     }
     else {
@@ -600,6 +612,19 @@ function closeSubMenu() {
         .set(idc("backButton"), {display:"none"});
 }
 function startXPositions() {
+     var genderobjs = document.getElementsByClassName("gender");
+    
+    if(window.localStorage.getItem("genderlook") == 0) {
+        genderobjs[0].className == "gender active";
+    }
+    else if(window.localStorage.getItem("genderlook") == 1) {
+        genderobjs[1].className == "gender active";
+    
+    }
+    else if(window.localStorage.getItem("genderlook") == 2) {
+        genderobjs[0].className == "gender active";
+        genderobjs[1].className == "gender active";
+    }
      new Dragdealer('distanceslider', {
           animationCallback: function(x, y) {
               document.getElementById("kilometres").innerHTML = "Within "+ Math.round(x * 100) +" kilometres";
