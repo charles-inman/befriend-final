@@ -420,6 +420,7 @@ var dataFromLocation;
 var usersProcessed;
 
 function transformUserData() {
+    console.log(dataFromLocation);
     if(dataFromLocation.userprofiles.length != 0) {
         ajaxGet(
             'screens/viewprofile.html', 
@@ -481,6 +482,18 @@ function setdataViewprofile(data) {
     }
 
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
+    
+    var maininterests = viewprofile.getElementsByClassName("interests")[0];
+    for(i = 0; i < intereststypes.length;i++) {
+        if(personalJSON.interests[intereststypes[i]].length != 0) {
+            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
+        }
+    }
+    if(maininterests.children == 0) {
+        maininterests.innerHTML = "<h3>No interests</h3>";
+    }
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h2")[1] =  fullJSON.question[data.personalData.question].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0] =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
 }
