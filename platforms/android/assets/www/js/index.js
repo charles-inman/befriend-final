@@ -395,12 +395,18 @@ function getUsersBaseOnLocation(longitude,latitude) {
     if(!window.localStorage.getItem("distance")) {
         window.localStorage.setItem("distance", "50");
     }
+    document.getElementById("viewprofile").innerHTML = "";
+      document.getElementById("viewprofile").style.display = "none";
     var distance = window.localStorage.getItem("distance");
     
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
+            document.getElementById("viewprofile").innerHTML = "<h2>We can't find anyone</h2><button onclick='getUsersBaseOnLocation()'>Try Again</button>";
+            var tlaa = new TimelineMax();
+                tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
         }
         else {
             dataFromLocation = JSON.parse(response);
