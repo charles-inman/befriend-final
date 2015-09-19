@@ -544,7 +544,18 @@ width: 7rem;
 #question select {
     width:100%;
 }
-
+h2.none {
+    margin-bottom: 8rem;
+    margin-top: 8rem;
+    text-align: center;
+}
+h2.button {
+        border:0.5rem solid #1aafdb;
+    display: block;
+    font-size: 5rem;
+    margin: auto;
+    padding: 2rem;
+}
 .thumbsup {
     margin: 20px auto;
     display: block;

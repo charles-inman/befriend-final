@@ -403,7 +403,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
-            document.getElementById("viewprofile").innerHTML = "<h2>We can't find anyone</h2><button onclick='getUsersBaseOnLocation()'>Try Again</button>";
+            document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button onclick='searchProfile()'>Try Again</button>";
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                 .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
