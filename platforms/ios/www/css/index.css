@@ -639,6 +639,7 @@ button.none {
 .subscreen {
     top:12%;
     position: absolute;
+overflow-x: hidden;
 }
 
 .profilemain {
@@ -884,4 +885,13 @@ font-size: 6rem;
 
 #mainScreen {
     overflow-x:hidden;
+}
+
+.questionview {
+    font-size: 5rem;
+}
+
+.answerview {
+    font-size: 4rem;
+    margin:2rem 0 4rem;
 }
