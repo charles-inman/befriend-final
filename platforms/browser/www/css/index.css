@@ -337,7 +337,7 @@ z-index: 10;
 	clear:both;
 }
 
-#interests {
+#interests,.interests {
 	width:100%;
 	clear:both;
 	margin: 20px 0;
@@ -507,7 +507,7 @@ z-index: 10;
     color:#fff;
     overflow:scroll;
 }
-#interests .imageint {
+#interests .imageint,.interests .imageint  {
     float:left;
     border:5px solid #63bd6c;
     border-radius:10rem;

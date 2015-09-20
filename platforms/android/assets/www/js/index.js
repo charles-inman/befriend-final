@@ -491,6 +491,8 @@ function setdataViewprofile(data) {
     if(maininterests.children == 0) {
         maininterests.innerHTML = "<h3>No interests</h3>";
     }
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h2")[1] =  interestJSON.question[parseInt(data.personalData.question)].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0] =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
 }
