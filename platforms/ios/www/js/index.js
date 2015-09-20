@@ -20,6 +20,11 @@ var app = {
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
+        ajaxGet(
+                    'js/interests-1.json', 
+                    function (response) {
+                        interestJSON = JSON.parse(response);
+                });
         if(regs == "active" && fbId.length != 0) {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
             mainScreen();
@@ -60,11 +65,7 @@ var app = {
                     }
                 },
                'fbid=' + fullJSON.authResponse.userID);
-                ajaxGet(
-                    'js/interests-1.json', 
-                    function (response) {
-                        interestJSON = JSON.parse(response);
-                });
+                
 			}
 
 			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
