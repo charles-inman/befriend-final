@@ -59,6 +59,7 @@ button {
 	width:100%;
 	height:100%;
 overflow-y: scroll;
+overflow-x: hidden;
 }
 #homescreen {
 	text-align:center;
@@ -894,4 +895,15 @@ font-size: 6rem;
 .answerview {
     font-size: 4rem;
     margin:2rem 0 4rem;
+}
+
+.tb {
+   -webkit-transition: all 0.5;
+   transition: all 0.5; 
+}
+.tb:hover {
+    -webkit-transform: scale(0.8) translateY(-1px);
+    -ms-transform: scale(0.8) translateY(-1px);
+    transform: scale(0.8) translateY(-1px);
+    
 }

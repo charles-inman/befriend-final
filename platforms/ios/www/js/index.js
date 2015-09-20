@@ -511,8 +511,8 @@ function appliedUser(type, element) {
                         var tl2 = new TimelineMax();
                             tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
 
-                    if(dataFromLocation.userprofiles.length != 0) {
-                        ajaxGet(
+                        if(dataFromLocation.userprofiles.length != 0) {
+                            ajaxGet(
                                 'screens/viewprofile.html', 
                                 function (response) {
                                 document.getElementById("viewprofile").innerHTML += response;
