@@ -532,7 +532,7 @@ function appliedUser(type, element) {
                     else {
                         searchProfile();
                     }
-                }},2);
+                }});
         }
             else {
                 alert(response);
