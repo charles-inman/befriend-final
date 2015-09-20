@@ -49,7 +49,6 @@ var app = {
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
                     function (response) {
-                        console.log("type of login " + response);
                     if(response == "yes") {
                         mainScreen();
                     }
@@ -420,7 +419,6 @@ var dataFromLocation;
 var usersProcessed;
 
 function transformUserData() {
-    console.log(dataFromLocation);
     if(dataFromLocation.userprofiles.length != 0) {
         ajaxGet(
             'screens/viewprofile.html', 
@@ -491,8 +489,11 @@ function setdataViewprofile(data) {
     if(maininterests.children == 0) {
         maininterests.innerHTML = "<h3>No interests</h3>";
     }
-    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h2")[1].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
-    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0].innerHTML =  data.personalData.answer;
+    console.log(data);
+    console.log(interestJSON);
+    
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
 }
@@ -645,7 +646,6 @@ function startXPositions() {
                     var elewidth = this.offsetWidth;
                     var touch = e.touches[0];
                     var posX = touch.pageX;
-                    console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
 
                     if(trueleft < 0 - (elewidth / 2)) {
@@ -693,9 +693,7 @@ function startXPositions() {
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var touch = e.touches[0];
-                    console.log(touch);
                     var posX = touch.pageX;
-                    console.log(posX);
                     var trueleft = ((posX - (width *0.05)) - (elewidth / 2) );
                     if(trueleft < 0 - (elewidth / 2)) {
                        trueleft =0- (elewidth / 2);
