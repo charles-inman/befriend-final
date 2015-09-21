@@ -762,7 +762,7 @@ function messageToRecieve() {
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             
-        tl.set(picky, {display:"block"})
+        tl.set(document.getElementById("messages"), {display:"block"})
         .set(idc("backButton"), {display:"block"})
         .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
