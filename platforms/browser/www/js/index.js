@@ -279,7 +279,7 @@ function mainInterestCheck(type) {
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
-        for(i = 0;i <interestJSON[intereststypes[mainTypeInterest]].length;i++) {
+        for(i = 0;i <interestJSON[intereststypes[mainTypeInterest]].length;i++)  {
             var container = document.createElement("div");
             var active = document.createElement("button");
             
@@ -390,7 +390,7 @@ function searchProfile() {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-
+    console.log("searching");
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
@@ -401,9 +401,11 @@ function getUsersBaseOnLocation(longitude,latitude) {
       document.getElementById("viewprofile").style.display = "none";
     var distance = window.localStorage.getItem("distance");
     
+    console.log("set view profiles");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
+    console.log("server response");
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button>";
             var tlaa = new TimelineMax();
