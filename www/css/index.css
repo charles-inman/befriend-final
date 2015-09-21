@@ -919,5 +919,9 @@ font-size: 6rem;
     background-size: contain;
     background-repeat: no-repeat;
     width:6rem;
-    height:6rem;
+    height:6rem;margin-top: 5%;
+max-height: 90%;
+max-width: 10%;
+position: absolute;
+right: 20%;
 }

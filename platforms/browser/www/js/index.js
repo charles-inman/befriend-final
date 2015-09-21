@@ -597,6 +597,7 @@ function openMenu(ele) {
 var upperagelimit;
 var loweragelimit;
 function openSubMenu(idof) {
+    if(idof == "messages") 
     openMenu(idc("mainmenuclick"));
     var picky = idc(idof)
     var tl = new TimelineMax();
@@ -760,7 +761,7 @@ function messageToRecieve() {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
-       console.log(response);
+       console.log(JSON.parse(response));
             alert(response);
     },
     'fbid=' + fbId );
