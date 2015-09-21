@@ -772,8 +772,8 @@ function messageToRecieve() {
             
             var jof = JSON.parse(response);
             console.log(jof[0]);
-            for(i = 0; i < jof[0].length;i++) {
-                var datajson = JSON.parse(jof[0][i][data]);
+            for(i = 0; i < jof.length;i++) {
+                var datajson = JSON.parse(jof[i][data]);
                 console.log(datajson);
                 
                 var contactcreate = document.createElement("div");
@@ -784,8 +784,8 @@ function messageToRecieve() {
                 
                 contactimage.src = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["name"];
-                contactmessage.innerHTML = jof[0][i]["mess"];
-                contacttime.innerHTML = jof[0][i]["time"];
+                contactmessage.innerHTML = jof[i]["mess"];
+                contacttime.innerHTML = jof[i]["time"];
                 
                 contactcreate.appendChild(contactimage);
                 contactcreate.appendChild(contactname);
