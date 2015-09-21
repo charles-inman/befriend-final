@@ -597,7 +597,7 @@ function openMenu(ele) {
 var upperagelimit;
 var loweragelimit;
 function openSubMenu(idof) {
-    if(idof == "messages") 
+    if(idof != "messages") 
     openMenu(idc("mainmenuclick"));
     var picky = idc(idof)
     var tl = new TimelineMax();
@@ -761,8 +761,34 @@ function messageToRecieve() {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
+            
+        tl.set(picky, {display:"block"})
+        .set(idc("backButton"), {display:"block"})
+        .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
+            var jof = JSON.parse(response);
+            for(i = 0; 0 < jof[0].length;i++) {
+                var datajson = JSON.parse(jof[0][i][data]);
+                
+                var contactcreate = document.createElement("div");
+                var contactimage = document.createElement("img");
+                var contactname = document.createElement("h2");
+                var contactmessage = document.createElement("h3");
+                var contacttime = document.createElement("p");
+                
+                contactimage.src = datajson["personalData"]["profileImage"];
+                contactname.innerHTML = datajson["personalData"]["name"];
+                contactmessage.innerHTML = jof[0][i]["mess"];
+                contacttime.innerHTML = jof[0][i]["time"];
+                
+                contactcreate.appendChild(contactimage);
+                contactcreate.appendChild(contactname);
+                contactcreate.appendChild(contactmessage);
+                contactcreate.appendChild(contacttime);
+                
+                document.getElementById("mainMessages").insertBefore(0, document.getElementById("mainMessages").childNodes[0]);
+            }
        console.log(JSON.parse(response));
-            alert(response);
     },
     'fbid=' + fbId );
 }
