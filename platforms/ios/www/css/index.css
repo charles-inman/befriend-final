@@ -913,3 +913,11 @@ font-size: 6rem;
     transform: scale(0.8) translateY(-1px);
     
 }
+
+#newmessage {
+    background-image: url(../img/message.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:6rem;
+    height:6rem;
+}

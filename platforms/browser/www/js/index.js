@@ -755,3 +755,13 @@ function startXPositions() {
 
     document.getElementById("ages").innerHTML = "Between " + loweragelimit + " and " + upperagelimit;
 }
+var acceptedids;
+function messageToRecieve() {
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
+        function (response) {
+       console.log(response);
+            alert(response);
+    },
+    'fbid=' + fbId );
+}
