@@ -762,6 +762,7 @@ function messageToRecieve() {
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             
+    var tl = new TimelineMax();
         tl.set(document.getElementById("messages"), {display:"block"})
         .set(idc("backButton"), {display:"block"})
         .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
