@@ -925,3 +925,7 @@ max-width: 10%;
 position: absolute;
 right: 20%;
 }
+
+#messages {
+    background-color: white;
+}
