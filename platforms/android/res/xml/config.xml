@@ -84,6 +84,7 @@
         <string>100</string>
     </gap:config-file>
     <access origin="*" />
+    <access origin="http://www.divinitycomputing.com/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

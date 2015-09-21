@@ -13,6 +13,9 @@ html,body,#pagewrap {
 	background-color:#fff;
 	overflow:hidden;
 }
+#pagewrap {
+    display: none;
+}
 h1,h2,h3,h4,h5,h6,button {
   font-family: 'Anke';
 	margin:0;
@@ -898,8 +901,8 @@ font-size: 6rem;
 }
 
 .tb {
-   -webkit-transition: all 0.5;
-   transition: all 0.5; 
+   -webkit-transition: 0.5 all;
+   transition: 0.5 all; 
     -webkit-transform: scale(1) translateY(0); 
     -ms-transform: scale(1) translateY(0); 
     transform: scale(1) translateY(0);
