@@ -405,7 +405,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
-    console.log("server response");
+    console.log(response);
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button>";
             var tlaa = new TimelineMax();
