@@ -767,7 +767,7 @@ function messageToRecieve() {
         .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
             var jof = JSON.parse(response);
-            for(i = 0; 0 < jof[0].length;i++) {
+            for(i = 0; i < jof[0].length;i++) {
                 var datajson = JSON.parse(jof[0][i][data]);
                 
                 var contactcreate = document.createElement("div");
