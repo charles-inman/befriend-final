@@ -762,12 +762,46 @@ function messageToRecieve() {
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             
+        if(document.getElementById("messages").style.display == "block") {
+            
     var tl = new TimelineMax();
         tl.set(document.getElementById("messages"), {display:"block"})
         .set(idc("backButton"), {display:"block"})
         .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
+            
             var jof = JSON.parse(response);
+            console.log(jof);
+            for(i = 0; i < jof[0].length;i++) {
+                var datajson = JSON.parse(jof[0][i][data]);
+                console.log(datajson);
+                
+                var contactcreate = document.createElement("div");
+                var contactimage = document.createElement("img");
+                var contactname = document.createElement("h2");
+                var contactmessage = document.createElement("h3");
+                var contacttime = document.createElement("p");
+                
+                contactimage.src = datajson["personalData"]["profileImage"];
+                contactname.innerHTML = datajson["personalData"]["name"];
+                contactmessage.innerHTML = jof[0][i]["mess"];
+                contacttime.innerHTML = jof[0][i]["time"];
+                
+                contactcreate.appendChild(contactimage);
+                contactcreate.appendChild(contactname);
+                contactcreate.appendChild(contactmessage);
+                contactcreate.appendChild(contacttime);
+                
+                document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
+            }
+        }
+            else {
+    var tl = new TimelineMax();
+        tl .fromTo(document.getElementById("messages"), 1,{x:"0%"}, {x:"100%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:1}, {opacity:0,ease: Circ.easeOut},1)
+        .set(document.getElementById("messages"), {display:"none"})
+        .set(idc("backButton"), {display:"none"});
+            }
        console.log(JSON.parse(response));
     },
     'fbid=' + fbId );
