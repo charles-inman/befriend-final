@@ -16,10 +16,13 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        if(window.localStorage.getItem("minage") != null) {
+        var minage = window.localStorage.getItem("minage");
+        var maxage = window.localStorage.getItem("maxage");
+        
+        if(minage === null || minage.length === 0) {
                     window.localStorage.setItem("minage", 18);
         }
-        if(window.localStorage.getItem("maxage") != null) {
+        if(maxage === null || maxage.length === 0) {
                     window.localStorage.setItem("maxage", 24);
         }
         
