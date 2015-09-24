@@ -16,8 +16,15 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        if(window.localStorage.getItem("minage") != null) {
+                    window.localStorage.setItem("minage", 18);
+        }
+        if(window.localStorage.getItem("maxage") != null) {
+                    window.localStorage.setItem("maxage", 24);
+        }
+        
         resize();
-        var socket = io.connect();
+        var socket = io.connect("http://www.divinitycomputing.com:3000");
         document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
@@ -187,6 +194,7 @@ var ajaxPost = function (url, callback,data) {
     xhr.onreadystatechange=function() {
       if (xhr.readyState==4 && callback) {
         callback(xhr.responseText);
+          console.log(xhr.responseText);
       }
     }
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
