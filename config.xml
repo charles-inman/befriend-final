@@ -48,20 +48,20 @@
     <!-- Plugins -->
 
     <!-- Core plugins -->
-    <gap:plugin name="org.apache.cordova.battery-status" />
-    <gap:plugin name="org.apache.cordova.camera" />
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.device-motion" />
-    <gap:plugin name="org.apache.cordova.device-orientation" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.file" />
-    <gap:plugin name="org.apache.cordova.file-transfer" />
-    <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.globalization" />
-    <gap:plugin name="org.apache.cordova.media" />
-    <gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="org.apache.cordova.vibration" />
+    <gap:plugin name="cordova.battery-status" source="npm" />
+    <gap:plugin name="cordova.camera" source="npm" />
+    <gap:plugin name="apache.cordova.device" source="npm" />
+    <gap:plugin name="apache.cordova.device-motion" source="npm" />
+    <gap:plugin name="apache.cordova.device-orientation" source="npm"  />
+    <gap:plugin name="apache.cordova.dialogs" source="npm" />
+    <gap:plugin name="apache.cordova.file" source="npm" />
+    <gap:plugin name="apache.cordova.file-transfer"source="npm"  />
+    <gap:plugin name="apache.cordova.geolocation" source="npm"  />
+    <gap:plugin name="apache.cordova.globalization" source="npm"  />
+    <gap:plugin name="apache.cordova.media" source="npm" />
+    <gap:plugin name="apache.cordova.network-information" source="npm"  />
+    <gap:plugin name="apache.cordova.splashscreen" source="npm" />
+    <gap:plugin name="apache.cordova.vibration" source="npm" />
 
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
@@ -69,10 +69,6 @@
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />
     </gap:plugin>
-    <!--
-        <gap:plugin name="com.phonegap.plugins.barcodescanner" />
-    -->
-
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
