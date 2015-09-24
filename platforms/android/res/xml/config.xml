@@ -21,7 +21,7 @@
     <author email="team@divinitycomputing.com" href="http://divinitycomputing.com">
         Divinity computing
     </author>
-    <preference name="phonegap-version" value="3.9.1" />
+    <preference name="phonegap-version" value="cli-5.1.1" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
