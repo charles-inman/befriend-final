@@ -36,18 +36,18 @@
     <preference name="android-installLocation" value="auto" />
     <gap:plugin name="cordova.battery-status" source="npm" />
     <gap:plugin name="cordova.camera" source="npm" />
-    <gap:plugin name="apache.cordova.device" source="npm" />
-    <gap:plugin name="apache.cordova.device-motion" source="npm" />
-    <gap:plugin name="apache.cordova.device-orientation" source="npm" />
-    <gap:plugin name="apache.cordova.dialogs" source="npm" />
-    <gap:plugin name="apache.cordova.file" source="npm" />
-    <gap:plugin name="apache.cordova.file-transfer" source="npm" />
-    <gap:plugin name="apache.cordova.geolocation" source="npm" />
-    <gap:plugin name="apache.cordova.globalization" source="npm" />
-    <gap:plugin name="apache.cordova.media" source="npm" />
-    <gap:plugin name="apache.cordova.network-information" source="npm" />
-    <gap:plugin name="apache.cordova.splashscreen" source="npm" />
-    <gap:plugin name="apache.cordova.vibration" source="npm" />
+    <gap:plugin name="cordova.device" source="npm" />
+    <gap:plugin name="cordova.device-motion" source="npm" />
+    <gap:plugin name="cordova.device-orientation" source="npm" />
+    <gap:plugin name="cordova.dialogs" source="npm" />
+    <gap:plugin name="cordova.file" source="npm" />
+    <gap:plugin name="cordova.file-transfer" source="npm" />
+    <gap:plugin name="cordova.geolocation" source="npm" />
+    <gap:plugin name="cordova.globalization" source="npm" />
+    <gap:plugin name="cordova.media" source="npm" />
+    <gap:plugin name="cordova.network-information" source="npm" />
+    <gap:plugin name="cordova.splashscreen" source="npm" />
+    <gap:plugin name="cordova.vibration" source="npm" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />
