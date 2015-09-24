@@ -14,13 +14,14 @@
     <access origin="https://*.fbcdn.net" />
     <access origin="https://*.akamaihd.net" />
     <allow-intent href="market:*" />
-    <name>befriend</name>
+    <name>Small World</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Find new friends
     </description>
     <author email="team@divinitycomputing.com" href="http://divinitycomputing.com">
         Divinity computing
     </author>
+    <preference name="phonegap-version" value="3.9.1" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="true" />
@@ -53,7 +54,7 @@
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="1395869224050727" />
-        <param name="APP_NAME" value="befriend" />
+        <param name="APP_NAME" value="Small world" />
     </gap:plugin>
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />

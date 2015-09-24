@@ -5,10 +5,10 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id="com.divinity.befriend"
         version   = "1.0.0">
-    <name>befriend</name>
+    <name>Small World</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Find new friends
     </description>
 
     <author href="http://divinitycomputing.com" email="team@divinitycomputing.com">
@@ -22,6 +22,7 @@
     -->
 
     <!-- Customize your app and platform with the preference element. -->
+        <preference name="phonegap-version" value="3.9.1" />
     <preference name="orientation"                value="portrait" />        <!-- all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
@@ -70,7 +71,7 @@
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
 	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="1395869224050727" />
-        <param name="APP_NAME" value="befriend" />
+        <param name="APP_NAME" value="Small world" />
     </gap:plugin>
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
