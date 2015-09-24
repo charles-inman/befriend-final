@@ -37,7 +37,7 @@
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
     
 	<feature name="Geolocation">
-		<param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+		<param name="android-package" value="org.apache.cordova-geolocation.GeoBroker" />
 		<param name="ios-package" value="CDVLocation" />
 	</feature>
 	<!--
@@ -48,21 +48,21 @@
     <!-- Plugins -->
 
     <!-- Core plugins -->
-    <gap:plugin name="cordova.battery-status" source="npm" />
-    <gap:plugin name="cordova.camera" source="npm" />
-    <gap:plugin name="cordova.device" source="npm" />
-    <gap:plugin name="cordova.device-motion" source="npm" />
-    <gap:plugin name="cordova.device-orientation" source="npm"  />
-    <gap:plugin name="cordova.dialogs" source="npm" />
-    <gap:plugin name="cordova.file" source="npm" />
-    <gap:plugin name="cordova.file-transfer"source="npm"  />
-    <gap:plugin name="cordova.geolocation" source="npm"  />
-    <gap:plugin name="cordova.globalization" source="npm"  />
-    <gap:plugin name="cordova.media" source="npm" />
-    <gap:plugin name="cordova.network-information" source="npm"  />
-    <gap:plugin name="cordova.splashscreen" source="npm" />
-    <gap:plugin name="cordova.vibration" source="npm" />
-
+    <gap:plugin name="cordova-battery-status" source="npm" />
+    <gap:plugin name="cordova-camera" source="npm" />
+    <gap:plugin name="cordova-device" source="npm" />
+    <gap:plugin name="cordova-device-motion" source="npm" />
+    <gap:plugin name="cordova-device-orientation" source="npm"  />
+    <gap:plugin name="cordova-dialogs" source="npm" />
+    <gap:plugin name="cordova-file" source="npm" />
+    <gap:plugin name="cordova-file-transfer"source="npm"  />
+    <gap:plugin name="cordova-geolocation" source="npm"  />
+    <gap:plugin name="cordova-globalization" source="npm"  />
+    <gap:plugin name="cordova-media" source="npm" />
+    <gap:plugin name="cordova-network-information" source="npm"  />
+    <gap:plugin name="cordova-splashscreen" source="npm" />
+    <gap:plugin name="cordova-vibration" source="npm" />
+ <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
 	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
@@ -115,8 +115,8 @@
     <access origin="*"/>
 	<access origin="http://www.divinitycomputing.com/*" />
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
-    <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->
-    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <!-- Whitelist configuration. Refer to https://cordova-apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->
+   
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

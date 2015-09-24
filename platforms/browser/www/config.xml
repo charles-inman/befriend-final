@@ -30,20 +30,21 @@
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-installLocation" value="auto" />
-    <gap:plugin name="cordova.battery-status" source="npm" />
-    <gap:plugin name="cordova.camera" source="npm" />
-    <gap:plugin name="cordova.device" source="npm" />
-    <gap:plugin name="cordova.device-motion" source="npm" />
-    <gap:plugin name="cordova.device-orientation" source="npm" />
-    <gap:plugin name="cordova.dialogs" source="npm" />
-    <gap:plugin name="cordova.file" source="npm" />
-    <gap:plugin name="cordova.file-transfer" source="npm" />
-    <gap:plugin name="cordova.geolocation" source="npm" />
-    <gap:plugin name="cordova.globalization" source="npm" />
-    <gap:plugin name="cordova.media" source="npm" />
-    <gap:plugin name="cordova.network-information" source="npm" />
-    <gap:plugin name="cordova.splashscreen" source="npm" />
-    <gap:plugin name="cordova.vibration" source="npm" />
+    <gap:plugin name="cordova-battery-status" source="npm" />
+    <gap:plugin name="cordova-camera" source="npm" />
+    <gap:plugin name="cordova-device" source="npm" />
+    <gap:plugin name="cordova-device-motion" source="npm" />
+    <gap:plugin name="cordova-device-orientation" source="npm" />
+    <gap:plugin name="cordova-dialogs" source="npm" />
+    <gap:plugin name="cordova-file" source="npm" />
+    <gap:plugin name="cordova-file-transfer" source="npm" />
+    <gap:plugin name="cordova-geolocation" source="npm" />
+    <gap:plugin name="cordova-globalization" source="npm" />
+    <gap:plugin name="cordova-media" source="npm" />
+    <gap:plugin name="cordova-network-information" source="npm" />
+    <gap:plugin name="cordova-splashscreen" source="npm" />
+    <gap:plugin name="cordova-vibration" source="npm" />
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />
@@ -78,7 +79,6 @@
     </gap:config-file>
     <access origin="*" />
     <access origin="http://www.divinitycomputing.com/*" />
-    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
