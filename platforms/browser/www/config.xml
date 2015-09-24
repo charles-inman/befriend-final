@@ -79,6 +79,8 @@
     <access origin="*" />
     <access origin="http://www.divinitycomputing.com/*" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
