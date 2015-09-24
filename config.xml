@@ -3,7 +3,7 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id="com.divinity.befriend"
+        id="com.divinity.smallworld"
         version   = "1.0.0">
     <name>Small World</name>
 
@@ -22,7 +22,6 @@
     -->
 
     <!-- Customize your app and platform with the preference element. -->
-	<preference name='phonegap-version' value='cli-5.1.1' />
     <preference name="orientation"                value="portrait" />        <!-- all: default means both landscape and portrait are enabled -->
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
