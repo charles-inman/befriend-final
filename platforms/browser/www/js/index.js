@@ -836,7 +836,7 @@ function messageToRecieve() {
             console.log(jof[0]["time"]);
             
             for(i = 0; i < jof.length;i++) {
-                var datajson = JSON.parse(jof[i][data]);
+                var datajson = JSON.parse(jof[i]["data"]);
                 
                 var contactcreate = document.createElement("div");
                 var contactimage = document.createElement("img");
