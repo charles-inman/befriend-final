@@ -392,6 +392,7 @@ function mainScreen() {
 }
 function searchProfile() {
     var onSuccess = function(position) {
+        alert("long " + position.coords.longitude + " Lat " +position.coords.latitude)
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
@@ -401,7 +402,6 @@ function searchProfile() {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-    console.log("searching");
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
@@ -412,7 +412,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
       document.getElementById("viewprofile").style.display = "none";
     var distance = window.localStorage.getItem("distance");
     
-    console.log("set view profiles");
+    console.log('fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
