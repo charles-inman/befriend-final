@@ -429,7 +429,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
             transformUserData();
         }
     },
-    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
+    'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude);
 }
 var dataFromLocation;
 /* Users Details */
