@@ -38,7 +38,18 @@ var app = {
                         interestJSON = JSON.parse(response);
                 });
         if(regs == "active" && fbId.length != 0) {
-            personalJSON = JSON.parse(window.localStorage.getItem("data"));
+            var datapersonal = window.localStorage.getItem("data");
+            if(datapersonal === null || datapersonal === 0) {
+                ajaxPost(
+                    "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
+                    function (response) {
+                        window.localStorage.setItem("data",response)
+                        datapersonal = response;
+                },
+               'factualid=' + fbId);
+            }
+            
+            personalJSON = JSON.parse(datapersonal);
             console.log(personalJSON);
             mainScreen();
         }
@@ -68,7 +79,16 @@ var app = {
                     "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
                     function (response) {
                     if(response == "yes") {
-                        mainScreen();
+                        ajaxPost(
+                            "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
+                            function (response) {
+                                var foundjson = JSON.parse(response);
+                                window.localStorage.setItem("data",response)
+                                personalJSON = foundjson;
+                                mainScreen();
+                        },
+                       'factualid=' + fbId);
+                        
                     }
                     else if(response == "no") {
                         registerGetInfo();
