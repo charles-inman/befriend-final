@@ -495,6 +495,8 @@ function transformUserData() {
     }
 }
 function setdataViewprofile(data) {
+    console.log(data);
+    console.log(interestJSON);
     var viewprofile = document.getElementById("viewprofile").lastChild;
     console.log(viewprofile.innerHTML);
     console.log(dataFromLocation.userprofiles[0].id);
@@ -504,6 +506,30 @@ function setdataViewprofile(data) {
     aa.type = 'text/css';
     aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +    data.personalData.profileImage + "'); }"));
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
+
+    viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
+    viewprofile.getElementsByClassName("mainDetails")[0].children[1].innerHTML = data.personalData.age + " yr old";
+    if( dataFromLocation.userprofiles[0].distance_in_km < 1) {
+        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML =  "Less than a km";
+    }
+    else {
+        viewprofile.getElementsByClassName("mainDetails")[0].children[2].innerHTML = Math.ceil(dataFromLocation.userprofiles[0].distance_in_km) + " km";
+    }
+    viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
+    
+    var maininterests = viewprofile.getElementsByClassName("interests")[0];
+    for(i = 0; i < intereststypes.length;i++) {
+        if(personalJSON.interests[intereststypes[i]].length != 0) {
+            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
+        }
+    }
+    if(maininterests.children == 0) {
+        maininterests.innerHTML = "<h3>No interests</h3>";
+    }
+    
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
+    
     dataFromLocation.userprofiles.splice(0, 1);
 }
 function appliedUser(type, element) {
