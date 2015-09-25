@@ -920,12 +920,30 @@ font-size: 6rem;
     background-repeat: no-repeat;
     width:6rem;
     height:6rem;margin-top: 5%;
-max-height: 90%;
-max-width: 10%;
-position: absolute;
-right: 20%;
+    max-height: 90%;
+    max-width: 10%;
+    position: absolute;
+    right: 20%;
 }
 
 #messages {
     background-color: white;
+}
+#mainMessages div img {
+    border-radius: 8rem;
+    float: left;
+    margin-right: 2rem;
+    max-height: 8rem;
+    max-width: 8rem;
+}
+#mainMessages div h3 {
+    margin-top: 1rem;
+    font-weight: normal;
+}
+#mainMessages div p {
+    margin-top: 2rem;
+    text-align: right;
+}
+#mainMessages div {
+    margin-bottom: 4rem;
 }
