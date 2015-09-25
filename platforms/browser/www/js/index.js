@@ -458,14 +458,14 @@ function transformUserData() {
         ajaxGet(
             'screens/viewprofile.html', 
             function (response) {
-            document.getElementById("viewprofile").innerHTML += response;
+                document.getElementById("viewprofile").innerHTML += response;
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                     function (viewprofile) {
                     if(response == "no id") {
                     }
                     else {
-                        console.log(JSON.parse(viewprofile));
+                        console.log(document.getElementById("viewprofile"));
                         setdataViewprofile(JSON.parse(viewprofile));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
@@ -476,7 +476,7 @@ function transformUserData() {
                                 ajaxGet(
                                 'screens/viewprofile.html', 
                                 function (viewprofilehtml) {
-                                document.getElementById("viewprofile").innerHTML += viewprofilehtml;
+                                    document.getElementById("viewprofile").innerHTML += viewprofilehtml;
                                     ajaxPost(
                                         "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                                         function (viewprofilesec) {
