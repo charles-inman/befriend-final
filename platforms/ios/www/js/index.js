@@ -51,7 +51,6 @@ var app = {
             
             personalJSON = JSON.parse(datapersonal);
             
-            logontochat();
             mainScreen();
         }
         else {
@@ -154,7 +153,7 @@ function registerGetInfo() {
             }
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
             personalJSON = JSON.parse('{ "personalData": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'","relationship":"' + profileJSON.relationship_status + '", "description":"' + profileJSON.bio +'","gender":"'+ profileJSON.gender +'","profileImage":"-1","question":"0","answer":"0"  }, "interests": {"music":[],"movies":[],"travel":[],"books":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
-                logontochat();
+               
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -181,7 +180,7 @@ function logontochat() {
                     loggedintochat = true;
                 }
                 else if(data == "already exists") {
-                    loggedintochat = false;
+                    loggedintochat = true;
                 }
                 else {
                     loggedintochat = false;
@@ -424,6 +423,7 @@ function register() {
                     window.localStorage.setItem("maxage", parseInt(personalJSON.personalData.age) + 5);
                     window.localStorage.setItem("data", JSON.stringify(personalJSON));
                     window.localStorage.setItem("fbid", fbId);
+                    
                     mainScreen();
                 }
                 else {
@@ -442,7 +442,7 @@ function register() {
 }
 function mainScreen() {
     newPage("mainscreen.html");
-    searchProfile();
+    searchProfile(); logontochat();
 }
 function searchProfile() {
     var onSuccess = function(position) {
