@@ -499,6 +499,8 @@ function transformUserData() {
 
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
+    console.log(viewprofile);
+    console.log(dataFromLocation.userprofiles[0].id);
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
