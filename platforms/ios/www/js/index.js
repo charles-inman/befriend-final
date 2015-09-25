@@ -50,7 +50,6 @@ var app = {
             }
             
             personalJSON = JSON.parse(datapersonal);
-            console.log(personalJSON);
             mainScreen();
         }
         else {
@@ -464,6 +463,8 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
+                        console.log("viewprofilebb");
+                        console.log(JSON.parse(viewprofilebb));
                         setdataViewprofile(JSON.parse(viewprofilebb));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
