@@ -845,9 +845,9 @@ function messageToRecieve() {
                 var contacttime = document.createElement("p");
                 
                 contactimage.src = datajson["personalData"]["profileImage"];
-                contactname.innerHTML = datajson["personalData"]["name"];
+                contactname.innerHTML = datajson["personalData"]["firstname"];
                 contactmessage.innerHTML = jof[i]["mess"];
-                contacttime.innerHTML = jof[i]["time"];
+                contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
                 
                 contactcreate.appendChild(contactimage);
                 contactcreate.appendChild(contactname);
@@ -866,4 +866,25 @@ function messageToRecieve() {
             }
     },
     'fbid=' + fbId );
+}
+function timeSince(date) {
+
+    var seconds = Math.floor(((new Date().getTime()/1000) - date)),
+    interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) return interval + "y";
+
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) return interval + "m";
+
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) return interval + "d";
+
+    interval = Math.floor(seconds / 3600);
+    if (interval >= 1) return interval + "h";
+
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) return interval + "m ";
+
+    return Math.floor(seconds) + "s";
 }
