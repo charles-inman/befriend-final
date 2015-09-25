@@ -443,7 +443,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
         else {
         
             dataFromLocation = JSON.parse(response);
-            console.log(dataFromLocation);
             transformUserData();
         }
     },
@@ -461,12 +460,11 @@ function transformUserData() {
                 document.getElementById("viewprofile").innerHTML += response;
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                    function (viewprofile) {
+                    function (viewprofilebb) {
                     if(response == "no id") {
                     }
                     else {
-                        console.log(document.getElementById("viewprofile"));
-                        setdataViewprofile(JSON.parse(viewprofile));
+                        setdataViewprofile(JSON.parse(viewprofilebb));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
@@ -496,10 +494,9 @@ function transformUserData() {
         });
     }
 }
-
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
-    console.log(viewprofile);
+    console.log(viewprofile.innerHTML);
     console.log(dataFromLocation.userprofiles[0].id);
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
@@ -518,17 +515,6 @@ function setdataViewprofile(data) {
     }
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
     
-    var maininterests = viewprofile.getElementsByClassName("interests")[0];
-    for(i = 0; i < intereststypes.length;i++) {
-        if(personalJSON.interests[intereststypes[i]].length != 0) {
-            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
-        }
-    }
-    if(maininterests.children == 0) {
-        maininterests.innerHTML = "<h3>No interests</h3>";
-    }
-    console.log(data);
-    console.log(interestJSON);
     
     viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
     viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
