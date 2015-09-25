@@ -27,7 +27,7 @@ var app = {
         }
         
         resize();
-        var socket = io.connect("http://www.divinitycomputing.com:3000");
+        socket = io.connect("http://www.divinitycomputing.com:3000");
         document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
@@ -50,6 +50,8 @@ var app = {
             }
             
             personalJSON = JSON.parse(datapersonal);
+            
+            logontochat();
             mainScreen();
         }
         else {
@@ -118,7 +120,7 @@ var app = {
                 document.documentElement.style.fontSize = rem + 'px';
             }
 var fullJSON;
-
+var socket;
 var interestJSON;
 var mainTypeInterest ;
 var profileJSON;
@@ -152,6 +154,7 @@ function registerGetInfo() {
             }
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
             personalJSON = JSON.parse('{ "personalData": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'","relationship":"' + profileJSON.relationship_status + '", "description":"' + profileJSON.bio +'","gender":"'+ profileJSON.gender +'","profileImage":"-1","question":"0","answer":"0"  }, "interests": {"music":[],"movies":[],"travel":[],"books":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
+                logontochat();
 			},
 			function (error) {
 				console.log("Failed: " + error);
@@ -162,6 +165,35 @@ function registerGetInfo() {
 		}
 	 );
 }
+
+var loggedintochat = false;
+function logontochat() {
+     ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+        function (response) {
+        if(response != "no id") {
+             socket.emit('user login absea', response, function(data) {
+                alert(data);
+                if(data == "user logged in") {
+                    console.log("logged in");
+                    loggedintochat = true;
+                }
+                else if(data == "already exists") {
+                    loggedintochat = false;
+                }
+                else {
+                    loggedintochat = false;
+                }
+            });
+        }
+        else {
+            alert(response);
+
+        }
+    },
+    'factualid=' + fbId + );
+}
+
 function setupProfileicon() {
 		photoChosen = document.getElementById("profileIcon");
 		getPhotos(fbId);
@@ -488,7 +520,6 @@ function transformUserData() {
                                     'factualid=' + dataFromLocation.userprofiles[0].id );
                             });
                         }
-                        
                     }
                 },
                 'factualid=' + dataFromLocation.userprofiles[0].id );
@@ -496,8 +527,6 @@ function transformUserData() {
     }
 }
 function setdataViewprofile(data) {
-    console.log(data);
-    console.log(interestJSON);
     var viewprofile = document.getElementById("viewprofile").lastChild;
     console.log(viewprofile.innerHTML);
     console.log(dataFromLocation.userprofiles[0].id);
