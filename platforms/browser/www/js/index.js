@@ -464,7 +464,7 @@ function transformUserData() {
                     }
                     else {
                         console.log("viewprofilebb");
-                        console.log(JSON.parse(viewprofilebb));
+                        console.log(viewprofilebb);
                         setdataViewprofile(JSON.parse(viewprofilebb));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
