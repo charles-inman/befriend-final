@@ -416,7 +416,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
-    console.log(response);
+    alert(response);
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button>";
             var tlaa = new TimelineMax();
@@ -424,6 +424,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
                 .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
         }
         else {
+        
             dataFromLocation = JSON.parse(response);
             transformUserData();
         }
