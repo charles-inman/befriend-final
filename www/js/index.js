@@ -443,6 +443,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         else {
         
             dataFromLocation = JSON.parse(response);
+            console.log(dataFromLocation);
             transformUserData();
         }
     },
@@ -464,6 +465,7 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
+                        console.log(JSON.parse(response));
                         setdataViewprofile(JSON.parse(response));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
