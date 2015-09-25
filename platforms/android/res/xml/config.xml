@@ -82,6 +82,7 @@
     </gap:config-file>
     <access origin="*" />
     <access origin="http://www.divinitycomputing.com/*" />
+    <gap:plugin name="cordova-plugin-whitelist" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
