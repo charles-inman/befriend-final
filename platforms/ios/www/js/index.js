@@ -412,7 +412,15 @@ function getUsersBaseOnLocation(longitude,latitude) {
       document.getElementById("viewprofile").style.display = "none";
     var distance = window.localStorage.getItem("distance");
     
-    console.log('fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
+    console.log('fbid=' + fbId);
+    console.log('&distance=' + distance);
+    console.log('&longitude=' + longitude);
+    console.log('&latitude=' + latitude );
+    console.log('&young=' + window.localStorage.getItem("minage"));
+    console.log('&old=' + window.localStorage.getItem("maxage"));
+    console.log('&gender=' + window.localStorage.getItem("genderlook"));
+    console.log( '&owngender=' + personalJSON.personalData.gender);
+    console.log( '&ownage=' + personalJSON.personalData.age);
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
