@@ -833,6 +833,9 @@ function messageToRecieve() {
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
             
             var jof = JSON.parse(response);
+       console.log(jof);
+       console.log(jof[0]);
+            
             for(i = 0; i < jof[0].length;i++) {
                 var datajson = JSON.parse(jof[0][i][data]);
                 
@@ -862,7 +865,6 @@ function messageToRecieve() {
         .set(document.getElementById("messages"), {display:"none"})
         .set(idc("backButton"), {display:"none"});
             }
-       console.log(JSON.parse(response));
     },
     'fbid=' + fbId );
 }
