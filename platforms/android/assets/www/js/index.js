@@ -461,12 +461,12 @@ function transformUserData() {
             document.getElementById("viewprofile").innerHTML += response;
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                    function (response) {
+                    function (viewprofile) {
                     if(response == "no id") {
                     }
                     else {
-                        console.log(JSON.parse(response));
-                        setdataViewprofile(JSON.parse(response));
+                        console.log(JSON.parse(viewprofile));
+                        setdataViewprofile(JSON.parse(viewprofile));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
@@ -475,15 +475,15 @@ function transformUserData() {
                         if(dataFromLocation.userprofiles.length != 0) {
                                 ajaxGet(
                                 'screens/viewprofile.html', 
-                                function (response) {
-                                document.getElementById("viewprofile").innerHTML += response;
+                                function (viewprofilehtml) {
+                                document.getElementById("viewprofile").innerHTML += viewprofilehtml;
                                     ajaxPost(
                                         "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                                        function (response) {
+                                        function (viewprofilesec) {
                                         if(response == "no id") {
                                         }
                                         else {
-                                            setdataViewprofile(JSON.parse(response));
+                                            setdataViewprofile(JSON.parse(viewprofilesec));
                                         }
                                     },
                                     'factualid=' + dataFromLocation.userprofiles[0].id );
