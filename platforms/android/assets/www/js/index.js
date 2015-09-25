@@ -824,7 +824,7 @@ function messageToRecieve() {
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             
-        if(document.getElementById("messages").style.display == "block") {
+        if(document.getElementById("messages").style.display != "block") {
             
     var tl = new TimelineMax();
         tl.set(document.getElementById("messages"), {display:"block"})
