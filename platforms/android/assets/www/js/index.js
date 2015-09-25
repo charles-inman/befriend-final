@@ -168,10 +168,12 @@ function registerGetInfo() {
 
 var loggedintochat = false;
 function logontochat() {
+    console.log("start login");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
         if(response != "no id") {
+            console.log("id check" + response);
              socket.emit('user login absea', response, function(data) {
                 alert(data);
                 if(data == "user logged in") {
