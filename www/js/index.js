@@ -191,7 +191,7 @@ function logontochat() {
 
         }
     },
-    'factualid=' + fbId + );
+    'factualid=' + fbId );
 }
 
 function setupProfileicon() {
