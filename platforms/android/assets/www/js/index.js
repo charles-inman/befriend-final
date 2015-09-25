@@ -852,7 +852,7 @@ function messageToRecieve() {
                 contactcreate.appendChild(contactmessage);
                 contactcreate.appendChild(contacttime);
                 
-                document.getElementById("mainMessages").insertBefore(0, document.getElementById("mainMessages").childNodes[0]);
+                document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
             }
         }
             else {
