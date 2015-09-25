@@ -39,6 +39,7 @@ var app = {
                 });
         if(regs == "active" && fbId.length != 0) {
             personalJSON = JSON.parse(window.localStorage.getItem("data"));
+            console.log(personalJSON);
             mainScreen();
         }
         else {
