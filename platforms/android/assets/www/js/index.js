@@ -898,6 +898,23 @@ function timeSince(date) {
 function getLastMessages(idcheck) {
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
-            .fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"100%",ease: Circ.easeOut});
+            .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
      
+     ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+        function (response) {
+        if(response != "no id") {
+            console.log("id check" + response);
+            ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
+                function (response) {
+                console.log(response);
+            },
+            'secondaryid=' + idcheck = "&primeid=" + response);
+        }
+        else {
+            alert(response);
+        }
+    },
+    'factualid=' + fbId );
 }
