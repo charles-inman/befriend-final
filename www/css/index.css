@@ -959,7 +959,9 @@ font-size: 6rem;
     position: absolute;
     height:100%;
     width:100%;
-    display:none;
+    display:none;left: 0px;
+top: 0px;
+    background-color:#fff;
 }
 
 #messagesarchive {

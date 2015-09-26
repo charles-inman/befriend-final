@@ -907,7 +907,10 @@ function getLastMessages(idcheck) {
             ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
                 function (messagereturn) {
-                console.log(messagereturn);
+                    var messagesinfo = JSON.parse(messagereturn);
+                    for(i = 0; i < messagesinfo["rmeg"].length;i++) {
+                        
+                    }
             },
             'secondaryid=' + idcheck + "&primeid=" + response);
         }
