@@ -979,13 +979,13 @@ top: 0px;
 border-bottom-right-radius: 10rem;
 border-top-right-radius: 10rem;
 }
-#messagesarchive div p:nth-child(1){
+#messagesarchive div p:nth-child(2){
     margin-top:2rem;
     font-size: 4rem;
     float: left;
     width: 60%;
 }
-#messagesarchive div p:nth-child(2){
+#messagesarchive div p:nth-child(3){
     float:left;
     clear:both;
     text-align:right;
@@ -1004,7 +1004,9 @@ border-top-right-radius: 10rem;
     max-height: 7rem;
     max-width: 7rem;
 }
-
+#activeMessages div {
+    overflow: hidden;
+}
 #messangername {
     margin-left: 2rem;
 margin-top: 2.2rem;
