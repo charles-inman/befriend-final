@@ -898,7 +898,7 @@ function timeSince(date) {
 }
 function getLastMessages(mainuserofchat) {
     var idcheck = mainuserofchat.getAttribute("messagerid");
-    
+    document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
             .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
