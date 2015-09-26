@@ -906,8 +906,8 @@ function getLastMessages(idcheck) {
             
             ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
-                function (response) {
-                console.log(response);
+                function (messagereturn) {
+                console.log(messagereturn);
             },
             'secondaryid=' + idcheck + "&primeid=" + response);
         }
