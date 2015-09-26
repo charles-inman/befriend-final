@@ -931,7 +931,7 @@ function getLastMessages(mainuserofchat) {
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
                         messagemain.appendChild(messagetime);
-                        document.getElementById("activeMessages").appendChild(messagemain);
+                        document.getElementById("messagesarchive").appendChild(messagemain);
                     }
             },
             'secondaryid=' + idcheck + "&primeid=" + response);

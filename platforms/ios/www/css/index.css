@@ -971,3 +971,19 @@ top: 0px;
     bottom:0;
     overflow: hidden;
 }
+#messagesarchive .senttouser  {
+    margin:3rem 0;
+    background-color:#63BD6C;
+    width:90%;
+border-bottom-right-radius: 10rem;
+border-top-right-radius: 10rem;
+}
+#messagesarchive div  {
+}
+#messagesarchive .senttouser img {
+    border-radius: 10rem;
+    float: left;
+    margin: 2rem;
+    max-height: 7rem;
+    max-width: 7rem;
+}
