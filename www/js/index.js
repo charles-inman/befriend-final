@@ -898,7 +898,6 @@ function getLastMessages(idcheck) {
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
             .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
-     var validMessageFind = idcheck.getAttribute("messagerid");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
