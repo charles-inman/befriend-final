@@ -248,7 +248,6 @@ var ajaxPost = function (url, callback,data) {
     xhr.onreadystatechange=function() {
       if (xhr.readyState==4 && callback) {
         callback(xhr.responseText);
-          console.log(xhr.responseText);
       }
     }
     xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -800,7 +799,7 @@ function startXPositions() {
                 };
     
     var width = document.documentElement["clientWidth"];
-                    var aas = document.getElementById("smallslider").children[1].offsetWidth;
+    var aas = document.getElementById("smallslider").children[1].offsetWidth;
     var elewidth = width * 0.9; 
     loweragelimit = window.localStorage.getItem("minage");
     upperagelimit = window.localStorage.getItem("maxage");
@@ -838,7 +837,6 @@ function messageToRecieve() {
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
             
             var jof = JSON.parse(response);
-            console.log(jof[0]["time"]);
             
             for(i = 0; i < jof.length;i++) {
                 var datajson = JSON.parse(jof[i]["data"]);
