@@ -820,6 +820,11 @@ function startXPositions() {
 
 var acceptedids;
 function messageToRecieve() {
+    var myNode = document.getElementById("mainMessages");
+    
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
@@ -846,14 +851,16 @@ function messageToRecieve() {
                 
                 contactimage.src = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
-                contactmessage.innerHTML = jof[i]["mess"];
+                contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
                 contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
-                
+                contactcreate.setAttribute("messagerid", jof[i]["id"]);
                 contactcreate.appendChild(contactimage);
                 contactcreate.appendChild(contactname);
                 contactcreate.appendChild(contactmessage);
                 contactcreate.appendChild(contacttime);
-                
+                contactcreate.onclick = function() {
+                    getLastMessages(contactcreate.getAttribute("messagerid"));
+                }
                 document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
             }
         }
@@ -872,19 +879,42 @@ function timeSince(date) {
     var seconds = Math.floor(((new Date().getTime()/1000) - (date.getTime()/1000) )),
     interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) return interval + "years";
+    if (interval > 1) return interval + " years ago";
 
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) return interval + "minuts";
+    if (interval > 1) return interval + " months ago";
 
     interval = Math.floor(seconds / 86400);
-    if (interval >= 1) return interval + "days";
+    if (interval >= 1) return interval + " days ago";
 
     interval = Math.floor(seconds / 3600);
-    if (interval >= 1) return interval + "hours";
+    if (interval >= 1) return interval + " hours ago";
 
     interval = Math.floor(seconds / 60);
-    if (interval > 1) return interval + "minutes";
+    if (interval > 1) return interval + " minutes ago";
 
-    return Math.floor(seconds) + "seconds";
+    return Math.floor(seconds) + " seconds ago";
+}
+function getLastMessages(idcheck) {
+    var tl = new TimelineMax();
+        tl .set(document.getElementById("activeMessages"), {display:"block"})
+            .fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"100%",ease: Circ.easeOut});
+     
+     ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+        function (response) {
+        if(response != "no id") {
+            console.log("id check" + response);
+            ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
+                function (response) {
+                console.log(JSON.parse(response));
+            },
+            'secondaryid=' + idcheck = "&primeid=" + response);
+        }
+        else {
+            alert(response);
+        }
+    },
+    'factualid=' + fbId );
 }

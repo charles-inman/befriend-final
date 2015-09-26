@@ -947,3 +947,25 @@ font-size: 6rem;
 #mainMessages div {
     margin-bottom: 4rem;
 }
+.headermenuMessage {
+    height:10%;
+    border-bottom:1rem solid #ddd;
+    width:100%;
+    position:absolute;
+    top:0;
+}
+
+#activeMessages {
+    position: absolute;
+    height:100%;
+    width:100%;
+    
+}
+
+#messagesarchive {
+    width:100%;
+    height:90%;
+    position:absolute;
+    bottom:0;
+    overflow: hidden;
+}
