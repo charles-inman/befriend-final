@@ -857,7 +857,8 @@ function messageToRecieve() {
                 contactcreate.appendChild(contactmessage);
                 contactcreate.appendChild(contacttime);
                 contactcreate.onclick = function() {
-                    getLastMessages(this.getAttribute("messagerid"));
+                    console.log(this);
+                    getLastMessages(contactcreate.getAttribute("messagerid"));
                 }
                 document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
             }
