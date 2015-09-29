@@ -818,6 +818,61 @@ function startXPositions() {
 
 var acceptedids;
 function messageToRecieve() {
+    var myNode = document.getElementById("mainMessages");
+    
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
+        function (response) {
+            
+        if(document.getElementById("messages").style.display != "block") {
+            
+    var tl = new TimelineMax();
+        tl.set(document.getElementById("messages"), {display:"block"})
+        .set(idc("backButton"), {display:"block"})
+        .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
+            
+            var jof = JSON.parse(response);
+            
+            for(i = 0; i < jof.length;i++) {
+                var datajson = JSON.parse(jof[i]["data"]);
+                
+                var contactcreate = document.createElement("div");
+                var contactimage = document.createElement("img");
+                var contactname = document.createElement("h2");
+                var contactmessage = document.createElement("h3");
+                var contacttime = document.createElement("p");
+                
+                contactimage.src = datajson["personalData"]["profileImage"];
+                contactname.innerHTML = datajson["personalData"]["firstname"];
+                contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
+                contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
+                contactcreate.setAttribute("otheruserimage", datajson["personalData"]["profileImage"]);
+                contactcreate.setAttribute("otherfirstname", datajson["personalData"]["firstname"]);
+                contactcreate.setAttribute("messagerid", jof[i]["id"]);
+                contactcreate.appendChild(contactimage);
+                contactcreate.appendChild(contactname);
+                contactcreate.appendChild(contactmessage);
+                contactcreate.appendChild(contacttime);
+                contactcreate.onclick = function() {
+                    console.log(this);
+                    getLastMessages(contactcreate);
+                }
+                document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
+            }
+        }
+            else {
+    var tl = new TimelineMax();
+        tl .fromTo(document.getElementById("messages"), 1,{x:"0%"}, {x:"100%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:1}, {opacity:0,ease: Circ.easeOut},1)
+        .set(document.getElementById("messages"), {display:"none"})
+        .set(idc("backButton"), {display:"none"});
+            }
+    },
+    'fbid=' + fbId );
 }
 function timeSince(date) {
 
@@ -841,6 +896,57 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds ago";
 }
 function getLastMessages(mainuserofchat) {
+    var idcheck = mainuserofchat.getAttribute("messagerid");
+    document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
+    document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
+    var tl = new TimelineMax();
+        tl.set(document.getElementById("activeMessages"), {display:"block"})
+            .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
+     ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+        function (response) {
+        if(response != "no id") {
+            document.getElementById("activeMessages").setAttribute("yourid", response);
+            ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
+                function (messagereturn) {
+                    var messagesinfo = JSON.parse(messagereturn);
+                    for(i = 0; i < messagesinfo["rmeg"].length;i++) {
+                        var messagemain = document.createElement("div");
+                        var messageimage = document.createElement("img");
+                        if(messagesinfo["rmeg"].fromuser == response) {
+                            messagemain.className = "sentfromuser";
+                            messageimage.src = personalJSON["personalData"]["profileImage"];
+                        }
+                        else {
+                            messagemain.className = "senttouser";
+                            messageimage.src = mainuserofchat.getAttribute("otheruserimage");
+                        
+                        }
+                        var messagesent = document.createElement("p");
+                        var messagetime = document.createElement("p");
+
+                        messagesent.innerHTML = messagesinfo["rmeg"][i]["message"];
+                        messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
+                        messagemain.appendChild(messageimage);
+                        messagemain.appendChild(messagesent);
+                        messagemain.appendChild(messagetime);
+                        document.getElementById("messagesarchive").appendChild(messagemain);
+                    }
+            },
+            'secondaryid=' + idcheck + "&primeid=" + response);
+        }
+        else {
+            alert(response);
+        }
+    },
+    'factualid=' + fbId );
 }
 function sendMessage() {
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
+     socket.emit('send message', sendJSON, function(data) {
+        if(data == "messageSent") {
+            console.log("message in");
+        }
+    });
 }
