@@ -621,7 +621,7 @@ button.none {
     right:5%;
     top:0;
     bottom:0;
-    z-index:99999999;
+    z-index:999999;
 }
 .burgermenu div {
     position: absolute;
@@ -1032,4 +1032,5 @@ margin-top: 2.2rem;
     position: absolute;
     top:0;
     left:0;
+    z-index:999999999;
 }
