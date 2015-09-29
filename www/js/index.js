@@ -950,13 +950,3 @@ function sendMessage() {
         }
     });
 }
-function moveMessagesForView(num) {
-    if(num == 0) {
-        var tl = new TimelineMax();
-        tl.fromTo(document.getElementById("activeMessages"), 0.5,{y:"0%"}, {y:"-60%",ease: Circ.easeOut});
-    }
-    else {
-        var tl = new TimelineMax();
-        tl.fromTo(document.getElementById("activeMessages"), 0.5,{y:"-60%"}, {y:"0%",ease: Circ.easeOut});
-    }
-}
