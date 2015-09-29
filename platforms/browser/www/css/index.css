@@ -1014,15 +1014,15 @@ margin-top: 2.2rem;
 }
 
 #messagesender {
-    padding:2rem 3.5%; 
+    padding:1rem 1%; 
     width:73%;
     bottom: 2%;
     position: absolute;
 }
 
 #sendMessage {
-    max-width:20%;
+    max-width:15%;
     position: absolute;
     bottom:2%;
-    right:0;
+    right:2.5%;
 }
