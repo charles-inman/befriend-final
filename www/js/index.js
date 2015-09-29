@@ -168,30 +168,6 @@ function registerGetInfo() {
 var loggedintochat = false;
 var userId;
 function logontochat() {
-    console.log("start login");
-     ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
-        function (response) {
-        if(response != "no id") {
-            userId = response;
-             socket.emit('user login absea', response, function(data) {
-                if(data == "user logged in") {
-                    console.log("logged in");
-                    loggedintochat = true;
-                }
-                else if(data == "already exists") {
-                    loggedintochat = true;
-                }
-                else {
-                    loggedintochat = false;
-                }
-            });
-        }
-        else {
-            alert(response);
-        }
-    },
-    'factualid=' + fbId );
 }
 
 function setupProfileicon() {
@@ -941,4 +917,12 @@ function getLastMessages(mainuserofchat) {
         }
     },
     'factualid=' + fbId );
+}
+function sendMessage() {
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
+     socket.emit('send message', sendJSON, function(data) {
+        if(data == "messageSent") {
+            console.log("message in");
+        }
+    });
 }
