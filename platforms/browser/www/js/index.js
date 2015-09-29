@@ -168,7 +168,6 @@ function registerGetInfo() {
 var loggedintochat = false;
 var userId;
 function logontochat() {
-    console.log("start login");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
@@ -658,23 +657,23 @@ function openMenu(ele) {
 var upperagelimit;
 var loweragelimit;
 function openSubMenu(idof) {
-        openMenu(idc("mainmenuclick"));
-        var picky = idc(idof);
-        var tl = new TimelineMax();
-        if(picky.style.display == "none") {
-            tl.set(picky, {display:"block"})
-            .set(idc("backButton"), {display:"block"})
-            .to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut})
-            .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1)
-            .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},1);
-        }
-        else {
-            tl.fromTo(picky, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
-                .set(picky, {display:"none"});
-        }
-        if(idof == "picky") {
-            startXPositions();
-        }
+    openMenu(idc("mainmenuclick"));
+    var picky = idc(idof);
+    var tl = new TimelineMax();
+    if(picky.style.display == "none") {
+        tl.set(picky, {display:"block"})
+        .set(idc("backButton"), {display:"block"})
+        .to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut})
+        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1)
+        .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},1);
+    }
+    else {
+        tl.fromTo(picky, 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+            .set(picky, {display:"none"});
+    }
+    if(idof == "picky") {
+        startXPositions();
+    }
 }
 function closeSubMenu() {
     var tl = new TimelineMax();
