@@ -1016,10 +1016,13 @@ margin-top: 2.2rem;
 #messagesender {
     padding:2rem 3.5%; 
     width:73%;
-    float:left;
+    bottom: 2%;
+    position: absolute;
 }
 
 #sendMessage {
     max-width:20%;
-    float:left;
+    position: absolute;
+    bottom:2%;
+    right:0;
 }
