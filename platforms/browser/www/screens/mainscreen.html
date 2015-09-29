@@ -65,7 +65,7 @@
                 </div>
                 <textarea id="messagesender" value="" placeholder="Your Message">
                 </textarea>
-                <img id="sendMessage" onclick="sendMessage()" src="img/send-mesage.png"/>
+                <img id="sendMessage" onclick="sendMessage()" onfocus="moveMessagesForView(0)" onblur="moveMessagesForView(1)" src="img/send-mesage.png"/>
             </div>
         </div>
     </div>
