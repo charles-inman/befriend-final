@@ -948,11 +948,12 @@ font-size: 6rem;
     margin-bottom: 4rem;
 }
 .headermenuMessage {
-    height:3.5rem;
+    height:5rem;
     border-bottom:0.4rem solid #ddd;
     width:100%;
     position:fixed;
     top:0;
+    z-index:999999999;
 }
 
 #activeMessages {
@@ -987,13 +988,15 @@ top: 0px;
     width: 60%;
 }
 #messagesarchive div p:nth-child(3){
-    float:left;
-    clear:both;
-    text-align:right;
-    font-style: italic;
-    font-size:2rem;
-    margin-bottom: 2rem;
-    margin-right: 5rem;
+    clear: both;
+float: left;
+font-size: 2rem;
+font-style: italic;
+margin-bottom: 1rem;
+margin-right: 5rem;
+margin-top: -3rem;
+text-align: right;
+width: 89%;
 }
 #messagesarchive .senttouser {
     color: #fff;
@@ -1010,14 +1013,21 @@ top: 0px;
 }
 #messangername {
     margin-left: 5rem;
-margin-top: 2.2rem;
+margin-top: 1.2rem;
 }
 
 #messagesender {
     padding:1rem 1%; 
     width:73%;
     bottom: 2%;
-    position: absolute;
+    position: absolute;resize:none;
+    border: none;
+    overflow: auto;
+    outline: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 #sendMessage {
