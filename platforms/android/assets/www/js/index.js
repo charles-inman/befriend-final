@@ -166,13 +166,14 @@ function registerGetInfo() {
 }
 
 var loggedintochat = false;
+var userId;
 function logontochat() {
     console.log("start login");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
         if(response != "no id") {
-            console.log("id check" + response);
+            userId = response;
              socket.emit('user login absea', response, function(data) {
                 if(data == "user logged in") {
                     console.log("logged in");
@@ -528,8 +529,6 @@ function transformUserData() {
 }
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
-    console.log(viewprofile.innerHTML);
-    console.log(dataFromLocation.userprofiles[0].id);
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
@@ -898,6 +897,7 @@ function timeSince(date) {
 }
 function getLastMessages(mainuserofchat) {
     var idcheck = mainuserofchat.getAttribute("messagerid");
+    document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
@@ -941,4 +941,12 @@ function getLastMessages(mainuserofchat) {
         }
     },
     'factualid=' + fbId );
+}
+function sendMessage() {
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
+     socket.emit('send message', sendJSON, function(data) {
+        if(data == "messageSent") {
+            console.log("message in");
+        }
+    });
 }

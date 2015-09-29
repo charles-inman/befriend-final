@@ -971,13 +971,14 @@ top: 0px;
     bottom:0;
     overflow: hidden;
     color: #fff;
+    border-bottom: 0.3rem solid #000;
 }
 #messagesarchive .senttouser  {
     margin:1.5rem 0;
     background-color:#63BD6C;
     width:90%;
-border-bottom-right-radius: 10rem;
-border-top-right-radius: 10rem;
+    border-bottom-right-radius: 10rem;
+    border-top-right-radius: 10rem;
 }
 #messagesarchive div p:nth-child(2){
     margin-top:2rem;
@@ -1014,5 +1015,11 @@ margin-top: 2.2rem;
 
 #messagesender {
     padding:2rem 3.5%; 
-    width:93%;
+    width:73%;
+    float:left;
+}
+
+#sendMessage {
+    max-width:20%;
+    float:left;
 }
