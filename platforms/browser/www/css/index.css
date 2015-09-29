@@ -948,10 +948,10 @@ font-size: 6rem;
     margin-bottom: 4rem;
 }
 .headermenuMessage {
-    height:10%;
+    height:3.5rem;
     border-bottom:0.4rem solid #ddd;
     width:100%;
-    position:absolute;
+    position:fixed;
     top:0;
 }
 
@@ -968,7 +968,7 @@ top: 0px;
     width:100%;
     height:70%;
     position:absolute;
-    bottom:0;
+    top:0;
     overflow: hidden;
     color: #fff;
     border-bottom: 0.3rem solid #000;
@@ -1009,7 +1009,7 @@ top: 0px;
     overflow: hidden;
 }
 #messangername {
-    margin-left: 2rem;
+    margin-left: 5rem;
 margin-top: 2.2rem;
 }
 
@@ -1021,8 +1021,15 @@ margin-top: 2.2rem;
 }
 
 #sendMessage {
-    max-width:5%;
+    max-width:12%;
     position: absolute;
     bottom:2%;
     right:7.5%;
+}
+
+.fullscreen {
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
 }
