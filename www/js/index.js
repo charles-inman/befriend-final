@@ -27,9 +27,7 @@ var app = {
         }
         
         resize();
-        socket = io.connect("http://www.divinitycomputing.com:3000");
         document.getElementById("pagewrap").style.display = "block";
-        usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
         ajaxGet(
@@ -108,16 +106,16 @@ var app = {
 	}
 };
             
-            function resize() {
-                var w = document.documentElement.clientWidth;
-                var styleSheet = document.styleSheets[0];
-                // x = scaling factor
-                var x = 0.01; 
-                var rem;
-                    rem = x * w;
-                console.log("width " + w + " rem: " + rem);
-                document.documentElement.style.fontSize = rem + 'px';
-            }
+function resize() {
+    var w = document.documentElement.clientWidth;
+    var styleSheet = document.styleSheets[0];
+    // x = scaling factor
+    var x = 0.01; 
+    var rem;
+        rem = x * w;
+    console.log("width " + w + " rem: " + rem);
+    document.documentElement.style.fontSize = rem + 'px';
+}
 var fullJSON;
 var socket;
 var interestJSON;
