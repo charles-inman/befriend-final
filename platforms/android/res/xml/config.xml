@@ -35,7 +35,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-installLocation" value="auto" />
     <preference name="android-build-tool" value="ant" />
-    <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
+    <preference name="android-windowSoftInputMode" value="stateVisible|adjustPan" />
     <gap:plugin name="org.apache.cordova.battery-status" source="npm" />
     <gap:plugin name="org.apache.cordova.camera" source="npm" />
     <gap:plugin name="org.apache.cordova.device" source="npm" />
