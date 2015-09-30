@@ -28,6 +28,18 @@ var app = {
         
         resize();
         socket = io.connect("http://www.divinitycomputing.com:3000");
+        socket.on('receive message', function(data,callback){
+        var datajson = JSON.parse(data);
+
+            alert(data);
+        var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
+        if(arc == datajson["toid"]) {
+            alert("");
+        }
+        else {
+            
+        }
+    });
         document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
@@ -127,18 +139,7 @@ var personalJSON;
 
 var fbId;    
 
-	socket.on('receive message', function(data,callback){
-        var datajson = JSON.parse(data);
-
-            alert(data);
-        var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
-        if(arc == datajson["toid"]) {
-            alert("");
-        }
-        else {
-            
-        }
-    });
+	
 function registerGetInfo() {
 	newPage("register.html");
 	
