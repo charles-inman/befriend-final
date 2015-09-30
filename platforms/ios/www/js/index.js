@@ -637,6 +637,17 @@ function genderChange(type) {
         window.localStorage.setItem("genderlook", "-1");
     }
 }
+function sendMessage() {
+    console.log("message sent");
+    window.KeyBoard.showKeyBoard(); 
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
+    document.getElementById("messagesender").value = "";
+    socket.emit('send message', sendJSON, function(data) {
+        if(data == "messageSent") {
+            console.log("message in");
+        }
+    });
+}
 function openMenu(ele) {
     var tl = new TimelineMax();
     if(idc("menu").style.display == "none") {
@@ -940,13 +951,4 @@ function getLastMessages(mainuserofchat) {
         }
     },
     'factualid=' + fbId );
-}
-function sendMessage() {
-            console.log("message sent");
-     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
-     socket.emit('send message', sendJSON, function(data) {
-        if(data == "messageSent") {
-            console.log("message in");
-        }
-    });
 }
