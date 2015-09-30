@@ -639,7 +639,6 @@ function genderChange(type) {
 }
 function sendMessagetouser() {
     console.log("message sent");
-    window.KeyBoard.showKeyBoard(); 
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
     document.getElementById("messagesender").value = "";
     socket.emit('grant message', sendJSON, function(data) {
