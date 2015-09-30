@@ -642,7 +642,7 @@ function sendMessagetouser() {
     window.KeyBoard.showKeyBoard(); 
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
     document.getElementById("messagesender").value = "";
-    socket.emit('send message', sendJSON, function(data) {
+    socket.emit('grant message', sendJSON, function(data) {
         if(data == "messageSent") {
             console.log("message in");
         }
