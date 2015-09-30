@@ -1038,6 +1038,7 @@ margin-top: 1.2rem;
     position: absolute;
     bottom:2%;
     right:5.5%;
+    z-index:9999999999999;
 }
 
 .fullscreen {

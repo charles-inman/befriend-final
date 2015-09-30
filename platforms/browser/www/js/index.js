@@ -868,7 +868,6 @@ function messageToRecieve() {
                 contactcreate.appendChild(contactmessage);
                 contactcreate.appendChild(contacttime);
                 contactcreate.onclick = function() {
-                    console.log(this);
                     getLastMessages(contactcreate);
                 }
                 document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
