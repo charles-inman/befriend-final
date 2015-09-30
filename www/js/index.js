@@ -640,12 +640,23 @@ function genderChange(type) {
 function sendMessagetouser() {
     console.log("message sent");
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
-    document.getElementById("messagesender").value = "";
-    socket.emit('grant message', sendJSON, function(data) {
-        if(data == "messageSent") {
-            console.log("message in");
+    
+    
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
+        function (response) {
+        if(response == "saved") {
+            document.getElementById("messagesender").value = "";
+            socket.emit('grant message', sendJSON, function(data) {
+                if(data == "messageSent") {
+                    console.log("message in");
+                }
+            });
         }
-    });
+        else {
+        }
+    },
+    'factualid=' + userId + '&toid=' + document.getElementById("messagesarchive").getAttribute("messagerid") + '&message=' + document.getElementById("messagesender").value);
 }
 function openMenu(ele) {
     var tl = new TimelineMax();

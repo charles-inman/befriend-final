@@ -1025,7 +1025,7 @@ margin-top: 1.2rem;
     width:73%;
     bottom: 1%;
     position: absolute;resize:none;
-    border: none;
+    border: 0;
     overflow-y: scroll;
     outline: none;
     background-color: transparent;
