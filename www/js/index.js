@@ -942,6 +942,7 @@ function getLastMessages(mainuserofchat) {
     'factualid=' + fbId );
 }
 function sendMessage() {
+            console.log("message sent");
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
      socket.emit('send message', sendJSON, function(data) {
         if(data == "messageSent") {
