@@ -657,6 +657,7 @@ function sendMessagetouser() {
             });
         }
         else {
+                    alert(response);
         }
     },
     'factualid=' + userId + '&toid=' + document.getElementById("messagesarchive").getAttribute("messagerid") + '&message=' + document.getElementById("messagesender").value);
