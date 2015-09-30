@@ -1021,7 +1021,7 @@ margin-top: 1.2rem;
 }
 
 #messagesender {
-    padding:1rem 1%; 
+    padding:0 1%; 
     width:73%;
     bottom: 1%;
     position: absolute;resize:none;
@@ -1032,7 +1032,7 @@ margin-top: 1.2rem;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    height:10%;
+    height:12%;
 }
 
 #sendMessage {
