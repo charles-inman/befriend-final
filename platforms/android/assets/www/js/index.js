@@ -939,7 +939,7 @@ function getLastMessages(mainuserofchat) {
                     for(i = 0; i < messagesinfo["rmeg"].length;i++) {
                         var messagemain = document.createElement("div");
                         var messageimage = document.createElement("img");
-                        if(messagesinfo["rmeg"].fromuser == response) {
+                        if(messagesinfo[i]["rmeg"].fromuser == response) {
                             messagemain.className = "sentfromuser";
                             messageimage.src = personalJSON["personalData"]["profileImage"];
                         }
@@ -951,8 +951,8 @@ function getLastMessages(mainuserofchat) {
                         var messagesent = document.createElement("p");
                         var messagetime = document.createElement("p");
 
-                        messagesent.innerHTML = messagesinfo["rmeg"][i]["message"];
-                        messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
+                        messagesent.innerHTML = messagesinfo[i]["rmeg"][i]["message"];
+                        messagetime.innerHTML = timeSince(new Date(messagesinfo[i]["rmeg"][i]["time"]));
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
                         messagemain.appendChild(messagetime);
