@@ -637,7 +637,7 @@ function genderChange(type) {
         window.localStorage.setItem("genderlook", "-1");
     }
 }
-function sendMessage() {
+function sendMessagetouser() {
     console.log("message sent");
     window.KeyBoard.showKeyBoard(); 
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
