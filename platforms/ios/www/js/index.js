@@ -651,6 +651,9 @@ function sendMessagetouser() {
                 if(data == "messageSent") {
                     console.log("message in");
                 }
+                else {
+                    alert(data);
+                }
             });
         }
         else {
