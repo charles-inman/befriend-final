@@ -127,6 +127,18 @@ var personalJSON;
 
 var fbId;    
 
+	socket.on('receive message', function(data,callback){
+        var datajson = JSON.parse(data);
+
+            alert(data);
+        var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
+        if(arc == datajson["toid"]) {
+            alert("");
+        }
+        else {
+            
+        }
+    });
 function registerGetInfo() {
 	newPage("register.html");
 	
@@ -603,17 +615,6 @@ function appliedUser(type, element) {
     'acceptedstate=' + type + '&fbid=' + fbId + '&touserid=' + element.getAttribute("idset") );
 }
 
-function populateDB(tx) {
-     tx.executeSql('CREATE TABLE IF NOT EXISTS users (userid,type)');
-     tx.executeSql('CREATE TABLE IF NOT EXISTS messages (userid,message,time,sentfrom)');
-}
-function errorCB(err) {
-    alert("Error processing SQL: "+err.code);
-}
-var activeLocalDB = false;
-function successCB() {
-    activeLocalDB = true;
-}
 var genderLookUp = 2;
 function genderChange(type) {
     var genderobjs = document.getElementsByClassName("gender");
