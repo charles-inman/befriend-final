@@ -858,8 +858,6 @@ function messageToRecieve() {
             var jof = JSON.parse(response);
             for(i = 0; i < jof.length;i++) {
                 var datajson = JSON.parse(jof[i]["data"]);
-                
-                console.log(datajson);
                 var contactcreate = document.createElement("div");
                 var contactimage = document.createElement("img");
                 var contactname = document.createElement("h2");
@@ -943,7 +941,7 @@ function getLastMessages(mainuserofchat) {
                         var messagesent = document.createElement("p");
                         var messagetime = document.createElement("p");
 
-                        messagesent.innerHTML = messagesinfo["rmeg"][i]["message"];
+                        messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
                         messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
