@@ -844,7 +844,7 @@ function startXPositions() {
 
 var acceptedids;
 function messageToRecieve() {
-    var myNode = document.getElementById("mainMessages");
+    var myNode = document.getElementById("mainMessagesContainer");
     
 	while (myNode.firstChild) {
 		myNode.removeChild(myNode.firstChild);
@@ -881,7 +881,7 @@ function messageToRecieve() {
                 contactcreate.onclick = function() {
                     getLastMessages(contactcreate);
                 }
-                document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
+                document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
             }
     },
     'fbid=' + fbId );
