@@ -849,20 +849,15 @@ function messageToRecieve() {
 	while (myNode.firstChild) {
 		myNode.removeChild(myNode.firstChild);
 	}
+    var tl = new TimelineMax();
+        tl.set(document.getElementById("messages"), {display:"block"})
+        .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             
-        if(document.getElementById("messages").style.display != "block") {
-            
-    var tl = new TimelineMax();
-        tl.set(document.getElementById("messages"), {display:"block"})
-        .set(idc("backButton"), {display:"block"})
-        .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
-        .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1);
-            
             var jof = JSON.parse(response);
-            
+            console.log(jof);
             for(i = 0; i < jof.length;i++) {
                 var datajson = JSON.parse(jof[i]["data"]);
                 
@@ -887,14 +882,6 @@ function messageToRecieve() {
                     getLastMessages(contactcreate);
                 }
                 document.getElementById("mainMessages").insertBefore(contactcreate, document.getElementById("mainMessages").childNodes[0]);
-            }
-        }
-            else {
-    var tl = new TimelineMax();
-        tl .fromTo(document.getElementById("messages"), 1,{x:"0%"}, {x:"100%",ease: Circ.easeOut})
-        .fromTo(idc("backButton"), 1, {opacity:1}, {opacity:0,ease: Circ.easeOut},1)
-        .set(document.getElementById("messages"), {display:"none"})
-        .set(idc("backButton"), {display:"none"});
             }
     },
     'fbid=' + fbId );
@@ -939,7 +926,7 @@ function getLastMessages(mainuserofchat) {
                     for(i = 0; i < messagesinfo["rmeg"].length;i++) {
                         var messagemain = document.createElement("div");
                         var messageimage = document.createElement("img");
-                        if(messagesinfo[i]["rmeg"].fromuser == response) {
+                        if(messagesinfo["rmeg"].fromuser == response) {
                             messagemain.className = "sentfromuser";
                             messageimage.src = personalJSON["personalData"]["profileImage"];
                         }
@@ -951,8 +938,8 @@ function getLastMessages(mainuserofchat) {
                         var messagesent = document.createElement("p");
                         var messagetime = document.createElement("p");
 
-                        messagesent.innerHTML = messagesinfo[i]["rmeg"][i]["message"];
-                        messagetime.innerHTML = timeSince(new Date(messagesinfo[i]["rmeg"][i]["time"]));
+                        messagesent.innerHTML = messagesinfo["rmeg"][i]["message"];
+                        messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
                         messagemain.appendChild(messagetime);
