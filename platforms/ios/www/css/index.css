@@ -1052,3 +1052,7 @@ width: 89%;
     left:0;
     z-index:999999999;
 }
+
+#mainMessagesContainer {
+    margin-top:8rem;
+}
