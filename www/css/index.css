@@ -413,17 +413,6 @@ z-index: 10;
     height:100%;
     background-color: #fff;
 }
-
-.backButton {
-    border: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    max-height:60%;
-    left: 4%;
-}
-
 .fixedheader {
     height: 12%;
     position: relative;
@@ -1055,4 +1044,13 @@ width: 89%;
 
 #mainMessagesContainer {
     margin-top:8rem;
+}
+img.backButton {
+    border: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height:60%;
+    left: 4%;
 }

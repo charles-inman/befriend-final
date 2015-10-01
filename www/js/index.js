@@ -855,12 +855,11 @@ function messageToRecieve() {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
-            
             var jof = JSON.parse(response);
-            console.log(jof);
             for(i = 0; i < jof.length;i++) {
                 var datajson = JSON.parse(jof[i]["data"]);
                 
+                console.log(datajson);
                 var contactcreate = document.createElement("div");
                 var contactimage = document.createElement("img");
                 var contactname = document.createElement("h2");
@@ -881,6 +880,7 @@ function messageToRecieve() {
                 contactcreate.onclick = function() {
                     getLastMessages(contactcreate);
                 }
+                console.log(document.getElementById("mainMessagesContainer").childNodes[0]);
                 document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
             }
     },
