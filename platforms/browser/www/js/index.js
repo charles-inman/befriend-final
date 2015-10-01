@@ -868,7 +868,6 @@ function messageToRecieve() {
                 
                 contactimage.src = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
-                contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
                 contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
                 contactcreate.setAttribute("otheruserimage", datajson["personalData"]["profileImage"]);
                 contactcreate.setAttribute("otherfirstname", datajson["personalData"]["firstname"]);
@@ -880,7 +879,7 @@ function messageToRecieve() {
                 contactcreate.onclick = function() {
                     getLastMessages(contactcreate);
                 }
-                console.log(document.getElementById("mainMessagesContainer").childNodes[0]);
+                console.log("node " + document.getElementById("mainMessagesContainer").childNodes[0]);
                 document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
             }
     },
