@@ -868,6 +868,11 @@ function messageToRecieve() {
                 
                 contactimage.src = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
+                if(jof[i]["mess"])
+                    contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
+                else {
+                    contactmessage.innerHTML = "no recent messages";
+                }
                 contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
                 contactcreate.setAttribute("otheruserimage", datajson["personalData"]["profileImage"]);
                 contactcreate.setAttribute("otherfirstname", datajson["personalData"]["firstname"]);
@@ -912,7 +917,8 @@ function getLastMessages(mainuserofchat) {
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
-            .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
+            .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
+            .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut},0);
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
@@ -956,10 +962,11 @@ function getLastMessages(mainuserofchat) {
 function closeMainMessages() {
     var tl = new TimelineMax();
         tl.fromTo(document.getElementById("messages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
-        .set(document.getElementById("messages"), {display:"none"});
+        .set(document.getElementById("messages"), {display:"none",x:"100%"});
 }
 function closeActiveMessages() {
     var tl = new TimelineMax();
         tl.fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
-        .set(document.getElementById("activeMessages"), {display:"none"});
+        .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut},0)
+        .set(document.getElementById("activeMessages"), {display:"none",x:"100%"});
 }
