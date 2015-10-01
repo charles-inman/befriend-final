@@ -1015,9 +1015,9 @@ width: 89%;
 #activeMessages div {
     overflow: hidden;
 }
-#messangername {
+.messangertitle {
     margin-left: 5rem;
-margin-top: 1.2rem;
+    margin-top: 1.2rem;
 }
 
 #messagesender {

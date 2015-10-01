@@ -54,11 +54,16 @@
     </div>
     <div id="messages" style="display:none;" class="fullscreen fill submenu">
         <div class="spacingcenter topspacing">
-            <div id="mainMessages"></div>
+            <div id="mainMessages">
+                <div class="headermenuMessage">
+                    <img class="backButton" onclick="closeMainMessages();" src="img/backbuttonblack.png"/>
+                    <h2 class="messangertitle"></h2>
+                </div>
+            </div>
             <div id="activeMessages">
                 <div class="headermenuMessage">
                     <img class="backButton" onclick="closeActiveMessages();" src="img/backbuttonblack.png"/>
-                    <h2 id="messangername"></h2>
+                    <h2 id="messangername" class="messangertitle"></h2>
                 </div>
                 <div id="messagesarchive">
                     

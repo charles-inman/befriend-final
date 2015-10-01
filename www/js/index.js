@@ -851,7 +851,7 @@ function messageToRecieve() {
 	}
     var tl = new TimelineMax();
         tl.set(document.getElementById("messages"), {display:"block"})
-        .fromTo(document.getElementById("messages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
+        .to(document.getElementById("messages"), 1, {x:"100%",ease: Circ.easeOut});
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
@@ -953,4 +953,14 @@ function getLastMessages(mainuserofchat) {
         }
     },
     'factualid=' + fbId );
+}
+function closeMainMessages() {
+    var tl = new TimelineMax();
+        tl.fromTo(document.getElementById("messages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
+        .set(document.getElementById("messages"), {display:"none"});
+}
+function closeActiveMessages() {
+    var tl = new TimelineMax();
+        tl.fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
+        .set(document.getElementById("activeMessages"), {display:"none"});
 }
