@@ -934,11 +934,13 @@ font-size: 6rem;
     font-weight: normal;
 }
 #mainMessages div p {
-    margin-top: 2rem;
+    margin-top: -1rem;
     text-align: right;
 }
 #mainMessages div {
     margin-bottom: 4rem;
+    margin-left: 3%;
+width: 94%;
 }
 .headermenuMessage {
     height:5rem;
@@ -1051,7 +1053,7 @@ img.backButton {
     top: 0;
     bottom: 0;
     margin: auto;
-    max-height:90%;
-    max-width:90%;
+    max-height:70%;
+    max-width:70%;
     left: 4%;
 }
