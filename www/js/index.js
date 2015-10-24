@@ -965,6 +965,6 @@ function closeMainMessages() {
 function closeActiveMessages() {
     var tl = new TimelineMax();
         tl.fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
-        .fromTo(document.getElementById("mainMessages"), 1,{x:"-100%"}, {x:"0%",ease: Circ.easeOut},0)
+        .fromTo(document.getElementById("mainMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut},0)
         .set(document.getElementById("activeMessages"), {display:"none",x:"100%"});
 }
