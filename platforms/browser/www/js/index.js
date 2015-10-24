@@ -856,7 +856,8 @@ function messageToRecieve() {
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
             var jof = JSON.parse(response);
-            for(i = 0; i < jof.length;i++) {
+            for(i = 0; i < jof.length;i++) (function(i){ 
+                
                 var datajson = JSON.parse(jof[i]["data"]);
                 var contactcreate = document.createElement("div");
                 var contactimage = document.createElement("img");
@@ -884,7 +885,7 @@ function messageToRecieve() {
                 }
                 console.log("node " + document.getElementById("mainMessagesContainer").childNodes[0]);
                 document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
-            }
+	   })(i);
     },
     'fbid=' + fbId );
 }
