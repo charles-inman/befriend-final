@@ -922,7 +922,7 @@ font-size: 6rem;
     -ms-transform: translateX(100%);
     transform: translateX(100%);
 }
-#mainMessages div img {
+#mainMessages div .divImage {
     border-radius: 8rem;
     float: left;
     margin-right: 2rem;

@@ -863,7 +863,7 @@ function messageToRecieve() {
                 var contactname = document.createElement("h2");
                 var contactmessage = document.createElement("h3");
                 var contacttime = document.createElement("p");
-                
+                contactimage.className = "divImage";
                 contactimage.src = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
                 if(jof[i]["mess"])
