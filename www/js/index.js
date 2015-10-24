@@ -659,7 +659,7 @@ function sendMessagetouser() {
             });
         }
         else {
-                    alert(response);
+           alert(response);
         }
     },
     'factualid=' + userId + '&toid=' + document.getElementById("messagesarchive").getAttribute("messagerid") + '&message=' + document.getElementById("messagesender").value);
@@ -916,7 +916,9 @@ function getLastMessages(mainuserofchat) {
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
             .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
-            .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut},0);
+            .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut, onComplete:function() {
+            document.getElementById("activeMessages").style.display = "block";
+        }},0);
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
@@ -966,5 +968,6 @@ function closeActiveMessages() {
     var tl = new TimelineMax();
         tl.fromTo(document.getElementById("activeMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut})
         .fromTo(document.getElementById("mainMessages"), 1,{x:"100%",y:0}, {x:"0%",ease: Circ.easeOut},0)
-        .set(document.getElementById("activeMessages"), {display:"none",x:"100%"});
+        .set(document.getElementById("activeMessages"), {display:"none",x:"100%"})
+        .set(document.getElementById("mainMessages"), {display:"block"});
 }
