@@ -928,6 +928,7 @@ function getLastMessages(mainuserofchat) {
             ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
                 function (messagereturn) {
+                    console.log(messagereturn);
                     var messagesinfo = JSON.parse(messagereturn);
                     for(i = 0; i < messagesinfo["rmeg"].length;i++) {
                         var messagemain = document.createElement("div");
