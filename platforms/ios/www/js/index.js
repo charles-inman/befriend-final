@@ -16,6 +16,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        
+        
+        document.addEventListener("pause", onPause, false);
+        document.addEventListener("resume", onResume, false);
+        
         var minage = window.localStorage.getItem("minage");
         var maxage = window.localStorage.getItem("maxage");
         
@@ -145,7 +150,15 @@ var app = {
 			);
 	}
 };
-            
+            function onPause() {
+                navigator.notification.alert("you got a message", alertCallback, "this is an alert", "hello");
+            }
+            function onResume() {
+            }
+
+            function dismissedNotification() {
+                
+            }
             function resize() {
                 var w = document.documentElement.clientWidth;
                 var styleSheet = document.styleSheets[0];

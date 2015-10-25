@@ -973,7 +973,7 @@ top: 0px;
     height:82%;
     position:absolute;
     top:0;
-    overflow: hidden;
+    overflow: scroll;
     color: #fff;
     border-bottom: 0.3rem solid #000;
 }
@@ -1023,6 +1023,7 @@ width: 89%;
     margin-left:10%;
 }
 #messagesarchive .sentfromuser p:nth-child(2){
+    margin-left: 5rem;
     margin-top:2rem;
     font-size: 4rem;
     float: left;
@@ -1035,7 +1036,7 @@ width: 89%;
     font-size: 2rem;
     font-style: italic;
     margin-bottom: 1rem;
-    margin-right: 5rem;
+    margin-left: 5rem;
     margin-top: -3rem;
     text-align: left;
     width: 89%;
@@ -1045,17 +1046,17 @@ width: 89%;
 }
 #messagesarchive .sentfromuser img {
     border-radius: 10rem;
-    float: left;
+    float: right;
     margin: 1rem;
     max-height: 7rem;
     max-width: 7rem;
 }
-#activeMessages div {
+#messagesarchive div {
     overflow: hidden;
 }
 .messangertitle {
     margin-left: 7rem;
-    margin-top: 1.2rem;
+    margin-top: 6%;
 }
 
 #messagesender {
