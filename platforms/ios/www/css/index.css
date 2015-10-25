@@ -549,6 +549,7 @@ button.none {
     margin: auto;
     padding: 2rem;
     background:transparent;
+width: 30%;
 }
 .thumbsup {
     margin: 20px auto;
@@ -605,7 +606,7 @@ button.none {
 .burgermenu {
     position:absolute;
     width:8%;
-    height:30%;
+    height:50%;
     margin:auto;
     right:5%;
     top:0;
@@ -620,13 +621,13 @@ button.none {
     left:0;
 }
 .burgermenu div:nth-child(1) {
-    top:0;
+    top:10%;
 }
 .burgermenu div:nth-child(2) {
-    top:1rem;
+    top:40%;
 }
 .burgermenu div:nth-child(3) {
-    top:2rem;
+    top:70%;
 }
 
 .subscreen {
@@ -908,7 +909,8 @@ font-size: 6rem;
     background-size: contain;
     background-repeat: no-repeat;
     width:6rem;
-    height:6rem;margin-top: 5%;
+    height:6rem;
+    top: 20%;
     max-height: 90%;
     max-width: 10%;
     position: absolute;
@@ -948,7 +950,7 @@ font-size: 6rem;
 width: 94%;
 }
 .headermenuMessage {
-    height:5rem;
+    height:7rem;
     border-bottom:0.4rem solid #ddd;
     width:100%;
     position:fixed;
@@ -985,13 +987,13 @@ top: 0px;
     border-bottom-right-radius: 10rem;
     border-top-right-radius: 10rem;
 }
-#messagesarchive div p:nth-child(2){
+#messagesarchive .senttouser p:nth-child(2){
     margin-top:2rem;
     font-size: 4rem;
     float: left;
     width: 60%;
 }
-#messagesarchive div p:nth-child(3){
+#messagesarchive .senttouser p:nth-child(3){
     clear: both;
 float: left;
 font-size: 2rem;
@@ -1012,11 +1014,47 @@ width: 89%;
     max-height: 7rem;
     max-width: 7rem;
 }
+#messagesarchive .sentfromuser  {
+    margin:1.5rem 0;
+    background-color:#1aafdb;
+    width:90%;
+    border-bottom-left-radius: 10rem;
+    border-top-left-radius: 10rem;
+    margin-left:10%;
+}
+#messagesarchive .sentfromuser p:nth-child(2){
+    margin-top:2rem;
+    font-size: 4rem;
+    float: left;
+    width: 60%;
+    text-align:right;
+}
+#messagesarchive .sentfromuser p:nth-child(3){
+    clear: both;
+    float: left;
+    font-size: 2rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    margin-right: 5rem;
+    margin-top: -3rem;
+    text-align: left;
+    width: 89%;
+}
+#messagesarchive .sentfromuser {
+    color: #fff;
+}
+#messagesarchive .sentfromuser img {
+    border-radius: 10rem;
+    float: left;
+    margin: 1rem;
+    max-height: 7rem;
+    max-width: 7rem;
+}
 #activeMessages div {
     overflow: hidden;
 }
 .messangertitle {
-    margin-left: 5rem;
+    margin-left: 7rem;
     margin-top: 1.2rem;
 }
 
@@ -1024,13 +1062,16 @@ width: 89%;
     padding:0 1%; 
     width:73%;
     bottom: 1%;
-    position: absolute;resize:none;
+    position: absolute;
+    resize:none;
     border: 0;
     overflow-y: scroll;
     outline: none;
     background-color: transparent;
     box-shadow: none;
     height:15%;
+    font-size:4rem;
+    margin-left:2rem;
 }
 
 #sendMessage {
@@ -1050,7 +1091,7 @@ width: 89%;
 }
 
 #mainMessagesContainer {
-    margin-top:8rem;
+    margin-top:10rem;
 }
 img.backButton {
     border: 0;

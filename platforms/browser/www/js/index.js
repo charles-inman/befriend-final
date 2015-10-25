@@ -30,14 +30,40 @@ var app = {
         socket = io.connect("http://www.divinitycomputing.com:3000");
         socket.on('receive message', function(data,callback){
         var datajson = JSON.parse(data);
-
             alert(data);
         var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
         if(arc == datajson["toid"]) {
-            alert("");
+            var messagemain = document.createElement("div");
+            var messageimage = document.createElement("img");
+            messagemain.className = "sentfromuser";
+            messageimage.src = datajson["profileImage"];
+           
+            var messagesent = document.createElement("p");
+            var messagetime = document.createElement("p");
+
+            messagesent.innerHTML = datajson["message"];
+            messagetime.innerHTML = timeSince(new Date(datajson["time"]));
+            messagemain.appendChild(messagesent);
+            messagemain.appendChild(messageimage);
+            messagemain.appendChild(messagetime);
+            document.getElementById("messagesarchive").appendChild(messagemain);
         }
         else {
+            var messagemain = document.createElement("div");
+            var messageimage = document.createElement("img");
             
+                messagemain.className = "senttouser";
+                messageimage.src = otherUserImageSrc;
+            
+            var messagesent = document.createElement("p");
+            var messagetime = document.createElement("p");
+
+            messagesent.innerHTML = datajson["message"];
+            messagetime.innerHTML = timeSince(new Date(datajson["time"]));
+            messagemain.appendChild(messageimage);
+            messagemain.appendChild(messagesent);
+            messagemain.appendChild(messagetime);
+            document.getElementById("messagesarchive").appendChild(messagemain);
         }
     });
         document.getElementById("pagewrap").style.display = "block";
@@ -641,7 +667,8 @@ function genderChange(type) {
 }
 function sendMessagetouser() {
     console.log("message sent");
-     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'"}';
+    var d = new Date();
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
     
     
     ajaxPost(
@@ -843,6 +870,7 @@ function startXPositions() {
 }
 
 var acceptedids;
+var otherUserImageSrc = "";
 function messageToRecieve() {
     var myNode = document.getElementById("mainMessagesContainer");
     
@@ -866,6 +894,7 @@ function messageToRecieve() {
                 var contacttime = document.createElement("p");
                 contactimage.className = "divImage";
                 contactimage.src = datajson["personalData"]["profileImage"];
+                otherUserImageSrc = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
                 if(jof[i]["mess"])
                     contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
