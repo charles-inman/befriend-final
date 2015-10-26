@@ -49,7 +49,7 @@
     <gap:plugin name="org.apache.cordova.network-information" source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
     <gap:plugin name="org.apache.cordova.vibration" source="npm" />
-    <gap:plugin name="org.apache.cordova.Notification" />
+    <gap:plugin name="phonegap-plugin-push" source="npm" />
     <gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />

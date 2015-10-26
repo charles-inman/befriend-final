@@ -62,7 +62,7 @@
     <gap:plugin name="org.apache.cordova.network-information"  source="npm" />
     <gap:plugin name="org.apache.cordova.splashscreen"  source="npm" />
     <gap:plugin name="org.apache.cordova.vibration"  source="npm" />
-	<gap:plugin name="org.apache.cordova.Notification"/>
+	<gap:plugin name="phonegap-plugin-push" source="npm" />
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
 	<gap:plugin name="com.phonegap.plugins.facebookconnect" version="0.9.0">

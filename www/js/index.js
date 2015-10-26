@@ -16,7 +16,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
+        push = PushNotification.init({ "android": {"senderID": "355324533451"},
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
         
         document.addEventListener("pause", onPause, false);
         document.addEventListener("resume", onResume, false);
@@ -34,43 +35,57 @@ var app = {
         resize();
         socket = io.connect("http://www.divinitycomputing.com:3000");
         socket.on('receive message', function(data,callback){
-        var datajson = JSON.parse(data);
-            alert(data);
-        var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
-        if(arc == datajson["toid"]) {
-            var messagemain = document.createElement("div");
-            var messageimage = document.createElement("img");
-            messagemain.className = "sentfromuser";
-            messageimage.src = datajson["profileImage"];
-           
-            var messagesent = document.createElement("p");
-            var messagetime = document.createElement("p");
+            var datajson = JSON.parse(data);
+                alert(data);
+            var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
+            if(arc == datajson["toid"]) {
+                var messagemain = document.createElement("div");
+                var messageimage = document.createElement("img");
+                messagemain.className = "sentfromuser";
+                messageimage.src = datajson["profileImage"];
 
-            messagesent.innerHTML = datajson["message"];
-            messagetime.innerHTML = timeSince(new Date(datajson["time"]));
-            messagemain.appendChild(messagesent);
-            messagemain.appendChild(messageimage);
-            messagemain.appendChild(messagetime);
-            document.getElementById("messagesarchive").appendChild(messagemain);
-        }
-        else {
-            var messagemain = document.createElement("div");
-            var messageimage = document.createElement("img");
-            
-                messagemain.className = "senttouser";
-                messageimage.src = otherUserImageSrc;
-            
-            var messagesent = document.createElement("p");
-            var messagetime = document.createElement("p");
+                var messagesent = document.createElement("p");
+                var messagetime = document.createElement("p");
 
-            messagesent.innerHTML = datajson["message"];
-            messagetime.innerHTML = timeSince(new Date(datajson["time"]));
-            messagemain.appendChild(messageimage);
-            messagemain.appendChild(messagesent);
-            messagemain.appendChild(messagetime);
-            document.getElementById("messagesarchive").appendChild(messagemain);
-        }
-    });
+                messagesent.innerHTML = datajson["message"];
+                messagetime.innerHTML = timeSince(new Date(datajson["time"]));
+                messagemain.appendChild(messagesent);
+                messagemain.appendChild(messageimage);
+                messagemain.appendChild(messagetime);
+                document.getElementById("messagesarchive").appendChild(messagemain);
+            }
+            else {
+                var messagemain = document.createElement("div");
+                var messageimage = document.createElement("img");
+
+                    messagemain.className = "senttouser";
+                    messageimage.src = otherUserImageSrc;
+
+                var messagesent = document.createElement("p");
+                var messagetime = document.createElement("p");
+
+                messagesent.innerHTML = datajson["message"];
+                messagetime.innerHTML = timeSince(new Date(datajson["time"]));
+                messagemain.appendChild(messageimage);
+                messagemain.appendChild(messagesent);
+                messagemain.appendChild(messagetime);
+                document.getElementById("messagesarchive").appendChild(messagemain);
+            }
+        });
+
+        push.on('notification', function(data) {
+            // data.message,
+            // data.title,
+            // data.count,
+            // data.sound,
+            // data.image,
+            // data.additionalData
+        });
+
+        push.on('error', function(e) {
+            // e.message
+        });
+        
         document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
@@ -151,14 +166,21 @@ var app = {
 	}
 };
             function onPause() {
-                navigator.notification.alert("you got a message", alertCallback, "this is an alert", "hello");
+                 socket.emit('offapp', userId, function(data) {
+                    if(data == "disconnected") {
+                        loggedintochat = false;
+                    }
+                });
             }
             function onResume() {
+                 socket.emit('onapp', userId, function(data) {
+                    if(data == "loggedin") {
+                        console.log("logged in");
+                        loggedintochat = true;
+                    }
+                });
             }
 
-            function dismissedNotification() {
-                
-            }
             function resize() {
                 var w = document.documentElement.clientWidth;
                 var styleSheet = document.styleSheets[0];
@@ -175,7 +197,7 @@ var interestJSON;
 var mainTypeInterest ;
 var profileJSON;
 var personalJSON;
-
+var push;
 var fbId;    
 
 	
@@ -220,29 +242,32 @@ function registerGetInfo() {
 var loggedintochat = false;
 var userId;
 function logontochat() {
-     ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
-        function (response) {
-        if(response != "no id") {
-            userId = response;
-             socket.emit('user login absea', response, function(data) {
-                if(data == "user logged in") {
-                    console.log("logged in");
-                    loggedintochat = true;
-                }
-                else if(data == "already exists") {
-                    loggedintochat = true;
-                }
-                else {
-                    loggedintochat = false;
-                }
-            });
-        }
-        else {
-            alert(response);
-        }
-    },
-    'factualid=' + fbId );
+    push.on('registration', function(data) {
+            // data.registrationId
+         ajaxPost(
+            "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+            function (response) {
+            if(response != "no id") {
+                userId = response;
+                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + data.registrationId + '"}', function(data) {
+                    if(data == "user logged in") {
+                        console.log("logged in");
+                        loggedintochat = true;
+                    }
+                    else if(data == "already exists") {
+                        loggedintochat = true;
+                    }
+                    else {
+                        loggedintochat = false;
+                    }
+                });
+            }
+            else {
+                alert(response);
+            }
+        },
+        'factualid=' + fbId );
+    });
 }
 
 function setupProfileicon() {
