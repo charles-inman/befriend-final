@@ -34,7 +34,6 @@
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-installLocation" value="auto" />
-    <preference name="android-build-tool" value="ant" />
     <preference name="android-windowSoftInputMode" value="adjustResize|stateVisible|stateAlwaysHidden" />
     <gap:plugin name="org.apache.cordova.battery-status" source="npm" />
     <gap:plugin name="org.apache.cordova.camera" source="npm" />
