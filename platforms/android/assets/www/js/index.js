@@ -201,7 +201,6 @@ var fbId;
 function registerGetInfo() {
 	newPage("register.html");
 	
-    usersProcessed.transaction(populateDB, errorCB, successCB);
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var pp = document.createElement("style");
