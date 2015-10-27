@@ -22,7 +22,6 @@ var app = {
         
         push.on('registration', function(data) {
             registrationPush = data.registrationId;
-            alert("reg" + registrationPush);
         });
         
         document.addEventListener("pause", onPause, false);
@@ -249,30 +248,32 @@ var userId;
 
 var registrationPush;
 function logontochat() {
-         ajaxPost(
-            "http://www.divinitycomputing.com/apps/beoples/getid.php", 
-            function (response) {
-            if(response != "no id") {
-                userId = response;
-                console.log(device.platform);
-                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}', function(data) {
-                    if(data == "user logged in") {
-                        console.log("logged in");
-                        loggedintochat = true;
-                    }
-                    else if(data == "already exists") {
-                        loggedintochat = true;
-                    }
-                    else {
-                        loggedintochat = false;
-                    }
-                });
-            }
-            else {
-                alert(response);
-            }
-        },
-        'factualid=' + fbId );
+    alert("Trying to log on");
+     ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
+        function (response) {
+        if(response != "no id") {
+            userId = response;
+            alert(device.platform);
+             socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
+            function(data) {
+                if(data == "user logged in") {
+                    console.log("logged in");
+                    loggedintochat = true;
+                }
+                else if(data == "already exists") {
+                    loggedintochat = true;
+                }
+                else {
+                    loggedintochat = false;
+                }
+            });
+        }
+        else {
+            alert(response);
+        }
+    },
+    'factualid=' + fbId );
 }
 
 function setupProfileicon() {
