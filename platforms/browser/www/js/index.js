@@ -993,7 +993,7 @@ function getLastMessages(mainuserofchat) {
             .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut, onComplete:function() {
             document.getElementById("activeMessages").style.display = "block";
         }},0);
-        document.getElementById("activeMessages").setAttribute("yourid", userid);
+        document.getElementById("activeMessages").setAttribute("yourid", userId);
     console.log("after animation");
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
