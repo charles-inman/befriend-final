@@ -1023,7 +1023,7 @@ width: 89%;
     margin-left:10%;
 }
 #messagesarchive .sentfromuser p:nth-child(2){
-    margin-left: 5rem;
+    margin-left: 10%;
     margin-top:2rem;
     font-size: 4rem;
     float: left;
@@ -1036,7 +1036,7 @@ width: 89%;
     font-size: 2rem;
     font-style: italic;
     margin-bottom: 1rem;
-    margin-left: 5rem;
+    margin-left: 10%;
     margin-top: -3rem;
     text-align: left;
     width: 89%;
