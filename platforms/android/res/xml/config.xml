@@ -49,7 +49,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" source="npm" />
     <gap:plugin name="org.apache.cordova.vibration" source="npm" />
     <gap:plugin name="phonegap-plugin-push" source="npm" />
-    <gap:plugin name="cordova-plugin-facebook4">
+    <gap:plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />
     </gap:plugin>

@@ -66,7 +66,7 @@
 	<gap:plugin name="phonegap-plugin-push" source="npm" />
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
-	<gap:plugin name="cordova-plugin-facebook4" >
+	<gap:plugin name="cordova-plugin-facebook4" source="npm">
         <param name="APP_ID" value="1395869224050727" />
         <param name="APP_NAME" value="Small world" />
     </gap:plugin>
