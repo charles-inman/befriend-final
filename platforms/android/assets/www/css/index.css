@@ -1022,13 +1022,11 @@ width: 89%;
     border-top-left-radius: 10rem;
     margin-left:10%;
 }
-#messagesarchive .sentfromuser p:nth-child(2){
-    margin-left: 10%;
-    margin-top:2rem;
-    font-size: 4rem;
+#messagesarchive .sentfromuser p:nth-child(1){
     float: left;
-    width: 60%;
-    text-align:right;
+    margin-left: 10%;
+    margin-top: 1rem;
+    width: 65%;
 }
 #messagesarchive .sentfromuser p:nth-child(3){
     clear: both;
@@ -1037,7 +1035,6 @@ width: 89%;
     font-style: italic;
     margin-bottom: 1rem;
     margin-left: 10%;
-    margin-top: -3rem;
     text-align: left;
     width: 89%;
 }
