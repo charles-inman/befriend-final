@@ -251,7 +251,6 @@ function logontochat() {
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
-    alert("Trying to log on" + response);
         if(response != "no id") {
             userId = response;
             alert(device.platform);
