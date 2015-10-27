@@ -249,7 +249,8 @@ function logontochat() {
             function (response) {
             if(response != "no id") {
                 userId = response;
-                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + data.registrationId + '"}', function(data) {
+                console.log(device.platform);
+                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + data.registrationId + '","device":"' + device.platform + '"}', function(data) {
                     if(data == "user logged in") {
                         console.log("logged in");
                         loggedintochat = true;
@@ -986,46 +987,39 @@ function getLastMessages(mainuserofchat) {
             .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut, onComplete:function() {
             document.getElementById("activeMessages").style.display = "block";
         }},0);
-     ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/getid.php", 
-        function (response) {
-        if(response != "no id") {
-            document.getElementById("activeMessages").setAttribute("yourid", response);
-            ajaxPost(
-                "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
-                function (messagereturn) {
-                    console.log(messagereturn);
-                    var messagesinfo = JSON.parse(messagereturn);
-                    for(i = 0; i < messagesinfo["rmeg"].length;i++) {
-                        var messagemain = document.createElement("div");
-                        var messageimage = document.createElement("img");
-                        if(messagesinfo["rmeg"].fromuser == response) {
-                            messagemain.className = "sentfromuser";
-                            messageimage.src = personalJSON["personalData"]["profileImage"];
-                        }
-                        else {
-                            messagemain.className = "senttouser";
-                            messageimage.src = mainuserofchat.getAttribute("otheruserimage");
-                        
-                        }
-                        var messagesent = document.createElement("p");
-                        var messagetime = document.createElement("p");
-
-                        messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
-                        messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
+        document.getElementById("activeMessages").setAttribute("yourid", userid);
+        ajaxPost(
+            "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
+            function (messagereturn) {
+                console.log(messagereturn);
+                var messagesinfo = JSON.parse(messagereturn);
+                for(i = 0; i < messagesinfo["rmeg"].length;i++) {
+                    var messagemain = document.createElement("div");
+                    var messageimage = document.createElement("img");
+                    console.log(messagesinfo["rmeg"].fromuser + " " + userid);
+                    if(messagesinfo["rmeg"].fromuser == userid) {
+                        messagemain.className = "sentfromuser";
+                        messageimage.src = personalJSON["personalData"]["profileImage"];
+                        messagemain.appendChild(messagesent);
+                        messagemain.appendChild(messageimage);
+                    }
+                    else {
+                        messagemain.className = "senttouser";
+                        messageimage.src = mainuserofchat.getAttribute("otheruserimage");
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
-                        messagemain.appendChild(messagetime);
-                        document.getElementById("messagesarchive").appendChild(messagemain);
+
                     }
-            },
-            'secondaryid=' + idcheck + "&primeid=" + response);
-        }
-        else {
-            alert(response);
-        }
-    },
-    'factualid=' + fbId );
+                    var messagesent = document.createElement("p");
+                    var messagetime = document.createElement("p");
+
+                    messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
+                    messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
+                    messagemain.appendChild(messagetime);
+                    document.getElementById("messagesarchive").appendChild(messagemain);
+                }
+        },
+            'secondaryid=' + idcheck + "&primeid=" + userid);
 }
 function closeMainMessages() {
     var tl = new TimelineMax();
