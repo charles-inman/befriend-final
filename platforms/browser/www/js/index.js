@@ -992,7 +992,6 @@ function getLastMessages(mainuserofchat) {
             document.getElementById("activeMessages").style.display = "block";
         }},0);
         document.getElementById("activeMessages").setAttribute("yourid", userId);
-    console.log("after animation");
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
             function (messagereturn) {
@@ -1003,7 +1002,7 @@ function getLastMessages(mainuserofchat) {
                     var messagesent = document.createElement("p");
                     var messagetime = document.createElement("p");
                     console.log(messagesinfo["rmeg"][i].fromuser + " " + userId);
-                    if(messagesinfo["rmeg"][i].fromuser == userid) {
+                    if(messagesinfo["rmeg"][i].fromuser == userId) {
                         messagemain.className = "sentfromuser";
                         messageimage.src = personalJSON["personalData"]["profileImage"];
                         messagemain.appendChild(messagesent);
