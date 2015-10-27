@@ -3,6 +3,7 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
+		xmlns:android   = "http://schemas.android.com/apk/res/android"
         id="com.divinity.smallworld"
         version   = "1.0.0">
     <name>Small World</name>
@@ -115,6 +116,10 @@
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
     <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->
 
+	<preference name="android-minSdkVersion" value="14" />
+	<preference name="android-maxSdkVersion" value="23" />
+	<preference name="android-build-tool" value="gradle" />
+	
     <access origin="*"/>
 	<access origin="http://www.divinitycomputing.com/*" />
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
