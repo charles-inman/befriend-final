@@ -41,7 +41,6 @@ var app = {
         socket = io.connect("http://www.divinitycomputing.com:3000");
         socket.on('receive message', function(data,callback){
             var datajson = JSON.parse(data);
-                alert(data);
             var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
             if(arc == datajson["toid"]) {
                 var messagemain = document.createElement("div");
@@ -251,7 +250,6 @@ function logontochat() {
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
-    alert("Trying to log on" + response);
         if(response != "no id") {
             userId = response;
              socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',

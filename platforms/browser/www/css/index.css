@@ -991,7 +991,7 @@ top: 0px;
     margin-top:2rem;
     font-size: 4rem;
     float: left;
-    width: 60%;
+    width: 60%;margin-bottom: 3em;
 }
 #messagesarchive .senttouser p:nth-child(3){
     clear: both;
@@ -1000,9 +1000,8 @@ font-size: 2rem;
 font-style: italic;
 margin-bottom: 1rem;
 margin-right: 5rem;
-margin-top: -3rem;
 text-align: right;
-width: 89%;
+width: 89%;margin-top: -3em;
 }
 #messagesarchive .senttouser {
     color: #fff;
@@ -1026,7 +1025,7 @@ width: 89%;
     float: left;
     margin-left: 10%;
     margin-top: 1rem;
-    width: 65%;
+    width: 65%;margin-bottom: 3em;
 }
 #messagesarchive .sentfromuser p:nth-child(3){
     clear: both;
@@ -1036,7 +1035,7 @@ width: 89%;
     margin-bottom: 1rem;
     margin-left: 10%;
     text-align: left;
-    width: 89%;
+    width: 89%;margin-top: -3em;
 }
 #messagesarchive .sentfromuser {
     color: #fff;
