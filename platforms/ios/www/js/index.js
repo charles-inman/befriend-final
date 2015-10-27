@@ -19,6 +19,10 @@ var app = {
         push = PushNotification.init({ "android": {"senderID": "355324533451"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
         
+        push.on('registration', function(data) {
+            registrationPush = data.registrationId;
+            console.log("reg" + registrationPush);
+        });
         document.addEventListener("pause", onPause, false);
         document.addEventListener("resume", onResume, false);
         
@@ -241,16 +245,16 @@ function registerGetInfo() {
 
 var loggedintochat = false;
 var userId;
+
+var registrationPush;
 function logontochat() {
-    push.on('registration', function(data) {
-            // data.registrationId
          ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getid.php", 
             function (response) {
             if(response != "no id") {
                 userId = response;
                 console.log(device.platform);
-                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + data.registrationId + '","device":"' + device.platform + '"}', function(data) {
+                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}', function(data) {
                     if(data == "user logged in") {
                         console.log("logged in");
                         loggedintochat = true;
@@ -268,7 +272,6 @@ function logontochat() {
             }
         },
         'factualid=' + fbId );
-    });
 }
 
 function setupProfileicon() {
