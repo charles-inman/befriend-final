@@ -995,11 +995,12 @@ function getLastMessages(mainuserofchat) {
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
             function (messagereturn) {
-                console.log(messagereturn);
                 var messagesinfo = JSON.parse(messagereturn);
                 for(i = 0; i < messagesinfo["rmeg"].length;i++) {
                     var messagemain = document.createElement("div");
                     var messageimage = document.createElement("img");
+                    var messagesent = document.createElement("p");
+                    var messagetime = document.createElement("p");
                     console.log(messagesinfo["rmeg"].fromuser + " " + userid);
                     if(messagesinfo["rmeg"].fromuser == userid) {
                         messagemain.className = "sentfromuser";
@@ -1014,8 +1015,6 @@ function getLastMessages(mainuserofchat) {
                         messagemain.appendChild(messagesent);
 
                     }
-                    var messagesent = document.createElement("p");
-                    var messagetime = document.createElement("p");
 
                     messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
                     messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
