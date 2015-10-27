@@ -33,6 +33,7 @@
     <preference name="android-windowSoftInputMode" value="adjustResize|stateVisible|stateAlwaysHidden" />
     <gap:plugin name="org.apache.cordova.battery-status" source="npm" />
     <gap:plugin name="org.apache.cordova.camera" source="npm" />
+    <gap:plugin name="org.apache.cordova.device" source="npm" />
     <gap:plugin name="org.apache.cordova.device-motion" source="npm" />
     <gap:plugin name="org.apache.cordova.device-orientation" source="npm" />
     <gap:plugin name="org.apache.cordova.dialogs" source="npm" />
