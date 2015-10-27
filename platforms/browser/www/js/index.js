@@ -1013,7 +1013,6 @@ function getLastMessages(mainuserofchat) {
                         messageimage.src = mainuserofchat.getAttribute("otheruserimage");
                         messagemain.appendChild(messageimage);
                         messagemain.appendChild(messagesent);
-
                     }
 
                     messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
