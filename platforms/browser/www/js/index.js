@@ -1004,7 +1004,7 @@ function getLastMessages(mainuserofchat) {
                     var messageimage = document.createElement("img");
                     var messagesent = document.createElement("p");
                     var messagetime = document.createElement("p");
-                    console.log(messagesinfo["rmeg"].fromuser + " " + userid);
+                    console.log(messagesinfo["rmeg"].fromuser + " " + userId);
                     if(messagesinfo["rmeg"].fromuser == userid) {
                         messagemain.className = "sentfromuser";
                         messageimage.src = personalJSON["personalData"]["profileImage"];
@@ -1024,7 +1024,7 @@ function getLastMessages(mainuserofchat) {
                     document.getElementById("messagesarchive").appendChild(messagemain);
                 }
         },
-            'secondaryid=' + idcheck + "&primeid=" + userid);
+            'secondaryid=' + idcheck + "&primeid=" + userId);
 }
 function closeMainMessages() {
     var tl = new TimelineMax();
