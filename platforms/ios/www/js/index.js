@@ -704,7 +704,6 @@ function genderChange(type) {
     }
 }
 function sendMessagetouser() {
-    console.log("message sent");
     var d = new Date();
      var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
     
