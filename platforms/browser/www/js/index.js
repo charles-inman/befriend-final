@@ -22,7 +22,7 @@ var app = {
         
         push.on('registration', function(data) {
             registrationPush = data.registrationId;
-            console.log("reg" + registrationPush);
+            alert("reg" + registrationPush);
         });
         
         document.addEventListener("pause", onPause, false);
