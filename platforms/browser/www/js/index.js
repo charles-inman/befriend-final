@@ -982,11 +982,9 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds ago";
 }
 function getLastMessages(mainuserofchat) {
-    console.log("get last messages");
     var idcheck = mainuserofchat.getAttribute("messagerid");
     document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
-    console.log("before animation");
     var tl = new TimelineMax();
         tl.set(document.getElementById("activeMessages"), {display:"block"})
             .fromTo(document.getElementById("activeMessages"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut})
@@ -998,8 +996,9 @@ function getLastMessages(mainuserofchat) {
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
             function (messagereturn) {
-                var messagesinfo = JSON.parse(messagereturn);
     console.log(messagereturn);
+                var messagesinfo = JSON.parse(messagereturn);
+    console.log(messagesinfo);
                 for(i = 0; i < messagesinfo["rmeg"].length;i++) {
                     var messagemain = document.createElement("div");
                     var messageimage = document.createElement("img");
