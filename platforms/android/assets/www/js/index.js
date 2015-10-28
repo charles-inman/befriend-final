@@ -845,7 +845,7 @@ function startXPositions() {
                     window.localStorage.setItem("maxage", upperagelimit);
                 };
                 document.getElementById("smallslider").children[1].ontouchmove  = function(e) {
-    e.preventDefault();
+                    e.preventDefault();
                     var  width = document.documentElement["clientWidth"];
                     var elewidth = this.offsetWidth;
                     var touch = e.touches[0];
@@ -862,7 +862,7 @@ function startXPositions() {
                     this.style.left = trueleft + "px";
                     if(trueleft < document.getElementById("smallslider").children[0].getAttribute("x")) {
                         document.getElementById("barbetween").style.left = (trueleft) + "px";
-                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) - (elewidth / 2)) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) - (elewidth / 2)) + "px";
                         this.className = "bluehandle ";
                         document.getElementById("smallslider").children[0].className = "bluehandle big";
                         upperagelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
@@ -875,7 +875,7 @@ function startXPositions() {
                     }
                     else {
                         document.getElementById("barbetween").style.left = ( document.getElementById("smallslider").children[0].getAttribute("x")) + "px";
-                    document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) + (elewidth / 2)) + "px";
+                        document.getElementById("barbetween").style.width = Math.abs((trueleft - document.getElementById("smallslider").children[0].getAttribute("x")) + (elewidth / 2)) + "px";
                         this.className = "bluehandle big";
                         document.getElementById("smallslider").children[0].className = "bluehandle ";
                         loweragelimit = Math.floor((16 +  ((document.getElementById("smallslider").children[0].getAttribute("x") / (width *0.9) * 86))));
@@ -1018,7 +1018,7 @@ function getLastMessages(mainuserofchat) {
                     messagemain.appendChild(messagetime);
                     document.getElementById("messagesarchive").appendChild(messagemain);
                 }
-                document.getElementById("messagesarchive").scrollTop = document.getElementById("messagesarchive").scrollHeight;
+                document.getElementById("messagesarchive").scrollTop = document.getElementById("messagesarchive").scrollHeight * 1.1;
         },
             'secondaryid=' + idcheck + "&primeid=" + userId);
 }

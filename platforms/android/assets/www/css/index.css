@@ -1045,19 +1045,14 @@ width: 89%;margin-top: -3em;
     float: right;
     margin: 1rem;
     max-height: 7rem;
-    max-width: 7rem;
+    max-width: 7rem;vertical-align: 
 }
 #messagesarchive div {
     overflow: hidden;
 }
 .messangertitle {
     margin-left: 7rem;
-    bottom: 0;
-    height: 0.9rem;
-    margin-bottom: auto;
-    margin-top: auto;
-    position: absolute;
-    top: 0;
+    line-height: 7rem;
     font-size:5rem;
 }
 
@@ -1095,6 +1090,12 @@ width: 89%;margin-top: -3em;
 
 #mainMessagesContainer {
     margin-top:10rem;
+}
+#mainMessagesContainer h2{
+    font-size:5rem;
+}
+#mainMessagesContainer h3{
+    font-size:3rem;
 }
 img.backButton {
     border: 0;
