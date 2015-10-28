@@ -1052,7 +1052,13 @@ width: 89%;margin-top: -3em;
 }
 .messangertitle {
     margin-left: 7rem;
-    margin-top: 6%;
+    bottom: 0;
+    height: 0.9rem;
+    margin-bottom: auto;
+    margin-top: auto;
+    position: absolute;
+    top: 0;
+    font-size:5rem;
 }
 
 #messagesender {
