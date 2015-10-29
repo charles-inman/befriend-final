@@ -239,7 +239,6 @@ var userId;
 
 var registrationPush;
 function logontochat(numify) {
-    alert("log in attempt");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
