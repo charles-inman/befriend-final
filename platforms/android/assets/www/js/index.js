@@ -20,10 +20,6 @@ var app = {
         push = PushNotification.init({ "android": {"senderID": "355324533451"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
         
-        push.on('registration', function(data) {
-            registrationPush = data.registrationId;
-        });
-        
         document.addEventListener("pause", onPause, false);
         document.addEventListener("resume", onResume, false);
         
@@ -39,6 +35,10 @@ var app = {
         
         resize();
         socket = io.connect("http://www.divinitycomputing.com:3000");
+        
+        socket.on('missed login', function(data,callback){
+            logontochat();
+        });
         socket.on('receive message', function(data,callback){
             var datajson = JSON.parse(data);
             var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
@@ -88,6 +88,7 @@ var app = {
 
         push.on('error', function(e) {
             // e.message
+            alert(e.message);
         });
         
         document.getElementById("pagewrap").style.display = "block";
@@ -252,19 +253,23 @@ function logontochat() {
         function (response) {
         if(response != "no id") {
             userId = response;
-             socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
-            function(data) {
-                if(data == "user logged in") {
-                    console.log("logged in");
-                    loggedintochat = true;
-                }
-                else if(data == "already exists") {
-                    loggedintochat = true;
-                }
-                else {
-                    loggedintochat = false;
-                }
-            });
+             push.on('registration', function(data) {
+                 registrationPush = data.registrationId;
+                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
+                function(data) {
+                    if(data == "user logged in") {
+                        console.log("logged in");
+                        loggedintochat = true;
+                    }
+                    else if(data == "already exists") {
+                        loggedintochat = true;
+                    }
+                    else {
+                        loggedintochat = false;
+                    }
+                });
+                 
+             });
         }
         else {
             alert(response);
