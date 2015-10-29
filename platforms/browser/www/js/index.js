@@ -106,7 +106,7 @@ var app = {
                 ajaxPost(
                     "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
                     function (response) {
-                        window.localStorage.setItem("data",response)
+                        window.localStorage.setItem("data",response);
                         datapersonal = response;
                 },
                'factualid=' + fbId);
@@ -254,6 +254,7 @@ var userId;
 
 var registrationPush;
 function logontochat(numify) {
+    alert("log in attempt");
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
@@ -533,7 +534,7 @@ function register() {
 }
 function mainScreen() {
     newPage("mainscreen.html");
-    logontochat();
+    logontochat(0);
     searchProfile();
 }
 function searchProfile() {
