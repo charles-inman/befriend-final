@@ -172,17 +172,24 @@ var app = {
 };
             function onPause() {
                  socket.emit('offapp', userId, function(data) {
-                    if(data == "disconnected") {
+                    if(data == "logged in") {
                         loggedintochat = false;
+                    }
+                    else {
+                        logontochat(1);
                     }
                 });
             }
             function onResume() {
                  socket.emit('onapp', userId, function(data) {
-                    if(data == "loggedin") {
+                    if(data == "logged in") {
                         console.log("logged in");
                         loggedintochat = true;
                     }
+                     else {
+                        loggedintochat = true;
+                        logontochat();
+                     }
                 });
             }
 
@@ -193,7 +200,6 @@ var app = {
                 var x = 0.01; 
                 var rem;
                     rem = x * w;
-                console.log("width " + w + " rem: " + rem);
                 document.documentElement.style.fontSize = rem + 'px';
             }
 var fullJSON;
@@ -247,7 +253,7 @@ var loggedintochat = false;
 var userId;
 
 var registrationPush;
-function logontochat() {
+function logontochat(numify) {
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (response) {
@@ -260,6 +266,9 @@ function logontochat() {
                     if(data == "user logged in") {
                         console.log("logged in");
                         loggedintochat = true;
+                        if(numify == 1) {
+                            onPause();
+                        }
                     }
                     else if(data == "already exists") {
                         loggedintochat = true;
