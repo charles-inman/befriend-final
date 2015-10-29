@@ -17,8 +17,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         
-        push = PushNotification.init({ "android": {"senderID": "355324533451"},
-         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+        
         
         document.addEventListener("pause", onPause, false);
         document.addEventListener("resume", onResume, false);
@@ -75,20 +74,6 @@ var app = {
                 messagemain.appendChild(messagetime);
                 document.getElementById("messagesarchive").appendChild(messagemain);
             }
-        });
-
-        push.on('notification', function(data) {
-            // data.message,
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
-        });
-
-        push.on('error', function(e) {
-            // e.message
-            alert(e.message);
         });
         
         document.getElementById("pagewrap").style.display = "block";
@@ -260,6 +245,23 @@ function logontochat(numify) {
         function (response) {
         if(response != "no id") {
             userId = response;
+            push = PushNotification.init({ "android": {"senderID": "355324533451"},
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+
+            push.on('notification', function(data) {
+                // data.message,
+                // data.title,
+                // data.count,
+                // data.sound,
+                // data.image,
+                // data.additionalData
+            });
+
+            push.on('error', function(e) {
+                // e.message
+                alert(e.message);
+            });
+            
              push.on('registration', function(data) {
                  registrationPush = data.registrationId;
                  socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
