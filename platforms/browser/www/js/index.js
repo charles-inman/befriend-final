@@ -261,6 +261,31 @@ function logontochat(numify) {
                 alert(e.message);
             });
             
+             push.on('registration', function(data) {
+                 registrationPush = data.registrationId;
+                 ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/setpush.php", 
+                function (response) {
+                         socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
+                        function(data) {
+                            if(data == "user logged in") {
+                                console.log("logged in");
+                                loggedintochat = true;
+                                if(numify == 1) {
+                                    onPause();
+                                }
+                            }
+                            else if(data == "already exists") {
+                                loggedintochat = true;
+                            }
+                            else {
+                                loggedintochat = false;
+                            }
+                        });
+                 
+                },
+                'id=' + userId + "&pushnote=" + registrationPush );
+             });
         }
         else {
             alert(response);
