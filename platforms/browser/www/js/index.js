@@ -216,8 +216,8 @@ function registerGetInfo() {
 				var datesset = result.birthday.split('/');
 				idc("description").value = profileJSON.bio;
                 idc("description").setAttribute("textdet", profileJSON.bio);
-            if(idc("description").value == "undefined") {
-                idc("description").value = "";
+                if(idc("description").value == "undefined") {
+                    idc("description").value = "";
                 idc("description").setAttribute("textdet", "");
             }
 			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";

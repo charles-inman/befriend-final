@@ -49,6 +49,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.divinity.befriend"
+        },
+        "phonegap-plugin-push": {
+            "PACKAGE_NAME": "com.divinity.smallworld"
         }
     },
     "dependent_plugins": {}
