@@ -263,23 +263,28 @@ function logontochat(numify) {
             
              push.on('registration', function(data) {
                  registrationPush = data.registrationId;
-                 socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
-                function(data) {
-                    if(data == "user logged in") {
-                        console.log("logged in");
-                        loggedintochat = true;
-                        if(numify == 1) {
-                            onPause();
-                        }
-                    }
-                    else if(data == "already exists") {
-                        loggedintochat = true;
-                    }
-                    else {
-                        loggedintochat = false;
-                    }
-                });
+                 ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/setpush.php", 
+                function (response) {
+                         socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
+                        function(data) {
+                            if(data == "user logged in") {
+                                console.log("logged in");
+                                loggedintochat = true;
+                                if(numify == 1) {
+                                    onPause();
+                                }
+                            }
+                            else if(data == "already exists") {
+                                loggedintochat = true;
+                            }
+                            else {
+                                loggedintochat = false;
+                            }
+                        });
                  
+                },
+                'id=' + userId + "&pushnote=" + registrationPush );
              });
         }
         else {
