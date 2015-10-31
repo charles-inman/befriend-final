@@ -263,6 +263,7 @@ function logontochat(numify) {
             
              push.on('registration', function(data) {
                  registrationPush = data.registrationId;
+                 alert(registrationPush);
                  ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/setpush.php", 
                 function (response) {
