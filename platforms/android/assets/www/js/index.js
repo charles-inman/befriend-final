@@ -34,7 +34,6 @@ var app = {
         
         assignSockets();
         
-        document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
@@ -58,8 +57,20 @@ var app = {
             personalJSON = JSON.parse(datapersonal);
             
             mainScreen();
+            
+            var tlaa = new TimelineMax();
+                tlaa.set(document.getElementById("pagewrap"), {display:"block"})
+                .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
+                .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
+                .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
         }
         else {
+            
+            var tlaa = new TimelineMax();
+                tlaa.set(document.getElementById("pagewrap"), {display:"block"})
+                .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
+                .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
+                .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
             document.getElementById("fblog").style.display = "block";
             document.getElementById("fblog").addEventListener("click", function() {
                 app.fblogin();
@@ -148,7 +159,7 @@ var app = {
                         updateScroll();
                     }
                     else {
-                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"]));
+                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"])));
                     }
                 });
             }
@@ -173,6 +184,7 @@ var fbId;
 var messageCount = 0;
 	
 function registerGetInfo() {
+    
 	newPage("register.html");
 	
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
