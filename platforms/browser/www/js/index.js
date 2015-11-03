@@ -35,46 +35,7 @@ var app = {
         resize();
         socket = io.connect("http://www.divinitycomputing.com:3000");
         
-        socket.on('missed login', function(data,callback){
-            logontochat();
-        });
-        socket.on('receive message', function(data,callback){
-            var datajson = JSON.parse(data);
-            var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
-            if(arc == datajson["toid"]) {
-                var messagemain = document.createElement("div");
-                var messageimage = document.createElement("img");
-                messagemain.className = "sentfromuser";
-                messageimage.src = datajson["profileImage"];
-
-                var messagesent = document.createElement("p");
-                var messagetime = document.createElement("p");
-
-                messagesent.innerHTML = datajson["message"];
-                messagetime.innerHTML = timeSince(new Date(datajson["time"]));
-                messagemain.appendChild(messagesent);
-                messagemain.appendChild(messageimage);
-                messagemain.appendChild(messagetime);
-                document.getElementById("messagesarchive").appendChild(messagemain);
-            }
-            else {
-                var messagemain = document.createElement("div");
-                var messageimage = document.createElement("img");
-
-                    messagemain.className = "senttouser";
-                    messageimage.src = otherUserImageSrc;
-
-                var messagesent = document.createElement("p");
-                var messagetime = document.createElement("p");
-
-                messagesent.innerHTML = datajson["message"];
-                messagetime.innerHTML = timeSince(new Date(datajson["time"]));
-                messagemain.appendChild(messageimage);
-                messagemain.appendChild(messagesent);
-                messagemain.appendChild(messagetime);
-                document.getElementById("messagesarchive").appendChild(messagemain);
-            }
-        });
+        assignSockets();
         
         document.getElementById("pagewrap").style.display = "block";
         usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
@@ -166,6 +127,8 @@ var app = {
                 });
             }
             function onResume() {
+                socket = io.connect("http://www.divinitycomputing.com:3000");
+                assignSockets();
                  socket.emit('onapp', userId, function(data) {
                     if(data == "logged in") {
                         console.log("logged in");
@@ -177,7 +140,22 @@ var app = {
                      }
                 });
             }
-
+            function assignSockets () {
+                socket.on('missed login', function(data,callback){
+                    logontochat();
+                });
+                socket.on('receive message', function(data,callback){
+                    var datajson = JSON.parse(data);
+                    var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
+                    if(arc == datajson["toid"]) {
+                        setupMessage(0, datajson["profileImage"], datajson["message"], timeSince(toDateTime(datajson["time"])));
+                        updateScroll();
+                    }
+                    else {
+                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"]));
+                    }
+                });
+            }
             function resize() {
                 var w = document.documentElement.clientWidth;
                 var styleSheet = document.styleSheets[0];
@@ -196,6 +174,7 @@ var personalJSON;
 var push;
 var fbId;    
 
+var messageCount = 0;
 	
 function registerGetInfo() {
 	newPage("register.html");
@@ -263,7 +242,6 @@ function logontochat(numify) {
             
              push.on('registration', function(data) {
                  registrationPush = data.registrationId;
-                 alert(registrationPush);
                  ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/setpush.php", 
                 function (response) {
@@ -582,7 +560,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
     'fbid=' + fbId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
 }
 var dataFromLocation;
-/* Users Details */
 var usersProcessed;
 
 function transformUserData() {
@@ -728,10 +705,33 @@ function genderChange(type) {
         window.localStorage.setItem("genderlook", "-1");
     }
 }
+
+function setupMessage(messageType, imageurl, message,time) {
+    var messagemain = document.createElement("div");
+    var messageimage = document.createElement("img");
+    var messagesent = document.createElement("p");
+    var messagetime = document.createElement("p");
+    if(messageType == 0) {
+        messagemain.className = "sentfromuser";
+        messagemain.appendChild(messagesent);
+        messagemain.appendChild(messageimage);
+    }
+    else {
+        messagemain.className = "senttouser";
+        messagemain.appendChild(messageimage);
+        messagemain.appendChild(messagesent);
+    }
+    messageimage.src = imageurl;
+
+    messagesent.innerHTML = message;
+    messagetime.innerHTML = time;
+    messagemain.appendChild(messagetime);
+    document.getElementById("messagesarchive").appendChild(messagemain);
+}
+
 function sendMessagetouser() {
     var d = new Date();
-     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
-    
+     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
     
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
@@ -932,7 +932,6 @@ function startXPositions() {
 }
 
 var acceptedids;
-var otherUserImageSrc = "";
 function messageToRecieve() {
     var myNode = document.getElementById("mainMessagesContainer");
     
@@ -1001,7 +1000,15 @@ function timeSince(date) {
 
     return Math.floor(seconds) + " seconds ago";
 }
+function toDateTime(secs) {
+    var t = new Date(1970,0,1);
+    t.setSeconds(secs);
+    return t;
+}
 function getLastMessages(mainuserofchat) {
+    
+    
+    
     var idcheck = mainuserofchat.getAttribute("messagerid");
     document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
@@ -1017,32 +1024,22 @@ function getLastMessages(mainuserofchat) {
             function (messagereturn) {
                 var messagesinfo = JSON.parse(messagereturn);
                 for(i = 0; i < messagesinfo["rmeg"].length;i++) {
-                    var messagemain = document.createElement("div");
-                    var messageimage = document.createElement("img");
-                    var messagesent = document.createElement("p");
-                    var messagetime = document.createElement("p");
-                    console.log(messagesinfo["rmeg"][i].fromuser + " " + userId);
+                    
                     if(messagesinfo["rmeg"][i].fromuser == userId) {
-                        messagemain.className = "sentfromuser";
-                        messageimage.src = personalJSON["personalData"]["profileImage"];
-                        messagemain.appendChild(messagesent);
-                        messagemain.appendChild(messageimage);
+                       setupMessage(0, personalJSON["personalData"]["profileImage"], messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
                     }
                     else {
-                        messagemain.className = "senttouser";
-                        messageimage.src = mainuserofchat.getAttribute("otheruserimage");
-                        messagemain.appendChild(messageimage);
-                        messagemain.appendChild(messagesent);
+                        setupMessage(1, mainuserofchat.getAttribute("otheruserimage"), messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
                     }
-
-                    messagesent.innerHTML = messagesinfo["rmeg"][i]["messagesync"];
-                    messagetime.innerHTML = timeSince(new Date(messagesinfo["rmeg"][i]["time"]));
-                    messagemain.appendChild(messagetime);
-                    document.getElementById("messagesarchive").appendChild(messagemain);
+                    
                 }
-                document.getElementById("messagesarchive").scrollTop = document.getElementById("messagesarchive").scrollHeight * 1.1;
+                updateScroll();
         },
             'secondaryid=' + idcheck + "&primeid=" + userId);
+}
+function updateScroll(){
+    var element = document.getElementById("messagesarchive");
+    element.scrollTop = element.scrollHeight - element.clientHeight; 
 }
 function closeMainMessages() {
     var tl = new TimelineMax();
