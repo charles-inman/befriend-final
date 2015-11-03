@@ -148,7 +148,7 @@ var app = {
                         updateScroll();
                     }
                     else {
-                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"])));
+                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"]));
                     }
                 });
             }

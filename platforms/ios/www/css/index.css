@@ -1198,3 +1198,174 @@ img.backButton {
     -webkit-filter: hue-rotate(360deg);
   }
 }
+.body h2 {
+  position: absolute;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  left: 50%;
+  top: 58%;
+  margin-left: -20px;
+}
+
+.body {
+  position: absolute;
+  top: 50%;
+  margin-left: -50px;
+  left: 50%;
+  -webkit-animation: speeder .4s linear infinite;
+  animation: speeder .4s linear infinite;
+}
+
+.body > span {
+  height: 55px;
+  width: 150px;
+  position: absolute;
+  top: -59px;
+  left: 0px;
+  background-image:url(http://www.divinitycomputing.com/apps/beoples/logo-side.png);
+  background-position:center;
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+
+.body > span > span:nth-child(1),
+.body > span > span:nth-child(2),
+.body > span > span:nth-child(3),
+.body > span > span:nth-child(4){
+  width: 30px;
+  height: 1px;
+  background: #ff0b25;
+  position: absolute;
+  -webkit-animation: fazer1 .2s linear infinite;
+  animation: fazer1 .2s linear infinite;
+  top:21px;
+}
+
+.body > span > span:nth-child(2) {
+  top: 25px;
+   -webkit-animation: fazer2 .4s linear infinite;
+   animation: fazer2 .4s linear infinite;
+}
+
+.body > span > span:nth-child(3) {
+  top: 29px;
+   -webkit-animation: fazer3 .4s linear infinite;
+   animation: fazer3 .4s linear infinite;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+.body > span > span:nth-child(4) {
+  top: 33px;
+   -webkit-animation: fazer4 1s linear infinite;
+   animation: fazer4 1s linear infinite;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+@-webkit-keyframes fazer1 {0% {left: 30px;} 100% {left: -80px;opacity: 0;}}
+
+@keyframes fazer1 {0% {left: 30px;} 100% {left: -80px;opacity: 0;}}
+
+@-webkit-keyframes fazer2 {0% {left: 30px;} 100% {left: -100px;opacity: 0;}}
+
+@keyframes fazer2 {0% {left: 30px;} 100% {left: -100px;opacity: 0;}}
+
+@-webkit-keyframes fazer3 {0% {left: 30px;} 100% {left: -50px;opacity: 0;}}
+
+@keyframes fazer3 {0% {left: 30px;} 100% {left: -50px;opacity: 0;}}
+
+@-webkit-keyframes fazer4 {0% {left: 30px;} 100% {left: -150px;opacity: 0;}}
+
+@keyframes fazer4 {0% {left: 30px;} 100% {left: -150px;opacity: 0;}}
+
+@-webkit-keyframes speeder {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -3px) rotate(-1deg); transform: translate(-1px, -3px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-2px, 0px) rotate(1deg); transform: translate(-2px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(1px, 2px) rotate(0deg); transform: translate(1px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 3px) rotate(-1deg); transform: translate(-1px, 3px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-1px, 1px) rotate(0deg); transform: translate(-1px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(3px, 1px) rotate(-1deg); transform: translate(3px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-2px, -1px) rotate(1deg); transform: translate(-2px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 1px) rotate(0deg); transform: translate(2px, 1px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes speeder {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -3px) rotate(-1deg); transform: translate(-1px, -3px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-2px, 0px) rotate(1deg); transform: translate(-2px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(1px, 2px) rotate(0deg); transform: translate(1px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 3px) rotate(-1deg); transform: translate(-1px, 3px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-1px, 1px) rotate(0deg); transform: translate(-1px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(3px, 1px) rotate(-1deg); transform: translate(3px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-2px, -1px) rotate(1deg); transform: translate(-2px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 1px) rotate(0deg); transform: translate(2px, 1px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.longfazers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.longfazers span {
+  position: absolute;
+  height: 2px;
+  width: 20%;
+  background: #000;
+}
+
+.longfazers span:nth-child(1) {
+  top: 20%;
+  -webkit-animation: lf .6s linear infinite;
+  animation: lf .6s linear infinite;
+  -webkit-animation-delay: -5s;
+  animation-delay: -5s;
+}
+
+.longfazers span:nth-child(2) {
+  top: 40%;
+  -webkit-animation: lf2 .8s linear infinite;
+  animation: lf2 .8s linear infinite; 
+  -webkit-animation-delay: -1s; 
+  animation-delay: -1s;
+}
+
+.longfazers span:nth-child(3) {
+  top: 60%;
+  -webkit-animation: lf3 .6s linear infinite;
+  animation: lf3 .6s linear infinite; 
+}
+
+.longfazers span:nth-child(4) {
+  top: 80%;
+  -webkit-animation: lf4 .5s linear infinite;
+  animation: lf4 .5s linear infinite; 
+  -webkit-animation-delay: -3s; 
+  animation-delay: -3s;
+}
+
+@-webkit-keyframes lf {0% {left: 200%;} 100% {left: -200%;opacity: 0;}}
+
+@keyframes lf {0% {left: 200%;} 100% {left: -200%;opacity: 0;}}
+@-webkit-keyframes lf2 {0% {left: 200%;} 100% {left: -200%;opacity: 0;}}
+@keyframes lf2 {0% {left: 200%;} 100% {left: -200%;opacity: 0;}}
+@-webkit-keyframes lf3 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
+@keyframes lf3 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
+@-webkit-keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
+@keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
+.rocketLoader {
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:0;
+    left:0;
+    top:0;
+  background-color: #fff;
+}
