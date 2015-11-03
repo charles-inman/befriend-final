@@ -58,19 +58,10 @@ var app = {
             
             mainScreen();
             
-            var tlaa = new TimelineMax();
-                tlaa.set(document.getElementById("pagewrap"), {display:"block"})
-                .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
-                .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
-                .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
         }
         else {
             
-            var tlaa = new TimelineMax();
-                tlaa.set(document.getElementById("pagewrap"), {display:"block"})
-                .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
-                .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
-                .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
+           showMainScreen();
             document.getElementById("fblog").style.display = "block";
             document.getElementById("fblog").addEventListener("click", function() {
                 app.fblogin();
@@ -146,6 +137,13 @@ var app = {
                         logontochat();
                      }
                 });
+            }
+            function showMainScreen() {
+                var tlaa = new TimelineMax();
+                    tlaa.set(document.getElementById("pagewrap"), {display:"block"})
+                    .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
+                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
+                    .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
             }
             function assignSockets () {
                 socket.on('missed login', function(data,callback){
@@ -527,6 +525,8 @@ function register() {
 }
 function mainScreen() {
     newPage("mainscreen.html");
+    
+    showMainScreen();
     logontochat(0);
     searchProfile();
 }
