@@ -1198,7 +1198,16 @@ img.backButton {
     -webkit-filter: hue-rotate(360deg);
   }
 }
-.body h2 {
+.rocketLoader {
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:0;
+    left:0;
+    top:0;
+  background-color: #fff;
+}
+.rocketLoader h2 {
   position: absolute;
   font-weight: 600;
   font-size: 12px;
@@ -1360,12 +1369,4 @@ img.backButton {
 @keyframes lf3 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
 @-webkit-keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
 @keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
-.rocketLoader {
-    position:absolute;
-    width:100%;
-    height:100%;
-    z-index:0;
-    left:0;
-    top:0;
-  background-color: #fff;
-}
+
