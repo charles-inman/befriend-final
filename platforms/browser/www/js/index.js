@@ -16,9 +16,6 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
-        
-        
         document.addEventListener("pause", onPause, false);
         document.addEventListener("resume", onResume, false);
         
@@ -42,10 +39,10 @@ var app = {
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
         ajaxGet(
-                    'js/interests-1.json', 
-                    function (response) {
-                        interestJSON = JSON.parse(response);
-                });
+            'js/interests-1.json', 
+            function (response) {
+                interestJSON = JSON.parse(response);
+        });
         if(regs == "active" && fbId.length != 0) {
             var datapersonal = window.localStorage.getItem("data");
             if(datapersonal === null || datapersonal === 0) {
@@ -69,14 +66,13 @@ var app = {
             });
             facebookConnectPlugin.getLoginStatus(function(response) {
               if (response.status === 'connected') {
-                  app.fblogin();
+                app.fblogin();
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
-              } else if (response.status === 'not_authorized') {
-              } else {
-                // the user isn't logged in to Facebook.
               }
-		 });
+              else if (response.status === 'not_authorized') {
+              } 
+            });
         }
 		
     },
@@ -89,10 +85,10 @@ var app = {
                     function (response) {
                     if(response == "yes") {
                         ajaxPost(
-                            "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
-                            function (response) {
+                        "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
+                        function (response) {
                                 var foundjson = JSON.parse(response);
-                                window.localStorage.setItem("data",response)
+                                window.localStorage.setItem("data",response);
                                 personalJSON = foundjson;
                                 mainScreen();
                         },
@@ -152,7 +148,7 @@ var app = {
                         updateScroll();
                     }
                     else {
-                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"]));
+                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"])));
                     }
                 });
             }
