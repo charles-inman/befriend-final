@@ -530,12 +530,11 @@ function mainScreen() {
     showMainScreen();
     searchProfile();
 }
-var viewprofAnim = new TimelineMax(repeat:-1, repeatDelay:1);
+var viewprofAnim = new TimelineMax({repeat:-1, repeatDelay:1});
 function searchProfile() {
-    viewprofAnim.fromTo(document.getElementById("seachUserLoader").children, 0.7, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Circ.easeOut},0.3);
+    viewprofAnim.staggerFromTo(document.getElementById("seachUserLoader").children, 0.7, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Circ.easeOut},0.3);
     var tlaa = new TimelineMax();
-        tlaa
-        .set(document.getElementById("seachUserLoader"), {display:"block"})
+        tlaa.set(document.getElementById("seachUserLoader"), {display:"block"})
             .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
         .set(document.getElementById("viewprofile"), {display:"none"});
