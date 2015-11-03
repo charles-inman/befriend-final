@@ -143,7 +143,7 @@ var app = {
                     tlaa.set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
-                    .set(document.getElementsByClassName("rocketLoader")[0], {display:"block"});
+                    .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
             function assignSockets () {
                 socket.on('missed login', function(data,callback){
@@ -526,11 +526,16 @@ function register() {
 function mainScreen() {
     newPage("mainscreen.html");
     
-    showMainScreen();
     logontochat(0);
+    showMainScreen();
     searchProfile();
 }
+var viewprofAnim = new TimelineMax();
 function searchProfile() {
+    
+    var tlaa = new TimelineMax();
+        tlaa.fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+        .set(document.getElementById("viewprofile"), {display:"none"});
     var onSuccess = function(position) {
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
@@ -548,13 +553,13 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     document.getElementById("viewprofile").innerHTML = "";
-      document.getElementById("viewprofile").style.display = "none";
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
-            document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button>";
+                        viewprofAnim.pause();
+            document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                 .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
@@ -582,8 +587,7 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
-                        console.log("viewprofilebb");
-                        console.log(viewprofilebb);
+                        viewprofAnim.pause();
                         setdataViewprofile(JSON.parse(viewprofilebb));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})

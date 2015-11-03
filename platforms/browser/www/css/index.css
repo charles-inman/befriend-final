@@ -545,64 +545,24 @@ h2.none {
     text-align: center;
 }
 button.none {
-        border:0.5rem solid #1aafdb;
     display: block;
     font-size: 5rem;
     margin: auto;
-    padding: 2rem;
     background:transparent;
-width: 30%;
+    width: 80%;
+}
+div.none {
+    position: absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
 }
 .thumbsup {
     margin: 20px auto;
     display: block;
     max-width: 100%;
     width: 8rem;
-}
-
-@-webkit-keyframes pulse {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-@keyframes pulse {
-  from {
-    -webkit-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-  }
-
-  to {
-    -webkit-transform: rotateY(360deg);
-    transform: rotateY(360deg);
-  }
-}
-
-.flame {
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-    -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-    -webkit-transition-timing-function: ease; /* Safari and Chrome */
-    transition-timing-function: ease;
-    width: 25%;
-}
-
-
-
-.loader {
-    width:100%;
-    background-color:#fff;
 }
 
 .burgermenu {
