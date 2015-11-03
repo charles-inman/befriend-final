@@ -15,6 +15,8 @@ html,body,#pagewrap {
 }
 #pagewrap {
     display: none;
+    position:relative;
+    z-index: 1;
 }
 h1,h2,h3,h4,h5,h6,button {
   font-family: 'Anke';
@@ -1112,7 +1114,12 @@ img.backButton {
   height: 10px;
   background: #f35626;
   color: #f35626;
-  margin: 80px auto;
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+  margin: auto;
   box-shadow: 15px 15px  0 0,
                 -15px -15px  0 0,
                 15px -15px  0 0,
@@ -1123,6 +1130,7 @@ img.backButton {
                 0 -15px 0 0;
   -webkit-animation: anim 2s linear infinite;
   animation: anim 2s linear infinite;
+    z-index:0;
 }
 
 @-webkit-keyframes anim {
