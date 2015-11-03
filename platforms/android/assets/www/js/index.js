@@ -530,18 +530,20 @@ function mainScreen() {
     showMainScreen();
     searchProfile();
 }
-var viewprofAnim = new TimelineMax();
+var viewprofAnim = new TimelineMax(repeat:-1, repeatDelay:1);
 function searchProfile() {
-    
+    viewprofAnim.fromTo(document.getElementById("seachUserLoader").children, 0.7, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Circ.easeOut},0.3);
     var tlaa = new TimelineMax();
-        tlaa.fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+        tlaa
+        .set(document.getElementById("seachUserLoader"), {display:"block"})
+            .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
         .set(document.getElementById("viewprofile"), {display:"none"});
     var onSuccess = function(position) {
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
     // onError Callback receives a PositionError object
-    //
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
@@ -553,12 +555,18 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     document.getElementById("viewprofile").innerHTML = "";
+    var tlaa = new TimelineMax();
+        tlaa
+        .set(document.getElementById("viewprofile"), {display:"block"})
+            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+            .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+        .set(document.getElementById("seachUserLoader"), {display:"none"});
+            viewprofAnim.pause();
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
-                        viewprofAnim.pause();
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("viewprofile"), {display:"block"})
@@ -589,10 +597,6 @@ function transformUserData() {
                     else {
                         viewprofAnim.pause();
                         setdataViewprofile(JSON.parse(viewprofilebb));
-                        var tlaa = new TimelineMax();
-                            tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
                         if(dataFromLocation.userprofiles.length != 0) {
                                 ajaxGet(

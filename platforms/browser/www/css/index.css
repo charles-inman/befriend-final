@@ -1330,3 +1330,38 @@ img.backButton {
 @-webkit-keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
 @keyframes lf4 {0% {left: 200%;} 100% {left: -100%;opacity: 0;}}
 
+
+#seachUserLoader img {
+    right:0;
+    margin:auto;
+    max-width:50%;
+    position:absolute;
+}
+#seachUserLoader img:nth-child(1) {
+    bottom: 10%;
+}
+#seachUserLoader img:nth-child(2) {
+    left: 60%;
+    bottom: 25%;
+    max-width:40%;
+}
+#seachUserLoader img:nth-child(3) {
+    left: -60%;
+    bottom: 34%;
+    max-width:35%;
+}
+#seachUserLoader img:nth-child(4) {
+    left: -7%;
+    bottom: 51%;
+    max-width:30%;
+}
+#seachUserLoader img:nth-child(5) {
+    left: 54%;
+    bottom: 62%;
+    max-width:25%;
+}
+#seachUserLoader img:nth-child(6) {
+    left: -58%;
+    bottom: 73%;
+    max-width:20%;
+}
