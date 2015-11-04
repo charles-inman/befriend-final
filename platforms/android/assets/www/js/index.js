@@ -110,7 +110,7 @@ var app = {
 
 			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 				fbLoginSuccess,
-				function (error) { console.warn("" + error); }
+				function (error) { console.warn("" + error) }
 			);
 	}
 };
@@ -139,8 +139,8 @@ var app = {
                 });
             }
             function showMainScreen() {
-                var mainScreenShow = new TimelineMax();
-                    mainScreenShow.set(document.getElementById("pagewrap"), {display:"block"})
+                var tlaa = new TimelineMax();
+                    tlaa.set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
@@ -531,14 +531,13 @@ function mainScreen() {
     searchProfile();
 }
 function searchProfile() {
-    console.log("Is searching");
-   document.getElementById("seachUserLoader").style.display = "block";
+    
     var onSuccess = function(position) {
-         console.log(position.coords.longitude);
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
     // onError Callback receives a PositionError object
+    //
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
@@ -550,13 +549,10 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     document.getElementById("viewprofile").innerHTML = "";
-    document.getElementById("viewprofile").style.display = "block";
-          console.log("get location");
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
-        alert(response);
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
         }
@@ -585,6 +581,10 @@ function transformUserData() {
                     else {
                         viewprofAnim.pause();
                         setdataViewprofile(JSON.parse(viewprofilebb));
+                        var tlaa = new TimelineMax();
+                            tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
                         if(dataFromLocation.userprofiles.length != 0) {
                                 ajaxGet(
