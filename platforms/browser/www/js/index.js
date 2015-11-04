@@ -139,8 +139,8 @@ var app = {
                 });
             }
             function showMainScreen() {
-                var tlaa = new TimelineMax();
-                    tlaa.set(document.getElementById("pagewrap"), {display:"block"})
+                var mainScreenShow = new TimelineMax();
+                    mainScreenShow.set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
@@ -530,10 +530,9 @@ function mainScreen() {
     showMainScreen();
     searchProfile();
 }
-var viewprofAnim = new TimelineMax({repeat:-1, repeatDelay:1});
 function searchProfile() {
-    var tlaa = new TimelineMax();
-        tlaa.set(document.getElementById("seachUserLoader"), {display:"block"})
+    var viewprofAnim = new TimelineMax();
+        viewprofAnim.set(document.getElementById("seachUserLoader"), {display:"block"})
         .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.05)
         .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.05)
         .set(document.getElementById("viewprofile"), {display:"none"});
