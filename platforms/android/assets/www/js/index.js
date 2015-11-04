@@ -532,11 +532,7 @@ function mainScreen() {
 }
 function searchProfile() {
     console.log("Is searching");
-    var viewprofAnim = new TimelineMax();
-        viewprofAnim.set(document.getElementById("seachUserLoader"), {display:"block"})
-        .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.05)
-        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.05)
-        .set(document.getElementById("viewprofile"), {display:"none"});
+   document.getElementById("seachUserLoader").style.display = "block";
     var onSuccess = function(position) {
          console.log(position.coords.longitude);
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
