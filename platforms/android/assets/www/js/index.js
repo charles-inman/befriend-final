@@ -532,11 +532,10 @@ function mainScreen() {
 }
 var viewprofAnim = new TimelineMax({repeat:-1, repeatDelay:1});
 function searchProfile() {
-    viewprofAnim.staggerFromTo(document.getElementById("seachUserLoader").children, 0.7, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Circ.easeOut},0.3);
     var tlaa = new TimelineMax();
         tlaa.set(document.getElementById("seachUserLoader"), {display:"block"})
-            .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+        .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.05)
+        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.05)
         .set(document.getElementById("viewprofile"), {display:"none"});
     var onSuccess = function(position) {
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
@@ -556,10 +555,12 @@ function getUsersBaseOnLocation(longitude,latitude) {
     document.getElementById("viewprofile").innerHTML = "";
     var soprof = new TimelineMax();
         soprof.set(document.getElementById("viewprofile"), {display:"block"})
-            .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-            .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-        .set(document.getElementById("seachUserLoader"), {display:"none"});
+        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.55)
+        .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.55)
+        .set(document.getElementById("seachUserLoader"), {display:"none"})
+        .set(document.getElementById("viewprofile"), {display:"block", onComplete:function() {
             viewprofAnim.pause();
+        }});
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
