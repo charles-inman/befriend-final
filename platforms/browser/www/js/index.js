@@ -543,6 +543,9 @@ function searchProfile() {
               'message: ' + error.message + '\n');
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    
+    document.getElementById("seachUserLoader").style.display = "block";
+    TweenLite.staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
     if(!window.localStorage.getItem("distance")) {
@@ -553,6 +556,9 @@ function getUsersBaseOnLocation(longitude,latitude) {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
+            
+        document.getElementById("seachUserLoader").style.display = "none";
+        document.getElementById("viewprofile").style.display = "block";
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
         }

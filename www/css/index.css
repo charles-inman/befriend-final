@@ -550,6 +550,7 @@ button.none {
     margin: auto;
     background:transparent;
     width: 80%;
+    border:0;
 }
 div.none {
     position: absolute;
