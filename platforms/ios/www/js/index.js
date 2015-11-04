@@ -554,9 +554,8 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     document.getElementById("viewprofile").innerHTML = "";
-    var tlaa = new TimelineMax();
-        tlaa
-        .set(document.getElementById("viewprofile"), {display:"block"})
+    var soprof = new TimelineMax();
+        soprof.set(document.getElementById("viewprofile"), {display:"block"})
             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
             .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
         .set(document.getElementById("seachUserLoader"), {display:"none"});
@@ -567,9 +566,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
         function (response) {
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
-            var tlaa = new TimelineMax();
-                tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5);
         }
         else {
         
