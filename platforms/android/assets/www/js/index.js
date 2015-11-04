@@ -553,14 +553,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         window.localStorage.setItem("distance", "50");
     }
     document.getElementById("viewprofile").innerHTML = "";
-    var soprof = new TimelineMax();
-        soprof.set(document.getElementById("viewprofile"), {display:"block"})
-        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.55)
-        .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.55)
-        .set(document.getElementById("seachUserLoader"), {display:"none"})
-        .set(document.getElementById("viewprofile"), {display:"block", onComplete:function() {
-            viewprofAnim.pause();
-        }});
+    document.getElementById("viewprofile").style.display = "block";
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
