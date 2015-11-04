@@ -110,7 +110,7 @@ var app = {
 
 			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 				fbLoginSuccess,
-				function (error) { console.warn("" + error) }
+				function (error) { console.warn("" + error); }
 			);
 	}
 };
@@ -531,14 +531,14 @@ function mainScreen() {
     searchProfile();
 }
 function searchProfile() {
-    alert("Is searching");
+    console.log("Is searching");
     var viewprofAnim = new TimelineMax();
         viewprofAnim.set(document.getElementById("seachUserLoader"), {display:"block"})
         .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.05)
         .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.05)
         .set(document.getElementById("viewprofile"), {display:"none"});
     var onSuccess = function(position) {
-        alert(position);
+         console.log(position.coords.longitude);
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
@@ -555,7 +555,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
     }
     document.getElementById("viewprofile").innerHTML = "";
     document.getElementById("viewprofile").style.display = "block";
-        alert("get location");
+          console.log("get location");
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
