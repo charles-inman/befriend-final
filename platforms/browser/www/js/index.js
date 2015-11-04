@@ -531,12 +531,14 @@ function mainScreen() {
     searchProfile();
 }
 function searchProfile() {
+    alert("Is searching");
     var viewprofAnim = new TimelineMax();
         viewprofAnim.set(document.getElementById("seachUserLoader"), {display:"block"})
         .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.05)
         .fromTo(document.getElementById("viewprofile"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.05)
         .set(document.getElementById("viewprofile"), {display:"none"});
     var onSuccess = function(position) {
+        alert(position);
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
 
@@ -553,10 +555,12 @@ function getUsersBaseOnLocation(longitude,latitude) {
     }
     document.getElementById("viewprofile").innerHTML = "";
     document.getElementById("viewprofile").style.display = "block";
+        alert("get location");
     var distance = window.localStorage.getItem("distance");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
+        alert(response);
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
         }
