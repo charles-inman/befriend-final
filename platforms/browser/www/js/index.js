@@ -534,27 +534,27 @@ function searchProfile() {
     
     var onSuccess = function(position) {
         TweenLite.set(document.getElementById("seachUserLoader").children,  {scale:"0",transformOrigin:"50% 100%"},  onComplete:function() {
-        document.getElementById("viewprofile").style.display = "none";
-    document.getElementById("seachUserLoader").style.display = "block";
-    var searchAnimation = new TimelineMax();
-        searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
-        .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
-        .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
-                if(userDef == true) {
-                    var tlaa = new TimelineMax();
-                        tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                        .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-                        .set(document.getElementById("seachUserLoader"), {display:"none"})
-                        .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-                        .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
-                }
-                else {
-                    TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1",transformOrigin:"50% 100%"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
-                        searchAnimation.restart();
-                    }});
-                }
+            document.getElementById("viewprofile").style.display = "none";
+            document.getElementById("seachUserLoader").style.display = "block";
+            var searchAnimation = new TimelineMax();
+                searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
+                .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
+                .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
+                        if(userDef == true) {
+                            var tlaa = new TimelineMax();
+                                tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                                .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+                                .set(document.getElementById("seachUserLoader"), {display:"none"})
+                                .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+                                .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                        }
+                        else {
+                            TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1",transformOrigin:"50% 100%"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
+                                searchAnimation.restart();
+                            }});
+                        }
             }});
-        }});
+        });
         
         getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
     };
@@ -580,7 +580,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         function (response) {
         if(response == "no results") {
             userDef = true;
-            document.getElementById("viewprofile").innerHTML = "<div onclick='searchProfile()'><h2 class='none'>We can't find anyone</h2><button class='none' >Try Again</button><div class='none' ></div></div>";
+            document.getElementById("viewprofile").innerHTML = "<div onclick='searchProfile()'><h2 class='none'>We can't find anyone</h2><button class='none' >Try Again</button><div class='none' ></div><img src='img/astro/main.png' /></div>";
         }
         else {
             
