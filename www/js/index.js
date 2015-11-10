@@ -544,8 +544,13 @@ function searchProfile() {
     }
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
     
+    document.getElementById("viewprofile").style.display = "none";
     document.getElementById("seachUserLoader").style.display = "block";
-    TweenLite.staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
+                        var tlaa = new TimelineMax();
+                            tlaa.set(document.getElementById("seachUserLoader"), {display:"block"})
+                            .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0",transformOrigin:"50% 100%"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
+                            .set(document.getElementById("seachUserLoader"), {display:"block"});
+  
 }
 function getUsersBaseOnLocation(longitude,latitude) {
     if(!window.localStorage.getItem("distance")) {
@@ -558,7 +563,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
         function (response) {
             
         document.getElementById("seachUserLoader").style.display = "none";
-        document.getElementById("viewprofile").style.display = "block";
         if(response == "no results") {
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
         }
@@ -585,10 +589,11 @@ function transformUserData() {
                     if(response == "no id") {
                     }
                     else {
-                        viewprofAnim.pause();
                         setdataViewprofile(JSON.parse(viewprofilebb));
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                            .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+                            .set(document.getElementById("seachUserLoader"), {display:"none"})
                             .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                         
