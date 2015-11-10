@@ -534,7 +534,7 @@ function searchProfile() {
     
     var onSuccess = function(position) {
         
-        TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%" onComplete:function() {
+        TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
             document.getElementById("viewprofile").style.display = "none";
             document.getElementById("seachUserLoader").style.display = "block";
             var searchAnimation = new TimelineMax();
