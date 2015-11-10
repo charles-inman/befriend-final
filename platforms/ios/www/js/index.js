@@ -60,7 +60,6 @@ var app = {
             
         }
         else {
-            
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("pagewrap"), {display:"block"})
                 .fromTo(document.getElementById("pagewrap"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut});
@@ -94,6 +93,8 @@ var app = {
                         function (response) {
                                 var foundjson = JSON.parse(response);
                                 window.localStorage.setItem("data",response);
+                                window.localStorage.setItem("registered", "active");
+                                window.localStorage.setItem("fbid", fbId);
                                 personalJSON = foundjson;
                                 mainScreen();
                         },
