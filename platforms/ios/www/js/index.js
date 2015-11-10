@@ -531,42 +531,41 @@ function mainScreen() {
     searchProfile();
 }
 function searchProfile() {
-    
-    var onSuccess = function(position) {
-        
+    TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"-100%",onComplete:function() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
-            document.getElementById("viewprofile").style.display = "none";
-            document.getElementById("seachUserLoader").style.display = "block";
-            var searchAnimation = new TimelineMax();
-                searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
-                .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
-                .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
-                        if(userDef == true) {
-                            var tlaa = new TimelineMax();
-                                tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                                .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-                                .set(document.getElementById("seachUserLoader"), {display:"none"})
-                                .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
-                                .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
-                        }
-                        else {
-                            TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
-                                searchAnimation.restart();
-                            }});
-                        }
+                document.getElementById("viewprofile").style.display = "none";
+                document.getElementById("seachUserLoader").style.display = "block";
+                var searchAnimation = new TimelineMax();
+                    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
+                    .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
+                    .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
+                            if(userDef == true) {
+                                var tlaa = new TimelineMax();
+                                    tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                                    .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+                                    .set(document.getElementById("seachUserLoader"), {display:"none"})
+                                    .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0.5)
+                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                            }
+                            else {
+                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
+                                    searchAnimation.restart();
+                                }});
+                            }
+                }});
             }});
-        }});
-        getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
-    };
+        var onSuccess = function(position) {
+            getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
+        };
 
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  
+        // onError Callback receives a PositionError object
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    } });
 }
 var userDef = false;
 function getUsersBaseOnLocation(longitude,latitude) {
