@@ -148,7 +148,7 @@ var app = {
                     .fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"110%",ease: Circ.easeOut})
                         .set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1.5, {x:"0%"}, {x:"100%",ease: Circ.easeOut},2)
-                    .fromTo(document.getElementById("pagewrap"), 1, {x:"-30%"}, {y:"0%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {y:"-30%"}, {y:"0%",ease: Circ.easeOut})
                     .fromTo(document.getElementById("pagewrap"), 1, {scale:1.1}, {y:0,scale:1,ease: Circ.easeOut},"-=0.2")
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
