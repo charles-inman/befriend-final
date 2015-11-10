@@ -579,7 +579,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         function (response) {
         if(response == "no results") {
             userDef = true;
-            document.getElementById("viewprofile").innerHTML = "<div onclick='searchProfile()'><h2 class='none'>We can't find anyone</h2><button class='none' >Try Again</button><div class='none' ></div><img src='img/astro/main.png' /></div>";
+            document.getElementById("viewprofile").innerHTML = "<div onclick='searchProfile()'><h2 class='none'>We can't find anyone</h2><button class='none' >Try Again</button><div class='none' ></div><img class='bigguy' src='img/astro/main.png' /></div>";
         }
         else {
             
