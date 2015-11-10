@@ -557,7 +557,7 @@ function searchProfile() {
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                             }
                             else {
-                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",Back.easeIn.config(1.7), onComplete:function() {
+                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeIn.config(1.7), onComplete:function() {
                                     searchAnimation.restart();
                                 }});
                             }
