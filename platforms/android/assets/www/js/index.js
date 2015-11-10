@@ -552,9 +552,9 @@ function searchProfile() {
                                 var tlaa = new TimelineMax();
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                                     .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
-                                    .set(document.getElementById("seachUserLoader"), {display:"none"})
                                     .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0",ease: Circ.easeOut},0.5)
-                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
+                                    .set(document.getElementById("seachUserLoader"), {display:"none"});
                             }
                             else {
                                 TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeIn.config(1.7), onComplete:function() {
