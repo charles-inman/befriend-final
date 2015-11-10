@@ -141,8 +141,9 @@ var app = {
             function showMainScreen() {
                 var tlaa = new TimelineMax();
                     tlaa.set(document.getElementById("pagewrap"), {display:"block"})
-                    .fromTo(document.getElementById("pagewrap"), 1, {y:"-100%",z:200}, {z:0,y:"0%",ease: Circ.easeOut})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {scale:1.2}, {scale:1,ease: Circ.easeOut},"-=0.2")
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
             function assignSockets () {
