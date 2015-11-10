@@ -533,18 +533,7 @@ function mainScreen() {
 function searchProfile() {
     
     var onSuccess = function(position) {
-        getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
-    };
-
-    // onError Callback receives a PositionError object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    
-    document.getElementById("viewprofile").style.display = "none";
+        document.getElementById("viewprofile").style.display = "none";
     document.getElementById("seachUserLoader").style.display = "block";
     var searchAnimation = new TimelineMax();
         searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
@@ -564,6 +553,17 @@ function searchProfile() {
                     }});
                 }
             }});
+        
+        getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
+    };
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
   
 }
 var userDef = false;
@@ -577,7 +577,7 @@ function getUsersBaseOnLocation(longitude,latitude) {
         "http://www.divinitycomputing.com/apps/beoples/locationfinder.php", 
         function (response) {
         if(response == "no results") {
-                        userDef = true;
+            userDef = true;
             document.getElementById("viewprofile").innerHTML = "<h2 class='none'>We can't find anyone</h2><button class='none' onclick='searchProfile()'>Try Again</button><div class='none' onclick='searchProfile()'></div>";
         }
         else {
