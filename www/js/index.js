@@ -145,9 +145,9 @@ var app = {
             function showMainScreen() {
                 var tlaa = new TimelineMax();
                     tlaa
-                    .fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"100%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"110%",ease: Circ.easeOut})
                         .set(document.getElementById("pagewrap"), {display:"block"})
-                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1.5, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1.5, {x:"0%"}, {x:"100%",ease: Circ.easeOut},2)
                     .fromTo(document.getElementById("pagewrap"), 1, {y:"90%"}, {y:"0%",ease: Circ.easeOut})
                     .fromTo(document.getElementById("pagewrap"), 1, {scale:1.1}, {y:0,scale:1,ease: Circ.easeOut},"-=0.2")
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
@@ -536,7 +536,7 @@ function mainScreen() {
     logontochat(0);
     showMainScreen();
     setTimeout(function(){ 
-    searchProfile(); }, 2000);
+    searchProfile(); }, 4000);
 }
 function searchProfile() {
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"-100%",onComplete:function() {
