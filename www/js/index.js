@@ -552,7 +552,7 @@ function searchProfile() {
                                 var tlaa = new TimelineMax();
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                                     .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
-                                    .fromTo(document.getElementById("viewprofile"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut},0.5)
+                                    .fromTo(document.getElementById("viewprofile"), 1, {x:0,y:"100%"}, {y:"0%",ease: Circ.easeOut},0.5)
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
                                     .set(document.getElementById("seachUserLoader"), {display:"none"});
                             }
