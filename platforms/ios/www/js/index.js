@@ -61,7 +61,6 @@ var app = {
         }
         else {
             
-           showMainScreen();
             document.getElementById("fblog").style.display = "block";
             document.getElementById("fblog").addEventListener("click", function() {
                 app.fblogin();
@@ -142,7 +141,7 @@ var app = {
                 var tlaa = new TimelineMax();
                     tlaa.set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
-                    .fromTo(document.getElementById("pagewrap"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {y:"120%"}, {y:"0%",ease: Circ.easeOut})
                     .fromTo(document.getElementById("pagewrap"), 1, {scale:1.2}, {scale:1,ease: Circ.easeOut},"-=0.2")
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
