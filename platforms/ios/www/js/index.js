@@ -544,14 +544,13 @@ function searchProfile() {
                 document.getElementById("viewprofile").style.display = "none";
                 document.getElementById("seachUserLoader").style.display = "block";
                 var searchAnimation = new TimelineMax();
-                    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
-                    .set(document.getElementById("viewprofile"), {x:0})
+                    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
                     .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
                             if(userDef == true) {
                                 var tlaa = new TimelineMax();
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                                    .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
+                                    .fromTo(document.getElementById("seachUserLoader"), 1, {x:"-100%"}, {x:"0%",ease: Circ.easeOut},0.5)
                                     .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.5)
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
                                     .set(document.getElementById("seachUserLoader"), {display:"none"});
