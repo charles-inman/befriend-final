@@ -534,7 +534,8 @@ function mainScreen() {
     
     logontochat(0);
     showMainScreen();
-    searchProfile();
+    setTimeout(function(){ 
+    searchProfile(); }, 2000);
 }
 function searchProfile() {
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"-100%",onComplete:function() {
@@ -555,7 +556,7 @@ function searchProfile() {
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                             }
                             else {
-                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
+                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0", onComplete:function() {
                                     searchAnimation.restart();
                                 }});
                             }
