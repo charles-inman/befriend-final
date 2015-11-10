@@ -93,8 +93,6 @@ var app = {
                         function (response) {
                                 var foundjson = JSON.parse(response);
                                 window.localStorage.setItem("data",response);
-                                window.localStorage.setItem("registered", "active");
-                                window.localStorage.setItem("fbid", fbId);
                                 personalJSON = foundjson;
                                 mainScreen();
                         },
@@ -145,11 +143,11 @@ var app = {
             function showMainScreen() {
                 var tlaa = new TimelineMax();
                     tlaa
-                    .fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"110%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 0.5, {y:"100%"}, {y:"100%",ease: Circ.easeOut})
                         .set(document.getElementById("pagewrap"), {display:"block"})
-                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1.5, {x:"0%"}, {x:"100%",ease: Circ.easeOut},2)
-                    .fromTo(document.getElementById("pagewrap"), 1, {y:"90%"}, {y:"0%",ease: Circ.easeOut})
-                    .fromTo(document.getElementById("pagewrap"), 1, {scale:1.1}, {y:0,scale:1,ease: Circ.easeOut},"-=0.2")
+                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {y:"120%"}, {y:"0%",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {scale:1.2}, {scale:1,ease: Circ.easeOut},"-=0.2")
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
             function assignSockets () {
@@ -536,7 +534,7 @@ function mainScreen() {
     logontochat(0);
     showMainScreen();
     setTimeout(function(){ 
-    searchProfile(); }, 4000);
+    searchProfile(); }, 2000);
 }
 function searchProfile() {
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"-100%",onComplete:function() {
@@ -553,11 +551,11 @@ function searchProfile() {
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                                     .fromTo(document.getElementById("seachUserLoader"), 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut},0.5)
                                     .set(document.getElementById("seachUserLoader"), {display:"none"})
-                                    .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0",ease: Circ.easeOut},0.5)
+                                    .fromTo(document.getElementById("viewprofile"), 1, {opacity:"0"}, {x:0,opacity:"1",ease: Circ.easeOut},0.5)
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                             }
                             else {
-                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0", onComplete:function() {
+                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1"}, {scale:"0",Back.easeIn.config(1.7), onComplete:function() {
                                     searchAnimation.restart();
                                 }});
                             }
