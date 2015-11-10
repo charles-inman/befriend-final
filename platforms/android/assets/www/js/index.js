@@ -544,6 +544,7 @@ function searchProfile() {
                 document.getElementById("viewprofile").style.display = "none";
                 document.getElementById("seachUserLoader").style.display = "block";
                 var searchAnimation = new TimelineMax();
+             searchAnimation.restart();
                     searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
                     .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
