@@ -141,8 +141,8 @@ var app = {
             function showMainScreen() {
                 var tlaa = new TimelineMax();
                     tlaa.set(document.getElementById("pagewrap"), {display:"block"})
-                    .fromTo(document.getElementById("pagewrap"), 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut})
-                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {opacity:"1"}, {opacity:"0",ease: Circ.easeOut})
+                    .fromTo(document.getElementById("pagewrap"), 1, {y:"-100%",z:200}, {z:0,y:"0%",ease: Circ.easeOut})
+                    .fromTo(document.getElementsByClassName("rocketLoader")[0], 1, {x:"0%"}, {x:"100%",ease: Circ.easeOut})
                     .set(document.getElementsByClassName("rocketLoader")[0], {display:"none"});
             }
             function assignSockets () {
@@ -537,6 +537,7 @@ function searchProfile() {
                 document.getElementById("seachUserLoader").style.display = "block";
                 var searchAnimation = new TimelineMax();
                     searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block"})
+                    .set(document.getElementById("viewprofile"), {x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
                     .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
                             if(userDef == true) {
@@ -548,7 +549,7 @@ function searchProfile() {
                                     .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
                             }
                             else {
-                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"1"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
+                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeOut.config(1.7), onComplete:function() {
                                     searchAnimation.restart();
                                 }});
                             }
