@@ -543,13 +543,13 @@ function searchProfile() {
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
-                document.getElementById("seachUserLoader").style.display = "block";
                 var searchAnimation = new TimelineMax();
-                                    searchAnimation.restart();
                     searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
                     .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
                             if(userDef == true) {
+                                searchAnimation.pause(0);
+                                searchAnimation.clear();
                                 var tlaa = new TimelineMax();
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                                     .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
