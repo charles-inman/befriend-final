@@ -539,6 +539,7 @@ function mainScreen() {
     searchProfile(); }, 4000);
 }
 function searchProfile() {
+    userDef = false;
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
@@ -559,9 +560,8 @@ function searchProfile() {
     } });
 }
 var userDef = false;
-var searchAnimation = new TimelineMax();
 function userAnimation() {
-    searchAnimation = new TimelineMax({onComplete:function() {
+    var searchAnimation = new TimelineMax({onComplete:function() {
          if(userDef == true) {
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("viewprofile"), {display:"block"})
@@ -575,11 +575,10 @@ function userAnimation() {
                 searchAnimation.restart();
             }});
         }
-    }}
-    );
+    }});
     
-        searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
-        .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
+    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
+    .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
 }
 function getUsersBaseOnLocation(longitude,latitude) {
     if(!window.localStorage.getItem("distance")) {
