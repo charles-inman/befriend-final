@@ -539,6 +539,7 @@ function mainScreen() {
     searchProfile(); }, 4000);
 }
 function searchProfile() {
+    userDef = false;
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
