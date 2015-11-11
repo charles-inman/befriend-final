@@ -543,6 +543,8 @@ function searchProfile() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
                 document.getElementById("seachUserLoader").style.display = "block";
+                TweenMax.killAll(false,true,fasle);
+                TweenMax.set(document.getElementById("seachUserLoader"), {clearProps:"all"}); 
                 var searchAnimation = new TimelineMax();
                     searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
