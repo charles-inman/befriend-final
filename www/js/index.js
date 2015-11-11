@@ -543,27 +543,7 @@ function searchProfile() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
                 document.getElementById("seachUserLoader").style.display = "block";
-                TweenMax.killAll(false,true,fasle);
-                TweenMax.set(document.getElementById("seachUserLoader"), {clearProps:"all"}); 
-                var searchAnimation = new TimelineMax();
-                    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
-                    .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
-                    .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
-                            if(userDef == true) {
-                                searchAnimation.clear();
-                                var tlaa = new TimelineMax();
-                                    tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                                    .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
-                                    .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
-                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut},"-=0.4")
-                                    .set(document.getElementById("seachUserLoader"), {display:"none"});
-                            }
-                            else {
-                                TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeIn.config(1.7), onComplete:function() {
-                                    searchAnimation.restart();
-                                }});
-                            }
-                    }});
+                userAnimation();
             }});
         var onSuccess = function(position) {
             getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
@@ -579,6 +559,32 @@ function searchProfile() {
     } });
 }
 var userDef = false;
+var usersetAnimation = false;
+var searchAnimation = new TimelineMax();
+function userAnimation() {
+    if(usersetAnimation) {
+        searchAnimation.restart();
+    }
+    else {
+        searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
+        .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
+        .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
+                if(userDef == true) {
+                    var tlaa = new TimelineMax();
+                        tlaa.set(document.getElementById("viewprofile"), {display:"block"})
+                        .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
+                        .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
+                        .fromTo(document.getElementById("viewprofile").firstChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut},"-=0.4")
+                        .set(document.getElementById("seachUserLoader"), {display:"none"});
+                }
+                else {
+                    TweenLite.fromTo(document.getElementById("seachUserLoader").children, 1, {scale:"1"}, {scale:"0",ease: Back.easeIn.config(1.7), onComplete:function() {
+                        searchAnimation.restart();
+                    }});
+                }
+        }});
+    }
+}
 function getUsersBaseOnLocation(longitude,latitude) {
     if(!window.localStorage.getItem("distance")) {
         window.localStorage.setItem("distance", "50");
