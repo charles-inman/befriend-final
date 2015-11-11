@@ -544,7 +544,7 @@ function searchProfile() {
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
         TweenMax.set(document.getElementById("seachUserLoader").children,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 TweenMax.set(document.getElementById("viewprofile"), {display: "none"});
-                TweenMax.set(document.getElementById("seachUserLoader"), {display: "block"});
+                TweenMax.set(document.getElementById("seachUserLoader"), {display: "block",x:0});
                 var searchAnimation = new TimelineMax({onComplete:function () {
                     if(userDef == true) {
                         var tlaa = new TimelineMax();
@@ -560,8 +560,7 @@ function searchProfile() {
                         }});
                     }
                 }});
-                    searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
-                    .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
+                    searchAnimation.staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3);
             }});
         var onSuccess = function(position) {
             getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
