@@ -539,12 +539,11 @@ function mainScreen() {
     searchProfile(); }, 4000);
 }
 function searchProfile() {
-    TweenMax.to(document.getElementById("viewprofile"), 0.5, {y:"-100%",onComplete:function() {
+    TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
         TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 document.getElementById("viewprofile").style.display = "none";
                 document.getElementById("seachUserLoader").style.display = "block";
                 var searchAnimation = new TimelineMax();
-                    searchAnimation.restart();
                     searchAnimation.set(document.getElementById("seachUserLoader"), {display:"block",x:0})
                     .staggerFromTo(document.getElementById("seachUserLoader").children, 0.5, {scale:"0"}, {scale:"1",ease: Back.easeOut.config(1.7)},0.3)
                     .set(document.getElementById("seachUserLoader"), {display:"block",onComplete:function() {
@@ -552,8 +551,8 @@ function searchProfile() {
                                 var tlaa = new TimelineMax();
                                     tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                                     .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
-                                    .fromTo(document.getElementById("viewprofile"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut},0.5)
-                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
+                                    .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
+                                    .fromTo(document.getElementById("viewprofile").firstChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
                                     .set(document.getElementById("seachUserLoader"), {display:"none"});
                             }
                             else {
@@ -561,7 +560,8 @@ function searchProfile() {
                                     searchAnimation.restart();
                                 }});
                             }
-                }});
+                    }});
+                    searchAnimation.restart();
             }});
         var onSuccess = function(position) {
             getUsersBaseOnLocation(position.coords.longitude,position.coords.latitude);  
