@@ -542,8 +542,9 @@ var userDef = false;
 function searchProfile() {
     userDef = false;
     TweenMax.to(document.getElementById("viewprofile"), 0.5, {x:"100%",onComplete:function() {
-        TweenMax.to(document.getElementById("seachUserLoader").children, 0.1,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
+        TweenMax.set(document.getElementById("seachUserLoader").children,  {scale:"0",transformOrigin:"50% 100%", onComplete:function() {
                 TweenMax.set(document.getElementById("viewprofile"), {display: "none"});
+                TweenMax.set(document.getElementById("seachUserLoader"), {display: "block"});
                 var searchAnimation = new TimelineMax({onComplete:function () {
                     if(userDef == true) {
                         var tlaa = new TimelineMax();
