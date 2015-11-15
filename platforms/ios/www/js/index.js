@@ -696,9 +696,8 @@ function appliedUser(type, element) {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/acceptedusers.php", 
         function (response) {
-            var jsonresponse = JSON.parse(response);
-        if(response == "success") {
-            if(type == 1) {
+        if(response == "success" || response == "match") {
+            if(response == "match") {
                 var viewprofile = document.getElementById("viewprofile").lastChild;
                 var sendJSON = '{"sentid":"' + userid +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
 
