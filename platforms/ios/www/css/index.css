@@ -1065,6 +1065,8 @@ width: 89%;margin-top: -3em;
 
 #mainMessagesContainer {
     margin-top:10rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 #mainMessagesContainer h2{
     font-size:5rem;
@@ -1378,4 +1380,39 @@ img.backButton {
     left: -58%;
     bottom: 73%;
     max-width:20%;
+}
+
+.match {
+    background-color:rgba(0,0,0,0.8);
+    display:none;
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+.matchcenter {
+    width:100%;
+    height:25rem;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    margin:auto;
+}
+.matchcenter h2 {
+    font-size:2.5rem;
+    color:#fff;
+    text-align:center;
+    margin-top:1rem;
+}
+.matchcenter h2:first-child {
+    margin-bottom:1rem;
+}
+.matchcenter img{
+    margin:0 auto;
+    border-radius:20rem;
+    display:block;
+    box-shadow: rgba(150, 255, 137, 0.701961) 0px 0px 0px 25px inset;
+    padding: 0.5rem;
 }

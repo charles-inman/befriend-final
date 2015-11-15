@@ -167,6 +167,26 @@ var app = {
                         setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"])));
                     }
                 });
+                socket.on('match found', function(data,callback){
+                    var datajson = JSON.parse(data);
+                    
+                    if(datajson["sentid"] == userId) {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
+                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["sentimage"];
+                    }
+                    else {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
+                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["toimage"];
+                    }
+                    
+                    var tl = new TimelineMax();
+
+                     tl.set(document.getElementsByClassName("match")[0], {display:"block"})
+                       .fromTo(document.getElementsByClassName("match")[0], 0.5,{opacity:0}, {opacity:1, ease:Circ.easeOut})
+                       .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[0], 0.5,{x:"-100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2")
+                       .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("img")[0], 0.5,{scale:"0",rotation:0}, {rotation:360,scale:"1", ease: Back.easeOut.config(1.7)}, "-=0.2")
+                       .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1], 0.5,{x:"100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2");
+                });
             }
             function resize() {
                 var w = document.documentElement.clientWidth;
@@ -276,7 +296,7 @@ function logontochat(numify) {
                         });
                  
                 },
-                'id=' + userId + "&pushnote=" + registrationPush );
+                'id=' + userId + "&pushnote=" + registrationPush + "&device=" + device.platform);
              });
         }
         else {
@@ -549,7 +569,7 @@ function searchProfile() {
                     if(userDef == true) {
                         var tlaa = new TimelineMax();
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
-                            .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut},0.5)
+                            .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%", ease: Power2.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
                             .fromTo(document.getElementById("viewprofile").firstChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
                             .set(document.getElementById("seachUserLoader"), {display:"none"});
@@ -640,6 +660,7 @@ function transformUserData() {
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
+    viewprofile.setAttribute("imagelink", data.personalData.profileImage);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
     var aa = document.createElement("style");
     aa.type = 'text/css';
@@ -675,43 +696,63 @@ function appliedUser(type, element) {
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/acceptedusers.php", 
         function (response) {
+            var jsonresponse = JSON.parse(response);
         if(response == "success") {
+            if(type == 1) {
+                var viewprofile = document.getElementById("viewprofile").lastChild;
+                var sendJSON = '{"sentid":"' + userid +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
 
-            var tl = new TimelineMax();
-                tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
-                    element.parentNode.removeChild(element);
-                    if(document.getElementById("viewprofile").children.length != 0) {
-                        var tl2 = new TimelineMax();
-                            tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
-
-                        if(dataFromLocation.userprofiles.length != 0) {
-                            ajaxGet(
-                                'screens/viewprofile.html', 
-                                function (response) {
-                                document.getElementById("viewprofile").innerHTML += response;
-                                    ajaxPost(
-                                        "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
-                                        function (response) {
-                                        if(response == "no id") {
-                                        }
-                                        else {
-                                            setdataViewprofile(JSON.parse(response));
-                                        }
-                                    },
-                                    'factualid=' + dataFromLocation.userprofiles[0].id );
-                            });
-                        }
+                socket.emit('check match', sendJSON, function(data) {
+                    if(data == "matched") {
+                        nextProfileView(element);
                     }
                     else {
-                        searchProfile();
+                        nextProfileView(element);
                     }
-                }});
-        }
-            else {
-                alert(response);
+
+                });
             }
+            else {
+                nextProfileView();
+            }
+        } 
+        else {
+                alert(response);
+        }
     },
-    'acceptedstate=' + type + '&fbid=' + fbId + '&touserid=' + element.getAttribute("idset") );
+    'acceptedstate=' + type + '&yourid=' + userId + '&touserid=' + element.getAttribute("idset") );
+}
+
+function nextProfileView(element) {
+    var tl = new TimelineMax();
+    tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
+        element.parentNode.removeChild(element);
+        if(document.getElementById("viewprofile").children.length != 0) {
+            var tl2 = new TimelineMax();
+                tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+
+            if(dataFromLocation.userprofiles.length != 0) {
+                ajaxGet(
+                    'screens/viewprofile.html', 
+                    function (response) {
+                    document.getElementById("viewprofile").innerHTML += response;
+                        ajaxPost(
+                            "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
+                            function (response) {
+                            if(response == "no id") {
+                            }
+                            else {
+                                setdataViewprofile(JSON.parse(response));
+                            }
+                        },
+                        'factualid=' + dataFromLocation.userprofiles[0].id );
+                });
+            }
+        }
+        else {
+            searchProfile();
+        }
+    }});
 }
 
 var genderLookUp = 2;
@@ -989,12 +1030,14 @@ function messageToRecieve() {
                 contactimage.src = datajson["personalData"]["profileImage"];
                 otherUserImageSrc = datajson["personalData"]["profileImage"];
                 contactname.innerHTML = datajson["personalData"]["firstname"];
-                if(jof[i]["mess"])
+                if(jof[i]["mess"]){
                     contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
+                    contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
+                }
                 else {
                     contactmessage.innerHTML = "no recent messages";
                 }
-                contacttime.innerHTML = timeSince(new Date(jof[i]["time"]));
+                
                 contactcreate.setAttribute("otheruserimage", datajson["personalData"]["profileImage"]);
                 contactcreate.setAttribute("otherfirstname", datajson["personalData"]["firstname"]);
                 contactcreate.setAttribute("messagerid", jof[i]["id"]);
@@ -1005,7 +1048,6 @@ function messageToRecieve() {
                 contactcreate.onclick = function() {
                     getLastMessages(contactcreate);
                 }
-                console.log("node " + document.getElementById("mainMessagesContainer").childNodes[0]);
                 document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
 	   })(i);
     },
@@ -1084,4 +1126,13 @@ function closeActiveMessages() {
         .fromTo(document.getElementById("mainMessages"), 1,{x:"100%",y:0}, {x:"0%",ease: Circ.easeOut},0)
         .set(document.getElementById("activeMessages"), {display:"none",x:"100%"})
         .set(document.getElementById("mainMessages"), {display:"block"});
+}
+function closeMatch(ele) {
+    var tlundo = new TimelineMax();
+
+     tlundo.fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[0], 0.5,{x:"0%"}, {x:"100%", ease: Back.easeIn.config(1.7)}, "-=0.2")
+       .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("img")[0], 0.5,{scale:"1",rotation:360}, {rotation:0,scale:"0", ease: Back.easeIn.config(1.7)}, "-=0.2")
+       .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1], 0.5,{x:"0%"}, {x:"-100%", ease: Back.easeIn.config(1.7)}, "-=0.2")
+       .fromTo(document.getElementsByClassName("match")[0], 0.5,{opacity:1}, {opacity:0, ease:Circ.easeOut})
+     .set(document.getElementsByClassName("match")[0], {display:"none"});
 }
