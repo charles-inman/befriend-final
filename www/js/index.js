@@ -699,24 +699,18 @@ function appliedUser(type, element) {
         if(response == "success" || response == "match") {
             if(response == "match") {
                 var viewprofile = document.getElementById("viewprofile").lastChild;
-                var sendJSON = '{"sentid":"' + userid +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
+                var sendJSON = '{"sentid":"' + userId +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
 
                 socket.emit('check match', sendJSON, function(data) {
-                    if(data == "matched") {
                         nextProfileView(element);
-                    }
-                    else {
-                        nextProfileView(element);
-                    }
-
                 });
             }
             else {
-                nextProfileView();
+                nextProfileView(element);
             }
         } 
         else {
-                alert(response);
+            alert(response);
         }
     },
     'acceptedstate=' + type + '&yourid=' + userId + '&touserid=' + element.getAttribute("idset") );
