@@ -722,7 +722,7 @@ function nextProfileView(element) {
         element.parentNode.removeChild(element);
         if(document.getElementById("viewprofile").children.length != 0) {
             var tl2 = new TimelineMax();
-                tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
 
             if(dataFromLocation.userprofiles.length != 0) {
                 ajaxGet(
