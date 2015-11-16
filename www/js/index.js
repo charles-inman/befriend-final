@@ -571,7 +571,7 @@ function searchProfile() {
                             tlaa.set(document.getElementById("viewprofile"), {display:"block"})
                             .fromTo(document.getElementById("seachUserLoader"), 1, {x:"0%"}, {x:"-100%", ease: Power2.easeOut},0.5)
                             .fromTo(document.getElementById("viewprofile"), 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut})
-                            .fromTo(document.getElementById("viewprofile").firstChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
+                            .fromTo(document.getElementById("viewprofile").lastChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut})
                             .set(document.getElementById("seachUserLoader"), {display:"none"});
                     }
                     else {
@@ -658,7 +658,7 @@ function transformUserData() {
     }
 }
 function setdataViewprofile(data) {
-    var viewprofile = document.getElementById("viewprofile").firstChild;
+    var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     viewprofile.setAttribute("imagelink", data.personalData.profileImage);
     viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
@@ -698,7 +698,7 @@ function appliedUser(type, element) {
         function (response) {
         if(response == "success" || response == "match") {
             if(response == "match") {
-                var viewprofile = document.getElementById("viewprofile").firstChild;
+                var viewprofile = document.getElementById("viewprofile").lastChild;
                 var sendJSON = '{"sentid":"' + userId +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
 
                 socket.emit('check match', sendJSON, function(data) {
@@ -722,7 +722,7 @@ function nextProfileView(element) {
         element.parentNode.removeChild(element);
         if(document.getElementById("viewprofile").children.length != 0) {
             var tl2 = new TimelineMax();
-                tl2.fromTo(document.getElementById("viewprofile").firstChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
 
             if(dataFromLocation.userprofiles.length != 0) {
                 ajaxGet(
