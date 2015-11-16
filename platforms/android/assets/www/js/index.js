@@ -691,7 +691,7 @@ function setdataViewprofile(data) {
     viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
-    TweenLite.set(viewprofile, {y:"100%"});
+    TweenLite.set(viewprofile, {x:"100%"});
 }
 function appliedUser(type, element) {
     ajaxPost(
