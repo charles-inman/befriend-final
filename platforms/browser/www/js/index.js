@@ -691,6 +691,7 @@ function setdataViewprofile(data) {
     viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
+    TweenLite.set(viewprofile, {y:"100%"});
 }
 function appliedUser(type, element) {
     ajaxPost(
@@ -722,13 +723,12 @@ function nextProfileView(element) {
         element.parentNode.removeChild(element);
         if(document.getElementById("viewprofile").children.length != 0) {
             var tl2 = new TimelineMax();
-                tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
-
+                tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut});
             if(dataFromLocation.userprofiles.length != 0) {
                 ajaxGet(
                     'screens/viewprofile.html', 
                     function (response) {
-                    document.getElementById("viewprofile").innerHTML += response;
+                        document.getElementById("viewprofile").innerHTML += response;
                         ajaxPost(
                             "http://www.divinitycomputing.com/apps/beoples/viewprofile.php", 
                             function (response) {
