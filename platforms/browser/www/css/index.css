@@ -624,7 +624,7 @@ overflow-x: hidden;
 
 .thumbs {
     width:50%;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 }
 .thumbs img{
     width:40%;

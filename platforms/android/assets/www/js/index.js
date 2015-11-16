@@ -687,7 +687,7 @@ function setdataViewprofile(data) {
         maininterests.innerHTML = "<h3>No interests</h3>";
     }
     
-    viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h3")[0].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
+    viewprofile.getElementsByClassName("whiteback")[0].getElementsByClassName("questionview")[0].innerHTML =  interestJSON.question[parseInt(data.personalData.question)].name;
     viewprofile.getElementsByClassName("whiteback")[0].getElementsByTagName("h4")[0].innerHTML =  data.personalData.answer;
     
     dataFromLocation.userprofiles.splice(0, 1);
@@ -721,10 +721,9 @@ function nextProfileView(element) {
     var tl = new TimelineMax();
     tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
         element.parentNode.removeChild(element);
-    }});
-    if(dataFromLocation.userprofiles.length != 0) {
+        if( element.parentNode.children.length == 1) {
             var tl2 = new TimelineMax();
-                tl2.fromTo(document.getElementById("viewprofile").lastChild.previousSibling, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
+                tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
             if(dataFromLocation.userprofiles.length != 0) {
                 ajaxGet(
                     'screens/viewprofile.html', 
@@ -746,6 +745,7 @@ function nextProfileView(element) {
         else {
             searchProfile();
         }
+    }});
 }
 
 var genderLookUp = 2;
@@ -1044,7 +1044,7 @@ function messageToRecieve() {
                 document.getElementById("mainMessagesContainer").insertBefore(contactcreate, document.getElementById("mainMessagesContainer").childNodes[0]);
 	   })(i);
     },
-    'fbid=' + fbId );
+    'idfound=' + userId );
 }
 function timeSince(date) {
 
