@@ -1089,6 +1089,10 @@ img.backButton {
   height: 10px;
   background: #f35626;
   color: #f35626;
+  border: 5px solid #FF4136;
+  box-shadow: 10px 0px #39CCCC, 10px 0px #01FF70;
+  -webkit-animation: shadowSpin 1s ease-in-out infinite;
+  animation: shadowSpin 1s ease-in-out infinite;
     position: absolute;
     left:0;
     top:0;
@@ -1103,76 +1107,91 @@ img.backButton {
                 15px 0  0 0,
                 -15px 0  0 0,
                 0 -15px 0 0;
-  -webkit-animation: anim 2s linear infinite;
-  animation: anim 2s linear infinite;
     z-index:0;
 }
-
-@-webkit-keyframes anim {
-  0% {
-    -webkit-filter: hue-rotate(0deg);
+@-webkit-keyframes boxSpin{
+  0%{
+    -webkit-transform: translate(-10px, 0px);
+    transform: translate(-10px, 0px);
   }
-  50% {
-    box-shadow: 20px 20px  0 0,
-                -20px -20px  0 0,
-                20px -20px  0 0,
-                -20px 20px  0 0,
-                0 10px  0 0,
-                10px 0  0 0,
-                -10px 0  0 0,
-                0 -10px 0 0;
+  25%{
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
   }
-  
-  75% {
-    box-shadow: 20px 20px  0 0,
-                -20px -20px  0 0,
-                20px -20px  0 0,
-                -20px 20px  0 0,
-                0 10px  0 0,
-                10px 0  0 0,
-                -10px 0  0 0,
-                0 -10px 0 0;
+  50%{
+    -webkit-transform: translate(10px, -10px);
+    transform: translate(10px, -10px);
   }
-  
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-filter: hue-rotate(360deg);
+  75%{
+    -webkit-transform: translate(-10px, -10px);
+    transform: translate(-10px, -10px);
+  }
+  100%{
+    -webkit-transform: translate(-10px, 10px);
+    transform: translate(-10px, 10px);
+  }
+}
+@keyframes boxSpin{
+  0%{
+    -webkit-transform: translate(-10px, 0px);
+    transform: translate(-10px, 0px);
+  }
+  25%{
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
+  }
+  50%{
+    -webkit-transform: translate(10px, -10px);
+    transform: translate(10px, -10px);
+  }
+  75%{
+    -webkit-transform: translate(-10px, -10px);
+    transform: translate(-10px, -10px);
+  }
+  100%{
+    -webkit-transform: translate(-10px, 10px);
+    transform: translate(-10px, 10px);
   }
 }
 
-@keyframes anim {
-  0% {
-    -webkit-filter: hue-rotate(0deg);
+
+@-webkit-keyframes shadowSpin{
+  0%{
+    box-shadow: 10px -10px #39CCCC, -10px 10px #FFDC00;
   }
-  50% {
-    box-shadow: 20px 20px  0 0,
-                -20px -20px  0 0,
-                20px -20px  0 0,
-                -20px 20px  0 0,
-                0 10px  0 0,
-                10px 0  0 0,
-                -10px 0  0 0,
-                0 -10px 0 0;
+  25%{
+    box-shadow: 10px 10px #39CCCC, -10px -10px #FFDC00;
   }
-  
-  75% {
-    box-shadow: 20px 20px  0 0,
-                -20px -20px  0 0,
-                20px -20px  0 0,
-                -20px 20px  0 0,
-                0 10px  0 0,
-                10px 0  0 0,
-                -10px 0  0 0,
-                0 -10px 0 0;
+  50%{
+    box-shadow: -10px 10px #39CCCC, 10px -10px #FFDC00;
   }
-  
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-filter: hue-rotate(360deg);
+  75%{
+    box-shadow: -10px -10px #39CCCC, 10px 10px #FFDC00;
+  }
+  100%{
+    box-shadow: 10px -10px #39CCCC, -10px 10px #FFDC00;
   }
 }
+
+
+@keyframes shadowSpin{
+  0%{
+    box-shadow: 10px -10px #39CCCC, -10px 10px #FFDC00;
+  }
+  25%{
+    box-shadow: 10px 10px #39CCCC, -10px -10px #FFDC00;
+  }
+  50%{
+    box-shadow: -10px 10px #39CCCC, 10px -10px #FFDC00;
+  }
+  75%{
+    box-shadow: -10px -10px #39CCCC, 10px 10px #FFDC00;
+  }
+  100%{
+    box-shadow: 10px -10px #39CCCC, -10px 10px #FFDC00;
+  }
+}
+
 .rocketLoader {
     position:absolute;
     width:100%;

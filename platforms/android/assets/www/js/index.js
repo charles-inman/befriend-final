@@ -1008,7 +1008,7 @@ function messageToRecieve() {
     var tl = new TimelineMax();
         tl.set(document.getElementById("messages"), {display:"block"})
         .to(document.getElementById("messages"), 1, {x:"0%",ease: Circ.easeOut})
-        .fromTo(document.getElementById("messangerLoader"), 0.5, {display:"block",scale:0},{scale:1,ease: Back.easeOut.config(1.7)},"-=0.5");
+        .fromTo(document.getElementById("messangerLoader"), 1, {display:"block",scale:0},{scale:1,ease: Back.easeOut.config(1.7)},"-=0.5");
     ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/retrieveusermatches.php", 
         function (response) {
@@ -1052,7 +1052,7 @@ function messageToRecieve() {
             }
             
             var tl = new TimelineMax();
-                tl.fromTo(document.getElementById("messangerLoader"), 0.5, {scale:1},{scale:0,ease:Back.easeIn.config(1.7)})
+                tl.fromTo(document.getElementById("messangerLoader"), 1, {scale:1},{scale:0,ease:Back.easeIn.config(1.7)})
                 .set(document.getElementById("messangerLoader"), {display:"none"})
                 .staggerFromTo(document.getElementById("mainMessagesContainer"), 0.4, {x:"100%"}, {x:"0%",ease: Circ.easeOut},0.3);
     },
@@ -1097,7 +1097,7 @@ function getLastMessages(mainuserofchat) {
             .fromTo(document.getElementById("mainMessages"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut, onComplete:function() {
             document.getElementById("activeMessages").style.display = "block";
         }},0)
-        .fromTo(document.getElementById("messangerLoader"), 0.5, {display:"block",scale:0},{scale:1,ease: Back.easeOut.config(1.7)},"-=0.5");
+        .fromTo(document.getElementById("messangerLoader"), 1, {display:"block",scale:0},{scale:1,ease: Back.easeOut.config(1.7)},"-=0.5");
         document.getElementById("activeMessages").setAttribute("yourid", userId);
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
@@ -1116,7 +1116,7 @@ function getLastMessages(mainuserofchat) {
                 updateScroll();
                 var lastMessageCheck = new TimelineMax();
                     lastMessageCheck
-                .fromTo(document.getElementById("messangerLoader"), 0.5, {scale:1},{scale:0,ease: Back.easeIn.config(1.7)})
+                .fromTo(document.getElementById("messangerLoader"), 1, {scale:1},{scale:0,ease: Back.easeIn.config(1.7)})
                     .set(document.getElementById("messangerLoader"), {display:"none"});
         },
             'secondaryid=' + idcheck + "&primeid=" + userId);
