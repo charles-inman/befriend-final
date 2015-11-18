@@ -1085,9 +1085,6 @@ function toDateTime(secs) {
     return t;
 }
 function getLastMessages(mainuserofchat) {
-    
-    
-    
     var idcheck = mainuserofchat.getAttribute("messagerid");
     document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
