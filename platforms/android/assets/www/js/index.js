@@ -796,28 +796,30 @@ function setupMessage(messageType, imageurl, message,time) {
 }
 
 function sendMessagetouser() {
-    var d = new Date();
-     var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
-    
-    ajaxPost(
-        "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
-        function (response) {
-        if(response == "saved") {
-            document.getElementById("messagesender").value = "";
-            socket.emit('grant message', sendJSON, function(data) {
-                if(data == "messageSent") {
-                    console.log("message in");
-                }
-                else {
-                    alert(data);
-                }
-            });
-        }
-        else {
-           alert(response);
-        }
-    },
-    'factualid=' + userId + '&toid=' + document.getElementById("messagesarchive").getAttribute("messagerid") + '&message=' + document.getElementById("messagesender").value);
+    if(document.getElementById("messagesender").value != "") {
+        var d = new Date();
+         var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
+
+        ajaxPost(
+            "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
+            function (response) {
+            if(response == "saved") {
+                document.getElementById("messagesender").value = "";
+                socket.emit('grant message', sendJSON, function(data) {
+                    if(data == "messageSent") {
+                        console.log("message in");
+                    }
+                    else {
+                        alert(data);
+                    }
+                });
+            }
+            else {
+               alert(response);
+            }
+        },
+        'factualid=' + userId + '&toid=' + document.getElementById("messagesarchive").getAttribute("messagerid") + '&message=' + document.getElementById("messagesender").value);
+    }
 }
 function openMenu(ele) {
     var tl = new TimelineMax();
