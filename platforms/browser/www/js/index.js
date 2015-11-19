@@ -1063,32 +1063,20 @@ function messageToRecieve() {
 }
 
 function timeSince(date) {
+    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"  ];
 
     var seconds = Math.floor(((new Date().getTime()/1000) - (date.getTime()/1000) )),
     interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) return interval + " years ago";
+    if (interval > 1) return date.getFullYear() + "/" + monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) return interval + " months ago";
+    if (interval > 1) return monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
     interval = Math.floor(seconds / 86400);
-    if (interval >= 1) return interval + " days ago";
+    if (interval >= 1) return monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
-    interval = Math.floor(seconds / 3600);
-    if (interval >= 1) return interval + " hours ago";
-
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) return interval + " minutes ago";
-
-    return Math.floor(seconds) + " seconds ago";
-}
-
-
-function toDateTime(secs) {
-    var t = new Date();
-    t.setSeconds(secs);
-    return t;
+    return date.getHours() + ":" + date.getMinutes();
 }
 function getLastMessages(mainuserofchat) {
 	var myNode = document.getElementById("messagesarchive");
