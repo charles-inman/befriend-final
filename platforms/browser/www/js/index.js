@@ -160,12 +160,12 @@ var app = {
                     var datajson = JSON.parse(data);
                     var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
                     if(arc == datajson["toid"]) {
-                        setupMessage(0, datajson["profileImage"], datajson["message"], timeSince(toDateTime(datajson["time"])));
-                        updateScroll();
+                        setupMessage(0, datajson["profileimage"], datajson["message"], timeSince(toDateTime(parseInt(datajson["time"]))));
                     }
                     else {
-                        setupMessage(1, datajson["profileImage"], datajson["message"], timeSince(new Date(datajson["time"])));
+                        setupMessage(1, datajson["profileimage"], datajson["message"], timeSince(toDateTime(parseInt(datajson["time"]))));
                     }
+                        updateScroll();
                 });
                 socket.on('match found', function(data,callback){
                     var datajson = JSON.parse(data);
@@ -1058,6 +1058,7 @@ function messageToRecieve() {
     },
     'idfound=' + userId );
 }
+
 function timeSince(date) {
 
     var seconds = Math.floor(((new Date().getTime()/1000) - (date.getTime()/1000) )),
@@ -1079,6 +1080,8 @@ function timeSince(date) {
 
     return Math.floor(seconds) + " seconds ago";
 }
+
+
 function toDateTime(secs) {
     var t = new Date(1970,0,1);
     t.setSeconds(secs);
