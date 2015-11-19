@@ -160,6 +160,8 @@ var app = {
                     var datajson = JSON.parse(data);
                     var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
                     if(arc == datajson["toid"]) {
+                        alert(datajson["time"] + parseInt(datajson["time"]) + toDateTime(parseInt(datajson["time"])));
+                        alert();
                         setupMessage(0, datajson["profileimage"], datajson["message"], timeSince(toDateTime(parseInt(datajson["time"]))));
                     }
                     else {
