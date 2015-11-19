@@ -254,7 +254,7 @@ function logontochat(numify) {
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (responsedata) {
-        if(response != "no id") {
+        if(responsedata != "no id") {
             userId = responsedata;
             push = PushNotification.init({ "android": {"senderID": "355324533451"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
