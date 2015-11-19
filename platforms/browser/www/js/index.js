@@ -796,6 +796,7 @@ function setupMessage(messageType, imageurl, message,time) {
 }
 
 function sendMessagetouser() {
+    document.getElementById("messagesender").focus();
     if(document.getElementById("messagesender").value != "") {
         var d = new Date();
          var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() +'"}';
@@ -1062,18 +1063,18 @@ function messageToRecieve() {
 }
 
 function timeSince(date) {
-    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"  ];
+    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
 
     var seconds = Math.floor(((new Date().getTime()/1000) - (date.getTime()/1000) )),
     interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) return date.getFullYear() + "/" + monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
+    if (interval > 1) return date.getFullYear() + " " + monthNames[date.getMonth()] + " " + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) return monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
+    if (interval > 1) return monthNames[date.getMonth()] + " " + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
     interval = Math.floor(seconds / 86400);
-    if (interval >= 1) return monthNames[date.getMonth()] + "/" + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
+    if (interval >= 1) return monthNames[date.getMonth()] + " " + date.getDay() + " - " + date.getHours() + ":" + date.getMinutes();
 
     return date.getHours() + ":" + date.getMinutes();
 }

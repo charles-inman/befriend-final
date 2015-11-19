@@ -75,7 +75,7 @@
             <div id="messagesarchive">
 
             </div>
-            <textarea id="messagesender" value="" onclick="updateScroll();" placeholder="Your Message"></textarea>
+            <textarea id="messagesender" value="" onclick="setTimeout(function(){ updateScroll(); }, 250);" placeholder="Your Message"></textarea>
             <img id="sendMessage" onclick="sendMessagetouser();" src="img/send-mesage.png"/>
         </div>
         <div id="messangerLoader" style="display:none" class="pixel-loader"></div>
