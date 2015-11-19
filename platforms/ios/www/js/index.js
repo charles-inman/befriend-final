@@ -799,7 +799,7 @@ function setupMessage(messageType, imageurl, message,time) {
 function sendMessagetouser() {
     if(document.getElementById("messagesender").value != "") {
         var d = new Date();
-         var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + (d.getTime() / 1000) +'"}';
+         var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
 
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
