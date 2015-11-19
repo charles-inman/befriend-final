@@ -1085,6 +1085,10 @@ function toDateTime(secs) {
     return t;
 }
 function getLastMessages(mainuserofchat) {
+	var myNode = document.getElementById("messagesarchive");
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
     var idcheck = mainuserofchat.getAttribute("messagerid");
     document.getElementById("messagesarchive").setAttribute("messagerid",idcheck);
     document.getElementById("messangername").innerHTML = mainuserofchat.getAttribute("otherfirstname");
@@ -1099,21 +1103,22 @@ function getLastMessages(mainuserofchat) {
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/getmessages.php", 
             function (messagereturn) {
-                var messagesinfo = JSON.parse(messagereturn);
-                for(i = 0; i < messagesinfo["rmeg"].length;i++) {
-                    
-                    if(messagesinfo["rmeg"][i].fromuser == userId) {
-                       setupMessage(0, personalJSON["personalData"]["profileImage"], messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
+                if(messagereturn != "no messages") {
+                    var messagesinfo = JSON.parse(messagereturn);
+                    for(i = 0; i < messagesinfo["rmeg"].length;i++) {
+
+                        if(messagesinfo["rmeg"][i].fromuser == userId) {
+                           setupMessage(0, personalJSON["personalData"]["profileImage"], messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
+                        }
+                        else {
+                            setupMessage(1, mainuserofchat.getAttribute("otheruserimage"), messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
+                        }
+
                     }
-                    else {
-                        setupMessage(1, mainuserofchat.getAttribute("otheruserimage"), messagesinfo["rmeg"][i]["messagesync"], timeSince(new Date(messagesinfo["rmeg"][i]["time"])));
-                    }
-                    
+                    updateScroll();
                 }
-                updateScroll();
                 var lastMessageCheck = new TimelineMax();
-                    lastMessageCheck
-                .fromTo(document.getElementById("messangerLoader"), 1, {opacity:1},{opacity:0,ease: Circ.easeIn})
+                    lastMessageCheck.fromTo(document.getElementById("messangerLoader"), 1, {opacity:1},{opacity:0,ease: Circ.easeIn})
                     .set(document.getElementById("messangerLoader"), {display:"none"});
         },
             'secondaryid=' + idcheck + "&primeid=" + userId);
