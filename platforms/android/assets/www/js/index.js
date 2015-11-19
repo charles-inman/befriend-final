@@ -300,7 +300,7 @@ function logontochat(numify) {
              });
         }
         else {
-            alert(response);
+            alert(responsedata);
         }
     },
     'factualid=' + fbId );
