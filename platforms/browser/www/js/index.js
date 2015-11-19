@@ -253,9 +253,9 @@ var registrationPush;
 function logontochat(numify) {
      ajaxPost(
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
-        function (response) {
+        function (responsedata) {
         if(response != "no id") {
-            userId = response;
+            userId = responsedata;
             push = PushNotification.init({ "android": {"senderID": "355324533451"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
@@ -278,7 +278,7 @@ function logontochat(numify) {
                  ajaxPost(
                 "http://www.divinitycomputing.com/apps/beoples/setpush.php", 
                 function (response) {
-                         socket.emit('user login absea', '{"id":"' + response + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
+                         socket.emit('user login absea', '{"id":"' + userId + '","pushid":"' + registrationPush + '","device":"' + device.platform + '"}',
                         function(data) {
                             if(data == "user logged in") {
                                 console.log("logged in");
