@@ -160,14 +160,13 @@ var app = {
                     var datajson = JSON.parse(data);
                     var arc = document.getElementById("messagesarchive").getAttribute("messagerid");
                     if(arc == datajson["toid"]) {
-                        alert(datajson["time"] + parseInt(datajson["time"]) + toDateTime(parseInt(datajson["time"])));
-                        alert();
-                        setupMessage(0, datajson["profileimage"], datajson["message"], timeSince(toDateTime(parseInt(datajson["time"]))));
+                        alert(parseInt(datajson["time"]) + toDateTime(parseInt(datajson["time"])));
+                        setupMessage(0, datajson["profileimage"], datajson["message"], timeSince(new Date(datajson["time"])));
                     }
                     else {
-                        setupMessage(1, datajson["profileimage"], datajson["message"], timeSince(toDateTime(parseInt(datajson["time"]))));
+                        setupMessage(1, datajson["profileimage"], datajson["message"], timeSince(new Date(datajson["time"])));
                     }
-                        updateScroll();
+                    updateScroll();
                 });
                 socket.on('match found', function(data,callback){
                     var datajson = JSON.parse(data);
@@ -800,7 +799,7 @@ function setupMessage(messageType, imageurl, message,time) {
 function sendMessagetouser() {
     if(document.getElementById("messagesender").value != "") {
         var d = new Date();
-         var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + d.getTime() +'"}';
+         var sendJSON = '{"sentid":"' + userId +'", "toid":"' + document.getElementById("messagesarchive").getAttribute("messagerid") +'", "message":"' + document.getElementById("messagesender").value +'","profileName":"' + personalJSON["personalData"]["firstname"] + '","profileimage":"' + personalJSON["personalData"]["profileImage"] + '","time":"' + (d.getTime() / 1000) +'"}';
 
         ajaxPost(
             "http://www.divinitycomputing.com/apps/beoples/savemessage.php", 
