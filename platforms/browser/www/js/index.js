@@ -1085,7 +1085,7 @@ function timeSince(date) {
 
 
 function toDateTime(secs) {
-    var t = new Date(1970,0,1);
+    var t = new Date();
     t.setSeconds(secs);
     return t;
 }
