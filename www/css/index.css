@@ -207,14 +207,14 @@ hr {
     position: absolute;
     left: 17%;
     top: 0;
-    line-height:12rem;
+    line-height:9rem;
     font-size: 8rem;
 }
 .screen-header-unfixed {
 	color:#fff;
     margin: auto;
     top: 0;
-    line-height:12rem;
+    line-height:9rem;
     font-size: 8rem;
 }
 
@@ -429,7 +429,7 @@ max-width: 120%;
     background-color: #fff;
 }
 .fixedheader {
-    height: 12%;
+    height: 8rem;
     position: relative;
 }
 
@@ -824,7 +824,9 @@ width: 6rem;
 #menu h2 {
     background-color:#1aafdb;
     color:#fff;
-    padding:6% 10%;
+    padding-left:2rem;
+    line-height: 8rem;
+    padding-top: 1rem;
 }
 #menu button {
     color:#fff;
