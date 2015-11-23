@@ -434,6 +434,7 @@ function newPage(pagename) {
 }
 var editProfImg;
 function editprofileImage() {
+    console.log(editProfImg);
 	var maingallery = document.getElementById("imageGallery");
 	document.getElementById("gallery").style.opacity = 1;
 	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
