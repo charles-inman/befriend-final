@@ -49,16 +49,24 @@ var app = {
                     function (response) {
                         window.localStorage.setItem("data",response);
                         datapersonal = response;
+                        personalJSON = JSON.parse(datapersonal);
+                        mainScreen();
                 },
                'factualid=' + fbId);
             }
-            
-            personalJSON = JSON.parse(datapersonal);
-            
-            mainScreen();
+            else {
+                personalJSON = JSON.parse(datapersonal);
+                mainScreen();
+            }
             
         }
         else {
+            var datapersonal = window.localStorage.getItem("data");
+            if(datapersonal === null || datapersonal === 0) {
+            }
+            else {
+                personalJSON = JSON.parse(datapersonal);
+            }
             var tlaa = new TimelineMax();
                 tlaa.set(document.getElementById("pagewrap"), {display:"block"})
                 .fromTo(document.getElementById("pagewrap"), 1, {y:"100%"}, {y:"0%",ease: Circ.easeOut});
@@ -252,9 +260,7 @@ var fbId;
 var messageCount = 0;
 	
 function registerGetInfo() {
-    
 	newPage("register.html");
-	
 	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
 		function (image) {
 			var pp = document.createElement("style");
@@ -1177,9 +1183,11 @@ function openeditProfile() {
     
 }
 function sortEditProf() {
+    console.log("Start edit" + personalJSON);
+    var editprofMain = document.getElementById("editprof");
     document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
     document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
-    document.getElementById("description").innerHTML = personalJSON["personalData"]["age"];
+    document.getElementById("description").innerHTML = personalJSON["personalData"]["description"];
     document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
     document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
 
@@ -1191,7 +1199,7 @@ function sortEditProf() {
     document.getElementById("profileIcon").className = "noplus";
     assignInterests();
     var tl2 = new TimelineMax();
-        tl2.fromTo(document.getElementById("editprof"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
+        tl2.fromTo(editprofMain, 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
 }
 function updateprofile() {
     
