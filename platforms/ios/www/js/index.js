@@ -120,38 +120,11 @@ var app = {
 
 function checkFBlogin() {
 
-		var fbLoginSuccess = function (userData) {
-				fullJSON = userData;
-				fbId = fullJSON.authResponse.userID;
-                ajaxPost(
-                    "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
-                    function (response) {
-                    if(response == "yes") {
-                        ajaxPost(
-                        "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
-                        function (response) {
-                                var foundjson = JSON.parse(response);
-                                window.localStorage.setItem("data",response);
-                                window.localStorage.setItem("registered", "active");
-                                window.localStorage.setItem("fbid", fbId);
-                                personalJSON = foundjson;
-                                mainScreen();
-                        },
-                       'factualid=' + fbId);
-                        
-                    }
-                    else if(response == "no") {
-                        registerGetInfo();
-                    }
-                    else {
-                        alert(response);
-                    }
-                },
-               'fbid=' + fullJSON.authResponse.userID);
-                
-			}
+    var fbLoginSuccess = function (userData) {
+            sortEditProf();
+    }
 
-    facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+    facebookConnectPlugin.getLoginStatus(
         fbLoginSuccess,
         function (error) { console.warn("" + error) }
     );
@@ -1168,24 +1141,26 @@ function openeditProfile() {
         tl.fromTo(document.getElementById("mainScreen"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
             addPage("editprofile.html" , 0);
             checkFBlogin();
-            
-            document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
-            document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
-            document.getElementById("description").innerHTML = personalJSON["personalData"]["age"];
-            document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
-            document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
-            
-			var pp = document.createElement("style");
-            pp.type = 'text/css';
-            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
-			document.getElementById("profileIcon").appendChild(pp);
-			document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
-            document.getElementById("profileIcon").className = "noplus";
-            assignInterests();
-            var tl2 = new TimelineMax();
-                tl2.fromTo(document.getElementById("editprof"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
         }});
     
+}
+function sortEditProf() {
+
+    document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
+    document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
+    document.getElementById("description").innerHTML = personalJSON["personalData"]["age"];
+    document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
+    document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
+
+    var pp = document.createElement("style");
+    pp.type = 'text/css';
+    pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
+    document.getElementById("profileIcon").appendChild(pp);
+    document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
+    document.getElementById("profileIcon").className = "noplus";
+    assignInterests();
+    var tl2 = new TimelineMax();
+        tl2.fromTo(document.getElementById("editprof"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
 }
 function updateprofile() {
     
