@@ -1177,9 +1177,17 @@ function openeditProfile() {
     
     var tl = new TimelineMax();
         tl.fromTo(document.getElementById("mainScreen"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
-            addPage("editprofile.html" , 0);
+        var myNode = document.getElementById("pagewrap");
+	
+        ajaxGet(
+        'screens/editprofile.html', 
+        function (response) {
+        
+			document.getElementById("pagewrap").innerHTML += response;
             checkFBlogin();
-        }});
+        });
+            
+    }});
     
 }
 function sortEditProf() {
