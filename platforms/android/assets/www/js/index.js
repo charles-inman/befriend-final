@@ -34,7 +34,6 @@ var app = {
         
         assignSockets();
         
-        usersProcessed = window.openDatabase("user", "1.0", "Users processed", 1000000);
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
         ajaxGet(
@@ -118,6 +117,45 @@ var app = {
 			);
 	}
 };
+
+function checkFBlogin() {
+
+		var fbLoginSuccess = function (userData) {
+				fullJSON = userData;
+				fbId = fullJSON.authResponse.userID;
+                ajaxPost(
+                    "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
+                    function (response) {
+                    if(response == "yes") {
+                        ajaxPost(
+                        "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
+                        function (response) {
+                                var foundjson = JSON.parse(response);
+                                window.localStorage.setItem("data",response);
+                                window.localStorage.setItem("registered", "active");
+                                window.localStorage.setItem("fbid", fbId);
+                                personalJSON = foundjson;
+                                mainScreen();
+                        },
+                       'factualid=' + fbId);
+                        
+                    }
+                    else if(response == "no") {
+                        registerGetInfo();
+                    }
+                    else {
+                        alert(response);
+                    }
+                },
+               'fbid=' + fullJSON.authResponse.userID);
+                
+			}
+
+    facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+        fbLoginSuccess,
+        function (error) { console.warn("" + error) }
+    );
+}
             function onPause() {
                  socket.emit('offapp', userId, function(data) {
                     if(data == "logged in") {
@@ -307,8 +345,12 @@ function logontochat(numify) {
 }
 
 function setupProfileicon() {
-		photoChosen = document.getElementById("profileIcon");
-		getPhotos(fbId);
+    photoChosen = document.getElementById("profileIcon");
+
+    var tlaa = new TimelineMax();
+        tlaa.set(document.getElementById("imageloader"), {display:"block"})
+        .fromTo(document.getElementById("imageloader"), 0.5, {opacity:"0"}, {opacity:"1", ease: Power2.easeOut});
+    getPhotos(fbId);
 }
 var photoChosen;
 function getPhotos(facebookid) {
@@ -402,6 +444,11 @@ function editprofileImage() {
 		imgage.src = editProfImg.data[i].source;
 		maingallery.appendChild(imgage);
 	})(i);
+    
+            var tlaa = new TimelineMax();
+                tlaa
+                .fromTo(document.getElementById("imageloader"), 1, {opacity:"1"}, {opacity:"0", ease: Power2.easeOut})
+                .set(document.getElementById("imageloader"), {display:"none"});
 }
 function addPage(pagename,type) {
 	var myNode = document.getElementById("pagewrap");
@@ -617,7 +664,6 @@ function getUsersBaseOnLocation(longitude,latitude) {
     'genid=' + userId + '&distance=' + distance + '&longitude=' + longitude + '&latitude=' + latitude + '&young=' + window.localStorage.getItem("minage") + '&old=' + window.localStorage.getItem("maxage") + '&gender=' + window.localStorage.getItem("genderlook") + '&owngender=' + personalJSON.personalData.gender + '&ownage=' + personalJSON.personalData.age);
 }
 var dataFromLocation;
-var usersProcessed;
 
 function transformUserData() {
     if(dataFromLocation.userprofiles.length != 0) {
@@ -1116,6 +1162,83 @@ function getLastMessages(mainuserofchat) {
         },
             'secondaryid=' + idcheck + "&primeid=" + userId);
 }
+function openeditProfile() {
+    
+    var tl = new TimelineMax();
+        tl.fromTo(document.getElementById("mainScreen"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
+            addPage("editprofile.html" , 0);
+            checkFBlogin();
+            
+            document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
+            document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
+            document.getElementById("description").innerHTML = personalJSON["personalData"]["age"];
+            document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
+            document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
+            
+			var pp = document.createElement("style");
+            pp.type = 'text/css';
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
+			document.getElementById("profileIcon").appendChild(pp);
+			document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
+            document.getElementById("profileIcon").className = "noplus";
+            assignInterests();
+            var tl2 = new TimelineMax();
+                tl2.fromTo(document.getElementById("editprof"), 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
+        }});
+    
+}
+function updateprofile() {
+    
+    var img = idc("profileIcon").getAttribute("assignedimage");
+
+    var options = new FileUploadOptions();
+    options.fileKey="file";
+    options.fileName=img.substr(img.lastIndexOf('/')+1);
+    options.mimeType="image/jpeg";
+
+    var params = new Object();
+    params.id = fbId;
+
+    options.params = params;
+    options.chunkedMode = false;
+
+    var ft = new FileTransfer();
+    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
+        var responsePicture = JSON.parse(responsedata.response);
+        if(responsePicture.success == "success") {
+            personalJSON.personalData.profileImage = responsePicture.image.url;
+            personalJSON.personalData.description = idc("description").value;
+            personalJSON.personalData.question = idc("question").children[0].value;
+            personalJSON.personalData.answer = idc("answer").value;
+
+            ajaxPost(
+                "http://www.divinitycomputing.com/apps/beoples/updateprof.php", 
+                function (response) {
+                if(response == "success") {
+                    window.localStorage.setItem("registered", "active");
+                    window.localStorage.setItem("data", JSON.stringify(personalJSON));
+
+                    var tl2 = new TimelineMax();
+                        tl2.fromTo(document.getElementById("editprof"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
+                        
+                    document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof").lastChild);
+                        }});
+                }
+                else {
+                    alert(response);
+
+                }
+            },
+            'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
+        }
+        else {
+            alert(responsedata.response);
+        }
+    }, function(response) {
+        alert(response);
+    }, options);
+}
+
 function updateScroll(){
     var element = document.getElementById("messagesarchive");
     element.scrollTop = element.scrollHeight - element.clientHeight; 
