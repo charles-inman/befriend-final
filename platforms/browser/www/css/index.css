@@ -193,7 +193,7 @@ hr {
 	background-color:#474746;
 	width:100%;
 	clear:both;
-	margin: 20px 0 30px;
+	margin: 0px 0 30px;
 }
 
 .spacingcenter {
@@ -216,13 +216,18 @@ hr {
     top: 0;
     line-height:9rem;
     font-size: 8rem;
+    height:8rem;
 }
 
 .column-two {
 	width:50%;
 	float:left;
 }
-
+#editprof {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 #profileIcon,.profileIcon {
 	background-color:#1aafdb;
 	border-radius:30rem;

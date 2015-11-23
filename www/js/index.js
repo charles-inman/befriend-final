@@ -120,13 +120,45 @@ var app = {
 
 function checkFBlogin() {
 
-    var fbLoginSuccess = function (userData) {
+    var fbCheckLogin = function (userData) {
             sortEditProf();
     }
 
     facebookConnectPlugin.getLoginStatus(
-        fbLoginSuccess,
-        function (error) { console.warn("" + error) }
+        fbCheckLogin,
+        function (error) {
+            
+		var fbLoginSuccess = function (userData) {
+				fullJSON = userData;
+				fbId = fullJSON.authResponse.userID;
+                ajaxPost(
+                    "http://www.divinitycomputing.com/apps/beoples/hasreg.php", 
+                    function (response) {
+                    if(response == "yes") {
+                        ajaxPost(
+                        "http://www.divinitycomputing.com/apps/beoples/fbviewprofile.php", 
+                        function (response) {
+                            sortEditProf();
+                        },
+                       'factualid=' + fbId);
+                        
+                    }
+                    else if(response == "no") {
+                        registerGetInfo();
+                    }
+                    else {
+                        alert(response);
+                    }
+                },
+               'fbid=' + fullJSON.authResponse.userID);
+                
+			}
+
+			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+				fbLoginSuccess,
+				function (error) { console.warn("" + error) }
+			);
+        }
     );
 }
             function onPause() {
@@ -1145,7 +1177,6 @@ function openeditProfile() {
     
 }
 function sortEditProf() {
-
     document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
     document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
     document.getElementById("description").innerHTML = personalJSON["personalData"]["age"];
