@@ -440,10 +440,9 @@ function editprofileImage() {
 	document.getElementById("gallery").style.opacity = 1;
 	openImage();
     
-            var tlaa = new TimelineMax();
-                tlaa
-                .fromTo(document.getElementById("imageloader"), 1, {opacity:"1"}, {opacity:"0", ease: Power2.easeOut})
-                .set(document.getElementById("imageloader"), {display:"none"});
+    var tlaa = new TimelineMax();
+        tlaa.fromTo(document.getElementById("imageloader"), 1, {opacity:"1"}, {opacity:"0", ease: Power2.easeOut})
+        .set(document.getElementById("imageloader"), {display:"none"});
 }
 function openImage() {
 	var maingallery = document.getElementById("imageGallery");
@@ -452,17 +451,14 @@ function openImage() {
     imgage.onload = function() {
         imgage.style.opacity = 1;
     }
-    console.log("Get Image " + editProfImg.data[0].id);
-
     facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-            console.log(photoimage);
             imgage.addEventListener("click", function() {
                 var aa = document.createElement("style");
                 aa.type = 'text/css';
                 aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
                 document.getElementById("profileIcon").innerHTML = "";
-                document.getElementById("profileIcon").setAttribute("assignedimage", photoimage.images[0].source);
+                document.getElementById("profileIcon").setAttribute("assignedimage", "/" + editProfImg.data[0].id + "?fields=images");
                 document.getElementById("profileIcon").appendChild(aa);
                 document.getElementById("profileIcon").className = "noplus";
                 document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
@@ -475,7 +471,7 @@ function openImage() {
         function (error) {
             console.log("Failed: " + error);
         }
-     );
+    );
 
     maingallery.appendChild(imgage);
 }
@@ -571,60 +567,37 @@ function assignInterests() {
 }
 function register() {
     var img = idc("profileIcon").getAttribute("assignedimage");
+    personalJSON.personalData.profileImage = img;
+    personalJSON.personalData.description = idc("description").value;
+    personalJSON.personalData.question = idc("question").children[0].value;
+    personalJSON.personalData.answer = idc("answer").value;
 
-    var options = new FileUploadOptions();
-    options.fileKey="file";
-    options.fileName=img.substr(img.lastIndexOf('/')+1);
-    options.mimeType="image/jpeg";
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/register.php", 
+        function (response) {
+        if(response == "success") {
+            window.localStorage.setItem("registered", "active");
+            window.localStorage.setItem("genderlook", "2");
+            window.localStorage.setItem("distance", "50");
+            var minage = 30;
+            if(parseInt(personalJSON.personalData.age) - 5 < 16) {
+               minage = 16;
+            }else {
+                minage = personalJSON.personalData.age;
+            }
+            window.localStorage.setItem("minage", minage);
+            window.localStorage.setItem("maxage", parseInt(personalJSON.personalData.age) + 5);
+            window.localStorage.setItem("data", JSON.stringify(personalJSON));
+            window.localStorage.setItem("fbid", fbId);
 
-    var params = new Object();
-    params.id = fbId;
-
-    options.params = params;
-    options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
-        var responsePicture = JSON.parse(responsedata);
-        if(responsePicture.success == "success") {
-            personalJSON.personalData.profileImage = responsePicture.image.url;
-            personalJSON.personalData.description = idc("description").value;
-            personalJSON.personalData.question = idc("question").children[0].value;
-            personalJSON.personalData.answer = idc("answer").value;
-
-            ajaxPost(
-                "http://www.divinitycomputing.com/apps/beoples/register.php", 
-                function (response) {
-                if(response == "success") {
-                    window.localStorage.setItem("registered", "active");
-                    window.localStorage.setItem("genderlook", "2");
-                    window.localStorage.setItem("distance", "50");
-                    var minage = 30;
-                    if(parseInt(personalJSON.personalData.age) - 5 < 16) {
-                       minage = 16;
-                    }else {
-                        minage = personalJSON.personalData.age;
-                    }
-                    window.localStorage.setItem("minage", minage);
-                    window.localStorage.setItem("maxage", parseInt(personalJSON.personalData.age) + 5);
-                    window.localStorage.setItem("data", JSON.stringify(personalJSON));
-                    window.localStorage.setItem("fbid", fbId);
-                    
-                    mainScreen();
-                }
-                else {
-                    alert(response);
-
-                }
-            },
-            'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
+            mainScreen();
         }
         else {
-            alert(responsedata.response);
+            alert(response);
+
         }
-    }, function(response) {
-        alert(response);
-    }, options);
+    },
+    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
 function mainScreen() {
     newPage("mainscreen.html");
@@ -735,11 +708,20 @@ function transformUserData() {
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
-    viewprofile.setAttribute("imagelink", data.personalData.profileImage);
-    viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
-    var aa = document.createElement("style");
-    aa.type = 'text/css';
-    aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +    data.personalData.profileImage + "'); }"));
+    
+    facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+        function (photoimage) {
+        viewprofile.setAttribute("imagelink", photoimage.images[0].source);
+            viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
+            var aa = document.createElement("style");
+            aa.type = 'text/css';
+            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +     photoimage.images[0].source + "'); }"));
+        },
+        function (error) {
+            console.log("Failed: " + error);
+        }
+     );
+                   
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
 
     viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
@@ -1228,55 +1210,31 @@ function sortEditProf() {
         tl2.fromTo(editprofMain, 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
 }
 function updateprofile() {
-    
     var img = idc("profileIcon").getAttribute("assignedimage");
+    personalJSON.personalData.profileImage = img;
+    personalJSON.personalData.description = idc("description").value;
+    personalJSON.personalData.question = idc("question").children[0].value;
+    personalJSON.personalData.answer = idc("answer").value;
 
-    var options = new FileUploadOptions();
-    options.fileKey="file";
-    options.fileName=img.substr(img.lastIndexOf('/')+1);
-    options.mimeType="image/jpeg";
+    ajaxPost(
+        "http://www.divinitycomputing.com/apps/beoples/updateprof.php", 
+        function (response) {
+        if(response == "success") {
+            window.localStorage.setItem("registered", "active");
+            window.localStorage.setItem("data", JSON.stringify(personalJSON));
 
-    var params = new Object();
-    params.id = fbId;
+            var tl2 = new TimelineMax();
+                tl2.fromTo(document.getElementById("editprof"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
 
-    options.params = params;
-    options.chunkedMode = false;
-
-    var ft = new FileTransfer();
-    ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
-        var responsePicture = JSON.parse(responsedata);
-        if(responsePicture.success == "success") {
-            personalJSON.personalData.profileImage = responsePicture.image.url;
-            personalJSON.personalData.description = idc("description").value;
-            personalJSON.personalData.question = idc("question").children[0].value;
-            personalJSON.personalData.answer = idc("answer").value;
-
-            ajaxPost(
-                "http://www.divinitycomputing.com/apps/beoples/updateprof.php", 
-                function (response) {
-                if(response == "success") {
-                    window.localStorage.setItem("registered", "active");
-                    window.localStorage.setItem("data", JSON.stringify(personalJSON));
-
-                    var tl2 = new TimelineMax();
-                        tl2.fromTo(document.getElementById("editprof"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
-                        
-                    document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof").lastChild);
-                        }});
-                }
-                else {
-                    alert(response);
-
-                }
-            },
-            'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
+            document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof").lastChild);
+                }});
         }
         else {
-            alert(responsedata.response);
+            alert(response);
+
         }
-    }, function(response) {
-        alert(response);
-    }, options);
+    },
+    'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
 }
 
 function updateScroll(){
