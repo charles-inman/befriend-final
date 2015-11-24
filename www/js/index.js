@@ -365,7 +365,7 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded&url={image-url}", ['email','user_photos', 'public_profile', 'user_friends'],
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email','user_photos', 'public_profile', 'user_friends'],
 		function (def) {
 			editProfImg = def;
 			addPage("findphotos.html" , 0);
@@ -443,17 +443,27 @@ function editprofileImage() {
 		imgage.onload = function() {
 			imgage.style.opacity = 1;
 		}
-		imgage.addEventListener("click", function() {
-			var aa = document.createElement("style");
-            aa.type = 'text/css';
-            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].url + "'); }"));
-			document.getElementById("profileIcon").innerHTML = "";
-			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].url);
-			document.getElementById("profileIcon").appendChild(aa);
-            document.getElementById("profileIcon").className = "noplus";
-            document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-		});
-		imgage.src = editProfImg.data[i].url;
+        
+        facebookConnectPlugin.api(facebookid + "/" + editProfImg.data[i].id, ['email','user_photos', 'public_profile', 'user_friends'],
+            function (photoimage) {
+                console.log(photoimage);
+                imgage.addEventListener("click", function() {
+                    var aa = document.createElement("style");
+                    aa.type = 'text/css';
+                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].url + "'); }"));
+                    document.getElementById("profileIcon").innerHTML = "";
+                    document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].url);
+                    document.getElementById("profileIcon").appendChild(aa);
+                    document.getElementById("profileIcon").className = "noplus";
+                    document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+                });
+                imgage.src = editProfImg.data[i].url;
+            },
+            function (error) {
+                console.log("Failed: " + error);
+            }
+         );
+        
 		maingallery.appendChild(imgage);
 	})(i);
     
