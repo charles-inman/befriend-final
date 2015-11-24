@@ -540,7 +540,7 @@ function mainInterestCheck(type) {
             }
             
             active.setAttribute("counter",i);
-            active.onclick = function() {
+            container.onclick = function() {
                 if(this.className == "active") {
                     personalJSON.interests[intereststypes[mainTypeInterest]].splice(parseInt(this.getAttribute("counter")),1);
                     this.className = "";
@@ -585,7 +585,7 @@ function register() {
 
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
-        var responsePicture = JSON.parse(responsedata.response);
+        var responsePicture = JSON.parse(responsedata);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
             personalJSON.personalData.description = idc("description").value;
@@ -1244,7 +1244,7 @@ function updateprofile() {
 
     var ft = new FileTransfer();
     ft.upload(img, "http://www.divinitycomputing.com/apps/beoples/saveprofilepicture.php", function(responsedata) {
-        var responsePicture = JSON.parse(responsedata.response);
+        var responsePicture = JSON.parse(responsedata);
         if(responsePicture.success == "success") {
             personalJSON.personalData.profileImage = responsePicture.image.url;
             personalJSON.personalData.description = idc("description").value;
