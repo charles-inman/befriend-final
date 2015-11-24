@@ -445,7 +445,7 @@ function editprofileImage() {
 		}
         console.log("Get Image " + editProfImg.data[i].id);
         
-        facebookConnectPlugin.api("/" + editProfImg.data[i].id + "?Fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
+        facebookConnectPlugin.api("/{" + editProfImg.data[i].id + "}", ['email','user_photos', 'public_profile', 'user_friends'],
             function (photoimage) {
                 console.log(photoimage);
                 imgage.addEventListener("click", function() {
