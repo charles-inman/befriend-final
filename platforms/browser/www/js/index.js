@@ -443,17 +443,25 @@ function editprofileImage() {
 		imgage.onload = function() {
 			imgage.style.opacity = 1;
 		}
-		imgage.addEventListener("click", function() {
-			var aa = document.createElement("style");
-            aa.type = 'text/css';
-            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].images[0] + "'); }"));
-			document.getElementById("profileIcon").innerHTML = "";
-			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].images[0]);
-			document.getElementById("profileIcon").appendChild(aa);
-            document.getElementById("profileIcon").className = "noplus";
-            document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-		});
-		imgage.src = editProfImg.data[i].source;
+        
+        
+	facebookConnectPlugin.api("/" + editProfImg[i]["id"],
+    function (response) {
+          if (response && !response.error) {
+            imgage.addEventListener("click", function() {
+                var aa = document.createElement("style");
+                aa.type = 'text/css';
+                aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + response.link + "'); }"));
+                document.getElementById("profileIcon").innerHTML = "";
+                document.getElementById("profileIcon").setAttribute("assignedimage", response.link);
+                document.getElementById("profileIcon").appendChild(aa);
+                document.getElementById("profileIcon").className = "noplus";
+                document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+            });
+            imgage.src = response.link;
+          }
+        }
+    );
 		maingallery.appendChild(imgage);
 	})(i);
     
