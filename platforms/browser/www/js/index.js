@@ -613,7 +613,8 @@ function register() {
                     mainScreen();
                 }
                 else {
-                    alert(response);
+        var responsePicture = JSON.parse(responsedata);
+                    alert(responsePicture);
 
                 }
             },
