@@ -1211,9 +1211,11 @@ function sortEditProf() {
     var editprofMain = document.getElementById("editprof");
     document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
     document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
-    document.getElementById("description").innerHTML = personalJSON["personalData"]["description"];
+    document.getElementById("description").value = personalJSON["personalData"]["description"];            
+    idc("description").setAttribute("textdet", personalJSON["personalData"]["description"]);
     document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
-    document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
+    document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];        
+    idc("question").children[1].setAttribute("textdet", personalJSON["personalData"]["answer"]);
     var pp = document.createElement("style");
     pp.type = 'text/css';
     pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
