@@ -451,14 +451,14 @@ function editprofileImage() {
                 imgage.addEventListener("click", function() {
                     var aa = document.createElement("style");
                     aa.type = 'text/css';
-                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].url + "'); }"));
+                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
                     document.getElementById("profileIcon").innerHTML = "";
-                    document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].url);
+                    document.getElementById("profileIcon").setAttribute("assignedimage", photoimage.images[i].source);
                     document.getElementById("profileIcon").appendChild(aa);
                     document.getElementById("profileIcon").className = "noplus";
                     document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
                 });
-                imgage.src = editProfImg.data[i].url;
+                imgage.src = photoimage.images[0].source;
             },
             function (error) {
                 console.log("Failed: " + error);
