@@ -571,7 +571,7 @@ function assignInterests() {
 }
 function register() {
     var img = idc("profileIcon").getAttribute("assignedimage");
-    console.log(img):
+
     var options = new FileUploadOptions();
     options.fileKey="file";
     options.fileName=img.substr(img.lastIndexOf('/')+1);
