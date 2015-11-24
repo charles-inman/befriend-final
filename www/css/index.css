@@ -83,35 +83,33 @@ overflow-x: hidden;
 	background-color:#2d2c2b;
 	height:50%;
 	float:left;
-	position: relative;
+	position: relative;width: 100%;
 }
 #h-one h1 {
     color: #FF0B25;
     font-weight: bold;
     font-size: 11rem;
-    margin-top: -16%;
     margin-bottom: 5%;word-spacing: 10000px;
 	width:70%;
+    float:left;
 }
 #h-one img{
     -webkit-transform: rotate(-38deg);
     -ms-transform: rotate(-38deg);
     transform: rotate(-38deg);
-    margin-bottom: -3%;
     float:left;
-    max-width:30%;
+    max-width:25%;margin-top: -8%;
 }
 .center h2 {
 	font-size:10rem;
 }
-#h-one h2:nth-child(2) {
+#h-one h2:nth-child(3) {
 	color:#434342;
 }
-#h-one h2:nth-child(3) {
+#h-one h2:nth-child(4) {
 	color:#545454;
 }
-
-#h-one h2:nth-child(4) {
+#h-one h2:nth-child(5) {
 	color:#fff;
 }
 #h-two,#h-three {
