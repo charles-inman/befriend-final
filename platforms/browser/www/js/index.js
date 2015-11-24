@@ -438,16 +438,16 @@ function editprofileImage() {
 	var maingallery = document.getElementById("imageGallery");
 	document.getElementById("gallery").style.opacity = 1;
 	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
+        
+        facebookConnectPlugin.api("/" + editProfImg.data[i].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
+            function (photoimage) {
+                (function(photoimageSrc){ 
 		var imgage = document.createElement("img");
 		imgage.style.opacity = 0;
 		imgage.onload = function() {
 			imgage.style.opacity = 1;
 		}
         console.log("Get Image " + editProfImg.data[i].id);
-        
-        facebookConnectPlugin.api("/" + editProfImg.data[i].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
-            function (photoimage) {
-                (function(photoimageSrc){ 
                 console.log(photoimageSrc);
                 imgage.addEventListener("click", function() {
                     var aa = document.createElement("style");
