@@ -437,43 +437,46 @@ function editprofileImage() {
     console.log(editProfImg);
 	var maingallery = document.getElementById("imageGallery");
 	document.getElementById("gallery").style.opacity = 1;
-	for(i = 0; i < editProfImg.data.length; i++) (function(i){ 
-        
-        facebookConnectPlugin.api("/" + editProfImg.data[i].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
-            function (photoimage) {
-                (function(photoimageSrc){ 
-		var imgage = document.createElement("img");
-		imgage.style.opacity = 0;
-		imgage.onload = function() {
-			imgage.style.opacity = 1;
-		}
-        console.log("Get Image " + editProfImg.data[i].id);
-                console.log(photoimageSrc);
-                imgage.addEventListener("click", function() {
-                    var aa = document.createElement("style");
-                    aa.type = 'text/css';
-                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimageSrc.images[0].source + "'); }"));
-                    document.getElementById("profileIcon").innerHTML = "";
-                    document.getElementById("profileIcon").setAttribute("assignedimage", photoimageSrc.images[i].source);
-                    document.getElementById("profileIcon").appendChild(aa);
-                    document.getElementById("profileIcon").className = "noplus";
-                    document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
-                });
-                imgage.src = photoimageSrc.images[0].source;
-		maingallery.appendChild(imgage);
-                    })(photoimage);
-            },
-            function (error) {
-                console.log("Failed: " + error);
-            }
-         );
-        
-	})(i);
+	openImage();
     
             var tlaa = new TimelineMax();
                 tlaa
                 .fromTo(document.getElementById("imageloader"), 1, {opacity:"1"}, {opacity:"0", ease: Power2.easeOut})
                 .set(document.getElementById("imageloader"), {display:"none"});
+}
+function openImage() {
+	var maingallery = document.getElementById("imageGallery");
+    var imgage = document.createElement("img");
+    imgage.style.opacity = 0;
+    imgage.onload = function() {
+        imgage.style.opacity = 1;
+    }
+    console.log("Get Image " + editProfImg.data[0].id);
+
+    facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
+        function (photoimage) {
+            console.log(photoimage);
+            imgage.addEventListener("click", function() {
+                var aa = document.createElement("style");
+                aa.type = 'text/css';
+                aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
+                document.getElementById("profileIcon").innerHTML = "";
+                document.getElementById("profileIcon").setAttribute("assignedimage", photoimage.images[0].source);
+                document.getElementById("profileIcon").appendChild(aa);
+                document.getElementById("profileIcon").className = "noplus";
+                document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
+            });
+            imgage.src = photoimage.images[0].source;
+            editProfImg.data.splice(0, 1);
+            if(editProfImg.data.length != 0)    
+                openImage();
+        },
+        function (error) {
+            console.log("Failed: " + error);
+        }
+     );
+
+    maingallery.appendChild(imgage);
 }
 function addPage(pagename,type) {
 	var myNode = document.getElementById("pagewrap");
