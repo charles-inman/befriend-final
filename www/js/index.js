@@ -443,8 +443,9 @@ function editprofileImage() {
 		imgage.onload = function() {
 			imgage.style.opacity = 1;
 		}
+        console.log("Get Image " + editProfImg.data[i].id);
         
-        facebookConnectPlugin.api(facebookid + "/" + editProfImg.data[i].id, ['email','user_photos', 'public_profile', 'user_friends'],
+        facebookConnectPlugin.api("/" + editProfImg.data[i].id, ['email','user_photos', 'public_profile', 'user_friends'],
             function (photoimage) {
                 console.log(photoimage);
                 imgage.addEventListener("click", function() {
