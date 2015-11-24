@@ -445,9 +445,11 @@ function editprofileImage() {
 		}
         
         
-	facebookConnectPlugin.api("/" + editProfImg[i]["id"],
+	facebookConnectPlugin.api(facebookid + "/" + editProfImg[i]["id"],
     function (response) {
+        console.log(response);
           if (response && !response.error) {
+        console.log(response.link);
             imgage.addEventListener("click", function() {
                 var aa = document.createElement("style");
                 aa.type = 'text/css';
