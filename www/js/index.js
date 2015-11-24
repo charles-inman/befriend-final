@@ -367,9 +367,7 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (def) {
-            console.log(def);
-			editProfImg = JSON.parse(def);
-            console.log(editProfImg);
+			editProfImg = def;
 			addPage("findphotos.html" , 0);
 		},
 		function (error) {
@@ -448,9 +446,9 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].source + "'); }"));
+            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].images[0] + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
-			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].source);
+			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].images[0]);
 			document.getElementById("profileIcon").appendChild(aa);
             document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
@@ -1194,7 +1192,6 @@ function openeditProfile() {
     
 }
 function sortEditProf() {
-    console.log("Start edit" + personalJSON);
     var editprofMain = document.getElementById("editprof");
     document.getElementById("mainDetails").children[0].innerHTML = personalJSON["personalData"]["firstname"];
     document.getElementById("mainDetails").children[1].innerHTML = personalJSON["personalData"]["age"];
