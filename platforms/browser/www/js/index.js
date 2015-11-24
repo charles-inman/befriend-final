@@ -367,7 +367,7 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (def) {
-			editProfImg = def;
+			editProfImg = JSON.parse(def);
 			addPage("findphotos.html" , 0);
 		},
 		function (error) {
@@ -548,7 +548,7 @@ function assignInterests() {
     }
     for(i = 0; i < intereststypes.length;i++) {
         if(personalJSON.interests[intereststypes[i]].length != 0) {
-            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" +maininterests.innerHTML;
+            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" + maininterests.innerHTML;
         }
     }
 }
@@ -1199,7 +1199,6 @@ function sortEditProf() {
     document.getElementById("description").innerHTML = personalJSON["personalData"]["description"];
     document.getElementById("question").children[0].value = personalJSON["personalData"]["question"];
     document.getElementById("question").children[1].value = personalJSON["personalData"]["answer"];
-
     var pp = document.createElement("style");
     pp.type = 'text/css';
     pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
