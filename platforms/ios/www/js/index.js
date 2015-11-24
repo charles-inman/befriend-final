@@ -371,10 +371,12 @@ function getPhotos(facebookid) {
             "url": "{image-url}"
         },
         function (def) {
+            console.log(def);
           if (def && !def.error) {
                 editProfImg = def;
                 addPage("findphotos.html" , 0);
           }
+        
         }
 	 );
 }
