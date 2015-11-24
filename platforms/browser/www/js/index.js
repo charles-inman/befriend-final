@@ -620,7 +620,7 @@ function register() {
             'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
         }
         else {
-            alert(responsedata.response);
+            alert(responsedata);
         }
     }, function(response) {
         alert(response);
@@ -1272,7 +1272,7 @@ function updateprofile() {
             'fbid=' + fbId + '&data=' + JSON.stringify(personalJSON));
         }
         else {
-            alert(responsedata.response);
+            alert(responsedata);
         }
     }, function(response) {
         alert(response);

@@ -81,7 +81,6 @@ overflow-x: hidden;
 
 #h-one {
 	background-color:#2d2c2b;
-	width:100%;
 	height:50%;
 	float:left;
 	position: relative;
@@ -91,13 +90,16 @@ overflow-x: hidden;
     font-weight: bold;
     font-size: 11rem;
     margin-top: -16%;
-    margin-bottom: 5%;
+    margin-bottom: 5%;word-spacing: 10000px;
+	width:70%;
 }
 #h-one img{
     -webkit-transform: rotate(-38deg);
     -ms-transform: rotate(-38deg);
     transform: rotate(-38deg);
     margin-bottom: -3%;
+    float:left;
+    max-width:30%;
 }
 .center h2 {
 	font-size:10rem;
