@@ -365,19 +365,14 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", 
-        "POST",
-        {
-            "url": "{image-url}"
-        },
-        function (def) {
-            console.log(def);
-          if (def && !def.error) {
-                editProfImg = def;
-                addPage("findphotos.html" , 0);
-          }
-        
-        }
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded&fields=url", ['email', 'public_profile', 'user_friends'],
+		function (def) {
+			editProfImg = def;
+			addPage("findphotos.html" , 0);
+		},
+		function (error) {
+			console.log("Failed: " + error);
+		}
 	 );
 }
 var ajaxGet = function (url, callback) {
@@ -451,14 +446,14 @@ function editprofileImage() {
 		imgage.addEventListener("click", function() {
 			var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].images[0] + "'); }"));
+            aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + editProfImg.data[i].url + "'); }"));
 			document.getElementById("profileIcon").innerHTML = "";
-			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].images[0]);
+			document.getElementById("profileIcon").setAttribute("assignedimage", editProfImg.data[i].url);
 			document.getElementById("profileIcon").appendChild(aa);
             document.getElementById("profileIcon").className = "noplus";
             document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
 		});
-		imgage.src = editProfImg.data[i].source;
+		imgage.src = editProfImg.data[i].url;
 		maingallery.appendChild(imgage);
 	})(i);
     
