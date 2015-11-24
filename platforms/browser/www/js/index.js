@@ -447,18 +447,20 @@ function editprofileImage() {
         
         facebookConnectPlugin.api("/" + editProfImg.data[i].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
             function (photoimage) {
-                console.log(photoimage);
+                (function(photoimageSrc){ 
+                console.log(photoimageSrc);
                 imgage.addEventListener("click", function() {
                     var aa = document.createElement("style");
                     aa.type = 'text/css';
-                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
+                    aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimageSrc.images[0].source + "'); }"));
                     document.getElementById("profileIcon").innerHTML = "";
-                    document.getElementById("profileIcon").setAttribute("assignedimage", photoimage.images[i].source);
+                    document.getElementById("profileIcon").setAttribute("assignedimage", photoimageSrc.images[i].source);
                     document.getElementById("profileIcon").appendChild(aa);
                     document.getElementById("profileIcon").className = "noplus";
                     document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
                 });
-                imgage.src = photoimage.images[0].source;
+                imgage.src = photoimageSrc.images[0].source;
+                    })(photoimage);
             },
             function (error) {
                 console.log("Failed: " + error);
