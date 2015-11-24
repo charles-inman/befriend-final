@@ -460,6 +460,7 @@ function editprofileImage() {
                     document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
                 });
                 imgage.src = photoimageSrc.images[0].source;
+		maingallery.appendChild(imgage);
                     })(photoimage);
             },
             function (error) {
@@ -467,7 +468,6 @@ function editprofileImage() {
             }
          );
         
-		maingallery.appendChild(imgage);
 	})(i);
     
             var tlaa = new TimelineMax();
