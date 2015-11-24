@@ -128,7 +128,7 @@ var app = {
 
 function checkFBlogin() {
 
-    var fbCheckLogin = function (userData) {
+    var fbCheckLogin = function (revData) {
             sortEditProf();
     }
 
@@ -367,7 +367,9 @@ var photoChosen;
 function getPhotos(facebookid) {
 	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email', 'public_profile', 'user_friends'],
 		function (def) {
+            console.log(def);
 			editProfImg = JSON.parse(def);
+            console.log(editProfImg);
 			addPage("findphotos.html" , 0);
 		},
 		function (error) {
