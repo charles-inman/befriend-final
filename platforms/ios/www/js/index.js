@@ -539,10 +539,10 @@ function mainInterestCheck(type) {
             container.onclick = function() {
                 if(this.className == "active") {
                     personalJSON.interests[intereststypes[mainTypeInterest]].splice(parseInt(this.getAttribute("counter")),1);
-                    this.className = "";
+                    this.children[0].className = "";
                 }
                 else {
-                    this.className = "active";
+                    this.children[0].className = "active";
                     personalJSON.interests[intereststypes[mainTypeInterest]].push({"count": this.getAttribute("counter") });
                 }
             }
@@ -1227,7 +1227,8 @@ function updateprofile() {
                 tl2.fromTo(document.getElementById("editprof"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
 
             document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof").lastChild);
-                }});
+                }})
+                .fromTo(document.getElementById("mainScreen"), 1,{x:"-100%"}, {x:"0%",ease: Circ.easeOut});
         }
         else {
             alert(response);
