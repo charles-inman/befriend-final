@@ -522,6 +522,7 @@ function mainInterestCheck(type) {
         idc("subcats").style.left = "16%";
         
         var myNode = idc("subcats");
+        
         while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
         }
