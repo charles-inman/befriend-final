@@ -525,7 +525,7 @@ z-index: 10;
     overflow:scroll;
 }
 #interests .imageint,.interests .imageint  {
-    float:left;
+    display:inline-block;
     border:5px solid #63bd6c;
     border-radius:10rem;
     position:relative;
