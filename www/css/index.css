@@ -438,7 +438,7 @@ z-index: 10;
     background-color: #fff;
 }
 .fixedheader {
-    height: 8rem;
+    height: 12rem;
     position: relative;
 }
 
@@ -590,8 +590,8 @@ div.none {
 
 .burgermenu {
     position:absolute;
-    width:8%;
-    height:50%;
+    width:4rem;
+    height:4rem;
     margin:auto;
     right:5%;
     top:0;
