@@ -216,7 +216,7 @@ hr {
     top: 0;
     line-height:9rem;
     font-size: 8rem;
-    height:8rem;
+    height:75px;
 }
 
 .column-two {
@@ -616,7 +616,7 @@ div.none {
 }
 
 .subscreen {
-    top:8rem;
+    top:75px;
     position: absolute;
 overflow-x: hidden;
 }
