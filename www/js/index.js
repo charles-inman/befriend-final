@@ -249,7 +249,7 @@ function checkFBlogin() {
                 
                 var subscreen = document.createElement("");
                 subscreen.type = 'text/css';
-                document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 8)) + "px; }"));
+            document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 8)) + "px !important; }"));
             }
 var fullJSON;
 var socket;
