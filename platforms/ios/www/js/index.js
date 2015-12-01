@@ -195,9 +195,8 @@ function checkFBlogin() {
             }
             function showMainScreen() {
                 var tlaa = new TimelineMax();
-                    tlaa
-                    .fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"110%",ease: Circ.easeOut})
-                        .set(document.getElementById("pagewrap"), {display:"block"})
+                    tlaa.fromTo(document.getElementById("pagewrap"), 0.5, {y:"0%"}, {y:"110%",ease: Circ.easeOut})
+                    .set(document.getElementById("pagewrap"), {display:"block"})
                     .fromTo(document.getElementsByClassName("rocketLoader")[0], 1.5, {x:"0%"}, {x:"100%",ease: Circ.easeOut},2)
                     .fromTo(document.getElementById("pagewrap"), 0.5, {y:"-30%"}, {y:"0%",ease: Circ.easeOut})
                     .fromTo(document.getElementById("pagewrap"), 0.5, {scale:1.1}, {y:0,scale:1,ease: Circ.easeOut},"-=0.3")
@@ -247,6 +246,10 @@ function checkFBlogin() {
                 var rem;
                     rem = x * w;
                 document.documentElement.style.fontSize = rem + 'px';
+                
+                var subscreen = document.createElement("");
+                subscreen.type = 'text/css';
+                document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 8)) + "px; }"));
             }
 var fullJSON;
 var socket;

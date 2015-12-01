@@ -616,7 +616,7 @@ div.none {
 }
 
 .subscreen {
-    top:12%;
+    top:8rem;
     position: absolute;
 overflow-x: hidden;
 }
