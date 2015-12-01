@@ -247,9 +247,9 @@ function checkFBlogin() {
                     rem = x * w;
                 document.documentElement.style.fontSize = rem + 'px';
                 
-                var subscreen = document.createElement("");
+                var subscreen = document.createElement("style");
                 subscreen.type = 'text/css';
-            document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 8)) + "px !important; }"));
+                document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 8)) + "px !important; }"));
             }
 var fullJSON;
 var socket;
