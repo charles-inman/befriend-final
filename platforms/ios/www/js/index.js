@@ -249,7 +249,8 @@ function checkFBlogin() {
                 
                 var subscreen = document.createElement("style");
                 subscreen.type = 'text/css';
-                document.body.appendChild(document.createTextNode(".subscreen { height:" + (document.body.clientHeight - (rem * 12)) + "px !important; }"));
+                subscreen.appendChild(document.createTextNode(".fill { height:" + (document.body.clientHeight - 75) + "px !important; }"));
+                document.body.appendChild(subscreen);
             }
 var fullJSON;
 var socket;

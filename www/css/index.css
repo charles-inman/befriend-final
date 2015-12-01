@@ -438,7 +438,7 @@ z-index: 10;
     background-color: #fff;
 }
 .fixedheader {
-    height: 12rem;
+    height: 75px;
     position: relative;
 }
 
@@ -456,16 +456,14 @@ z-index: 10;
     display:inline-block;
     vertical-align: middle;
 }
-
 .overflow {
     overflow-y: scroll;
 }
-
 .fill {
     height: 88%;
     width: 100%;
+    bottom:0;
 }
-
 .interesting {
     height:88%;
     width:90%;
