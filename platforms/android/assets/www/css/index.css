@@ -588,8 +588,8 @@ div.none {
 
 .burgermenu {
     position:absolute;
-    width:4rem;
-    height:4rem;
+    width:30px;
+    height:30px;
     margin:auto;
     right:5%;
     top:0;
