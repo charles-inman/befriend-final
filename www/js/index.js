@@ -1217,7 +1217,26 @@ function sortEditProf() {
     idc("question").children[1].setAttribute("textdet", personalJSON["personalData"]["answer"]);
     var pp = document.createElement("style");
     pp.type = 'text/css';
-    pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + personalJSON["personalData"]["profileImage"]+ "'); }"));
+    
+    facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+        function (photoimage) {
+        
+        var urlFound = "";
+        
+            if(photoimage.images[0].source) {
+                urlFound = photoimage.images[0].source;
+            }
+            else {
+                urlFound = photoimage.data.url;
+            }
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + urlFound + "'); }"));
+        },
+        function (error) {
+            console.log("Failed: " + error);
+        }
+        
+     );
+    
     document.getElementById("profileIcon").appendChild(pp);
     document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
     document.getElementById("profileIcon").className = "noplus";
