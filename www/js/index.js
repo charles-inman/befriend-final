@@ -33,7 +33,7 @@ var app = {
         socket = io.connect("http://www.divinitycomputing.com:3000");
         
         assignSockets();
-        
+        console.log("step one");
         var regs = window.localStorage.getItem("registered");
         fbId = window.localStorage.getItem("fbid");
         ajaxGet(
@@ -265,6 +265,39 @@ var messageCount = 0;
 	
 function registerGetInfo() {
 	newPage("register.html");
+	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
+		function (image) {
+			var pp = document.createElement("style");
+            pp.type = 'text/css';
+            pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
+			document.getElementById("profileIcon").appendChild(pp);
+			document.getElementById("profileIcon").setAttribute("assignedimage", fbId + "/picture?redirect=false&type=large");
+            document.getElementById("profileIcon").className = "noplus"; 
+		
+			facebookConnectPlugin.api("/" + fbId + "?fields=bio,birthday,first_name,gender,relationship_status", ["public_profile","user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			function (result) {
+				profileJSON = result;
+                console.log(profileJSON);
+			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = profileJSON.first_name;
+				var datesset = result.birthday.split('/');
+				idc("description").value = profileJSON.bio;
+                idc("description").setAttribute("textdet", profileJSON.bio);
+                if(idc("description").value == "undefined") {
+                    idc("description").value = "";
+                idc("description").setAttribute("textdet", "");
+            }
+			   idc("mainDetails").getElementsByTagName("h3")[0].innerHTML = calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) + " Years old";
+            personalJSON = JSON.parse('{ "personalData": { "firstname":"' + profileJSON.first_name +'","age":"' + calculateAge(new Date(datesset[2],datesset[0],datesset[1],0,0,0)) +'","relationship":"' + profileJSON.relationship_status + '", "description":"' + profileJSON.bio +'","gender":"'+ profileJSON.gender +'","profileImage":"-1","question":"0","answer":"0"  }, "interests": {"music":[],"movies":[],"travel":[],"books":[],"games":[],"crafts":[],"dancing":[],"dining":[],"exercising":[],"artsandculture":[],"sports":[],"technology":[] },"version":0  }');
+               
+			},
+			function (error) {
+				console.log("Failed: " + error);
+			});
+		},
+		function (error) {
+			console.log("Failed: " + error);
+		}
+	 );
 }
 
 var loggedintochat = false;
@@ -876,7 +909,7 @@ function openMenu(ele) {
         .fromTo(ele.children[0], 1, {marginTop:"33%",rotation:"45deg"}, {marginTop:"0%",rotation:"0deg",ease: Circ.easeOut},0)
         .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0)
         .fromTo(ele.children[2], 1, {marginTop:"-33%",rotation:"-45deg"}, {marginTop:"0%",rotation:"0deg",ease: Circ.easeOut},0)
-        .set(idc("menu"), {display:"none"})'
+            .set(idc("menu"), {display:"none"})
     }
 }
 var upperagelimit;
@@ -1154,7 +1187,7 @@ function getLastMessages(mainuserofchat) {
                     lastMessageCheck.fromTo(document.getElementById("messangerLoader"), 1, {opacity:1},{opacity:0,ease: Circ.easeIn, onComplete:function() { updateScroll(); }})
                     .set(document.getElementById("messangerLoader"), {display:"none"});
         },
-        'secondaryid=' + idcheck + "&primeid=" + userId);
+            'secondaryid=' + idcheck + "&primeid=" + userId);
 }
 function openeditProfile() {
     
