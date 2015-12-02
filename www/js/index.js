@@ -717,11 +717,21 @@ function setdataViewprofile(data) {
     
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-        viewprofile.setAttribute("imagelink", photoimage.images[0].source);
+        
+        var urlFound = "";
+        
+        if(photoimage.images[0].source) {
+            urlFound = photoimage.images[0].source;
+        }
+        else {
+            urlFound = photoimage.data.url;
+        }
+        
+        viewprofile.setAttribute("imagelink", urlFound);
             viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
             var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +     photoimage.images[0].source + "'); }"));
+            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +" { background-image:url('" + urlFound + "'); }"));
         },
         function (error) {
             console.log("Failed: " + error);
