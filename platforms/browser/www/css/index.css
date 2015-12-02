@@ -481,7 +481,7 @@ z-index: 10;
 }
 .interesting div p{ 
     float:left;
-    font-size:5rem;
+    font-size:18px;
     margin-top: 1rem;
 }
 .interesting div button{ 
