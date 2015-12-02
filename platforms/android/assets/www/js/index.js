@@ -272,7 +272,7 @@ function registerGetInfo() {
         console.log(image);
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
 			document.getElementById("profileIcon").appendChild(pp);
-			document.getElementById("profileIcon").setAttribute("assignedimage", "/" + image.data.id + "?fields=images");
+			document.getElementById("profileIcon").setAttribute("assignedimage", fbId + "/picture?redirect=false&type=large");
             document.getElementById("profileIcon").className = "noplus"; 
 		
 			facebookConnectPlugin.api("/" + fbId + "?fields=bio,birthday,first_name,gender,relationship_status", ["public_profile","user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
@@ -717,11 +717,21 @@ function setdataViewprofile(data) {
     
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-        viewprofile.setAttribute("imagelink", photoimage.images[0].source);
+        
+        var urlFound = "";
+        
+        if(photoimage.images[0].source) {
+            urlFound = photoimage.images[0].source;
+        }
+        else {
+            urlFound = photoimage.data.url;
+        }
+        
+        viewprofile.setAttribute("imagelink", urlFound);
             viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
             var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +     photoimage.images[0].source + "'); }"));
+            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +" { background-image:url('" + urlFound + "'); }"));
         },
         function (error) {
             console.log("Failed: " + error);
