@@ -271,13 +271,12 @@ function registerGetInfo() {
             pp.type = 'text/css';
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
 			document.getElementById("profileIcon").appendChild(pp);
-			document.getElementById("profileIcon").setAttribute("assignedimage", "/" + image.data.id + "?fields=images");
+			document.getElementById("profileIcon").setAttribute("assignedimage", fbId + "/picture?redirect=false&type=large");
             document.getElementById("profileIcon").className = "noplus"; 
 		
 			facebookConnectPlugin.api("/" + fbId + "?fields=bio,birthday,first_name,gender,relationship_status", ["public_profile","user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
 			function (result) {
 				profileJSON = result;
-                console.log(profileJSON);
 			   idc("mainDetails").getElementsByTagName("h2")[0].innerHTML = profileJSON.first_name;
 				var datesset = result.birthday.split('/');
 				idc("description").value = profileJSON.bio;
@@ -716,15 +715,26 @@ function setdataViewprofile(data) {
     
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-        viewprofile.setAttribute("imagelink", photoimage.images[0].source);
+        
+        var urlFound = "";
+        
+        if(photoimage.images[0].source) {
+            urlFound = photoimage.images[0].source;
+        }
+        else {
+            urlFound = photoimage.data.url;
+        }
+        
+        viewprofile.setAttribute("imagelink", urlFound);
             viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
             var aa = document.createElement("style");
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +"  { background-image:url('" +     photoimage.images[0].source + "'); }"));
+            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +" { background-image:url('" + urlFound + "'); }"));
         },
         function (error) {
             console.log("Failed: " + error);
         }
+        
      );
                    
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
@@ -898,7 +908,7 @@ function openMenu(ele) {
         .fromTo(ele.children[0], 1, {marginTop:"33%",rotation:"45deg"}, {marginTop:"0%",rotation:"0deg",ease: Circ.easeOut},0)
         .fromTo(ele.children[1], 1, {opacity:"0"}, {opacity:"1",ease: Circ.easeOut},0)
         .fromTo(ele.children[2], 1, {marginTop:"-33%",rotation:"-45deg"}, {marginTop:"0%",rotation:"0deg",ease: Circ.easeOut},0)
-            .set(idc("menu"), {display:"none"})
+        .set(idc("menu"), {display:"none"})'
     }
 }
 var upperagelimit;
@@ -1176,7 +1186,7 @@ function getLastMessages(mainuserofchat) {
                     lastMessageCheck.fromTo(document.getElementById("messangerLoader"), 1, {opacity:1},{opacity:0,ease: Circ.easeIn, onComplete:function() { updateScroll(); }})
                     .set(document.getElementById("messangerLoader"), {display:"none"});
         },
-            'secondaryid=' + idcheck + "&primeid=" + userId);
+        'secondaryid=' + idcheck + "&primeid=" + userId);
 }
 function openeditProfile() {
     
