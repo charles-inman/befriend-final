@@ -860,6 +860,7 @@ font-size: 6rem;
     position:absolute;
     top:0;
     left:0;
+    width:100%;
 }
 
 #mainScreen {
