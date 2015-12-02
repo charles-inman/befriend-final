@@ -202,13 +202,13 @@ hr {
 }
 
 .screen-header {
-	color:#fff;
-    margin: auto;
-    position: absolute;
-    left: 17%;
-    top: 0;
-    line-height:75px;
-    font-size: 8rem;
+	color: white;
+font-size: 28px;
+left: 17%;
+line-height: 80px;
+margin: auto;
+position: absolute;
+top: 0px;
 }
 .screen-header-unfixed {
 	color:#fff;
@@ -895,7 +895,7 @@ font-size: 6rem;
     background-repeat: no-repeat;
     width:6rem;
     height:6rem;
-    top: 20%;
+    top: 25%;
     max-height: 90%;
     max-width: 10%;
     position: absolute;
@@ -1036,8 +1036,8 @@ width: 89%;margin-top: -3em;
     overflow: hidden;
 }
 .messangertitle {
-    margin-left: 7rem;
-    line-height: 7rem;
+font-size: 25px;
+line-height: 8rem;
     font-size:5rem;
 }
 
@@ -1067,6 +1067,7 @@ width: 89%;margin-top: -3em;
 
 .fullscreen {
     height:100%;
+    width:100%;
     position: absolute;
     top:0;
     left:0;
