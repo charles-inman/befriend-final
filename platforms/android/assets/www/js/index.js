@@ -269,6 +269,7 @@ function registerGetInfo() {
 		function (image) {
 			var pp = document.createElement("style");
             pp.type = 'text/css';
+        console.log(image);
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + image.data.url + "'); }"));
 			document.getElementById("profileIcon").appendChild(pp);
 			document.getElementById("profileIcon").setAttribute("assignedimage", "/" + image.data.id + "?fields=images");
