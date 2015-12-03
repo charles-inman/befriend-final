@@ -456,7 +456,7 @@ function openImage() {
     }
     facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-            imgage.onclick {
+            imgage.onclick = function(){
                 var aa = document.createElement("style");
                 aa.type = 'text/css';
                 imgage.setAttribute("lockurl","/" + editProfImg.data[0].id + "?fields=images");
