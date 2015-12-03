@@ -1037,9 +1037,10 @@ width: 89%;margin-top: -3em;
     overflow: hidden;
 }
 .messangertitle {
-font-size: 25px;
-line-height: 8rem;
+    font-size: 25px;
+    line-height: 8rem;
     font-size:5rem;
+    margin-left:8rem;
 }
 
 #messagesender {
