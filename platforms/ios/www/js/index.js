@@ -540,7 +540,7 @@ function mainInterestCheck(type) {
                 }
             }
             
-            active.setAttribute("counter",i);
+            container.setAttribute("counter",i);
             container.onclick = function() {
                 if(this.className == "active") {
                     personalJSON.interests[intereststypes[mainTypeInterest]].splice(parseInt(this.getAttribute("counter")),1);
