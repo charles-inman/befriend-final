@@ -1225,13 +1225,12 @@ function sortEditProf() {
         
             if(photoimage.images[0].source) {
                 urlFound = photoimage.images[0].source;
-                console.log("Other picture found");
+                alert("Other picture found " + urlFound);
             }
             else {
                 urlFound = photoimage.data.url;
-                console.log("profile picture found");
+               alert("profile picture found " + urlFound);
             }
-            console.log(urlFound);
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + urlFound + "'); }"));
             document.getElementById("profileIcon").appendChild(pp);
             document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
