@@ -1221,15 +1221,21 @@ function sortEditProf() {
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         
-        var urlFound = "";
+            var urlFound = "";
         
             if(photoimage.images[0].source) {
                 urlFound = photoimage.images[0].source;
+                console.log("Other picture found");
             }
             else {
                 urlFound = photoimage.data.url;
+                console.log("profile picture found");
             }
+            console.log(urlFound);
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + urlFound + "'); }"));
+            document.getElementById("profileIcon").appendChild(pp);
+            document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
+            document.getElementById("profileIcon").className = "noplus";
         },
         function (error) {
             console.log("Failed: " + error);
@@ -1237,9 +1243,6 @@ function sortEditProf() {
         
      );
     
-    document.getElementById("profileIcon").appendChild(pp);
-    document.getElementById("profileIcon").setAttribute("assignedimage", personalJSON["personalData"]["profileImage"]);
-    document.getElementById("profileIcon").className = "noplus";
     assignInterests();
     var tl2 = new TimelineMax();
         tl2.fromTo(editprofMain, 1,{x:"100%"}, {x:"0%",ease: Circ.easeOut});
