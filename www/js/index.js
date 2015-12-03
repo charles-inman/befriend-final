@@ -456,10 +456,10 @@ function openImage() {
     }
     facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-            imgage.onclick = function(){
+            imgage.setAttribute("lockurl","/" + editProfImg.data[0].id + "?fields=images");
+            imgage.addEventListener("click", function() {
                 var aa = document.createElement("style");
                 aa.type = 'text/css';
-                imgage.setAttribute("lockurl","/" + editProfImg.data[0].id + "?fields=images");
                 aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
                 document.getElementById("profileIcon").innerHTML = "";
                 document.getElementById("profileIcon").setAttribute("assignedimage", imgage.getAttribute("lockurl"));
