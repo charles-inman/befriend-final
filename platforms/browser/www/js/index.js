@@ -439,7 +439,6 @@ function newPage(pagename) {
 }
 var editProfImg;
 function editprofileImage() {
-    console.log(editProfImg);
 	var maingallery = document.getElementById("imageGallery");
 	document.getElementById("gallery").style.opacity = 1;
 	openImage();
@@ -463,6 +462,7 @@ function openImage() {
                 aa.appendChild(document.createTextNode("#profileIcon { background-image:url('" + photoimage.images[0].source + "'); }"));
                 document.getElementById("profileIcon").innerHTML = "";
                 document.getElementById("profileIcon").setAttribute("assignedimage", "/" + editProfImg.data[0].id + "?fields=images");
+                console.log( document.getElementById("profileIcon").getAttribute("assignedimage"));
                 document.getElementById("profileIcon").appendChild(aa);
                 document.getElementById("profileIcon").className = "noplus";
                 document.getElementById("pagewrap").removeChild(document.getElementById("gallery"));
@@ -1264,7 +1264,7 @@ function updateprofile() {
             var tl2 = new TimelineMax();
                 tl2.fromTo(document.getElementById("editprof"), 1,{x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
 
-            document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof").lastChild);
+                    document.getElementById("editprof").parentNode.removeChild(document.getElementById("editprof"));
                 }})
                 .fromTo(document.getElementById("mainScreen"), 1,{x:"-100%"}, {x:"0%",ease: Circ.easeOut});
         }
