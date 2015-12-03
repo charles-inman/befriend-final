@@ -714,7 +714,7 @@ function transformUserData() {
 function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
-    
+    console.log(dataFromLocation);
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         
@@ -1222,16 +1222,13 @@ function sortEditProf() {
     facebookConnectPlugin.api(personalJSON["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         
-                alert("first TRY ");
             var urlFound = "";
         
             if(photoimage.images[0].source) {
                 urlFound = photoimage.images[0].source;
-                alert("Other picture found " + urlFound);
             }
             else {
                 urlFound = photoimage.data.url;
-               alert("profile picture found " + urlFound);
             }
             pp.appendChild(document.createTextNode("#profileIcon { background-image:url('" + urlFound + "'); }"));
             document.getElementById("profileIcon").appendChild(pp);
