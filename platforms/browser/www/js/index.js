@@ -1218,9 +1218,10 @@ function sortEditProf() {
     var pp = document.createElement("style");
     pp.type = 'text/css';
     
-    facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api(personalJSON["personalData"]["profileImage"] ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         
+                alert("first TRY ");
             var urlFound = "";
         
             if(photoimage.images[0].source) {
