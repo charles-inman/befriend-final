@@ -221,8 +221,9 @@ function checkFBlogin() {
                     var datajson = JSON.parse(data);
                     
                     document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].onload = function() {
-                    var tlmatch = new TimelineMax();
-                     tlmatch.set(document.getElementsByClassName("match")[0], {display:"block"})
+                    var tl = new TimelineMax();
+
+                     tl.set(document.getElementsByClassName("match")[0], {display:"block"})
                        .fromTo(document.getElementsByClassName("match")[0], 0.5,{opacity:0}, {opacity:1, ease:Circ.easeOut})
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[0], 0.5,{x:"-100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2")
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("img")[0], 0.5,{scale:"0",rotation:0}, {rotation:360,scale:"1", ease: Back.easeOut.config(1.7)}, "-=0.2")
