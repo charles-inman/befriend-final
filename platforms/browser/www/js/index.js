@@ -712,10 +712,10 @@ function transformUserData() {
     }
 }
 function setdataViewprofile(data) {
-    console.log(dataFromLocation);
+    console.log(data);
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
-    facebookConnectPlugin.api(dataFromLocation.userprofiles[0].personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         
         var urlFound = "";
