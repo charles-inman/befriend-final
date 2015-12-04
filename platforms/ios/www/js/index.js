@@ -894,7 +894,18 @@ function setupMessage(messageType, imageurl, message,time) {
         messagemain.appendChild(messageimage);
         messagemain.appendChild(messagesent);
     }
-    messageimage.src = imageurl;
+    facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
+        function (photoimage) {
+        var urlFound = "";
+
+        if(photoimage.images[0].source) {
+            urlFound = photoimage.images[0].source;
+        }
+        else {
+            urlFound = photoimage.data.url;
+        }
+        messageimage.src = urlFound;
+    });
 
     messagesent.innerHTML = message;
     messagetime.innerHTML = time;
@@ -1133,8 +1144,19 @@ function messageToRecieve() {
                 var contactmessage = document.createElement("h3");
                 var contacttime = document.createElement("p");
                 contactimage.className = "divImage";
-                contactimage.src = datajson["personalData"]["profileImage"];
                 otherUserImageSrc = datajson["personalData"]["profileImage"];
+                facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                    function (photoimage) {
+                    var urlFound = "";
+
+                    if(photoimage.images[0].source) {
+                        urlFound = photoimage.images[0].source;
+                    }
+                    else {
+                        urlFound = photoimage.data.url;
+                    }
+                    contactimage.src = urlFound;
+                });
                 contactname.innerHTML = datajson["personalData"]["firstname"];
                 if(jof[i]["mess"]){
                     contactmessage.innerHTML = jof[i]["mess"].substring(0, 100);
