@@ -335,6 +335,7 @@ function logontochat(numify) {
         "http://www.divinitycomputing.com/apps/beoples/getid.php", 
         function (responsedata) {
         if(responsedata != "no id") {
+            console.log("find id " + responsedata);
             userId = responsedata;
             push = PushNotification.init({ "android": {"senderID": "355324533451"},
          "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
@@ -822,8 +823,8 @@ function appliedUser(type, element) {
 function nextProfileView(element) {
     var tl = new TimelineMax();
     tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
-        element.parentNode.removeChild(element);
-        if( element.parentNode.children.length == 1) {
+        if( element.parentNode.children.length != 0 && element.parentNode.children.length != 1 ) {
+           element.parentNode.removeChild(element);
             var tl2 = new TimelineMax();
                 tl2.fromTo(document.getElementById("viewprofile").lastChild, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut});
             if(dataFromLocation.userprofiles.length != 0) {
@@ -848,6 +849,7 @@ function nextProfileView(element) {
             }
         }
         else {
+            element.parentNode.removeChild(element);
             searchProfile();
         }
     }});
