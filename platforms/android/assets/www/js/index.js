@@ -220,24 +220,47 @@ function checkFBlogin() {
                 socket.on('match found', function(data,callback){
                     var datajson = JSON.parse(data);
                     
-                    if(datajson["sentid"] == userId) {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
-                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["sentimage"];
-                        
-                        
-                    }
-                    else {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
-                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["toimage"];
-                    }
-                    
-                    var tl = new TimelineMax();
-
-                     tl.set(document.getElementsByClassName("match")[0], {display:"block"})
+                    document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].onload = function() {
+                    var tlmatch = new TimelineMax();
+                     tlmatch.set(document.getElementsByClassName("match")[0], {display:"block"})
                        .fromTo(document.getElementsByClassName("match")[0], 0.5,{opacity:0}, {opacity:1, ease:Circ.easeOut})
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[0], 0.5,{x:"-100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2")
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("img")[0], 0.5,{scale:"0",rotation:0}, {rotation:360,scale:"1", ease: Back.easeOut.config(1.7)}, "-=0.2")
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1], 0.5,{x:"100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2");
+                    }
+                    if(datajson["sentid"] == userId) {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
+                        
+                        facebookConnectPlugin.api(datajson["sentimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                            function (photoimage) {
+                            var urlFound = "";
+
+                            if(photoimage.images[0].source) {
+                                urlFound = photoimage.images[0].source;
+                            }
+                            else {
+                                urlFound = photoimage.data.url;
+                            }
+                            document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = urlFound;
+                        });
+                        
+                    }
+                    else {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
+                        
+                        facebookConnectPlugin.api(datajson["toimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                            function (photoimage) {
+                            var urlFound = "";
+
+                            if(photoimage.images[0].source) {
+                                urlFound = photoimage.images[0].source;
+                            }
+                            else {
+                                urlFound = photoimage.data.url;
+                            }
+                            document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = urlFound;
+                        });
+                    }
                 });
             }
             function resize() {
@@ -794,7 +817,6 @@ function appliedUser(type, element) {
 }
 
 function nextProfileView(element) {
-    console.log(dataFromLocation);
     var tl = new TimelineMax();
     tl.fromTo(element, 1, {x:"0%"}, {x:"-100%",ease: Circ.easeOut,onComplete:function() {
         element.parentNode.removeChild(element);
