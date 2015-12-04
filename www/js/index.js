@@ -230,9 +230,9 @@ function checkFBlogin() {
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1], 0.5,{x:"100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2");
                     }
                     if(datajson["sentid"] == userId) {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
                         
-                        facebookConnectPlugin.api(datajson["sentimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                        facebookConnectPlugin.api(datajson["toimage"], ['email','user_photos', 'public_profile', 'user_friends'],
                             function (photoimage) {
                             var urlFound = "";
 
@@ -247,9 +247,9 @@ function checkFBlogin() {
                         
                     }
                     else {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
                         
-                        facebookConnectPlugin.api(datajson["toimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                        facebookConnectPlugin.api(datajson["sentimage"], ['email','user_photos', 'public_profile', 'user_friends'],
                             function (photoimage) {
                             var urlFound = "";
 
@@ -804,8 +804,8 @@ function appliedUser(type, element) {
                 var viewprofile = document.getElementById("viewprofile").lastChild;
                 var sendJSON = '{"sentid":"' + userId +'", "toid":"' + viewprofile.getAttribute("idset") + '", "sentname":"' + personalJSON["personalData"]["firstname"] + '", "toname":"' + viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML + '", "toimage":"' + viewprofile.getAttribute("imagelink") + '", "sentimage":"' + personalJSON["personalData"]["profileImage"] + '"}';
 
+                nextProfileView(element);
                 socket.emit('check match', sendJSON, function(data) {
-                        nextProfileView(element);
                 });
             }
             else {
