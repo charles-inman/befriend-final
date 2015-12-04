@@ -713,8 +713,11 @@ function transformUserData() {
 }
 function setdataViewprofile(data) {
     console.log(data);
+    
+    var datid = dataFromLocation.userprofiles[0].id;
     var viewprofile = document.getElementById("viewprofile").lastChild;
-    viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
+    viewprofile.setAttribute("idset", datid);
+    var aa = document.createElement("style");
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         console.log(photoimage);
@@ -728,10 +731,9 @@ function setdataViewprofile(data) {
         }
         
         viewprofile.setAttribute("imagelink", urlFound);
-            viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + dataFromLocation.userprofiles[0].id;
-            var aa = document.createElement("style");
+            viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + datid;
             aa.type = 'text/css';
-            aa.appendChild(document.createTextNode(".profileimage" + dataFromLocation.userprofiles[0].id +" { background-image:url('" + urlFound + "'); }"));
+            aa.appendChild(document.createTextNode(".profileimage" + datid +" { background-image:url('" + urlFound + "'); }"));
         },
         function (error) {
             console.log("Failed: " + error);
