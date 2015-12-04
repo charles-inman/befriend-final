@@ -220,15 +220,7 @@ function checkFBlogin() {
                 socket.on('match found', function(data,callback){
                     var datajson = JSON.parse(data);
                     
-                    if(datajson["sentid"] == userId) {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
-                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["sentimage"];
-                    }
-                    else {
-                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
-                        document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = datajson["toimage"];
-                    }
-                    
+                    document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].onload = function() {
                     var tl = new TimelineMax();
 
                      tl.set(document.getElementsByClassName("match")[0], {display:"block"})
@@ -236,6 +228,40 @@ function checkFBlogin() {
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[0], 0.5,{x:"-100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2")
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("img")[0], 0.5,{scale:"0",rotation:0}, {rotation:360,scale:"1", ease: Back.easeOut.config(1.7)}, "-=0.2")
                        .fromTo(document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1], 0.5,{x:"100%"}, {x:"0%", ease: Back.easeOut.config(1.7)}, "-=0.2");
+                    }
+                    if(datajson["sentid"] == userId) {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
+                        
+                        facebookConnectPlugin.api(datajson["sentimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                            function (photoimage) {
+                            var urlFound = "";
+
+                            if(photoimage.images[0].source) {
+                                urlFound = photoimage.images[0].source;
+                            }
+                            else {
+                                urlFound = photoimage.data.url;
+                            }
+                            document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = urlFound;
+                        });
+                        
+                    }
+                    else {
+                        document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
+                        
+                        facebookConnectPlugin.api(datajson["toimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                            function (photoimage) {
+                            var urlFound = "";
+
+                            if(photoimage.images[0].source) {
+                                urlFound = photoimage.images[0].source;
+                            }
+                            else {
+                                urlFound = photoimage.data.url;
+                            }
+                            document.getElementsByClassName("match")[0].getElementsByTagName("img")[0].src = urlFound;
+                        });
+                    }
                 });
             }
             function resize() {
@@ -720,7 +746,6 @@ function setdataViewprofile(data) {
     var aa = document.createElement("style");
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-        console.log(photoimage);
         var urlFound = "";
         
         if(photoimage.images[0].source) {
@@ -739,8 +764,7 @@ function setdataViewprofile(data) {
             console.log("Failed: " + error);
         }
         
-     );
-     console.log("fb worked");              
+     );            
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
 
     viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
@@ -816,6 +840,9 @@ function nextProfileView(element) {
                         },
                         'factualid=' + dataFromLocation.userprofiles[0].id );
                 });
+            }
+            else {
+                searchProfile();
             }
         }
         else {
@@ -924,7 +951,7 @@ function openSubMenu(idof) {
     if(picky.style.display == "none") {
         tl.set(picky, {display:"block"})
         .set(idc("backButton"), {display:"block"})
-        .to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut})
+        .to(document.getElementsByClassName("submenu"), 1, {x:"100%",ease: Circ.easeOut}d)
         .fromTo(idc("backButton"), 1, {opacity:0}, {opacity:1,ease: Circ.easeOut},1)
         .fromTo(picky, 1, {x:"100%"}, {x:"0%",ease: Circ.easeOut},1);
     }
