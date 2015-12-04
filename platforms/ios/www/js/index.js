@@ -818,6 +818,9 @@ function nextProfileView(element) {
                         'factualid=' + dataFromLocation.userprofiles[0].id );
                 });
             }
+            else {
+                searchProfile();
+            }
         }
         else {
             searchProfile();
