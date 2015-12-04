@@ -1445,4 +1445,6 @@ img.backButton {
     display:block;
     box-shadow: rgba(150, 255, 137, 0.701961) 0px 0px 0px 25px inset;
     padding: 0.5rem;
+    width:8rem;
+    height:8rem;
 }
