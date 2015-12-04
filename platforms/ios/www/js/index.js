@@ -717,7 +717,7 @@ function setdataViewprofile(data) {
     viewprofile.setAttribute("idset", dataFromLocation.userprofiles[0].id);
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
-        
+        console.log(photoimage);
         var urlFound = "";
         
         if(photoimage.images[0].source) {
@@ -738,7 +738,7 @@ function setdataViewprofile(data) {
         }
         
      );
-                   
+     console.log("fb worked");              
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
 
     viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
