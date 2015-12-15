@@ -360,7 +360,7 @@ z-index: 10;
 #interests,.interests {
 	width:100%;
 	clear:both;
-	margin: 20px 0;
+	margin: 20px 0 0.5rem;
     overflow:scroll;
     height:9rem;
     white-space: nowrap;
@@ -1449,9 +1449,12 @@ img.backButton {
     height:12rem;
 }
 .subInterests {
-    margin:5px 0;
+    margin:5px 0 2rem;;
     height:3rem;
 }
 .subInterests p {
     display:inline-block;
+    padding:1rem;
+    margin:0 0.5rem;
+    border-radius:1rem;
 }
