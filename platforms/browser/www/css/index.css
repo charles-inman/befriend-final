@@ -1452,11 +1452,12 @@ img.backButton {
     margin:5px 0 2rem;
     height:3rem;
     white-space: nowrap;
+    overflow:scroll;
 }
 .subInterests p {
     display:inline-block;
     padding:1rem;
     margin:0 0.5rem;
     border-radius:1rem;
-    background-color:#282828;
+    background-color:#82e75a;
 }
