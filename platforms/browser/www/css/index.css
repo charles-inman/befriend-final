@@ -1449,12 +1449,14 @@ img.backButton {
     height:12rem;
 }
 .subInterests {
-    margin:5px 0 2rem;;
+    margin:5px 0 2rem;
     height:3rem;
+    white-space: nowrap;
 }
 .subInterests p {
     display:inline-block;
     padding:1rem;
     margin:0 0.5rem;
     border-radius:1rem;
+    background-color:#282828;
 }
