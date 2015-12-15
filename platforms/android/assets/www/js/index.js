@@ -739,8 +739,6 @@ function transformUserData() {
     }
 }
 function setdataViewprofile(data) {
-    console.log(data);
-    
     var datid = dataFromLocation.userprofiles[0].id;
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", datid);
@@ -766,8 +764,7 @@ function setdataViewprofile(data) {
             console.log("Failed: " + error);
         }
         
-     );
-     console.log("fb worked");              
+     );            
     viewprofile.getElementsByClassName("profileIcon")[0].appendChild(aa);
 
     viewprofile.getElementsByClassName("mainDetails")[0].children[0].innerHTML = data.personalData.firstname;
@@ -781,11 +778,26 @@ function setdataViewprofile(data) {
     viewprofile.getElementsByClassName("profilemain")[0].getElementsByTagName("p")[0].innerHTML = data.personalData.description;
     
     var maininterests = viewprofile.getElementsByClassName("interests")[0];
-    for(i = 0; i < intereststypes.length;i++) {
+    for(i = 0; i < intereststypes.length;i++)  (function(i){ 
         if(personalJSON.interests[intereststypes[i]].length != 0) {
-            maininterests.innerHTML = "<div class='imageint'><img src='img/icons/" + intereststypes[i] +".png'></div>" + maininterests.innerHTML;
+            var imageint = document.createElement("div");
+            var imageinticon = document.createElement("img");
+            imageint.className = "imageint";
+            imageinticon.src = 'img/icons/' + intereststypes[i] +'.png';
+            imageint.appendChild(imageinticon);
+            maininterests.appendChild(imageint);
+            imageint.onclick = function () {
+               if(viewprofile.getElementsByClassName("subInterests")[0]) {
+                   var subint = viewprofile.getElementsByClassName("subInterests")[0];
+                   subint.innerHTML = "";
+                   for(b = 0; b < personalJSON.interests[intereststypes[i]].length; b++) {
+                       var subinterest = document.createElement("p");
+                       subinterest.innerHTML = interestJSON[intereststypes[i]][parseInt(personalJSON.interests[intereststypes[i]][b])].name;
+                   }
+               }
+            }
         }
-    }
+    })(i);
     if(maininterests.children.length == 0) {
         maininterests.innerHTML = "<h3>No interests</h3>";
     }
