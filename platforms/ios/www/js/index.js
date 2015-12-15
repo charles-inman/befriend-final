@@ -743,10 +743,39 @@ function setdataViewprofile(data) {
     var viewprofile = document.getElementById("viewprofile").lastChild;
     viewprofile.setAttribute("idset", datid);
     var aa = document.createElement("style");
+    
+        var urlFound = "";
+     var profFinal = setInterval(function(){ 
+        if(urlFound == "") {
+        facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+        function (photoimage) {
+        console.log(photoimage);
+        
+        if(photoimage.images[0].source) {
+            urlFound = photoimage.images[0].source;
+        }
+        else {
+            urlFound = photoimage.data.url;
+        }
+        
+        viewprofile.setAttribute("imagelink", urlFound);
+            viewprofile.getElementsByClassName("profileIcon")[0].className = "profileIcon noplus profileimage" + datid;
+            aa.type = 'text/css';
+            aa.appendChild(document.createTextNode(".profileimage" + datid +" { background-image:url('" + urlFound + "'); }"));
+        },
+        function (error) {
+            console.log("Failed: " + error);
+        }
+        
+     );  
+        }
+         else {
+             clearInterval(profFinal);
+         }
+        }, 1000);
     facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
         function (photoimage) {
         console.log(photoimage);
-        var urlFound = "";
         
         if(photoimage.images[0].source) {
             urlFound = photoimage.images[0].source;
