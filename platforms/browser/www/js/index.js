@@ -792,7 +792,10 @@ function setdataViewprofile(data) {
                    subint.innerHTML = "";
                    for(b = 0; b < personalJSON.interests[intereststypes[i]].length; b++) {
                        var subinterest = document.createElement("p");
+                       console.log(personalJSON.interests[intereststypes[i]][b].count);
+                       console.log(interestJSON[intereststypes[i]]);
                        subinterest.innerHTML = interestJSON[intereststypes[i]][parseInt(personalJSON.interests[intereststypes[i]][b].count)].name;
+                       subint.appendChild(subinterest);
                    }
                }
             }
