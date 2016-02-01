@@ -119,7 +119,7 @@ var app = {
                 
 			}
 
-			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			facebookConnectPlugin.login(["public_profile","user_birthday","user_photos","user_about_me"],
 				fbLoginSuccess,
 				function (error) { console.warn("" + error) }
 			);
@@ -162,7 +162,7 @@ function checkFBlogin() {
                 
 			}
 
-			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			facebookConnectPlugin.login(["public_profile", "user_birthday","user_photos","user_about_me"],
 				fbLoginSuccess,
 				function (error) { console.warn("" + error) }
 			);
@@ -232,7 +232,7 @@ function checkFBlogin() {
                     if(datajson["sentid"] == userId) {
                         document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["toname"];
                         
-                        facebookConnectPlugin.api(datajson["toimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                        facebookConnectPlugin.api(datajson["toimage"], ['user_photos', 'public_profile'],
                             function (photoimage) {
                             var urlFound = "";
 
@@ -249,7 +249,7 @@ function checkFBlogin() {
                     else {
                         document.getElementsByClassName("match")[0].getElementsByTagName("h2")[1].innerHTML = datajson["sentname"];
                         
-                        facebookConnectPlugin.api(datajson["sentimage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                        facebookConnectPlugin.api(datajson["sentimage"], ['user_photos', 'public_profile'],
                             function (photoimage) {
                             var urlFound = "";
 
@@ -291,7 +291,7 @@ var messageCount = 0;
 	
 function registerGetInfo() {
 	newPage("register.html");
-	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['email', 'public_profile', 'user_friends'],
+	facebookConnectPlugin.api(fbId + "/picture?redirect=false&type=large", ['public_profile'],
 		function (image) {
 			var pp = document.createElement("style");
             pp.type = 'text/css';
@@ -300,7 +300,7 @@ function registerGetInfo() {
 			document.getElementById("profileIcon").setAttribute("assignedimage", fbId + "/picture?redirect=false");
             document.getElementById("profileIcon").className = "noplus"; 
 		
-			facebookConnectPlugin.api("/" + fbId + "?fields=bio,birthday,first_name,gender,relationship_status", ["public_profile","user_birthday","user_photos","user_hometown","user_likes","user_work_history","user_location","user_about_me","user_actions.books","user_actions.news","user_likes","user_actions.fitness","user_actions.music","user_actions.video"],
+			facebookConnectPlugin.api("/" + fbId + "?fields=bio,birthday,first_name,gender,relationship_status", ["public_profile","user_birthday","user_photos","user_about_me"],
 			function (result) {
 				profileJSON = result;
                 console.log(profileJSON);
@@ -397,7 +397,7 @@ function setupProfileicon() {
 }
 var photoChosen;
 function getPhotos(facebookid) {
-	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['email','user_photos', 'public_profile', 'user_friends'],
+	facebookConnectPlugin.api(facebookid + "/photos?type=uploaded", ['user_photos', 'public_profile'],
 		function (def) {
 			editProfImg = def;
 			addPage("findphotos.html" , 0);
@@ -481,7 +481,7 @@ function openImage() {
     imgage.onload = function() {
         imgage.style.opacity = 1;
     }
-    facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api("/" + editProfImg.data[0].id + "?fields=images", ['user_photos', 'public_profile'],
         function (photoimage) {
                 imgage.setAttribute("lockurl","/" + editProfImg.data[0].id + "?fields=images");
             imgage.addEventListener("click", function() {
@@ -747,7 +747,7 @@ function setdataViewprofile(data) {
         var urlFound = "";
      var profFinal = setInterval(function(){ 
         if(urlFound == "") {
-        facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+        facebookConnectPlugin.api(data.personalData.profileImage, ['user_photos', 'public_profile'],
         function (photoimage) {
         console.log(photoimage);
         
@@ -773,7 +773,7 @@ function setdataViewprofile(data) {
              clearInterval(profFinal);
          }
         }, 1000);
-    facebookConnectPlugin.api(data.personalData.profileImage, ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api(data.personalData.profileImage, ['user_photos', 'public_profile'],
         function (photoimage) {
         console.log(photoimage);
         
@@ -938,7 +938,7 @@ function setupMessage(messageType, imageurl, message,time) {
         messagemain.appendChild(messageimage);
         messagemain.appendChild(messagesent);
     }
-    facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['user_photos', 'public_profile'],
         function (photoimage) {
         var urlFound = "";
 
@@ -1189,7 +1189,7 @@ function messageToRecieve() {
                 var contacttime = document.createElement("p");
                 contactimage.className = "divImage";
                 otherUserImageSrc = datajson["personalData"]["profileImage"];
-                facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
+                facebookConnectPlugin.api(datajson["personalData"]["profileImage"], ['user_photos', 'public_profile'],
                     function (photoimage) {
                     var urlFound = "";
 
@@ -1318,7 +1318,7 @@ function sortEditProf() {
     var pp = document.createElement("style");
     pp.type = 'text/css';
     
-    facebookConnectPlugin.api(personalJSON["personalData"]["profileImage"], ['email','user_photos', 'public_profile', 'user_friends'],
+    facebookConnectPlugin.api(personalJSON["personalData"]["profileImage"], ['user_photos', 'public_profile'],
         function (photoimage) {
         
             var urlFound = "";
